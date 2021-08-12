@@ -1,0 +1,38 @@
+{
+    "currentDate": "2021-01",
+    "isPlusUser": true,
+    "stateCode": "CA",
+    "primary": {
+        "birthDate": "1971-01",
+        "goalAge": "60y"
+    },
+    "accounts": [
+        {
+            "name": "savings",
+            "type": "aftertax",
+            "balance": 100000,
+            "taxTreatment": "ordinaryIncome"
+        }
+    ],
+    "paymentStreams": [
+        {
+            "name": "my_job_income",
+            "paymentAmount": 10000,
+            "paymentsPerYear": 12,
+            "target": "savings",
+            "earnedIncome": true
+        }
+    ],
+    "events": {
+        "relocations": [
+            {
+                "date": "2024-01",
+                "stateCode": "WA"
+            },
+            {
+                "date": "2027-03",
+                "stateCode": "OR"
+            }
+        ]
+    }
+}

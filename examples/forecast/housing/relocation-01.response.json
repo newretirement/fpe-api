@@ -1,0 +1,672 @@
+{
+    "startDate": "2021-01",
+    "endDate": "2031-01",
+    "duration": "10y0m",
+    "period": "yearly",
+    "postRetireIncomeExpenseRatio": 3.48,
+    "estateValue": 939361,
+    "currentNetWorth": 100000,
+    "lifetimeTaxes": 359587,
+    "lifetimeSSBenefit": 0,
+    "outOfSavingsDate": null,
+    "accounts": [
+        {
+            "name": "savings",
+            "type": "aftertax",
+            "values": [
+                181710,
+                263420,
+                345130,
+                426841,
+                526192,
+                616723,
+                707254,
+                778042,
+                858701,
+                939361
+            ]
+        },
+        {
+            "name": "@projected_savings",
+            "type": "report",
+            "values": [
+                181710,
+                263420,
+                345130,
+                426841,
+                526192,
+                616723,
+                707254,
+                778042,
+                858701,
+                939361
+            ]
+        },
+        {
+            "name": "@total_savings",
+            "type": "report",
+            "values": [
+                181710,
+                263420,
+                345130,
+                426841,
+                526192,
+                616723,
+                707254,
+                778042,
+                858701,
+                939361
+            ]
+        },
+        {
+            "name": "@total_debt",
+            "type": "report",
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    ],
+    "paymentStreams": [
+        {
+            "name": "@interest:savings",
+            "type": "income",
+            "taxable": true,
+            "taxableFederal": true,
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "name": "my_job_income",
+            "type": "income",
+            "taxable": true,
+            "taxableFederal": true,
+            "targetAccount": "savings",
+            "values": [
+                120000,
+                120000,
+                120000,
+                120000,
+                120000,
+                120000,
+                120000,
+                120000,
+                120000,
+                120000
+            ]
+        },
+        {
+            "name": "@income_tax",
+            "type": "expense",
+            "values": [
+                38289,
+                38289,
+                38289,
+                38289,
+                27013,
+                29469,
+                29469,
+                49212,
+                39340,
+                39340
+            ]
+        },
+        {
+            "name": "@federal_income_tax",
+            "type": "report",
+            "values": [
+                19809,
+                19809,
+                19809,
+                19809,
+                19809,
+                19809,
+                19809,
+                19809,
+                19809,
+                0
+            ]
+        },
+        {
+            "name": "@state_income_tax",
+            "type": "report",
+            "values": [
+                7860,
+                7860,
+                7860,
+                0,
+                0,
+                0,
+                10351,
+                10351,
+                10351,
+                0
+            ]
+        },
+        {
+            "name": "@fica",
+            "type": "report",
+            "values": [
+                9180,
+                9180,
+                9180,
+                9180,
+                9180,
+                9180,
+                9180,
+                9180,
+                9180,
+                0
+            ]
+        },
+        {
+            "name": "@other_state_taxes",
+            "type": "report",
+            "values": [
+                1440,
+                1440,
+                1440,
+                480,
+                480,
+                480,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "name": "@federal_standard_deduction",
+            "type": "report",
+            "values": [
+                12550,
+                12550,
+                12550,
+                12550,
+                12550,
+                12550,
+                12550,
+                12550,
+                12550,
+                0
+            ]
+        },
+        {
+            "name": "@state_standard_deduction",
+            "type": "report",
+            "values": [
+                4601,
+                4601,
+                4601,
+                0,
+                0,
+                0,
+                2215,
+                2215,
+                2215,
+                0
+            ]
+        },
+        {
+            "name": "@federal_taxable_income",
+            "type": "report",
+            "values": [
+                107450,
+                107450,
+                107450,
+                107450,
+                107450,
+                107450,
+                107450,
+                107450,
+                107450,
+                0
+            ],
+            "meta": {
+                "tax_authority": "usa"
+            }
+        },
+        {
+            "name": "@state_taxable_income",
+            "type": "report",
+            "values": [
+                115399,
+                115399,
+                115399,
+                120000,
+                120000,
+                120000,
+                117785,
+                117785,
+                117785,
+                0
+            ],
+            "meta": {
+                "tax_authority": "ca"
+            }
+        },
+        {
+            "name": "@taxable_income_in_federal_bracket:0.1",
+            "type": "report",
+            "values": [
+                9950,
+                9950,
+                9950,
+                9950,
+                9950,
+                9950,
+                9950,
+                9950,
+                9950,
+                0
+            ],
+            "meta": {
+                "tax_authority": "usa",
+                "tax_rate": "0.1"
+            }
+        },
+        {
+            "name": "@taxable_income_in_federal_bracket:0.12",
+            "type": "report",
+            "values": [
+                30575,
+                30575,
+                30575,
+                30575,
+                30575,
+                30575,
+                30575,
+                30575,
+                30575,
+                0
+            ],
+            "meta": {
+                "tax_authority": "usa",
+                "tax_rate": "0.12"
+            }
+        },
+        {
+            "name": "@taxable_income_in_federal_bracket:0.22",
+            "type": "report",
+            "values": [
+                45850,
+                45850,
+                45850,
+                45850,
+                45850,
+                45850,
+                45850,
+                45850,
+                45850,
+                0
+            ],
+            "meta": {
+                "tax_authority": "usa",
+                "tax_rate": "0.22"
+            }
+        },
+        {
+            "name": "@taxable_income_in_federal_bracket:0.24",
+            "type": "report",
+            "values": [
+                21075,
+                21075,
+                21075,
+                21075,
+                21075,
+                21075,
+                21075,
+                21075,
+                21075,
+                0
+            ],
+            "meta": {
+                "tax_authority": "usa",
+                "tax_rate": "0.24"
+            }
+        },
+        {
+            "name": "@taxable_income_in_state_bracket:ca:0.01",
+            "type": "report",
+            "values": [
+                8932,
+                8932,
+                8932,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "meta": {
+                "tax_authority": "ca",
+                "tax_rate": "0.01"
+            }
+        },
+        {
+            "name": "@taxable_income_in_state_bracket:ca:0.02",
+            "type": "report",
+            "values": [
+                12243,
+                12243,
+                12243,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "meta": {
+                "tax_authority": "ca",
+                "tax_rate": "0.02"
+            }
+        },
+        {
+            "name": "@taxable_income_in_state_bracket:ca:0.04",
+            "type": "report",
+            "values": [
+                12246,
+                12246,
+                12246,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "meta": {
+                "tax_authority": "ca",
+                "tax_rate": "0.04"
+            }
+        },
+        {
+            "name": "@taxable_income_in_state_bracket:ca:0.06",
+            "type": "report",
+            "values": [
+                12973,
+                12973,
+                12973,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "meta": {
+                "tax_authority": "ca",
+                "tax_rate": "0.06"
+            }
+        },
+        {
+            "name": "@taxable_income_in_state_bracket:ca:0.08",
+            "type": "report",
+            "values": [
+                12240,
+                12240,
+                12240,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "meta": {
+                "tax_authority": "ca",
+                "tax_rate": "0.08"
+            }
+        },
+        {
+            "name": "@taxable_income_in_state_bracket:ca:0.093",
+            "type": "report",
+            "values": [
+                56765,
+                56765,
+                56765,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "meta": {
+                "tax_authority": "ca",
+                "tax_rate": "0.093"
+            }
+        },
+        {
+            "name": "@taxable_income_in_state_bracket:or:0.05",
+            "type": "report",
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                3550,
+                3550,
+                3550,
+                0
+            ],
+            "meta": {
+                "tax_authority": "or",
+                "tax_rate": "0.05"
+            }
+        },
+        {
+            "name": "@taxable_income_in_state_bracket:or:0.07",
+            "type": "report",
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                5350,
+                5350,
+                5350,
+                0
+            ],
+            "meta": {
+                "tax_authority": "or",
+                "tax_rate": "0.07"
+            }
+        },
+        {
+            "name": "@taxable_income_in_state_bracket:or:0.09",
+            "type": "report",
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                108885,
+                108885,
+                108885,
+                0
+            ],
+            "meta": {
+                "tax_authority": "or",
+                "tax_rate": "0.09"
+            }
+        },
+        {
+            "name": "@combined_irmaa",
+            "type": "report",
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "name": "@total_income",
+            "type": "report",
+            "values": [
+                120000,
+                120000,
+                120000,
+                120000,
+                120000,
+                120000,
+                120000,
+                120000,
+                120000,
+                120000
+            ]
+        },
+        {
+            "name": "@total_expenses",
+            "type": "report",
+            "values": [
+                38289,
+                38289,
+                38289,
+                38289,
+                27013,
+                29469,
+                29469,
+                49212,
+                39340,
+                39340
+            ]
+        },
+        {
+            "name": "@gap",
+            "type": "report",
+            "values": [
+                81710,
+                81710,
+                81710,
+                81710,
+                92986,
+                90531,
+                90531,
+                70787,
+                80659,
+                80659
+            ]
+        },
+        {
+            "name": "@tax_liability",
+            "type": "report",
+            "values": [
+                38289,
+                38289,
+                38289,
+                29469,
+                29469,
+                29469,
+                39340,
+                39340,
+                39340,
+                0
+            ]
+        }
+    ],
+    "rates": [
+        {
+            "name": "@federal_marginal_income_tax_rate",
+            "values": [
+                0.24,
+                0.24,
+                0.24,
+                0.24,
+                0.24,
+                0.24,
+                0.24,
+                0.24,
+                0.24,
+                0
+            ]
+        },
+        {
+            "name": "@state_marginal_income_tax_rate",
+            "values": [
+                0.093,
+                0.093,
+                0.093,
+                0,
+                0,
+                0,
+                0.09,
+                0.09,
+                0.09,
+                0
+            ]
+        },
+        {
+            "name": "@combined_marginal_income_tax_rate",
+            "values": [
+                0.333,
+                0.333,
+                0.333,
+                0.24,
+                0.24,
+                0.24,
+                0.33,
+                0.33,
+                0.33,
+                0
+            ]
+        },
+        {
+            "name": "@federal_effective_income_tax_rate",
+            "values": [
+                0.1844,
+                0.1844,
+                0.1844,
+                0.1844,
+                0.1844,
+                0.1844,
+                0.1844,
+                0.1844,
+                0.1844,
+                0
+            ]
+        }
+    ],
+    "drawdown": {
+        "strategy": "SPENDING"
+    }
+}

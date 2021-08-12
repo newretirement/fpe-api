@@ -1,0 +1,106 @@
+{
+    "plan": {
+        "currentDate": "2021-01",
+        "market": {
+            "inflation": {"mean": 0.028}
+        },
+        "primary": {
+            "birthDate": "1961-01",
+            "goalAge": "90y",
+            "gender": "female",
+            "medical": {
+                "medicareStartAge": "65y",
+                "health": "good"
+            },
+            "socialSecurity": {
+                "startAge": "67y0m",
+                "primaryInsuranceAmount": 2450
+            }
+        },
+        "spouse": {
+            "birthDate": "1964-01",
+            "goalAge": "85y",
+            "gender": "male",
+            "medical": {
+                "medicareStartAge": "65y",
+                "health": "poor"
+            },
+            "socialSecurity": {
+                "startAge": "63y6m",
+                "primaryInsuranceAmount": 2100
+            }
+        },
+        "cashFlow": {
+            "checkingAccount": "primary_checking",
+            "savingsAccount": "primary_savings"
+        },
+        "accounts": [
+            {
+                "name": "primary_checking",
+                "type": "aftertax"
+            },
+            {
+                "name": "primary_savings",
+                "type": "aftertax",
+                "taxTreatment": "ordinaryIncome"
+            },
+            {
+                "name": "debt",
+                "type": "revolvingCredit"
+            },
+            {
+                "name": "primary_retirement_savings",
+                "balance": 300000,
+                "type": "401k",
+                "rate": {"mean": 0.04},
+                "owner": "primary"
+            },
+            {
+                "name": "spouse_retirement_savings",
+                "balance": 200000,
+                "type": "ira",
+                "rate": {"mean": 0.02},
+                "owner": "spouse"
+            }
+        ],
+        "paymentStreams": [
+            {
+                "name": "primary_work_income",
+                "paymentAmount": 8000,
+                "paymentsPerYear": 12,
+                "rate": {"mean": 0.02},
+                "endAge": "67y",
+                "target": "primary_checking",
+                "earnedIncome": true,
+                "contributions": [
+                    {
+                        "employeeContribRate": 0.1,
+                        "employeeContribTarget": "primary_retirement_savings"
+                    }
+                ]
+            },
+            {
+                "name": "spouse_work_income",
+                "paymentAmount": 5000,
+                "paymentsPerYear": 12,
+                "rate": {"mean": 0.02},
+                "endAge": "68y",
+                "target": "primary_checking",
+                "earnedIncome": true,
+                "contributions": [
+                    {
+                        "employeeContribRate": 0.06,
+                        "employeeContribTarget": "spouse_retirement_savings"
+                    }
+                ]
+            },
+            {
+                "name": "expenses",
+                "paymentAmount": 8000,
+                "startAge": "66y",
+                "source": "optimal",
+                "paymentsPerYear": 12
+            }
+        ]
+    }
+}

@@ -1,0 +1,55 @@
+{
+    "plan": {
+        "currentDate": "2021-01",
+        "cashFlow": {
+            "checkingAccount": "checking",
+            "savingsAccount": "savings",
+            "savingRate": 1
+        },
+        "primary": {
+            "birthDate": "1973-01",
+            "goalAge": "90y",
+            "gender": "male"
+        },
+        "accounts": [
+            {
+                "name": "checking",
+                "type": "aftertax"
+            },
+            {
+                "name": "savings",
+                "type": "aftertax",
+                "balance": 100000
+            },
+            {
+                "name": "lifetime_debt",
+                "type": "revolvingCredit"
+            },
+            {
+                "name": "acme_401k",
+                "type": "401k"
+            }
+        ],
+        "paymentStreams": [
+            {
+                "name": "acme_income",
+                "paymentAmount": 15000,
+                "paymentsPerYear": 12,
+                "endAge": "65y",
+                "rate": {"mean": 0.06},
+                "contributions": [
+                  {
+                      "employeeContribRate": 0.1,
+                      "employerMatches": [
+                          {"rate": 1.0, "upTo": 0.05}
+                      ],
+                      "employerMatchAnnualCap": 9000,
+                      "employeeContribTarget": "acme_401k"
+                  }
+                ],
+                "target": "checking",
+                "earnedIncome": true
+            }
+        ]
+    }
+}
