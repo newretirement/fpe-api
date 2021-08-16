@@ -14,7 +14,7 @@ Starting at the present month, FPE projects future financial state by calculatin
 All FPE endpoints require a valid API key, which must be provided in the request header.  For example:
 
 ```
-GET /fpe/v4/forecast HTTP/1.1
+POST /fpe/v4/forecast HTTP/1.1
 X-Api-Key: abcdefg1234567
 ```
 
