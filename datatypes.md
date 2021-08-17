@@ -186,7 +186,7 @@ The `Medical` object contains the attributes relating to a person's health and h
 | `needsLTC` | boolean | True only if the person requires long-term care. |
 | `hasLTCI` | boolean | True only if the person has long-term care insurance (LTCI).  This flag is ignored if `needsLTC` is false. |
 | `health` | enum | Indicates a person's physical health.  It is needed for providing more accurate medical cost estimates.  Valid values are `excellent`, `good`, and `poor`.  Default is `excellent`). |
-| `medicareStartAge` | [Duration](#duration) | The age at which Medicare-related expenses start.  Default is `65y`. |
+| `medicareStartAge` | [Duration](#duration) | The age at which Medicare-related expenses will commence.  Default age is `65y`.  To exclude Medicare-related costs from the financial projection, set this age equal to or greater than the [person's goalAge](#person). |
 | `medigapPremium` | [PremiumLevel](#premiumlevel) | The levels of cost for Medigap premiums. |
 | `drugPremium` | [PremiumLevel](#premiumlevel) | The levels of cost for prescription drug premiums. |
 | `medicareAdvantage` | [PremiumLevel](#premiumlevel) | The levels of cost for Medicare Advantage premiums. |
