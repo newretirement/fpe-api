@@ -96,12 +96,12 @@ A sample JSON request for relocation is [here](./examples/forecast/housing/reloc
 | `lifetimeTaxes` | int | The sum of all taxes paid throughout the financial projection. |
 | `lifetimeSSBenefit` | int | The sum of all social security payments received throughout the financial projection. |
 | `outOfSavingsDate` | [Date](#date) | The date that the user's [Plan](#plan) runs out of savings and starts accumulating debt. A value of `null` means the plan never ran out of savings. |
-| `accounts` | [MoneyTimeSeries[]](#moneytimeseries) | The projected periodic account balances corresponding to the [accounts](#account) defined within the [Plan](#plan). |
-| `paymentStreams` | [MoneyTimeSeries[]](#moneytimeseries) | The projected periodic payments corresponding to the [paymentStreams](#paymentstream) defined within the [Plan](#plan).  |
+| `accounts` | [Projection[]](#projection) | The projected periodic account balances corresponding to the [accounts](#account) defined within the [Plan](#plan). |
+| `paymentStreams` | [Projection[]](#projection) | The projected periodic payments corresponding to the [paymentStreams](#paymentstream) defined within the [Plan](#plan).  |
 
-#### MoneyTimeSeries
+#### Projection
 
-`MoneyTimeSeries` is a time series of either `yearly` or `monthly` granularity, whose values (depending on context) represent future account balances, payments, or projection reports.
+`Projection` is a named time series representing a financial projection of either `yearly` or `monthly` granularity.  The values (depending on context) represent future account balances, payments, or projection reports.
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
