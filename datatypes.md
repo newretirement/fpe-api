@@ -241,7 +241,7 @@ The `Market` object contains financial market data and other economic values tha
 
 ## Rate
 
-The `Rate` object describes the growth rate and variability of various financial objects, such as [Accounts](datatypes.md#Account) and [PaymentStreams](datatypes.md#PaymentStream).  This object is, in a sense, polymorphic, in that its behavior varys based on how it's configured, what parent object it's attached to, and the type of simulation in which it is participating.
+The `Rate` object describes the growth rate and variability of various financial objects, such as [Accounts](datatypes.md#Account) and [PaymentStreams](datatypes.md#PaymentStream).  This object is, in a sense, polymorphic, in that its behavior varies based on how it's configured, what parent object it's attached to, and the type of simulation in which it is participating.
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
