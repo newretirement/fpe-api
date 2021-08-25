@@ -6,7 +6,7 @@ An `account` is a financial ledger of the transactions within a real-world accou
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `name` | string | The unique name of the account (e.g. `"wells_fargo_savings"`).|
+| `name` | string | The unique name of the account (e.g. `"wells_fargo_savings"`). Valid characters are: `[a-zA-Z0-9]`, `-`, `_`, `/`, and white space.|
 | `type` | [AccountType](#accounttype) | Determines the type of account. Common account types are `aftertax`, `ira`, `401k`, `asset`, `loan`. |
 | `balance` | int | The account balance at the start of the simulation. |
 | `balanceLimit` | int |  Sets a balance limit on this account.  This attribute is only valid for accounts of type `loan` or `revolvingCredit`.|
@@ -117,7 +117,7 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `name` | string | The unique name of this paymentStream (e.g. `"auto_insurance"`). |
+| `name` | string | The unique name of this paymentStream (e.g. `"auto_insurance"`). Valid characters are: `[a-zA-Z0-9]`, `-`, `_`, `/`, and white space. |
 | `source` | string | The name of the [account](#account) from which the payment will be withdrawn. |
 | `target` | string | The name of the [account](#account) into which the payment will be deposited. |
 | `rate` | [Rate](#rate) | Determines the annual growth rate of the payment over time.  The growth is applied annually starting 12 months into the simulation. |
