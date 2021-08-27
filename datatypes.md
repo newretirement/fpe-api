@@ -121,10 +121,11 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 | `source` | string | The name of the [account](#account) from which the payment will be withdrawn. |
 | `target` | string | The name of the [account](#account) into which the payment will be deposited. |
 | `rate` | [Rate](#rate) | Determines the annual growth rate of the payment over time.  The growth is applied annually starting 12 months into the simulation. |
-| `owner` | enum | Determines who the payments are associated with. Valid values are [`primary`, `spouse`]. If this attribute is empty, `primary` is the default.
+| `startGrowthOnFirstPayment` | boolean | If true, annual growth (determined by `rate`) is deferred until the first payment occurs (determined by `startAge`). By default, growth starts immediately. |
+| `owner` | enum | Determines who the payments are associated with. Valid values are [`primary`, `spouse`]. If this attribute is empty, `primary` is the default. |
 | `startAge` | [Duration](#duration) | The age of the payment owner when future payments start.  |
 | `endAge` | [Duration](#duration) | The age of the payment owner when future payments have stopped. |
-| `onAge` | [Duration](#duration) | This is a convenience attribute to specify a one-time payment at a specific age. |
+| `onAge` | [Duration](#duration) | Specify a single payment at a specific age. __Note:__ this is just a shorthand method of configuring a lump sum payment; the same thing can be accomplished via `startAge`, `endAge`, and `paymentsPerYear`.  E.g. `{onAge: "35y6m"}` is the same as `{startAge: "35y6m", endAge: "35y7m", paymentsPerYear: 12}`. |
 | `paymentsPerYear` | int | Determines the payment frequency within a given year. Valid values are: [`1`, `2`, `4`, `12`].  Regardless of frequency, the first payment occurs on `startAge` (or `onAge`). |
 | `paymentAmount` | int | The dollar amount of the payment.
 | `earnedIncome` | boolean | Set to `true` if this paymentStream represents income that the IRS deems allowable for a tax-advantaged contribution to a retirement account.  Also referred to as "taxable compensation".|
@@ -187,7 +188,7 @@ The `Medical` object contains the attributes relating to a person's health and h
 | ---------- | ---- | ----------- |
 | `needsLTC` | boolean | True only if the person requires long-term care. |
 | `hasLTCI` | boolean | True only if the person has long-term care insurance (LTCI).  This flag is ignored if `needsLTC` is false. |
-| `health` | enum | Indicates a person's physical health.  It is needed for providing more accurate medical cost estimates.  Valid values are `excellent`, `good`, and `poor`.  Default is `excellent`). |
+| `health` | enum | Indicates a person's physical health.  It is needed for providing more accurate medical cost estimates.  Valid values are `excellent`, `good`, and `poor`.  Default is `excellent`. |
 | `medicareStartAge` | [Duration](#duration) | The age at which Medicare-related expenses will commence.  Default age is `65y`.  To exclude Medicare-related costs from the financial projection, set this age equal to or greater than the [person's goalAge](#person). |
 | `medigapPremium` | [PremiumLevel](#premiumlevel) | The levels of cost for Medigap premiums. |
 | `drugPremium` | [PremiumLevel](#premiumlevel) | The levels of cost for prescription drug premiums. |
