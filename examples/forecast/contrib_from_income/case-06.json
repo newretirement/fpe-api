@@ -1,0 +1,53 @@
+{
+    "plan": {
+        "comment": "Employee starts contributing 5% annually; then increases contribution rate 1% each year until an 8.5% cap has been reached.",
+        "currentDate": "2021-01",
+        "cashFlow": {
+            "checkingAccount": "checking",
+            "savingsAccount": "savings",
+            "savingRate": 1
+        },
+        "primary": {
+            "birthDate": "1971-01",
+            "goalAge": "58y",
+            "gender": "male"
+        },
+        "accounts": [
+            {
+                "name": "checking",
+                "type": "aftertax"
+            },
+            {
+                "name": "savings",
+                "type": "aftertax",
+                "balance": 100000
+            },
+            {
+                "name": "lifetime_debt",
+                "type": "revolvingCredit"
+            },
+            {
+                "name": "acme_401k",
+                "type": "401k"
+            }
+        ],
+        "paymentStreams": [
+            {
+                "name": "acme_income",
+                "paymentAmount": 10000,
+                "paymentsPerYear": 12,
+                "target": "checking",
+                "endAge": "65y",
+                "earnedIncome": true,
+                "contributions": [
+                    {
+                        "employeeContribRate": 0.05,
+                        "employeeContribRateInc": 0.01,
+                        "employeeContribRateCap": 0.085,
+                        "employeeContribTarget": "acme_401k"
+                    }
+                ]
+            }
+        ]
+    }
+}
