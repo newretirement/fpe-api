@@ -96,6 +96,7 @@ A sample JSON request for relocation is [here](./examples/forecast/housing/reloc
 | `lifetimeTaxes` | int | The sum of all taxes paid throughout the financial projection. |
 | `lifetimeSSBenefit` | int | The sum of all social security payments received throughout the financial projection. |
 | `outOfSavingsDate` | [Date](#date) | The date that the user's [Plan](#plan) runs out of savings and starts accumulating debt. A value of `null` means the plan never ran out of savings. |
+| `monthlyRetirementIncome` | int | The estimated monthly income received in retirement. This attribute is only calculated if `params.calcMonthlyRetirementIncome` is set to true in the request. |
 | `accounts` | [Projection[]](#projection) | The projected periodic account balances corresponding to the [accounts](#account) defined within the [Plan](#plan). |
 | `paymentStreams` | [Projection[]](#projection) | The projected periodic payments corresponding to the [paymentStreams](#paymentstream) defined within the [Plan](#plan).  |
 
@@ -118,7 +119,7 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `name` | string | The unique name of this paymentStream (e.g. `"auto_insurance"`). Valid characters are: `[a-zA-Z0-9]`, `-`, `_`, `/`, and white space. |
-| `source` | string | The name of the [account](#account) from which the payment will be withdrawn. |
+| `source` | string | The name of the [account](#account) from which the payment will be withdrawn. <br/>**Special case**: If "optimal" is specified, the algorithm will withdraw the requested amount from 1 or more existing accounts, taking into consideration account type, projected growth rate, and possibly other attributes in an attempt to minimize negative impact on the plan's interest growth. |
 | `target` | string | The name of the [account](#account) into which the payment will be deposited. |
 | `rate` | [Rate](#rate) | Determines the annual growth rate of the payment over time.  The growth is applied annually starting 12 months into the simulation. |
 | `startGrowthOnFirstPayment` | boolean | If true, annual growth (determined by `rate`) is deferred until the first payment occurs (determined by `startAge`). By default, growth starts immediately. |

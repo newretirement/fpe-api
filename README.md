@@ -210,10 +210,22 @@ Given a financial [plan](./datatypes.md#plan), this endpoint runs a simulation t
 ### Request JSON Syntax
 
 &nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"params": {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;calcMonthlyRetirementIncome: `true|false`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"plan": {<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Plan object](./datatypes.md#plan)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+
+#### `params` request object
+
+The `params` object, and each of its attributes, are totally optional:
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `calcMonthlyRetirementIncome` | boolean | If `true`, the monthly retirement income calculation is executed, and the result is output in the [Forecast](./datatypes.md#forecast) object. |
 
 A sample request JSON for this endpoint can be found [here](examples/forecast/basic/single-01.json).
 
