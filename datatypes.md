@@ -14,6 +14,7 @@ An `account` is a financial ledger of the transactions within a real-world accou
 | `rate` | [Rate](#rate) | Determines the account's growth, which is calculated and updated on a monthly basis.
 | `costBasis` | int | The dollar amount paid to acquire a holding.  This attribute is only relevant for accounts on which capital gains taxes are calculated.|
 | `realizedGainRate` | float | Determines the percentage of projected monthly investment returns are realized immediately and taxed as capital gains.  Setting this attribute to 1.0 means 100% of investment returns will be taxed immediately. A value of 0.0 means none of the returns are realized immediately, and so capital gains will only be processed upon a distribution event. This attribute is only relevant for accounts on which capital gains taxes are calculated.|
+| `disableOptimalWithdraw` | boolean | If true, this account is excluded from the candidate accounts selected for the _Optimal Withdrawal Strategy_ (refer to description for [PaymentStream.source](#paymentstream)) Defaults to `false`. |
 
 #### AccountType
 
@@ -119,7 +120,7 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `name` | string | The unique name of this paymentStream (e.g. `"auto_insurance"`). Valid characters are: `[a-zA-Z0-9]`, `-`, `_`, `/`, and white space. |
-| `source` | string | The name of the [account](#account) from which the payment will be withdrawn. <br/>**Special case**: If "optimal" is specified, the algorithm will withdraw the requested amount from 1 or more existing accounts, taking into consideration account type, projected growth rate, and possibly other attributes in an attempt to minimize negative impact on the plan's interest growth. |
+| `source` | string | The name of the [account](#account) from which the payment will be withdrawn. <br/>**Special case**: If "optimal" is specified, the algorithm will implicitly withdraw the requested amount from 1 or more existing accounts, taking into consideration account type, projected growth rate, and possibly other attributes in an attempt to minimize negative impact on the plan's interest growth. This is known as the _Optimal Withdrawal Strategy_. |
 | `target` | string | The name of the [account](#account) into which the payment will be deposited. |
 | `rate` | [Rate](#rate) | Determines the annual growth rate of the payment over time.  The growth is applied annually starting 12 months into the simulation. |
 | `startGrowthOnFirstPayment` | boolean | If true, annual growth (determined by `rate`) is deferred until the first payment occurs (determined by `startAge`). By default, growth starts immediately. |
