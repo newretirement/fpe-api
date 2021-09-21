@@ -211,7 +211,7 @@ Given a financial [plan](./datatypes.md#plan), this endpoint runs a simulation t
 
 &nbsp;&nbsp;&nbsp;&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"params": {<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;calcMonthlyRetirementIncome: `true|false`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;projectionPeriod: `monthly|yearly`<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;},<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"plan": {<br/>
@@ -225,7 +225,7 @@ The `params` object, and each of its attributes, are totally optional:
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `calcMonthlyRetirementIncome` | boolean | If `true`, the monthly retirement income calculation is executed, and the result is output in the [Forecast](./datatypes.md#forecast) object. |
+| `projectionPeriod` | enum | Determines if the forecasted projection vectors represent monthly or aggregated annual amounts. Valid values are [`monthly`, `yearly`]. If this attribute is empty, `yearly` is the default. |
 
 A sample request JSON for this endpoint can be found [here](examples/forecast/basic/single-01.json).
 
