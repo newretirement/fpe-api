@@ -131,7 +131,7 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 | `paymentsPerYear` | int | Determines the payment frequency within a given year. Valid values are: [`1`, `2`, `4`, `12`].  Regardless of frequency, the first payment occurs on `startAge` (or `onAge`). |
 | `paymentAmount` | int | The dollar amount of the payment.
 | `earnedIncome` | boolean | Set to `true` if this paymentStream represents income that the IRS deems allowable for a tax-advantaged contribution to a retirement account.  Also referred to as "taxable compensation".|
-| `survivorBenefit` | A rate in the range `[0..1]` that determines the ratio of each periodic payment that is retained when the paymentStream's owner dies. This attribute is typically needed for modeling annuities and pensions. |
+| `survivorBenefit` | float | A rate in the range `[0..1]` that determines the ratio of each periodic payment that is retained when the paymentStream's owner dies. This attribute is typically needed for modeling annuities and pensions. |
 This attribute is ignored if the owner of this PaymentStream has no spouse.
 | `taxDeductionRate` | float | A value in the range [0..1] that indicates what percentage of this expense is tax-deductible.  If unset, the default value is `0.0`. __NOTE:__ This attribute only applies to PaymentStream objects that represent [expenses](./payment_streams.md#expense-streams). |
 | `aboveTheLine` | boolean | If true, the tax-deductible portion of the expense will be subtracted from gross income prior calculating AGI.  Otherwise, its is treated as an itemized deduction (below-the-line). __NOTE:__ This attribute is relevant only when `taxDeductionRate > 0.0`. |
