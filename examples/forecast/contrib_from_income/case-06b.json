@@ -1,7 +1,7 @@
 {
     "plan": {
-        "comment": "Employee starts contributing 5% annually; then increases contribution rate 1% each year until an 8.5% cap has been reached.",
-        "currentDate": "2021-01",
+        "comment": "Employee starts contributing $100/paycheck; then increases contribution amount $75 each year until a $300 cap has been reached.",
+        "currentDate": "2021-09",
         "cashFlow": {
             "checkingAccount": "checking",
             "savingsAccount": "savings",
@@ -37,13 +37,12 @@
                 "paymentAmount": 10000,
                 "paymentsPerYear": 12,
                 "target": "checking",
-                "endAge": "65y",
                 "earnedIncome": true,
                 "contributions": [
                     {
-                        "employeeContribRate": 0.05,
-                        "employeeContribRateInc": 0.01,
-                        "employeeContribRateCap": 0.085,
+                        "employeeContribAmount": 100,
+                        "employeeContribAmountInc": 75,
+                        "employeeContribAmountCap": 300,
                         "employeeContribTarget": "acme_401k"
                     }
                 ]
