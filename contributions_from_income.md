@@ -6,7 +6,7 @@ Income-linked contributions are essentially one or more contributions taken dire
 
 ### Employer Match Logic
 
-Some companies offer [401(k) matching](https://www.investopedia.com/articles/personal-finance/112315/how-401k-matching-works.asp), whereby the company contributes a certain amount to the employee's retirement savings plan based on the that employee's annual contribution.
+Some companies offer [401(k) matching](https://www.investopedia.com/articles/personal-finance/112315/how-401k-matching-works.asp), whereby the company contributes a certain amount to the employee's retirement savings plan based on that employee's annual contribution.
 
 FPE supports single-tiered and multi-tiered employer match rules.  A single-tiered example is:
 
