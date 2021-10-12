@@ -2,7 +2,71 @@
 
 ## Overview
 
-Income-linked contributions are essentially one or more contributions taken directly from a payment on an [income stream](./payment_streams.md#income-streams) and deposited into one or more target [accounts](./datatypes.md#account).  The remainder of the income payment (i.e. the amount left after processing the contributions) is then deposited into the stream's designated `target` account.
+Income-linked contributions are essentially one or more contributions taken directly from an [income stream](./payment_streams.md#income-streams) payment, and deposited into one or more target [accounts](./datatypes.md#account).  The remainder of the income payment (i.e. the amount left after processing the contributions) is then deposited into the stream's designated `target` account.
+
+### Employer Match Logic
+
+Some companies offer [401(k) matching](https://www.investopedia.com/articles/personal-finance/112315/how-401k-matching-works.asp), whereby the company contributes a certain amount to the employee's retirement savings plan based on the that employee's annual contribution.
+
+FPE supports single-tiered and multi-tiered employer match rules.  A single-tiered example is:
+
+```
+Match 100% of employee's contribution up to 6% of salary
+```
+
+A multi-tiered example is:
+
+```
+tier 1: Match 100% of employee's contribution up to 6% of salary
+tier 2: Then, match 50% of employee's contribution up to 8% of salary
+tier 3: Then, match 25% of employee's contribution up to 10% of salary
+```
+
+The dollar amount of the employer match is calculated and processed on each pay period (typically monthly).  The basic calculation steps are as follows:
+
+1. Determine the _employer contribution rate_ based on the employer match rules and the employee's contribution rate
+1. Multiply _employer contribution rate_ by the employee's pretax income to obtain the dollar amount the employer will contribute as a match.
+1. If an annual employer match limit was specified, then (if necessary) reduce the employer match dollar amount calculated for the current pay period (see previous step) such that the year-to-date employer match amount does not exceed this limit.
+
+Below are the calculation steps in detail:
+
+<b>Step 1: Calculate employer contribution rate</b>
+
+This formula is the same for single- or multi-tiered match rules (a single-tier rule is just a multi-tier composed of 1 tier).  
+
+Let:
+- _c_ = the employee contribution rate
+- _n_ = the number of employer match tiers
+- _r<sub>k</sub>_ = the employer match rate for tier _k_
+- _s<sub>k</sub>_ = the percent of salary up to which the employer will match in tier _k_
+
+![empmatch](https://latex.codecogs.com/svg.image?%5Ctext%7Bemployer%20contribution%20rate%7D%20=%20%5Csum_%7Bk=1%7D%5E%7Bn%7D%5Cbegin%7Bcases%7D%20r_%7Bk%7D%20%5Ctimes%20min(c,%20s_%7Bk%7D)%20&%20%5Ctext%7B%20if%20%7D%20k=1%20%5C%5C%20r_%7Bk%7D%20%5Ctimes%20max(0,%20min(c,%20s_%7Bk%7D)%20-%20s_%7Bk-1%7D)%20&%20%5Ctext%7B%20if%20%7D%20k%3E1%20%5C%5C%5Cend%7Bcases%7D)
+
+<b>Step 2: Calculate employer match dollar amount</b>
+
+The amount that the employer will contribute to the employee's retirement plan for the current pay period is simply:
+
+![emp-match-amount](https://latex.codecogs.com/svg.image?%5Ctext%7Bemployer%20match%20dollar%20amount%7D%20=%20i%20%5Ctimes%20r)
+
+where:
+- _i_ = the employee's pretax income for the current pay period
+- _r_ = the _employer contribution rate_ calculated in the previous step
+
+<b>Step 3: Constrain employer match to satisfy an annual cap</b>
+
+If an employer match annual cap has been specified (see [employerMatchAnnualCap](./datatypes.md#contributionfromincome)), the employer match dollar amount may need to be reduced in order to stay within this annual limit:
+
+![emp-match-cap](https://latex.codecogs.com/svg.image?m'%20=%20%5Cbegin%7Bcases%7DannualCap%20-%20ytdMatch%20&%20%5Ctext%7B%20if%20%7D%20(ytdMatch%20&plus;%20m)%20%3E%20annualCap%20%5C%5Cm%20&%20%5Ctext%7B%20if%20%7D%20(ytdMatch%20&plus;%20m)%20%3C=%20annualCap%20%5C%5C%20%5Cend%7Bcases%7D)
+
+where:
+- _m_ = the employer match dollar amount calculated in the previous step
+- _ytdMatch_ = the total year-to-date employer match amount (not including _m_)
+- _annualCap_ = employer match annual dollar amount cap
+- _m'_ = the (potentially) reduced employer match dollar amount
+
+_m'_ is the dollar amount that the employer will contribute to the employee's retirement savings plan for the current pay period.
+
+## Sample Scenarios
 
 ### Example 1: Employer Matching
 
@@ -166,6 +230,7 @@ This example demonstrates how the employee and employer contributions can be tra
 ```
 
 The complete JSON request for this example can be found [here](examples/forecast/contrib_from_income/case-05.json).
+
 
 ### Output Streams
 
