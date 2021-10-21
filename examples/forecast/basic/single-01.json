@@ -40,8 +40,8 @@
                 "type": "ira",
                 "rate": {
                     "curve": [
-                        {"year": 2021, "rate": {"mean": 0.06}},
-                        {"year": 2027, "rate": {"mean": 0.04}}
+                        {"date": "2021-01", "rate": {"mean": 0.06}},
+                        {"date": "2027-07", "rate": {"mean": 0.04}}
                     ]
                 }
             }

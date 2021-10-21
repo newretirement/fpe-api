@@ -266,5 +266,6 @@ The `Rate` object describes the growth rate and variability of various financial
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `year` | int | The year within the financial projection that the new rate will apply.  Within the specified future year, the rate change will occur in January. |
 | `rate` | [Rate](#rate) | Describes the growth rate characteristics for the time segment implied by this `RatePt` object and the following one within the parent `Rate.curve[]`. |
+| `date` | [Date](#date) | The future date within the financial projection on which the new rate will apply. |
+| `year` | int | _DEPRECATED (use `RatePt.date` instead)_. The year within the financial projection that the new rate will apply.  Within the specified future year, the rate change will occur in January. |
