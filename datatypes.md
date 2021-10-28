@@ -125,9 +125,12 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 | `rate` | [Rate](#rate) | Determines the annual growth rate of the payment over time.  The growth is applied annually starting 12 months into the simulation. |
 | `startGrowthOnFirstPayment` | boolean | If true, annual growth (determined by `rate`) is deferred until the first payment occurs (determined by `startAge`). By default, growth starts immediately. |
 | `owner` | enum | Determines who the payments are associated with. Valid values are [`primary`, `spouse`]. If this attribute is empty, `primary` is the default. |
-| `startAge` | [Duration](#duration) | The age of the payment owner when future payments start.  |
-| `endAge` | [Duration](#duration) | The age of the payment owner when future payments have stopped. |
-| `onAge` | [Duration](#duration) | Specify a single payment at a specific age. __Note:__ this is just a shorthand method of configuring a lump sum payment; the same thing can be accomplished via `startAge`, `endAge`, and `paymentsPerYear`.  E.g. `{onAge: "35y6m"}` is the same as `{startAge: "35y6m", endAge: "35y7m", paymentsPerYear: 12}`. |
+| `startDate` | [Date](#date) | The date that future payments commence.  |
+| `endDate` | [Date](#date) | The date that future payments have ceased.  |
+| `date` | [Date](#date) | Specify a single payment on a specific date. __Note:__ this is just a shorthand method of configuring a one-time payment; the same thing can be accomplished via `startDate` and `endDate`.  E.g. `{date: "2040-06"}` is the same as `{startDate: "2040-06", endDate: "2040-07"}`. |
+| `startAge` | [Duration](#duration) | _DEPRECATED (use `startDate` instead)_. The age of the payment owner when future payments start.  |
+| `endAge` | [Duration](#duration) | _DEPRECATED (use `endDate` instead)_. The age of the payment owner when future payments have stopped. |
+| `onAge` | [Duration](#duration) | _DEPRECATED (use `date` attribute instead)_. Specify a single payment at a specific age. __Note:__ this is just a shorthand method of configuring a lump sum payment; the same thing can be accomplished via `startAge`, `endAge`, and `paymentsPerYear`.  E.g. `{onAge: "35y6m"}` is the same as `{startAge: "35y6m", endAge: "35y7m", paymentsPerYear: 12}`. |
 | `paymentsPerYear` | int | Determines the payment frequency within a given year. Valid values are: [`1`, `2`, `4`, `12`].  Regardless of frequency, the first payment occurs on `startAge` (or `onAge`). |
 | `paymentAmount` | int | The dollar amount of the payment.
 | `earnedIncome` | boolean | Set to `true` if this paymentStream represents income that the IRS deems allowable for a tax-advantaged contribution to a retirement account.  Also referred to as "taxable compensation".|
