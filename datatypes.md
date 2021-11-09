@@ -102,6 +102,7 @@ A sample JSON request for relocation is [here](./examples/forecast/housing/reloc
 | `monthlyRetirementIncome` | int | The estimated monthly income received in retirement. This attribute is only calculated if `params.calcMonthlyRetirementIncome` is set to true in the request. |
 | `accounts` | [Projection[]](#projection) | The projected periodic account balances corresponding to the [accounts](#account) defined within the [Plan](#plan). |
 | `paymentStreams` | [Projection[]](#projection) | The projected periodic payments corresponding to the [paymentStreams](#paymentstream) defined within the [Plan](#plan).  |
+| `fire` | [FIRE](#fire) | Contains details as to the earliest retirement dates across the earned income streams that still yields a non-negative estate value.  |
 
 #### Projection
 
@@ -117,7 +118,7 @@ A sample JSON request for relocation is [here](./examples/forecast/housing/reloc
 
 #### FIRE
 
-`FIRE` is the result of an optional calculation that finds the earliest `endDate` that can be used across all [PaymentStreams](#PaymentStream) whose `earnedIncome` flag is true such that the forecast's `estateValue is as close to $0 without going negative.
+`FIRE` is the result of an optional calculation that finds the earliest `endDate` that can be used across all [PaymentStreams](#PaymentStream) whose `earnedIncome` flag is true such that the forecast's `estateValue` is as close to $0 without being negative.
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
