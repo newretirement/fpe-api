@@ -14,7 +14,9 @@ An `account` is a financial ledger of the transactions within a real-world accou
 | `rate` | [Rate](#rate) | Determines the account's growth, which is calculated and updated on a monthly basis.
 | `costBasis` | int | The dollar amount paid to acquire a holding.  This attribute is only relevant for accounts on which capital gains taxes are calculated.|
 | `realizedGainRate` | float | Determines the percentage of projected monthly investment returns are realized immediately and taxed as capital gains.  Setting this attribute to 1.0 means 100% of investment returns will be taxed immediately. A value of 0.0 means none of the returns are realized immediately, and so capital gains will only be processed upon a distribution event. This attribute is only relevant for accounts on which capital gains taxes are calculated.|
-| `disableOptimalWithdraw` | boolean | If true, this account is excluded from the candidate accounts selected for the _Optimal Withdrawal Strategy_ (refer to description for [PaymentStream.source](#paymentstream)) Defaults to `false`. |
+| `disableOptimalWithdraw` | boolean | If true, this account is excluded from the candidate accounts selected for the _Optimal Withdrawal Strategy_ (refer to description for [PaymentStream.source](#PaymentStream)). Defaults to `false`. |
+| `disableRMD` | boolean | If true, RMDs are guaranteed not to be taken from this account, regardless of context (e.g. the person's age or the account's type). Defaults to `false`. |
+| `disableRothConversion` | boolean | If true, the _Roth Conversion Optimizer_ algorithm will ignore this account when finding candidate tax-advantaged accounts to be converted.  Defaults to `false`. |
 
 #### AccountType
 
@@ -112,6 +114,16 @@ A sample JSON request for relocation is [here](./examples/forecast/housing/reloc
 | `values` | int[] | The periodic values within this time series. The first value in this series corresponds to [Plan.currentDate](#plan). |
 
 <br/><hr/>
+
+#### FIRE
+
+`FIRE` is the result of an optional calculation that finds the earliest `endDate` that can be used across all [PaymentStreams](#PaymentStream) whose `earnedIncome` flag is true such that the forecast's `estateValue is as close to $0 without going negative.
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `origRetireDate` | string | The name of this time series. |
+| `earliestRetireDates` | map | A map of [PaymentStream](#PaymentStream) names to [Date](#Date) entries, where each entry indicates the earliest `endDate` for the named stream that will satisfy the goal described in the [FIRE](#FIRE) summary above. |
+
 
 ## PaymentStream
 

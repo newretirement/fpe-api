@@ -226,6 +226,7 @@ The `params` object, and each of its attributes, are totally optional:
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `projectionPeriod` | enum | Determines if the forecasted projection vectors represent monthly or aggregated annual amounts. Valid values are [`monthly`, `yearly`]. If this attribute is empty, `yearly` is the default. |
+| `calcFIRE` | boolean | If `true`, the 'FIRE' solver is executed, and the result appears in the [Forecast.FIRE](datatypes.md#Forecast) response object. |
 
 A sample request JSON for this endpoint can be found [here](examples/forecast/basic/single-01.json).
 
