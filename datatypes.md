@@ -14,7 +14,7 @@ An `account` is a financial ledger of the transactions within a real-world accou
 | `rate` | [Rate](#rate) | Determines the account's growth, which is calculated and updated on a monthly basis.
 | `costBasis` | int | The dollar amount paid to acquire a holding.  This attribute is only relevant for accounts on which capital gains taxes are calculated.|
 | `realizedGainRate` | float | Determines the percentage of projected monthly investment returns are realized immediately and taxed as capital gains.  Setting this attribute to 1.0 means 100% of investment returns will be taxed immediately. A value of 0.0 means none of the returns are realized immediately, and so capital gains will only be processed upon a distribution event. This attribute is only relevant for accounts on which capital gains taxes are calculated.|
-| `disableOptimalWithdraw` | boolean | If true, this account is excluded from the candidate accounts selected for the _Optimal Withdrawal Strategy_ (refer to description for [PaymentStream.source](#PaymentStream)). Defaults to `false`. |
+| `disableOptimalWithdraw` | boolean | If true, this account is excluded from the candidate accounts selected for the _Optimal Withdrawal Strategy_ (refer to [PaymentStream\.source](#paymentstream) description). Defaults to `false`. |
 | `disableRMD` | boolean | If true, RMDs are guaranteed not to be taken from this account, regardless of context (e.g. the person's age or the account's type). Defaults to `false`. |
 | `disableRothConversion` | boolean | If true, the _Roth Conversion Optimizer_ algorithm will ignore this account when finding candidate tax-advantaged accounts to be converted.  Defaults to `false`. |
 
@@ -24,16 +24,17 @@ The `AccountType` enum represents the different types of accounts that can be mo
 
 | Value | Description |
 | ------------ | ----------- |
-| `aftertax` | |
-| `asset` | |
-| `ira` | |
-| `401k` | |
-| `529` | |
-| `hsa` | |
-| `roth` | |
-| `loan` | |
-| `revolvingCredit` | |
-| `reverseMortgage` | |
+| `aftertax` | Any account funded with after-tax dollars (e.g. checking account). |
+| `asset` | An [asset](https://www.investopedia.com/terms/a/asset.asp) is a resource with economic value that an individual owns or controls with the expectation that it will provide a future benefit. Common examples are real estate, fine art, and jewelry. |
+| `ira` | [Traditional IRA](https://www.investopedia.com/terms/t/traditionalira.asp) |
+| `401k` | [Traditional 401(k)](https://www.investopedia.com/terms/1/401kplan.asp) |
+| `529` | A [529 plan](https://www.investopedia.com/terms/1/529plan.asp) is a tax-advantaged savings plan designed to help pay for education. |
+| `hsa` | A [Health Savings Account](https://www.investopedia.com/terms/h/hsa.asp) (HSA) is a tax-advantaged savings account that is created for people who get their insurance coverage through [high-deductible health plans](https://www.investopedia.com/terms/h/hdhp.asp). |
+| `roth` | [Roth IRA](https://www.investopedia.com/terms/r/rothira.asp) |
+| `roth401k` | [Roth 401(k)](https://www.investopedia.com/terms/1/401kplan.asp) |
+| `loan` |  A type of credit vehicle in which a sum of money is lent to another party in exchange for future repayment of the value or principal amount. In FPE, a loan refers specifically to the borrowing of a specific one-time amount (e.g. car loan, mortgage) vs. revolving credit loans (e.g. cred cards). |
+| `revolvingCredit` | [Revolving credit](https://www.investopedia.com/terms/r/revolvingcredit.asp) is an agreement that permits an account holder to borrow money repeatedly up to a set dollar limit while repaying a portion of the current balance due in regular payments. Two common examples are [credit cards and LOC (line of credit)](https://www.bankrate.com/finance/credit-cards/line-of-credit-vs-credit-card/). |
+| `reverseMortgage` | See [What is a Reverse Mortgage?](https://www.investopedia.com/mortgage/reverse-mortgage/) |
 
 <br/><hr/>
 
@@ -118,12 +119,12 @@ A sample JSON request for relocation is [here](./examples/forecast/housing/reloc
 
 #### FIRE
 
-`FIRE` is the result of an optional calculation that finds the earliest `endDate` that can be used across all [PaymentStreams](#PaymentStream) whose `earnedIncome` flag is true such that the forecast's `estateValue` is as close to $0 without being negative.
+`FIRE` is the result of an optional calculation that finds the earliest `endDate` that can be used across all [PaymentStreams](#paymentstream) whose `earnedIncome` flag is true such that the forecast's `estateValue` is as close to $0 without being negative.
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `origRetireDate` | string | The name of this time series. |
-| `earliestRetireDates` | map | A map of [PaymentStream](#PaymentStream) names to [Date](#Date) entries, where each entry indicates the earliest `endDate` for the named stream that will satisfy the goal described in the [FIRE](#FIRE) summary above. |
+| `earliestRetireDates` | map | A map of [PaymentStream](#paymentstream) names to [Date](#date) entries, where each entry indicates the earliest `endDate` for the named stream that will satisfy the goal described in the [FIRE](#FIRE) summary above. |
 
 
 ## PaymentStream
@@ -266,7 +267,7 @@ The `Market` object contains financial market data and other economic values tha
 
 ## Rate
 
-The `Rate` object describes the growth rate and variability of various financial objects, such as [Accounts](datatypes.md#Account) and [PaymentStreams](datatypes.md#PaymentStream).  This object is, in a sense, polymorphic, in that its behavior varies based on how it's configured, what parent object it's attached to, and the type of simulation in which it is participating.
+The `Rate` object describes the growth rate and variability of various financial objects, such as [Accounts](datatypes.md#account) and [PaymentStreams](datatypes.md#paymentstream).  This object is, in a sense, polymorphic, in that its behavior varies based on how it's configured, what parent object it's attached to, and the type of simulation in which it is participating.
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
@@ -274,7 +275,7 @@ The `Rate` object describes the growth rate and variability of various financial
 | `optimistic ` | float | The optimistic annual growth rate. This attribute should be used in conjunction with `pessimistic`. Valid range is `[-0.4, 0.4]`. |
 | `pessimistic ` | float | The pessimistic annual growth rate. This attribute should be used in conjunction with `optimistic`. Valid range is `[-0.4, 0.4]`. |
 | `stdev` | float | The standard deviation of the random growth rate (only applicable when running a Monte Carlo simulation). |
-| `curve` | [RatePt[]](#ratept) | Defines 1 or more growth rates that will occur at specified future dates within the projection.  If this array is defined, all other attributes of this `Rate` object are ignored. The rates within this curve are assumed to be in ascending chronological order. __NOTE:__ Rate curves are only allowed on [Account](datatypes.md#Account) objects. |
+| `curve` | [RatePt[]](#ratept) | Defines 1 or more growth rates that will occur at specified future dates within the projection.  If this array is defined, all other attributes of this `Rate` object are ignored. The rates within this curve are assumed to be in ascending chronological order. __NOTE:__ Rate curves are only allowed on [Account](datatypes.md#account) objects. |
 
 #### RatePt
 
