@@ -53,7 +53,7 @@ Also, the `PaymentStream.onAge` (the convenience attribute for referring to a on
 
 ## Dropping support for `RatePt.year`
 
-Starting in [v4.5.0](https://github.com/newretirement/fpe-api/releases/tag/v4.5.0), the [RatePt](https://github.com/newretirement/fpe-api/blob/v4.5.0/datatypes.md.md#ratept) objects within a [PaymentStream.rate.curve\[\]](https://github.com/newretirement/fpe-api/blob/v4.5.0/datatypes.md#PaymentStream) array could be set by either `year` or [date](https://github.com/newretirement/fpe-api/blob/v4.5.0/datatypes.md#Date)
+Starting in [v4.5.0](https://github.com/newretirement/fpe-api/releases/tag/v4.5.0), the [RatePt](https://github.com/newretirement/fpe-api/blob/v4.5.0/datatypes.md#ratept) objects within a [PaymentStream.rate.curve\[\]](https://github.com/newretirement/fpe-api/blob/v4.5.0/datatypes.md#PaymentStream) array could be set by either `year` or [date](https://github.com/newretirement/fpe-api/blob/v4.5.0/datatypes.md#Date)
 
 In V5, the `rate.curve[*].year` attribute will no longer be supported (use `rate.curve[*].date` instead).  The advantage to using the [date](https://github.com/newretirement/fpe-api/blob/v5.0.0/datatypes.md#date) object is that the rate change can be specified at month granularity.  JSON examples below:
 
