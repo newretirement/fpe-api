@@ -40,7 +40,7 @@
                 "paymentAmount": 10000,
                 "paymentsPerYear": 12,
                 "target": "checking",
-                "endAge": "70y",
+                "endDate": "2035-01",
                 "earnedIncome": true,
                 "contributions": [
                     {

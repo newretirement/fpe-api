@@ -69,7 +69,7 @@
                 "paymentAmount": 8000,
                 "paymentsPerYear": 12,
                 "rate": {"mean": 0.02},
-                "endAge": "67y",
+                "endDate": "2028-01",
                 "target": "primary_checking",
                 "earnedIncome": true,
                 "contributions": [
@@ -84,7 +84,7 @@
                 "paymentAmount": 5000,
                 "paymentsPerYear": 12,
                 "rate": {"mean": 0.02},
-                "endAge": "68y",
+                "endDate": "2032-01",
                 "target": "primary_checking",
                 "earnedIncome": true,
                 "contributions": [
@@ -97,7 +97,7 @@
             {
                 "name": "expenses",
                 "paymentAmount": 8000,
-                "startAge": "66y",
+                "startDate": "2027-01",
                 "source": "optimal",
                 "paymentsPerYear": 12
             }
