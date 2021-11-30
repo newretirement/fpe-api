@@ -69,9 +69,23 @@ The `Events` object represents various non-periodic life events such as relocati
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `relocations` | [Relocation[]](#relocation) | Models relocating to a new U.S. state. |
-| `assetSales` | `AssetSale[]` | Models house buying, selling, rent-then-buy (and vice versa), and refinances. |
+| `assetSales` | [AssetSale[]](#assetsale) | Models buying/selling of assets, especially real estate. |
 | `reverseMortgages` | `ReverseMortgage[]` | |
 | `annuityPurchases` | `AnnuityPurchase[]` | |
+
+#### AssetSale
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `date` | [Date](#date) | The date on which the asset sale transaction takes place. |
+| `currentAssetName` | string | The name of the account representing the asset being sold (omit if no asset is being sold). |
+| `currentLoanName` | string | The name of the account representing the loan associated with the current asset (omit if none). |
+| `newAssetName` | string | The name of the account representing the new asset being purchased (omit if none). |
+| `newAssetBalance` | int | The price of the new asset. |
+| `newAssetStateCode` | string | If this transaction involves a relocation to a new state (e.g. buying a house as a primary residence in a new state), assign the 2-character state code to this attribute.  Doing so allows the tax module to compute future taxes using the new state's tax data.  <br/>_NOTE: This is exclusively a PlannerPlus feature, so if `plan.isPlusUser` is `false`, this attribute has no effect._ |
+| `transactionAccountName` | string | The name of the account to use for all transactions involved in this asset sale.  This includes deposits (e.g. proceeds from asset sales) and withrawals (e.g. down payment on a new house). If this attribute is omitted, then proceeds will deposit into the default savings account, and the _Optimal Withdrawal Strategy_ will be used for withdrawals. |
+| `newLoanName` | string | The name of the new loan associated with the new asset (omit if none). |
+| `newLoanBalance` | int | The starting balance on the new loan (omit if none). |
 
 #### Relocation
 
@@ -142,9 +156,6 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 | `startDate` | [Date](#date) | The date that future payments commence.  |
 | `endDate` | [Date](#date) | The date that future payments have ceased.  |
 | `date` | [Date](#date) | Specify a single payment on a specific date. __Note:__ this is just a shorthand method of configuring a one-time payment; the same thing can be accomplished via `startDate` and `endDate`.  E.g. `{date: "2040-06"}` is the same as `{startDate: "2040-06", endDate: "2040-07"}`. |
-| `startAge` | [Duration](#duration) | _DEPRECATED (use `startDate` instead)_. The age of the payment owner when future payments start.  |
-| `endAge` | [Duration](#duration) | _DEPRECATED (use `endDate` instead)_. The age of the payment owner when future payments have stopped. |
-| `onAge` | [Duration](#duration) | _DEPRECATED (use `date` attribute instead)_. Specify a single payment at a specific age. __Note:__ this is just a shorthand method of configuring a lump sum payment; the same thing can be accomplished via `startAge`, `endAge`, and `paymentsPerYear`.  E.g. `{onAge: "35y6m"}` is the same as `{startAge: "35y6m", endAge: "35y7m", paymentsPerYear: 12}`. |
 | `paymentsPerYear` | int | Determines the payment frequency within a given year. Valid values are: [`1`, `2`, `4`, `12`].  Regardless of frequency, the first payment occurs on `startAge` (or `onAge`). |
 | `paymentAmount` | int | The dollar amount of the payment.
 | `earnedIncome` | boolean | Set to `true` if this paymentStream represents income that the IRS deems allowable for a tax-advantaged contribution to a retirement account.  Also referred to as "taxable compensation".|
@@ -285,4 +296,3 @@ The `Rate` object describes the growth rate and variability of various financial
 | ---------- | ---- | ----------- |
 | `rate` | [Rate](#rate) | Describes the growth rate characteristics for the time segment implied by this `RatePt` object and the following one within the parent `Rate.curve[]`. |
 | `date` | [Date](#date) | The future date within the financial projection on which the new rate will apply. |
-| `year` | int | _DEPRECATED (use `RatePt.date` instead)_. The year within the financial projection that the new rate will apply.  Within the specified future year, the rate change will occur in January. |

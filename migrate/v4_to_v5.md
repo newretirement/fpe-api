@@ -2,11 +2,11 @@
 
 ## Dropping support for PaymentStream ages
 
-The [PaymentStream](https://github.com/newret/fpe-api/blob/master/datatypes.md#PaymentStream) attributes `startAge`, `endAge`, and `onAge` are being removed in V5 in favor of `startDate`, `endDate`, and `date`.
+The [PaymentStream](https://github.com/newret/fpe-api/blob/master/datatypes.md#PaymentStream) attributes `startAge`, `endAge`, and `onAge` are being removed in V5 in favor of `startDate`, `endDate`, and `date` respectively.
 
 Refer to the [v4.6.0 release notes](https://github.com/newretirement/fpe-api/releases/tag/v4.6.0) for details on `startDate`, `endDate`, and `date`.  The advantage to using dates instead of ages is that a date "stands on its own", whereas in order to know the point in time implied by an age requires knowing the the birthdate of the PaymentStream's owner.
 
-`POST /v4/forecast`:<br/>
+__V4 PaymentStream:__<br/>
 
 ```json
 {
@@ -26,7 +26,7 @@ Refer to the [v4.6.0 release notes](https://github.com/newretirement/fpe-api/rel
 }
 ```
 
-`POST /v5/forecast`:<br/>
+__V5 PaymentStream:__<br/>
 
 
 ```json
@@ -55,9 +55,9 @@ Also, the `PaymentStream.onAge` (the convenience attribute for referring to a on
 
 Starting in [v4.5.0](https://github.com/newretirement/fpe-api/releases/tag/v4.5.0), the [RatePt](https://github.com/newretirement/fpe-api/blob/v4.5.0/datatypes.md.md#ratept) objects within a [PaymentStream.rate.curve\[\]](https://github.com/newretirement/fpe-api/blob/v4.5.0/datatypes.md#PaymentStream) array could be set by either `year` or [date](https://github.com/newretirement/fpe-api/blob/v4.5.0/datatypes.md#Date)
 
-In V5, the `rate.curve[*].year` attribute will no longer be supported (use `rate.curve[*].date` instead).  The advantage to using the [date](https://github.com/newretirement/fpe-api/blob/v4.5.0/datatypes.md#Date) object is that the rate change can be specified at month granularity.  JSON examples below:
+In V5, the `rate.curve[*].year` attribute will no longer be supported (use `rate.curve[*].date` instead).  The advantage to using the [date](https://github.com/newretirement/fpe-api/blob/v5.0.0/datatypes.md#date) object is that the rate change can be specified at month granularity.  JSON examples below:
 
-__/v4/forecast__<br/>
+__V4 Rate:__<br/>
 
 ```json
 {
@@ -70,7 +70,7 @@ __/v4/forecast__<br/>
 }
 ```
 
-__/v5/forecast__<br/>
+__V5 Rate:__<br/>
 
 ```json
 {
@@ -83,9 +83,9 @@ __/v5/forecast__<br/>
 }
 ```
 
-## Asset transactions now specified by date (vs. by Primary's age)
+## [Asset sales](https://github.com/newretirement/fpe-api/blob/v5.0.0/datatypes.md#assetsale) now specified by [date](https://github.com/newretirement/fpe-api/blob/v5.0.0/datatypes.md#date) (vs. by Primary's age)
 
-__/v4/forecast__<br/>
+__V4 AssetSale:__<br/>
 
 ```json
 "events": {
@@ -97,7 +97,7 @@ __/v4/forecast__<br/>
 }
 ```
 
-__/v5/forecast__<br/>
+__V5 AssetSale:__<br/>
 
 ```json
 "events": {
@@ -113,7 +113,7 @@ __/v5/forecast__<br/>
 
 The [POST /v4/forecast](https://github.com/newretirement/fpe-api#post-forecast) endpoint calculates and returns a forecast that contains a set of time series projections.  The values within each time series are either yearly (default) or monthly depending on how the request is configured.
 
-Prior to [v4.2.0](https://github.com/newretirement/fpe-api/releases/tag/v4.2.0), the period of the projection values was specified via a query param:
+Prior to [v4.2.0](https://github.com/newretirement/fpe-api/releases/tag/v4.2.0), the period of the projection values was specified exclusively via a query param:
 
 ```
 POST /v4/forecast?period=${P}
@@ -137,3 +137,5 @@ POST /v5/forecast
 }
 ```
 where `${P}` is either `yearly` or `monthly`.
+
+Starting in V5, projection period can only be set via `params.projectionPeriod`.
