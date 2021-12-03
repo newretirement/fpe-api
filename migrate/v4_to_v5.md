@@ -83,6 +83,7 @@ __V5 Rate:__<br/>
 }
 ```
 
+
 ## [Asset sales](https://github.com/newretirement/fpe-api/blob/v5.0.0/datatypes.md#assetsale) now specified by [date](https://github.com/newretirement/fpe-api/blob/v5.0.0/datatypes.md#date) (vs. by Primary's age)
 
 __V4 AssetSale:__<br/>
@@ -108,6 +109,7 @@ __V5 AssetSale:__<br/>
   ]
 }
 ```
+
 
 ## Dropping support for 'monthly' queryparam on `POST /forecast` endpoint
 
@@ -139,3 +141,10 @@ POST /v5/forecast
 where `${P}` is either `yearly` or `monthly`.
 
 Starting in V5, projection period can only be set via `params.projectionPeriod`.
+
+
+## Income/Expense score is now an optional calc
+
+The [Forecast](https://github.com/newretirement/fpe-api/blob/v5.0.0/datatypes.md#forecast) response object currently contains an attribute called `postRetireIncomeExpenseRatio`, which is the result of an income/expense ratio calculation.  In V4, this calc runs unconditionally.
+
+Starting in V5, this calc is optional, and will only be executed if the client sets `calcPostRetireIncomeExpenseRatio` to `true` in the [params section](https://github.com/newretirement/fpe-api#params-request-object) of the `POST /v5/forecast` request object.
