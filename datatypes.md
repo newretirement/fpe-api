@@ -17,7 +17,7 @@ An `account` is a financial ledger of the transactions within a real-world accou
 | `disableOptimalWithdraw` | boolean | If true, this account is excluded from the candidate accounts selected for the _Optimal Withdrawal Strategy_ (refer to [PaymentStream\.source](#paymentstream) description). Defaults to `false`. |
 | `disableRMD` | boolean | If true, RMDs are guaranteed not to be taken from this account, regardless of context (e.g. the person's age or the account's type). Defaults to `false`. |
 | `disableRothConversion` | boolean | If true, the _Roth Conversion Optimizer_ algorithm will ignore this account when finding candidate tax-advantaged accounts to be converted.  Defaults to `false`. |
-| `inheritDate` | [Date](#date) | Required for modeling [inherited IRAs](https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-beneficiary).  If this account has a designated beneficiary, set this attribute to the original account owner's death.  Inherited retirement accounts are:<br/>&nbsp;&nbsp;1. not subject to RMDs<br/>&nbsp;&nbsp;2. not eligible for Roth conversion|
+| `inherited` | boolean | Required for modeling [inherited IRAs](https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-beneficiary).  If this account has a designated beneficiary, set this attribute to `true`.  Inherited retirement accounts are:<br/>&nbsp;&nbsp;1. not subject to RMDs<br/>&nbsp;&nbsp;2. not eligible for Roth conversion|
 
 #### AccountType
 
