@@ -1,0 +1,66 @@
+{
+    "description": "Primary has 3 IRAs: a non-inherited IRA, an IRA they inherited in the past (2016-01) whose current balance is $20K, and an IRA they will inherit in the future (2023-01).  The inherited IRAs are not subject to RMDs nor will the get converted into Roth IRAs within the Roth Conversion Optimizer.",
+    "plan": {
+        "currentDate": "2021-01",
+        "cashFlow": {
+            "checkingAccount": "checking",
+            "savingsAccount": "savings",
+            "savingRate": 1
+        },
+        "primary": {
+            "birthDate": "1951-01",
+            "gender": "female",
+            "goalAge": "75y"
+        },
+        "accounts": [
+            {
+                "name": "checking",
+                "type": "aftertax"
+            },
+            {
+                "name": "savings",
+                "type": "aftertax",
+                "balance": 10000
+            },
+            {
+                "name": "regular_ira",
+                "type": "ira",
+                "balance": 50000,
+                "owner": "primary"
+            },
+            {
+                "name": "inherited_ira_past",
+                "type": "ira",
+                "balance": 20000,
+                "inherited": true,
+                "owner": "primary"
+            },
+            {
+                "name": "inherited_ira_future",
+                "type": "ira",
+                "inherited": true,
+                "owner": "primary"
+            },
+            {
+                "name": "debt",
+                "type": "revolvingCredit"
+            }
+        ],
+        "paymentStreams": [
+            {
+                "name": "inherit_ira_in_past",
+                "date": "2016-01",
+                "target": "inherited_ira_past"
+            },
+            {
+                "name": "inherit_ira_in_future",
+                "paymentAmount": 10000,
+                "date": "2023-01",
+                "target": "inherited_ira_future"
+            }
+        ]
+    },
+    "params": {
+        "projectionPeriod": "yearly"
+    }
+}

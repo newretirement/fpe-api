@@ -17,6 +17,7 @@ An `account` is a financial ledger of the transactions within a real-world accou
 | `disableOptimalWithdraw` | boolean | If true, this account is excluded from the candidate accounts selected for the _Optimal Withdrawal Strategy_ (refer to [PaymentStream\.source](#paymentstream) description). Defaults to `false`. |
 | `disableRMD` | boolean | If true, RMDs are guaranteed not to be taken from this account, regardless of context (e.g. the person's age or the account's type). Defaults to `false`. |
 | `disableRothConversion` | boolean | If true, the _Roth Conversion Optimizer_ algorithm will ignore this account when finding candidate tax-advantaged accounts to be converted.  Defaults to `false`. |
+| `inherited` | boolean | Required for modeling [inherited IRAs](https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-beneficiary).  If this account has a designated beneficiary, set this attribute to `true`.  Inherited retirement accounts are:<br/>&nbsp;&nbsp;1. not subject to RMDs<br/>&nbsp;&nbsp;2. not eligible for Roth conversion|
 
 #### AccountType
 
@@ -26,11 +27,11 @@ The `AccountType` enum represents the different types of accounts that can be mo
 | ------------ | ----------- |
 | `aftertax` | Any account funded with after-tax dollars (e.g. checking account). |
 | `asset` | An [asset](https://www.investopedia.com/terms/a/asset.asp) is a resource with economic value that an individual owns or controls with the expectation that it will provide a future benefit. Common examples are real estate, fine art, and jewelry. |
-| `ira` | [Traditional IRA](https://www.investopedia.com/terms/t/traditionalira.asp) |
-| `401k` | [Traditional 401(k)](https://www.investopedia.com/terms/1/401kplan.asp) |
+| `ira` | See [Traditional IRA](https://www.investopedia.com/terms/t/traditionalira.asp) |
+| `401k` | See [Traditional 401(k)](https://www.investopedia.com/terms/1/401kplan.asp) |
 | `529` | A [529 plan](https://www.investopedia.com/terms/1/529plan.asp) is a tax-advantaged savings plan designed to help pay for education. |
 | `hsa` | A [Health Savings Account](https://www.investopedia.com/terms/h/hsa.asp) (HSA) is a tax-advantaged savings account that is created for people who get their insurance coverage through [high-deductible health plans](https://www.investopedia.com/terms/h/hdhp.asp). |
-| `roth` | [Roth IRA](https://www.investopedia.com/terms/r/rothira.asp) |
+| `roth` | See [Roth IRA](https://www.investopedia.com/terms/r/rothira.asp) |
 | `roth401k` | [Roth 401(k)](https://www.investopedia.com/terms/1/401kplan.asp) |
 | `loan` |  A type of credit vehicle in which a sum of money is lent to another party in exchange for future repayment of the value or principal amount. In FPE, a loan refers specifically to the borrowing of a specific one-time amount (e.g. car loan, mortgage) vs. revolving credit loans (e.g. cred cards). |
 | `revolvingCredit` | [Revolving credit](https://www.investopedia.com/terms/r/revolvingcredit.asp) is an agreement that permits an account holder to borrow money repeatedly up to a set dollar limit while repaying a portion of the current balance due in regular payments. Two common examples are [credit cards and LOC (line of credit)](https://www.bankrate.com/finance/credit-cards/line-of-credit-vs-credit-card/). |
