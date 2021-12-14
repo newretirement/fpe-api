@@ -202,6 +202,7 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `birthDate` | [Date](#date) | The person's date of birth. |
+| `retireDate` | [Date](#date) | The date on which this person plans to retire. |
 | `gender` | [Gender](#gender) | The person's gender. |
 | `goalAge` | [Duration](#duration) | How long the person expects to live. |
 | `socialSecurity` | [SocialSecurity](#socialsecurity) | Social security configuration. |
