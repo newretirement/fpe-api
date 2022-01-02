@@ -227,7 +227,7 @@ The `params` object, and each of its attributes, are totally optional:
 | ---------- | ---- | ----------- |
 | `projectionPeriod` | enum | Determines if the forecasted projection vectors represent monthly or aggregated annual amounts. Valid values are [`monthly`, `yearly`]. If this attribute is empty, `yearly` is the default. |
 | `calcFIRE` | boolean | If `true`, the 'FIRE' solver is executed, and the result appears in the [Forecast.FIRE](datatypes.md#Forecast) response object. |
-| `calcSpendingPower` | boolean | If `true`, the 'Spending Power' calculation executes, and the result appears as the `spendingPower` attribute within the [Forecast](datatypes.md#Forecast) response object. Note that [plan.primary.retireDate](datatypes.md#Person) must be set when running this calculation. [Forecast.spendingPower](datatypes.md#Forecast) for more details on this calculation. |
+| `calcSpendingPower` | boolean | If `true`, the 'Spending Power' calculation executes, and the result appears as the `spendingPower` attribute within the [Forecast](datatypes.md#Forecast) response object. Note that [plan.primary.retireDate](datatypes.md#Person) must be set when running this calculation. See [Forecast.spendingPower](datatypes.md#Forecast) for more details on this calculation. |
 
 A sample request JSON for this endpoint can be found [here](examples/forecast/basic/single-01.json).
 
