@@ -104,6 +104,7 @@ A sample JSON request for relocation is [here](./examples/forecast/housing/reloc
 | `accounts` | [Projection[]](#projection) | The projected periodic account balances corresponding to the [accounts](#account) defined within the [Plan](#plan). |
 | `paymentStreams` | [Projection[]](#projection) | The projected periodic payments corresponding to the [paymentStreams](#paymentstream) defined within the [Plan](#plan).  |
 | `fire` | [FIRE](#fire) | Contains details as to the earliest retirement dates across the earned income streams that still yields a non-negative estate value.  |
+| `spendingPower` | float | A monetary amount indicating the hypothetical maximum annual spending that could occur starting in retirement such that account balances are not totally depleted at end-of-plan. I.e. spending more than this amount annually starting in retirement would result in a negative `estateValue`. <br/><b>NOTE:</b> This calculation considers all expenses starting in January of the retirement year (vs. just the expenses starting on the exact retirement date).  For example, if `plan.primary.retireDate` is `2040-10`, the calculated `spendingPower` result will additionally take into account the pre-retirement months Jan-Sept of 2040. |
 
 #### Projection
 
