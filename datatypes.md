@@ -256,6 +256,7 @@ A `plan` is the top-level financial object; it represents the user's complete pr
 | `accounts` | [Account[]](#account) | Array of accounts within the financial plan. |
 | `paymentStreams` | [PaymentStream[]](#paymentstream) | Array of payment streams within the financial plan. |
 | `events` | [Events](#events) | Describes various non-periodic life events such as buying a new home or purchasing an annuity. |
+| `tcjaSunset` | boolean | If true, FPE will model the [sunsetting](https://www.investopedia.com/terms/s/sunsetprovision.asp) of the [Tax Cuts and Jobs Act](https://www.investopedia.com/taxes/how-gop-tax-bill-affects-you/) due to end starting in 2026. Default is `false`. |
 
 #### CashFlow
 
