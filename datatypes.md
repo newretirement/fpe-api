@@ -65,11 +65,11 @@ A duration specifies a specific length of time with month-accuracy.  The duratio
 
 ## Events
 
-The `Events` object represents various non-periodic life events such as relocating to a new state, buying a new home, or purchasing an annuity.
+The `Events` object represents various non-periodic life events such as relocating to a new [U.S. state](#usstate), buying a new home, or purchasing an annuity.
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `relocations` | [Relocation[]](#relocation) | Models relocating to a new U.S. state. |
+| `relocations` | [Relocation[]](#relocation) | Models relocating to a new [U.S. state](#usstate). |
 | `assetSales` | [AssetSale[]](#assetsale) | Models buying/selling of assets, especially real estate. |
 | `reverseMortgages` | `ReverseMortgage[]` | |
 | `annuityPurchases` | `AnnuityPurchase[]` | |
@@ -83,7 +83,7 @@ The `Events` object represents various non-periodic life events such as relocati
 | `currentLoanName` | string | The name of the account representing the loan associated with the current asset (omit if none). |
 | `newAssetName` | string | The name of the account representing the new asset being purchased (omit if none). |
 | `newAssetBalance` | int | The price of the new asset. |
-| `newAssetStateCode` | string | If this transaction involves a relocation to a new state (e.g. buying a house as a primary residence in a new state), assign the 2-character state code to this attribute.  Doing so allows the tax module to compute future taxes using the new state's tax data.  <br/>_NOTE: This is exclusively a PlannerPlus feature, so if `plan.isPlusUser` is `false`, this attribute has no effect._ |
+| `newAssetStateCode` | [USState](#usstate) | If this transaction involves a relocation to a new state (e.g. buying a house as a primary residence in a new state), assign a valid state code to this attribute.  Doing so allows the tax module to compute future taxes using the new state's tax data. |
 | `transactionAccountName` | string | The name of the account to use for all transactions involved in this asset sale.  This includes deposits (e.g. proceeds from asset sales) and withrawals (e.g. down payment on a new house). If this attribute is omitted, then proceeds will deposit into the default savings account, and the _Optimal Withdrawal Strategy_ will be used for withdrawals. |
 | `newLoanName` | string | The name of the new loan associated with the new asset (omit if none). |
 | `newLoanBalance` | int | The starting balance on the new loan (omit if none). |
@@ -93,7 +93,7 @@ The `Events` object represents various non-periodic life events such as relocati
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `date` | [Date](#date) | The date of relocation. |
-| `stateCode` | string | The [ANSI U.S. state abbreviation](https://en.wikipedia.org/wiki/List_of_U.S._state_and_territory_abbreviations) corresponding to the primary's current state of residence. |
+| `stateCode` | [USState](#usstate) | The U.S. state corresponding to the primary's current state of residence. |
 
 A sample JSON request for relocation is [here](./examples/forecast/housing/relocation-01.json).
 
@@ -118,9 +118,39 @@ A sample JSON request for relocation is [here](./examples/forecast/housing/reloc
 | `monthlyRetirementIncome` | int | The estimated monthly income received in retirement. This attribute is only calculated if `params.calcMonthlyRetirementIncome` is set to true in the request. |
 | `accounts` | [Projection[]](#projection) | The projected periodic account balances corresponding to the [accounts](#account) defined within the [Plan](#plan). |
 | `paymentStreams` | [Projection[]](#projection) | The projected periodic payments corresponding to the [paymentStreams](#paymentstream) defined within the [Plan](#plan).  |
+| `annualReports` | [AnnualReports](#annualreports) | Contains various reports that are unconditionally annual in nature (e.g. income tax due). |
 | `fire` | [FIRE](#fire) | Contains details as to the earliest retirement dates across the earned income streams that still yields a non-negative estate value.  |
 | `postRetireIncomeExpenseRatio` | float | This value loosely serves as a "retirement readiness" score.  It is unbounded (e.g. if person has high income and very low expenses in retirement, this score will be well over `1.0`).  |
 
+#### AnnualReports
+
+Contains various reports that are unconditionally annual in nature (e.g. income tax due).
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `fedTaxableIncomeByBracket` | [IncomeTaxDataRange[]](#incometaxdatarange) | Reports federal taxable income by tax bracket over time. |
+| `stateTaxableIncomeByBracket` | [IncomeTaxDataRange[]](#incometaxdatarange) | Reports state taxable income by tax bracket over time. |
+
+#### FIRE
+
+`FIRE` is the result of an optional calculation that finds the earliest `endDate` that can be used across all [PaymentStreams](#paymentstream) whose `earnedIncome` flag is true such that the forecast's `estateValue` is as close to $0 without being negative.
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `origRetireDate` | string | The name of this time series. |
+| `earliestRetireDates` | map | A map of [PaymentStream](#paymentstream) names to [Date](#date) entries, where each entry indicates the earliest `endDate` for the named stream that will satisfy the goal described in the [FIRE](#FIRE) summary above. |
+
+#### IncomeTaxDataRange
+
+Within a given tax jurisdiction (federal or state), `IncomeTaxDataRange` represents taxable income by tax bracket over a range of consecutive years.
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `startYear` | int | The year in which the reported taxable income starts within this range (year is inclusive). |
+| `endYear` | int | The year in which the reported taxable income ceases within this range (year is exclusive). |
+| `filingStatus` | enum | The IRS filing status of the corresponding tax brackets.  Valid values are `single` and `married`. |
+| `stateCode` | [USState](#usstate) | The U.S. state corresponding to the tax bracket data. If the tax jurisdiction is federal, then this attribute is omitted.  |
+| `taxBrackets` | [TaxBracket[]](#taxbracket) | The year in which the reported taxable income ceases within this range (year is exclusive). |
 
 #### Projection
 
@@ -132,16 +162,16 @@ A sample JSON request for relocation is [here](./examples/forecast/housing/reloc
 | `type` | string | The classification of this time series. If this series represents account balances, `type` is assigned the [AccountType](#accounttype) of the corresponding account. Otherwise, this time series represents payments or a report, in which case `type` is assigned one of [`income`, `expense`, `transfer`, `report`]. |
 | `values` | int[] | The periodic values within this time series. The first value in this series corresponds to [Plan.currentDate](#plan). |
 
-<br/><hr/>
+#### TaxBracket
 
-#### FIRE
-
-`FIRE` is the result of an optional calculation that finds the earliest `endDate` that can be used across all [PaymentStreams](#paymentstream) whose `earnedIncome` flag is true such that the forecast's `estateValue` is as close to $0 without being negative.
+Within a given tax jurisdiction (federal or state), `IncomeTaxDataRange` represents taxable income by tax bracket over a range of consecutive years.
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `origRetireDate` | string | The name of this time series. |
-| `earliestRetireDates` | map | A map of [PaymentStream](#paymentstream) names to [Date](#date) entries, where each entry indicates the earliest `endDate` for the named stream that will satisfy the goal described in the [FIRE](#FIRE) summary above. |
+| `rate` | float | The income tax rate for this tax bracket. |
+| `income` | int[] | The annual taxable income over a range of years within this tax bracket.  Note that the income limits within the bracket might be inflation-adjusted over time. |
+
+<br/><hr/>
 
 
 ## PaymentStream
@@ -252,7 +282,7 @@ A `plan` is the top-level financial object; it represents the user's complete pr
 | `market` | [Market](#market) | Market data (inflation rate, etc.). |
 | `primary` | [Person](#person) | The primary account holder within the simulation. |
 | `spouse` | [Person](#person) | The primary's spouse (optional). |
-| `stateCode` | string | The [ANSI U.S. state abbreviation](https://en.wikipedia.org/wiki/List_of_U.S._state_and_territory_abbreviations) corresponding to the primary's current state of residence. |
+| `stateCode` | [USState](#usstate) | The primary's current state of residence. |
 | `accounts` | [Account[]](#account) | Array of accounts within the financial plan. |
 | `paymentStreams` | [PaymentStream[]](#paymentstream) | Array of payment streams within the financial plan. |
 | `events` | [Events](#events) | Describes various non-periodic life events such as buying a new home or purchasing an annuity. |
@@ -301,3 +331,12 @@ The `Rate` object describes the growth rate and variability of various financial
 | ---------- | ---- | ----------- |
 | `rate` | [Rate](#rate) | Describes the growth rate characteristics for the time segment implied by this `RatePt` object and the following one within the parent `Rate.curve[]`. |
 | `date` | [Date](#date) | The future date within the financial projection on which the new rate will apply. |
+
+<br/><hr/>
+
+
+## USState
+
+`USState` is an enum that represents the 50+ U.S. states/territories.  For example: `CA` (California), `NY` (New York), `TX` (Texas).  Each enum value is a 2-character code based on the [ISO 3166 Standard](https://www.iso.org/obp/ui/#iso:code:3166:US) (Codes for the representation of names of countries and their subdivisions).
+<br/><br/>
+<b>NOTE:</b> The ISO 3166 standard supports [user-assigned code elements](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#User-assigned_code_elements) for application-specific functionality/meaning.  In addition to the 50 U.S. states, FPE defines the special "state" whose code is `ZZ`, which is used as a "mock U.S. state" with a generic set of tax data (e.g. 3% flat tax, $5K/$10K standard deduction for single/married filing status).
