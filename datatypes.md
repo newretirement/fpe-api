@@ -10,7 +10,7 @@ An `account` is a financial ledger of the transactions within a real-world accou
 | `type` | [AccountType](#accounttype) | Determines the type of account. Common account types are `aftertax`, `ira`, `401k`, `asset`, `loan`. |
 | `balance` | int | The account balance at the start of the simulation. |
 | `balanceLimit` | int |  Sets a balance limit on this account.  This attribute is only valid for accounts of type `loan` or `revolvingCredit`.|
-| `owner` | enum | Determines who owns the account. Valid values are [`primary`, `spouse`]. If this attribute is empty, `primary` is the default.|
+| `owner` | enum | Determines the account owner (valid values are [`primary`, `spouse`]). If this attribute is empty AND the primary account holder has no spouse, then the value defaults to `primary`. |
 | `rate` | [Rate](#rate) | Determines the account's growth, which is calculated and updated on a monthly basis.
 | `costBasis` | int | The dollar amount paid to acquire a holding.  This attribute is only relevant for accounts on which capital gains taxes are calculated.|
 | `realizedGainRate` | float | Determines the percentage of projected monthly investment returns are realized immediately and taxed as capital gains.  Setting this attribute to 1.0 means 100% of investment returns will be taxed immediately. A value of 0.0 means none of the returns are realized immediately, and so capital gains will only be processed upon a distribution event. This attribute is only relevant for accounts on which capital gains taxes are calculated.|
@@ -185,7 +185,7 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 | `target` | string | The name of the [account](#account) into which the payment will be deposited. |
 | `rate` | [Rate](#rate) | Determines the annual growth rate of the payment over time.  The growth is applied annually starting 12 months into the simulation. |
 | `startGrowthOnFirstPayment` | boolean | If true, annual growth (determined by `rate`) is deferred until the first payment occurs (determined by `startAge`). By default, growth starts immediately. |
-| `owner` | enum | Determines who the payments are associated with. Valid values are [`primary`, `spouse`]. If this attribute is empty, `primary` is the default. |
+| `owner` | enum | Determines who the payments are associated with. Valid values are [`primary`, `spouse`].  If an owner is assigned, payments will cease upon the owner's death.  Otherwise, payments will continue through the end of the simulation. |
 | `startDate` | [Date](#date) | The date that future payments commence.  |
 | `endDate` | [Date](#date) | The date that future payments have ceased.  |
 | `date` | [Date](#date) | Specify a single payment on a specific date. __Note:__ this is just a shorthand method of configuring a one-time payment; the same thing can be accomplished via `startDate` and `endDate`.  E.g. `{date: "2040-06"}` is the same as `{startDate: "2040-06", endDate: "2040-07"}`. |
@@ -193,7 +193,7 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 | `paymentAmount` | int | The dollar amount of the payment.
 | `earnedIncome` | boolean | Set to `true` if this paymentStream represents income that the IRS deems allowable for a tax-advantaged contribution to a retirement account.  Also referred to as "taxable compensation".|
 | `taxable` | boolean | [Income streams](./payment_streams.md#income-streams) flagged as taxable are considered when calculating AGI for tax purposes.  For example, an annuity income stream may or may not be taxed depending on the individual's chosen configuration. Defaults to `true`. |
-| `survivorBenefit` | float | A rate in the range `[0..1]` that determines the ratio of each periodic payment that is retained when the paymentStream's owner dies. This attribute is typically needed for modeling annuities and pensions. |
+| `survivorBenefit` | float | A rate in the range `[0..1]` that determines the ratio of each payment amount that is retained when the paymentStream's owner dies. This attribute is typically needed for modeling annuities and pensions. |
 | `taxDeductionRate` | float | A value in the range [0..1] that indicates what percentage of this expense is tax-deductible.  If unset, the default value is `0.0`. __NOTE:__ This attribute only applies to PaymentStream objects that represent [expenses](./payment_streams.md#expense-streams). |
 | `aboveTheLine` | boolean | If true, the tax-deductible portion of the expense will be subtracted from gross income prior calculating AGI.  Otherwise, its is treated as an itemized deduction (below-the-line). __NOTE:__ This attribute is relevant only when `taxDeductionRate > 0.0`. |
 | `contributions` | [ContributionFromIncome[]](#contributionfromincome) | (Optional) Specifies 1 or more "income-linked" contributions taken directly from the income payment. Use this for modeling things like 401(k) employee contributions with employer matching rules. |
