@@ -184,12 +184,12 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 | `source` | string | The name of the [account](#account) from which the payment will be withdrawn. <br/>**Special case**: If "optimal" is specified, the algorithm will implicitly withdraw the requested amount from 1 or more existing accounts, taking into consideration account type, projected growth rate, and possibly other attributes in an attempt to minimize negative impact on the plan's interest growth. This is known as the _Optimal Withdrawal Strategy_. |
 | `target` | string | The name of the [account](#account) into which the payment will be deposited. |
 | `rate` | [Rate](#rate) | Determines the annual growth rate of the payment over time.  The growth is applied annually starting 12 months into the simulation. |
-| `startGrowthOnFirstPayment` | boolean | If true, annual growth (determined by `rate`) is deferred until the first payment occurs (determined by `startAge`). By default, growth starts immediately. |
+| `startGrowthOnFirstPayment` | boolean | If true, annual growth (determined by `rate`) is deferred until the first payment occurs (determined by `startDate`). By default, growth starts immediately. |
 | `owner` | enum | Determines who the payments are associated with. Valid values are [`primary`, `spouse`].  If an owner is assigned, payments will cease upon the owner's death.  Otherwise, payments will continue through the end of the simulation. |
 | `startDate` | [Date](#date) | The date that future payments commence.  |
 | `endDate` | [Date](#date) | The date that future payments have ceased.  |
 | `date` | [Date](#date) | Specify a single payment on a specific date. __Note:__ this is just a shorthand method of configuring a one-time payment; the same thing can be accomplished via `startDate` and `endDate`.  E.g. `{date: "2040-06"}` is the same as `{startDate: "2040-06", endDate: "2040-07"}`. |
-| `paymentsPerYear` | int | Determines the payment frequency within a given year. Valid values are: [`1`, `2`, `4`, `12`].  Regardless of frequency, the first payment occurs on `startAge` (or `onAge`). |
+| `paymentsPerYear` | int | Determines the payment frequency within a given year. Valid values are: [`1`, `2`, `4`, `12`].  Regardless of frequency, the first payment occurs on `startDate` (or `date`). |
 | `paymentAmount` | int | The dollar amount of the payment.
 | `earnedIncome` | boolean | Set to `true` if this paymentStream represents income that the IRS deems allowable for a tax-advantaged contribution to a retirement account.  Also referred to as "taxable compensation".|
 | `taxable` | boolean | [Income streams](./payment_streams.md#income-streams) flagged as taxable are considered when calculating AGI for tax purposes.  For example, an annuity income stream may or may not be taxed depending on the individual's chosen configuration. Defaults to `true`. |
