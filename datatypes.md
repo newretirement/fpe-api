@@ -71,8 +71,8 @@ The `Events` object represents various non-periodic life events such as relocati
 | ---------- | ---- | ----------- |
 | `relocations` | [Relocation[]](#relocation) | Models relocating to a new [U.S. state](#usstate). |
 | `assetSales` | [AssetSale[]](#assetsale) | Models buying/selling of assets, especially real estate. |
-| `reverseMortgages` | `ReverseMortgage[]` | |
-| `annuityPurchases` | `AnnuityPurchase[]` | |
+| `reverseMortgages` | `ReverseMortgage[]` | Models 1 or more [reverse mortgages](https://www.investopedia.com/mortgage/reverse-mortgage/). |
+| `annuityPurchases` | `AnnuityPurchase[]` | Models 1 or more future annuity purchases, which are then converted into periodic income starting at some point after the purchase date. |
 
 #### AssetSale
 
