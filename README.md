@@ -207,6 +207,7 @@ Returns information about the deployed web service.
 
 Estimates the monthly [annuity](https://www.investopedia.com/terms/a/annuity.asp) income stream based on a given annuity premium, as well as other information that potentially affects the income amount.
 
+<!-- TOC ignore:true -->
 #### Request
 
 This the top-level request object that is submitted to this endpoint.
