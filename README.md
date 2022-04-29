@@ -207,7 +207,7 @@ Returns information about the deployed web service.
 
 Estimates the monthly [annuity](https://www.investopedia.com/terms/a/annuity.asp) income stream based on a given annuity premium, as well as other information that potentially affects the future income payments.
 
-#### Request
+#### AnnuitizeRequest
 
 This the top-level request object that is submitted to this endpoint.
 
@@ -215,7 +215,7 @@ This the top-level request object that is submitted to this endpoint.
 | ---------- | ---- | ----------- |
 | `currentDate` | [Date](./datatypes.md#date) | Today's date. |
 | `annuitant` | [Person](#person) | The person receiving the annuity. |
-| `annuitantSpouse` | [Person](#person) | The annuitant's spouse (optional). |
+| `annuitantSpouse` | [Person](#person) | (optional) The annuitant's spouse. |
 | `scenarios` | [Scenario[]](#scenario) | List of 0 or more annuity calculation scenarios. |
 
 #### Person
@@ -294,22 +294,21 @@ This the top-level request object that is submitted to this endpoint.
 
 Given a financial [plan](./datatypes.md#plan), this endpoint runs a simulation that generates a forecast of that plan, consisting of some summary information about the future projection, and a set of time series representing the future periodic values of each account and payment stream involved in the simulation.
 
-#### Forecast Request
+#### ForecastRequest
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `params` | [ForecastParams](#forecastparams) | |
-| `plan` | [Plan](datatypes.md#plan) | |
+| `params` | [ForecastParams](#forecastparams) | (optional) Configuration for things like optional calculations, time series density, etc. |
+| `plan` | [Plan](datatypes.md#plan) | The financial plan to forecast. |
 
 #### ForecastParams
-
-The `params` object, and each of its attributes, are totally optional:
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `projectionPeriod` | enum | Determines if the forecasted projection vectors represent monthly or aggregated annual amounts. Valid values are [`monthly`, `yearly`]. If this attribute is empty, `yearly` is the default. |
 | `calcFIRE` | boolean | If `true`, the 'FIRE' solver is executed, and the result appears in the [Forecast.FIRE](datatypes.md#forecast) response. |
 | `calcPostRetireIncomeExpenseRatio` | boolean | If `true`, the _Income/Expense Ratio_ calculation is executed, and the result appears in [Forecast.postRetireIncomeExpenseRatio](datatypes.md#forecast) within the response. |
+| `calcSpendingPower` | boolean | If `true`, the 'Spending Power' calculation executes, and the result appears as the `spendingPower` attribute within the [Forecast](datatypes.md#Forecast) response object. Note that [plan.primary.retireDate](datatypes.md#Person) must be set when running this calculation. See [Forecast.spendingPower](datatypes.md#Forecast) for more details on this calculation. |
 
 A sample request JSON for this endpoint can be found [here](examples/forecast/basic/single-01.json).
 
