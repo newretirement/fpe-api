@@ -14,7 +14,7 @@ Starting at the present month, FPE projects future financial state by calculatin
 All FPE endpoints require a valid API key, which must be provided in the request header.  For example:
 
 ```
-POST /fpe/v4/forecast HTTP/1.1
+POST /fpe/v5/forecast HTTP/1.1
 X-Api-Key: abcdefg1234567
 ```
 
@@ -29,8 +29,6 @@ FPE uses [semantic versioning](https://semver.org/) as its software versioning p
 
 1. __HTTP response header__: All endpoints add a `Fpe-Version` header attribute to their response.
 2. __[GET /info](#get-info)__: This endpoint returns the version, along with other build/deploy related info.
-
-The MAJOR version is embedded in the URL path of all FPE endpoints (e.g. `POST {host}/fpe/v4/forecast`).
 
 <br/><hr/><br/>
 
@@ -120,13 +118,13 @@ The server understood the client request, but refuses to authorize it.  This typ
 
 __`404 Not Found`__
 
-The requested resource or method doesn't exist (e.g. `GET /fpe/v4/fake/path/123`).
+The requested resource or method doesn't exist (e.g. `GET /fpe/v5/fake/path/123`).
 
 <br/>
 
 __`405 Method Not Allowed`__
 
-The request method is valid (e.g. `GET`, `POST`), but is not supported by the requested resource.  For example, `GET /fpe/v4/forecast` will return `HTTP 405`, since endpoint only supports the `POST` HTTP method.
+The request method is valid (e.g. `GET`, `POST`), but is not supported by the requested resource.  For example, `GET /fpe/v5/forecast` will return `HTTP 405`, since endpoint only supports the `POST` HTTP method.
 
 <br/>
 
@@ -203,45 +201,80 @@ Returns information about the deployed web service.
 
 <br/>
 
+## `POST /annuitize`
+
+Estimates the monthly [annuity](https://www.investopedia.com/terms/a/annuity.asp) income stream based on a given annuity premium, as well as other information that potentially affects the future income payments.
+
+### AnnuitizeRequest
+
+This is the top-level request object that is posted to this endpoint.
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `currentDate` | [Date](./datatypes.md#date) | Today's date. |
+| `annuitant` | [Person](#person) | The person receiving the annuity. |
+| `annuitantSpouse` | [Person](#person) | (optional) The annuitant's spouse. |
+| `scenarios` | [Scenario[]](#scenario) | List of 0 or more annuity calculation scenarios. |
+
+#### Person
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `birthDate` | [Date](./datatypes.md#date) | The person's date of birth. |
+| `gender` | [Gender](datatypes.md#gender) | The person's gender (required for mortality calculations). |
+
+#### Scenario
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `premium` | int | The lump sum cost of the annuity. |
+| `purchaseDate` | [Date](./datatypes.md#date)  | The date on which the annuity was purchased. |
+| `startDate` | [Date](./datatypes.md#date)  | The date on which annuity payments shall commence. |
+| `survivorBenefit` | float | Survivor benefit ratio, which is only relevant if the annuitant has a spouse.  Valid range is `[0.0..1.0]`.  Default value is `0.0` if omitted. |
+| `cola` | float | Cost of Living Adjustment.  Valid range is `[0.0..1.0]`.  Default value is `0.0` if omitted. |
+| `yearsCertain` | int | A [Years Certain annuity](https://www.investopedia.com/terms/y/years-certain-annuity.asp) pays the holder a continuous monthly income for the specified number of years, regardless of how long the annuitant lives.  Default value is `0` if omitted. |
+| `cashRefund` | boolean | A [Cash Refund annuity](https://www.investopedia.com/terms/c/cash-refund-annuity.asp) returns to a beneficiary any sum left over should the annuitant die before breaking even on what they paid in premiums.  Default value is `false` if omitted. |
+
+### AnnuitizeResponse
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `monthlyBenefitAmounts` | int[] | Array of monthly benefit amounts, which correspond to the array of scenarios defined in the [AnnuitizeRequest](#annuitizerequest) object. |
+
+### Examples
+
+Example request and response JSONs can be found in [examples/annuitize/](examples/annuitize/).
+
+<br/>
+
 ## `POST /forecast`
 
 Given a financial [plan](./datatypes.md#plan), this endpoint runs a simulation that generates a forecast of that plan, consisting of some summary information about the future projection, and a set of time series representing the future periodic values of each account and payment stream involved in the simulation.
 
-### Request JSON Syntax
+### ForecastRequest
 
-&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"params": {<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[Params object]](#params-object)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;},<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"plan": {<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[Plan object]](./datatypes.md#plan)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `params` | [ForecastParams](#forecastparams) | (optional) Configuration for things like optional calculations, time series density, etc. |
+| `plan` | [Plan](datatypes.md#plan) | The financial plan to forecast. |
 
-#### `Params` object
-
-The `params` object, and each of its attributes, are totally optional:
+#### ForecastParams
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `projectionPeriod` | enum | Determines if the forecasted projection vectors represent monthly or aggregated annual amounts. Valid values are [`monthly`, `yearly`]. If this attribute is empty, `yearly` is the default. |
 | `calcFIRE` | boolean | If `true`, the 'FIRE' solver is executed, and the result appears in the [Forecast.FIRE](datatypes.md#forecast) response. |
 | `calcPostRetireIncomeExpenseRatio` | boolean | If `true`, the _Income/Expense Ratio_ calculation is executed, and the result appears in [Forecast.postRetireIncomeExpenseRatio](datatypes.md#forecast) within the response. |
+| `calcSpendingPower` | boolean | If `true`, the 'Spending Power' calculation executes, and the result appears as the `spendingPower` attribute within the [Forecast](datatypes.md#Forecast) response object. Note that [plan.primary.retireDate](datatypes.md#Person) must be set when running this calculation. See [Forecast.spendingPower](datatypes.md#Forecast) for more details on this calculation. |
 
 A sample request JSON for this endpoint can be found [here](examples/forecast/basic/single-01.json).
 
-### Response JSON Syntax
+### ForecastResponse
 
-&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"forecast": {<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Forecast object](./datatypes.md#forecast)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"warnings": [<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[potential warnings](#what-is-a-warning)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `forecast` | [Forecast](datatypes.md#forecast) | The projected forecast of the submitted plan. |
+| `warnings` | [Warning[]](#what-is-a-warning) |  |
 
 ### Sample Scenario
 
