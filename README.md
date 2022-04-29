@@ -14,7 +14,7 @@ Starting at the present month, FPE projects future financial state by calculatin
 All FPE endpoints require a valid API key, which must be provided in the request header.  For example:
 
 ```
-POST /fpe/v4/forecast HTTP/1.1
+POST /fpe/v5/forecast HTTP/1.1
 X-Api-Key: abcdefg1234567
 ```
 
@@ -29,8 +29,6 @@ FPE uses [semantic versioning](https://semver.org/) as its software versioning p
 
 1. __HTTP response header__: All endpoints add a `Fpe-Version` header attribute to their response.
 2. __[GET /info](#get-info)__: This endpoint returns the version, along with other build/deploy related info.
-
-The MAJOR version is embedded in the URL path of all FPE endpoints (e.g. `POST {host}/fpe/v4/forecast`).
 
 <br/><hr/><br/>
 
@@ -120,13 +118,13 @@ The server understood the client request, but refuses to authorize it.  This typ
 
 __`404 Not Found`__
 
-The requested resource or method doesn't exist (e.g. `GET /fpe/v4/fake/path/123`).
+The requested resource or method doesn't exist (e.g. `GET /fpe/v5/fake/path/123`).
 
 <br/>
 
 __`405 Method Not Allowed`__
 
-The request method is valid (e.g. `GET`, `POST`), but is not supported by the requested resource.  For example, `GET /fpe/v4/forecast` will return `HTTP 405`, since endpoint only supports the `POST` HTTP method.
+The request method is valid (e.g. `GET`, `POST`), but is not supported by the requested resource.  For example, `GET /fpe/v5/forecast` will return `HTTP 405`, since endpoint only supports the `POST` HTTP method.
 
 <br/>
 
@@ -269,7 +267,7 @@ A sample request JSON for this endpoint can be found [here](examples/forecast/ba
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `forecast` | [Forecast](datatypes.md#forecast) |  |
+| `forecast` | [Forecast](datatypes.md#forecast) | The projected forecast of the submitted plan. |
 | `warnings` | [Warning[]](#what-is-a-warning) |  |
 
 ### Sample Scenario
