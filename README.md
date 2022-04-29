@@ -235,6 +235,12 @@ This is the top-level request object that is posted to this endpoint.
 | `yearsCertain` | int | A [Years Certain annuity](https://www.investopedia.com/terms/y/years-certain-annuity.asp) pays the holder a continuous monthly income for the specified number of years, regardless of how long the annuitant lives.  Default value is `0` if omitted. |
 | `cashRefund` | boolean | A [Cash Refund annuity](https://www.investopedia.com/terms/c/cash-refund-annuity.asp) returns to a beneficiary any sum left over should the annuitant die before breaking even on what they paid in premiums.  Default value is `false` if omitted. |
 
+### AnnuitizeResponse
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `monthlyBenefitAmounts` | int[] | Array of monthly benefit amounts, which correspond to the array of scenarios defined in the request object. |
+
 ### Examples
 
 Example request and response JSONs can be found in [examples/annuitize/](examples/annuitize/).
