@@ -294,18 +294,14 @@ This the top-level request object that is submitted to this endpoint.
 
 Given a financial [plan](./datatypes.md#plan), this endpoint runs a simulation that generates a forecast of that plan, consisting of some summary information about the future projection, and a set of time series representing the future periodic values of each account and payment stream involved in the simulation.
 
-### Request JSON Syntax
+#### Forecast Request
 
-&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"params": {<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[Params object]](#params-object)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"plan": {<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[Plan object]](./datatypes.md#plan)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `params` | [ForecastParams](#forecastparams) | |
+| `plan` | [Plan](datatypes.md#plan) | |
 
-#### `Params` object
+#### ForecastParams
 
 The `params` object, and each of its attributes, are totally optional:
 
@@ -317,16 +313,12 @@ The `params` object, and each of its attributes, are totally optional:
 
 A sample request JSON for this endpoint can be found [here](examples/forecast/basic/single-01.json).
 
-### Response JSON Syntax
+#### ForecastResponse
 
-&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"forecast": {<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Forecast object](./datatypes.md#forecast)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"warnings": [<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[potential warnings](#what-is-a-warning)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `forecast` | [Forecast](datatypes.md#forecast) |  |
+| `warnings` | [Warning[]](#what-is-a-warning) |  |
 
 ### Sample Scenario
 
