@@ -239,7 +239,7 @@ This is the top-level request object that is posted to this endpoint.
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `monthlyBenefitAmounts` | int[] | Array of monthly benefit amounts, which correspond to the array of scenarios defined in the request object. |
+| `monthlyBenefitAmounts` | int[] | Array of monthly benefit amounts, which correspond to the array of scenarios defined in the [AnnuityRequest](#annuityrequest) object. |
 
 ### Examples
 
