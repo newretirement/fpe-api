@@ -235,7 +235,7 @@ This is the top-level request object that is posted to this endpoint.
 | `survivorBenefit` | float | Survivor benefit ratio, which is only relevant if the annuitant has a spouse.  Valid range is `[0.0..1.0]`.  Default value is `0.0` if omitted. |
 | `cola` | float | Cost of Living Adjustment.  Valid range is `[0.0..1.0]`.  Default value is `0.0` if omitted. |
 | `yearsCertain` | int | A [Years Certain annuity](https://www.investopedia.com/terms/y/years-certain-annuity.asp) pays the holder a continuous monthly income for the specified number of years, regardless of how long the annuitant lives.  Default value is `0` if omitted. |
-| `cashRefund` | boolean | A [Cash Refund annuity](ttps://www.investopedia.com/terms/c/cash-refund-annuity.asp) returns to a beneficiary any sum left over should the annuitant die before breaking even on what they paid in premiums.  Default value is `false` if omitted. |
+| `cashRefund` | boolean | A [Cash Refund annuity](https://www.investopedia.com/terms/c/cash-refund-annuity.asp) returns to a beneficiary any sum left over should the annuitant die before breaking even on what they paid in premiums.  Default value is `false` if omitted. |
 
 ### Examples
 
@@ -254,7 +254,7 @@ Given a financial [plan](./datatypes.md#plan), this endpoint runs a simulation t
 | `params` | [ForecastParams](#forecastparams) | (optional) Configuration for things like optional calculations, time series density, etc. |
 | `plan` | [Plan](datatypes.md#plan) | The financial plan to forecast. |
 
-### ForecastParams
+#### ForecastParams
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
@@ -265,7 +265,7 @@ Given a financial [plan](./datatypes.md#plan), this endpoint runs a simulation t
 
 A sample request JSON for this endpoint can be found [here](examples/forecast/basic/single-01.json).
 
-#### ForecastResponse
+### ForecastResponse
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
