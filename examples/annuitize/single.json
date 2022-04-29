@@ -1,0 +1,35 @@
+{
+    "currentDate": "2022-04",
+    "annuitant": {
+        "birthDate": "1962-01",
+        "gender": "female"
+    },
+    "scenarios": [
+        {
+            "premium": 30000,
+            "purchaseDate": "2025-12",
+            "startDate": "2035-01",
+            "cola": 0.0
+        },
+        {
+            "premium": 30000,
+            "purchaseDate": "2025-12",
+            "startDate": "2035-01",
+            "cola": 0.03
+        },
+        {
+            "premium": 100000,
+            "purchaseDate": "2025-12",
+            "startDate": "2035-01",
+            "cola": 0.05,
+            "cashRefund": true
+        },
+        {
+            "premium": 100000,
+            "purchaseDate": "2025-12",
+            "startDate": "2035-01",
+            "cola": 0.05,
+            "yearsCertain": 10
+        }
+    ]
+}
