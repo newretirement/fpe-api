@@ -207,7 +207,7 @@ Returns information about the deployed web service.
 
 Estimates the monthly [annuity](https://www.investopedia.com/terms/a/annuity.asp) income stream based on a given annuity premium, as well as other information that potentially affects the future income payments.
 
-#### AnnuitizeRequest
+### AnnuitizeRequest
 
 This is the top-level request object that is posted to this endpoint.
 
@@ -237,58 +237,9 @@ This is the top-level request object that is posted to this endpoint.
 | `yearsCertain` | int | A [Years Certain annuity](https://www.investopedia.com/terms/y/years-certain-annuity.asp) pays the holder a continuous monthly income for the specified number of years, regardless of how long the annuitant lives.  Default value is `0` if omitted. |
 | `cashRefund` | boolean | A [Cash Refund annuity](ttps://www.investopedia.com/terms/c/cash-refund-annuity.asp) returns to a beneficiary any sum left over should the annuitant die before breaking even on what they paid in premiums.  Default value is `false` if omitted. |
 
-#### Sample request
+### Examples
 
-```json
-{
-    "currentDate": "2022-04",
-    "annuitant": {
-        "birthDate": "1962-01",
-        "gender": "female"
-    },
-    "annuitantSpouse": {
-        "birthDate": "1965-01",
-        "gender": "male"
-    },
-    "scenarios": [
-        {
-            "premium": 30000,
-            "purchaseDate": "2025-12",
-            "startDate": "2035-01",
-            "cola": 0.03,
-            "survivorBenefit": 0.5
-        },
-        {
-            "premium": 40000,
-            "purchaseDate": "2025-12",
-            "startDate": "2035-01",
-            "cola": 0.05,
-            "survivorBenefit": 0.75
-        },
-        {
-            "premium": 50000,
-            "purchaseDate": "2030-01",
-            "startDate": "2035-01",
-            "cola": 0.06,
-            "survivorBenefit": 1.0
-        }
-    ]
-}
-```
-
-#### Sample response
-
-The response contains the list of estimated monthly benefit amounts that correspond to the list of scenarios defined in the request object.
-
-```json
-{
-    "monthlyBenefitAmounts": [
-        215,
-        222,
-        191
-    ]
-}
-```
+Example request and response JSONs can be found in [examples/annuitize/](examples/annuitize/).
 
 <br/>
 
@@ -296,14 +247,14 @@ The response contains the list of estimated monthly benefit amounts that corresp
 
 Given a financial [plan](./datatypes.md#plan), this endpoint runs a simulation that generates a forecast of that plan, consisting of some summary information about the future projection, and a set of time series representing the future periodic values of each account and payment stream involved in the simulation.
 
-#### ForecastRequest
+### ForecastRequest
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `params` | [ForecastParams](#forecastparams) | (optional) Configuration for things like optional calculations, time series density, etc. |
 | `plan` | [Plan](datatypes.md#plan) | The financial plan to forecast. |
 
-#### ForecastParams
+### ForecastParams
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
