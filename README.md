@@ -203,6 +203,93 @@ Returns information about the deployed web service.
 
 <br/>
 
+## `POST /annuitize`
+
+Estimates the monthly [annuity](https://www.investopedia.com/terms/a/annuity.asp) income stream based on a given annuity premium, as well as other information that potentially affects the income amount.
+
+#### Request
+
+This the top-level request object that is submitted to this endpoint.
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `currentDate` | [Date](./datatypes.md#date) | Today's date. |
+| `annuitant` | [Person](#person) | The person receiving the annuity. |
+| `annuitantSpouse` | [Person](#person) | The annuitant's spouse (optional). |
+| `scenarios` | [Scenario[]](#scenario) | List of 0 or more annuity calculation scenarios. |
+
+#### Person
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `birthDate` | [Date](./datatypes.md#date) | The person's date of birth. |
+| `gender` | [Gender](datatypes.md#gender) | The person's gender (required for mortality calculations). |
+
+#### Scenario
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `premium` | int | The lump sum cost of the annuity. |
+| `purchaseDate` | [Date](./datatypes.md#date)  | The date on which the annuity was purchased. |
+| `startDate` | [Date](./datatypes.md#date)  | The date on which annuity payments shall commence. |
+| `survivorBenefit` | float | Survivor benefit ratio, which is only relevant if the annuitant has a spouse.  Valid range is `[0.0..1.0]`.  Default value is `0.0` if omitted. |
+| `cola` | float | Cost of Living Adjustment.  Valid range is `[0.0..1.0]`.  Default value is `0.0` if omitted. |
+| `yearsCertain` | int | A [Years Certain annuity](https://www.investopedia.com/terms/y/years-certain-annuity.asp) pays the holder a continuous monthly income for the specified number of years, regardless of how long the annuitant lives.  Default value is `0` if omitted. |
+| `cashRefund` | boolean | A [Cash Refund annuity](ttps://www.investopedia.com/terms/c/cash-refund-annuity.asp) returns to a beneficiary any sum left over should the annuitant die before breaking even on what they paid in premiums.  Default value is `false` if omitted. |
+
+#### Sample request
+
+```json
+{
+    "currentDate": "2022-04",
+    "annuitant": {
+        "birthDate": "1962-01",
+        "gender": "female"
+    },
+    "annuitantSpouse": {
+        "birthDate": "1965-01",
+        "gender": "male"
+    },
+    "scenarios": [
+        {
+            "premium": 30000,
+            "purchaseDate": "2025-12",
+            "startDate": "2035-01",
+            "cola": 0.03,
+            "survivorBenefit": 0.5
+        },
+        {
+            "premium": 40000,
+            "purchaseDate": "2025-12",
+            "startDate": "2035-01",
+            "cola": 0.05,
+            "survivorBenefit": 0.75
+        },
+        {
+            "premium": 50000,
+            "purchaseDate": "2030-01",
+            "startDate": "2035-01",
+            "cola": 0.06,
+            "survivorBenefit": 1.0
+        }
+    ]
+}
+```
+
+#### Sample response
+
+```json
+{
+    "monthlyBenefitAmounts": [
+        215,
+        222,
+        191
+    ]
+}
+```
+
+<br/>
+
 ## `POST /forecast`
 
 Given a financial [plan](./datatypes.md#plan), this endpoint runs a simulation that generates a forecast of that plan, consisting of some summary information about the future projection, and a set of time series representing the future periodic values of each account and payment stream involved in the simulation.
@@ -213,9 +300,7 @@ Given a financial [plan](./datatypes.md#plan), this endpoint runs a simulation t
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"params": {<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[Params object]](#params-object)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;},<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"plan": {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"plan": {<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[Plan object]](./datatypes.md#plan)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
