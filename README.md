@@ -209,7 +209,7 @@ Estimates the monthly [annuity](https://www.investopedia.com/terms/a/annuity.asp
 
 #### AnnuitizeRequest
 
-This the top-level request object that is submitted to this endpoint.
+This is the top-level request object that is posted to this endpoint.
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
@@ -277,6 +277,8 @@ This the top-level request object that is submitted to this endpoint.
 ```
 
 #### Sample response
+
+The response contains the list of estimated monthly benefit amounts that correspond to the list of scenarios defined in the request object.
 
 ```json
 {
