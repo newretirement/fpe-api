@@ -205,6 +205,8 @@ Returns information about the deployed web service.
 
 Estimates the monthly [annuity](https://www.investopedia.com/terms/a/annuity.asp) income stream based on a given annuity premium, as well as other information that potentially affects the future income payments.
 
+For a given [annuitant](https://www.investopedia.com/terms/a/annuitant.asp) and (optional) surviving spouse, multiple [scenarios](#annuityscenario) may be submitted in batch for the sake of convenience and efficiency.  
+
 ### AnnuitizeRequest
 
 This is the top-level request object that is posted to this endpoint.
@@ -212,25 +214,27 @@ This is the top-level request object that is posted to this endpoint.
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `currentDate` | [Date](./datatypes.md#date) | Today's date. |
-| `annuitant` | [Person](#person) | The person receiving the annuity. |
-| `annuitantSpouse` | [Person](#person) | (optional) The annuitant's spouse. |
-| `scenarios` | [Scenario[]](#scenario) | List of 0 or more annuity calculation scenarios. |
+| `annuitant` | [Person](#person) | The [annuitant](https://www.investopedia.com/terms/a/annuitant.asp) is the recepient of the annuity payments. |
+| `survivingSpouse` | [Person](#person) | (optional) If the annuitant has a spouse |
+| `scenarios` | [Scenario[]](#annuityscenario) | List of 0 or more annuity calculation scenarios. |
 
 #### Person
+
+Represents either the annuitant or their surviving spouse.
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `birthDate` | [Date](./datatypes.md#date) | The person's date of birth. |
 | `gender` | [Gender](datatypes.md#gender) | The person's gender (required for mortality calculations). |
 
-#### Scenario
+#### AnnuityScenario
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `premium` | int | The lump sum cost of the annuity. |
 | `purchaseDate` | [Date](./datatypes.md#date)  | The date on which the annuity was purchased. |
 | `startDate` | [Date](./datatypes.md#date)  | The date on which annuity payments shall commence. |
-| `survivorBenefit` | float | Survivor benefit ratio, which is only relevant if the annuitant has a spouse.  Valid range is `[0.0..1.0]`.  Default value is `0.0` if omitted. |
+| `survivorBenefit` | float | Survivor benefit ratio.  This is only relevant when the annuitant has declared a `survivingSpouse`.  Valid range is `[0.0..1.0]`.  Default value is `0.0` if omitted. |
 | `cola` | float | Cost of Living Adjustment.  Valid range is `[0.0..1.0]`.  Default value is `0.0` if omitted. |
 | `yearsCertain` | int | A [Years Certain annuity](https://www.investopedia.com/terms/y/years-certain-annuity.asp) pays the holder a continuous monthly income for the specified number of years, regardless of how long the annuitant lives.  Default value is `0` if omitted. |
 | `cashRefund` | boolean | A [Cash Refund annuity](https://www.investopedia.com/terms/c/cash-refund-annuity.asp) returns to a beneficiary any sum left over should the annuitant die before breaking even on what they paid in premiums.  Default value is `false` if omitted. |
@@ -239,7 +243,8 @@ This is the top-level request object that is posted to this endpoint.
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `monthlyBenefitAmounts` | int[] | Array of monthly benefit amounts, which correspond to the array of scenarios defined in the [AnnuitizeRequest](#annuitizerequest) object. |
+| `monthlyBenefitAmounts` | int[] | Array of monthly benefit amounts, which correspond to the array of [scenarios](#annuityscenario) defined in the [AnnuitizeRequest](#annuitizerequest) object. |
+| `warnings` | [Warning[]](#what-is-a-warning) | List of non-critical warnings. |
 
 ### Examples
 
@@ -252,6 +257,8 @@ Example request and response JSONs can be found in [examples/annuitize/](example
 Given a financial [plan](./datatypes.md#plan), this endpoint runs a simulation that generates a forecast of that plan, consisting of some summary information about the future projection, and a set of time series representing the future periodic values of each account and payment stream involved in the simulation.
 
 ### ForecastRequest
+
+This is the top-level request object that is posted to this endpoint.
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
@@ -274,12 +281,12 @@ A sample request JSON for this endpoint can be found [here](examples/forecast/ba
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `forecast` | [Forecast](datatypes.md#forecast) | The projected forecast of the submitted plan. |
-| `warnings` | [Warning[]](#what-is-a-warning) |  |
+| `warnings` | [Warning[]](#what-is-a-warning) | List of non-critical warnings. |
 
 ### Sample Scenario
 
 Consider this basic scenario, which is followed by the corresponding JSON request/response:
 
-> Scenario: The current date is January 2021.  John is a 60 year old single male in excellent health.  He expects to live until the age of 90.  John will start claiming social security at age 67 (full retirement age), and knows his PIA will be $2,325. His retirement savings consists of a single IRA with a current balance of $500,000 and an expected AGR of 6% (and a future AGR of 4% starting in 2027).  John works for a company where he earns $7,500/month.  Furthermore, he is participating in an employer-sponsored retirement plan, where he contributes 10% of his salary, and the company matches 50% of his contribution up to 8% of salary.  He plans on retiring at age 67.  John expects to spend $7,000/month in retirement.
+> Scenario: The current date is January 2021.  John is a 60-year-old single male in excellent health.  He expects to live until the age of 90.  John will start claiming social security at age 67 (full retirement age), and knows his PIA will be $2,325. His retirement savings consists of a single IRA with a current balance of $500,000 and an expected AGR of 6% (and a future AGR of 4% starting in 2027).  John works for a company where he earns $7,500/month.  Furthermore, he is participating in an employer-sponsored retirement plan, where he contributes 10% of his salary, and the company matches 50% of his contribution up to 8% of salary.  He plans on retiring at age 67.  John expects to spend $7,000/month in retirement.
 
 The JSON request for this scenario is [here](examples/forecast/basic/single-01.json), and the corresponding JSON response is [here](examples/forecast/basic/single-01.response.json).
