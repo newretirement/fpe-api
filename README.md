@@ -201,7 +201,7 @@ Returns information about the deployed web service.
 
 <br/>
 
-## `POST /annuitize`
+## `POST /v5/annuitize`
 
 Estimates the monthly [annuity](https://www.investopedia.com/terms/a/annuity.asp) income stream based on a given annuity premium, as well as other information that potentially affects the future income payments.
 
@@ -252,7 +252,7 @@ Example request and response JSONs can be found in [examples/annuitize/](example
 
 <br/>
 
-## `POST /forecast`
+## `POST /v5/forecast`
 
 Given a financial [plan](./datatypes.md#plan), this endpoint runs a simulation that generates a forecast of that plan, consisting of some summary information about the future projection, and a set of time series representing the future periodic values of each account and payment stream involved in the simulation.
 
