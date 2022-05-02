@@ -216,7 +216,7 @@ This is the top-level request object that is posted to this endpoint.
 | `currentDate` | [Date](./datatypes.md#date) | Today's date. |
 | `annuitant` | [Person](#person) | The [annuitant](https://www.investopedia.com/terms/a/annuitant.asp) is the recepient of the annuity payments. |
 | `survivingSpouse` | [Person](#person) | (optional) If the annuitant has a spouse |
-| `scenarios` | [Scenario[]](#annuityscenario) | List of 0 or more annuity calculation scenarios. |
+| `scenarios` | [AnnuityScenario[]](#annuityscenario) | List of 0 or more annuity calculation scenarios. |
 
 #### Person
 
