@@ -1,0 +1,54 @@
+{
+    "description": "Single person with 1 job that ends in 2035.",
+    "params": {
+        "calcFIRE": true,
+        "projectionPeriod": "yearly"
+    },
+    "plan": {
+        "currentDate": "2021-01",
+        "isPlusUser": true,
+        "stateCode": "OR",
+        "cashFlow": {
+            "checkingAccount": "checking",
+            "savingsAccount": "savings",
+            "savingRate": 1
+        },
+        "primary": {
+            "birthDate": "1971-01",
+            "gender": "male",
+            "goalAge": "70y0m"
+        },
+        "accounts": [
+            {
+                "name": "checking",
+                "type": "aftertax"
+            },
+            {
+                "name": "savings",
+                "type": "aftertax",
+                "balance": 1000000
+            },
+            {
+                "name": "debt",
+                "type": "revolvingCredit"
+            }
+        ],
+        "paymentStreams": [
+            {
+                "name": "job-1",
+                "paymentAmount": 5000,
+                "paymentsPerYear": 12,
+                "earnedIncome": true,
+                "startDate": "2025-01",
+                "endDate": "2035-01",
+                "target": "savings"
+            },
+            {
+                "name": "expense-1",
+                "paymentAmount": 5000,
+                "paymentsPerYear": 12,
+                "source": "optimal"
+            }
+        ]
+    }
+}

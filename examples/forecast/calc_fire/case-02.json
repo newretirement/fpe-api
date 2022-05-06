@@ -1,0 +1,72 @@
+{
+    "description": "Single person with 3 jobs, the latest of which ends in 2038.",
+    "params": {
+        "calcFIRE": true,
+        "projectionPeriod": "yearly"
+    },
+    "plan": {
+        "currentDate": "2021-01",
+        "isPlusUser": true,
+        "stateCode": "OR",
+        "cashFlow": {
+            "checkingAccount": "checking",
+            "savingsAccount": "savings",
+            "savingRate": 1
+        },
+        "primary": {
+            "birthDate": "1971-01",
+            "gender": "male",
+            "goalAge": "70y0m"
+        },
+        "accounts": [
+            {
+                "name": "checking",
+                "type": "aftertax"
+            },
+            {
+                "name": "savings",
+                "type": "aftertax",
+                "balance": 995000
+            },
+            {
+                "name": "debt",
+                "type": "revolvingCredit"
+            }
+        ],
+        "paymentStreams": [
+            {
+                "name": "job-1",
+                "paymentAmount": 5000,
+                "paymentsPerYear": 12,
+                "earnedIncome": true,
+                "startDate": "2025-01",
+                "endDate": "2028-01",
+                "target": "savings"
+            },
+            {
+                "name": "job-2",
+                "paymentAmount": 4000,
+                "paymentsPerYear": 12,
+                "earnedIncome": true,
+                "startDate": "2030-01",
+                "endDate": "2033-12",
+                "target": "savings"
+            },
+            {
+                "name": "job-3",
+                "paymentAmount": 1000,
+                "paymentsPerYear": 12,
+                "earnedIncome": true,
+                "startDate": "2035-01",
+                "endDate": "2038-01",
+                "target": "savings"
+            },
+            {
+                "name": "expense-01",
+                "paymentAmount": 5000,
+                "paymentsPerYear": 12,
+                "source": "optimal"
+            }
+        ]
+    }
+}
