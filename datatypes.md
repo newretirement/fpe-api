@@ -135,7 +135,7 @@ Contains various reports that are unconditionally annual in nature (e.g. income 
 
 `FIRE` is the result of the optional [calcFIRE](README.md#forecastparams) calculation, which solves for the earliest `endDate` that can be used across all [PaymentStreams](#paymentstream) whose `earnedIncome` flag is true, such that the forecast's `estateValue` is as close to $0 without being negative.
 
-Note that, while the FIRE algorithm can potentially push the `endDate` for a given job to a later date (i.e. suggestion you need to postpone retirement), it will never move the `startDate` back to an earlier date.
+Note that, while the FIRE algorithm can potentially push the `endDate` for a given job to a later date (i.e. suggesting you need to postpone retirement), it will never move a future `startDate` back to an earlier date.
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
