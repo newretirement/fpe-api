@@ -133,12 +133,16 @@ Contains various reports that are unconditionally annual in nature (e.g. income 
 
 #### FIRE
 
-`FIRE` is the result of an optional calculation that finds the earliest `endDate` that can be used across all [PaymentStreams](#paymentstream) whose `earnedIncome` flag is true such that the forecast's `estateValue` is as close to $0 without being negative.
+`FIRE` is the result of the optional [calcFIRE](README.md#forecastparams) calculation, which solves for the earliest `endDate` that can be used across all [PaymentStreams](#paymentstream) whose `earnedIncome` flag is true, such that the forecast's `estateValue` is as close to $0 without being negative.
+
+Note that, while the FIRE algorithm can potentially push the `endDate` for a given job to a later date (i.e. suggestion you need to postpone retirement), it will never move the `startDate` back to an earlier date.
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `origRetireDate` | string | The name of this time series. |
+| `origRetireDate` | string | The plan's inferred retirement date, which is based on the latest date across all `earnedIncome` [PaymentStreams](#paymentstream). |
 | `earliestRetireDates` | map | A map of [PaymentStream](#paymentstream) names to [Date](#date) entries, where each entry indicates the earliest `endDate` for the named stream that will satisfy the goal described in the [FIRE](#FIRE) summary above. |
+
+Sample JSON requests can be found in [examples/forecast/calc_fire/](examples/forecast/calc_fire/).
 
 #### IncomeTaxDataRange
 
