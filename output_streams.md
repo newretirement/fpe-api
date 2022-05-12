@@ -25,5 +25,5 @@ When a [plan](datatypes.md#plan) is submitted to the [POST /forecast](README.md#
 
 | Term  | Definition |
 | ------| ---------- |
-| liquid asset | A[liquid asset](https://www.investopedia.com/terms/l/liquidasset.asp) is an asset that can easily be converted into cash in a short amount of time.  Within FPE, an [account](datatypes.md#account) is classified as a liquid asset based on its [type](datatypes.md#accounttype) and the following rules:<br/>- NOT a liquid asset if type is `asset`, `loan`, `revolvingCredit` or `reverseMortage` <br/>-IS a liquid asset for any other account type |
-| excess income | After processing all expenses, transfers, tax payments, and contributions to retirement plans within a given month, _excess income_ is the remainder of the gross income received in that month. |
+| liquid&nbsp;asset | A [liquid asset](https://www.investopedia.com/terms/l/liquidasset.asp) is an asset that can easily be converted into cash in a short amount of time.  Within FPE, an [account](datatypes.md#account) is classified as a liquid asset based on its [type](datatypes.md#accounttype) combined with the following rules:<br/>  - NOT a liquid asset if account type is `asset`, `loan`, `revolvingCredit` or `reverseMortage` <br/>  - IS a liquid asset for any other account type |
+| excess&nbsp;income | After processing all expenses, transfers, tax payments, and contributions to retirement plans within a given month, _excess income_ is the remainder of the gross income received that month. |
