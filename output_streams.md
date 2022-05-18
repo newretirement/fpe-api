@@ -15,11 +15,20 @@ When a [plan](datatypes.md#plan) is submitted to the [POST /forecast](README.md#
 
 | Stream name  | Type | Description |
 | ---------- | ---- | ----------- |
-| `@total_income` | report | The sum of all PaymentStream projections of type `income`. |
-| `@total_expenses` | report | The sum of all PaymentStream projections of type `expense`. |
-| `@saved_surplus` | report | The portion of [excess income](#terminology) that is saved each month.  The saved portion is determined by [plan.cashFlow.savingRate](datatypes.md#cashflow). For example, if in a given month the plan has $1,000 of excess income, and savingRate = 0.75, then $250 will be transferred plan's [checkingAccount](datatypes.md#cashflow) into the plan's [savingsAccount](datatypes.md#cashflow). |
-| `@unsaved_surplus` | expense | The portion of [excess income](#terminology) that is "spent" each month.  The unsaved portion is determined by [plan.cashFlow.savingRate](datatypes.md#cashflow). For example, if in a given month the plan has $1,000 of excess income, and savingRate = 0.75, then $750 will be withdrawn from the plan's [checkingAccount](datatypes.md#cashflow). |
+| `@capital_gains` | report | The [capital gains](https://www.investopedia.com/articles/personal-finance/101515/comparing-longterm-vs-shortterm-capital-gain-tax-rates.asp) for the given tax year. |
+| `@capital_gains_tax` | report | The [tax due on all capital gains](https://www.investopedia.com/terms/c/capital_gains_tax.asp) for the given tax year. |
+| `@federal_income_tax` | report | The calculated federal income tax due for the given tax year. |
+| `@federal_taxable_income` | report | The portion of the plan's income that is subject to federal income tax for the given tax year. |
+| `@fica` | report | The [FICA](https://www.investopedia.com/terms/f/fica.asp) amount due for the given tax year. |
+| `@gap` | report | `@total_income - @total_expenses` |
 | `@income_tax` | expense | The actual income tax payments made to the IRS.  Income tax includes federal, state, FICA, and other taxes. |
+| `@saved_surplus` | report | The portion of [excess income](#terminology) that is saved each month.  The saved portion is determined by [plan.cashFlow.savingRate](datatypes.md#cashflow). For example, if in a given month the plan has $1,000 of excess income, and savingRate = 0.75, then $250 will be transferred plan's [checkingAccount](datatypes.md#cashflow) into the plan's [savingsAccount](datatypes.md#cashflow). |
+| `@state_income_tax` | report | The calculated state income tax due for the given tax year. |
+| `@state_taxable_income` | report | The portion of the plan's income that is subject to state income tax for the given tax year. |
+| `@tax_liability` | report | The total tax liability for the given tax year.  Includes federal+state income tax, FICA, capital gains tax, and possibly other state-specific taxes. |
+| `@total_expenses` | report | The sum of all PaymentStream projections of type `expense`. |
+| `@total_income` | report | The sum of all PaymentStream projections of type `income`. |
+| `@unsaved_surplus` | expense | The portion of [excess income](#terminology) that is "spent" each month.  The unsaved portion is determined by [plan.cashFlow.savingRate](datatypes.md#cashflow). For example, if in a given month the plan has $1,000 of excess income, and savingRate = 0.75, then $750 will be withdrawn from the plan's [checkingAccount](datatypes.md#cashflow). |
 
 ## Terminology
 
