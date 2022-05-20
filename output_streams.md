@@ -18,11 +18,15 @@ When a [plan](datatypes.md#plan) is submitted to the [POST /forecast](README.md#
 | `@capital_gains` | report | The [capital gains](https://www.investopedia.com/articles/personal-finance/101515/comparing-longterm-vs-shortterm-capital-gain-tax-rates.asp) for the given tax year. |
 | `@capital_gains_tax` | report | The [tax due on all capital gains](https://www.investopedia.com/terms/c/capital_gains_tax.asp) for the given tax year. |
 | `@capital_gains_tax_payment` | expense | Represents a [capital gains tax](https://www.investopedia.com/terms/c/capital_gains_tax.asp) payment. |
+| `@combined_irmaa` | report | `@irmaa + @irmaa_spouse`. |
 | `@federal_income_tax` | report | The calculated federal income tax due for the given tax year. |
 | `@federal_taxable_income` | report | The portion of the plan's income that is subject to federal income tax for the given tax year. |
 | `@fica` | report | The [FICA](https://www.investopedia.com/terms/f/fica.asp) amount due for the given tax year. |
 | `@gap` | report | `@total_income - @total_expenses` |
 | `@income_tax` | expense | The actual income tax payments made to the IRS.  Income tax includes federal, state, FICA, and other taxes. |
+| `@irmaa` | report | The [IRMAA](https://www.medicareresources.org/medicare-eligibility-and-enrollment/what-is-the-income-related-monthly-adjusted-amount-irmaa/) portion of the total `@medicare_oopc` expense. |
+| `@irmaa_spouse` | report | Same as the `@irmaa` payment stream, but applies exclusively to the spouse (if one is defined for this plan). |
+| `@medicare_oopc` | expense | The Medicare Out-Of-Pocket-Cost within a given period. |
 | `@repay:lifetimeDebt` | report | Reports [lifetime debt](#terminology) repayment within a given period. |
 | `@saved_surplus` | report | The portion of [excess income](#terminology) that is saved each month.  The saved portion is determined by [plan.cashFlow.savingRate](datatypes.md#cashflow). For example, if in a given month the plan has $1,000 of excess income, and savingRate = 0.75, then $250 will be transferred plan's [checkingAccount](datatypes.md#cashflow) into the plan's [savingsAccount](datatypes.md#cashflow). |
 | `@ss_income` | income | Social security income stream for the primary member of the plan. |
@@ -40,5 +44,5 @@ When a [plan](datatypes.md#plan) is submitted to the [POST /forecast](README.md#
 | Term | Definition |
 | -----| ---------- |
 | excess&nbsp;income | After processing all expenses, transfers, tax payments, and contributions to retirement plans within a given month, _excess income_ is the remainder of the gross income received that month. |
-| lifetime&nbsp;debt | Whenever the plan has insufficient funds to cover a withdrawal, the amount is paid for out of the "lifetime debt" account (i.e. an account whose type is [revolvingCredit](datatypes.md#accounttypes)). |
+| lifetime&nbsp;debt | Whenever the plan has insufficient funds to cover a withdrawal, the amount is paid for out of the "lifetime debt" account (i.e. an account whose type is [revolvingCredit](datatypes.md#accounttype)). |
 | liquid&nbsp;asset | A [liquid asset](https://www.investopedia.com/terms/l/liquidasset.asp) is an asset that can easily be converted into cash in a short amount of time.  Within FPE, an [account](datatypes.md#account) is classified as a liquid asset based on its [type](datatypes.md#accounttype) combined with the following rules:<br/>  - NOT a liquid asset if account type is `asset`, `loan`, `revolvingCredit` or `reverseMortage` <br/>  - IS a liquid asset for any other account type |
