@@ -269,12 +269,25 @@ This is the top-level request object that is posted to this endpoint.
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `projectionPeriod` | enum | Determines if the forecasted projection vectors represent monthly or aggregated annual amounts. Valid values are [`monthly`, `yearly`]. If this attribute is empty, `yearly` is the default. |
 | `calcFIRE` | boolean | If `true`, the 'FIRE' solver is executed, and the result appears in the [Forecast.FIRE](datatypes.md#forecast) response. |
 | `calcPostRetireIncomeExpenseRatio` | boolean | If `true`, the _Income/Expense Ratio_ calculation is executed, and the result appears in [Forecast.postRetireIncomeExpenseRatio](datatypes.md#forecast) within the response. |
 | `calcSpendingPower` | boolean | If `true`, the 'Spending Power' calculation executes, and the result appears as the `spendingPower` attribute within the [Forecast](datatypes.md#Forecast) response object. Note that [plan.primary.retireDate](datatypes.md#Person) must be set when running this calculation. See [Forecast.spendingPower](datatypes.md#Forecast) for more details on this calculation. |
+| `filterForecast` | [ForecastFilter](#forecastfilter) | Applies filtering to the output streams within the [Forecast](datatypes.md#forecast) object. |
+| `projectionPeriod` | enum | Determines if the forecasted projection vectors represent monthly or aggregated annual amounts. Valid values are [`monthly`, `yearly`]. If this attribute is empty, `yearly` is the default. |
 
-A sample request JSON for this endpoint can be found [here](examples/forecast/basic/single-01.json).
+### AnnualReportsFilter
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `excludeAll` | boolean | Excludes the [annualReports](datatypes.md#forecast) content from the forecast. |
+
+### ForecastFilter
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `accounts` | [StreamFilter](#streamfilter) | Applies filtering rules to the account output streams. |
+| `paymentStreams` | [StreamFilter](#streamfilter) | Applies filtering rules to the payment output streams.  |
+| `annualReports` | [AnnualReportsFilter](#annualreportsfilter) | Applies filtering rules to the annual report output streams.  |
 
 ### ForecastResponse
 
@@ -282,6 +295,19 @@ A sample request JSON for this endpoint can be found [here](examples/forecast/ba
 | ---------- | ---- | ----------- |
 | `forecast` | [Forecast](datatypes.md#forecast) | The projected forecast of the submitted plan. |
 | `warnings` | [Warning[]](#what-is-a-warning) | List of non-critical warnings. |
+
+### IncludeFilter
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `name` | string[] | The list of output stream names to include in the forecast. |
+
+### StreamFilter
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `excludeAll` | boolean | Excludes all output streams.|
+| `include` | [IncludeFilter](#includefilter) | Includes only the output streams implied by this filter.|
 
 ### Sample Scenario
 
