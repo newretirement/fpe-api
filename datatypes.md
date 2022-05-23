@@ -116,8 +116,8 @@ A sample JSON request for relocation is [here](./examples/forecast/housing/reloc
 | `lifetimeSSBenefit` | int | The sum of all social security payments received throughout the financial projection. |
 | `outOfSavingsDate` | [Date](#date) | The date that the user's [Plan](#plan) runs out of savings and starts accumulating debt. A value of `null` means the plan never ran out of savings. |
 | `monthlyRetirementIncome` | int | The estimated monthly income received in retirement. This attribute is only calculated if `params.calcMonthlyRetirementIncome` is set to true in the request. |
-| `accounts` | [Projection[]](#projection) | The projected periodic account balances corresponding to the [accounts](#account) defined within the [Plan](#plan). |
-| `paymentStreams` | [Projection[]](#projection) | The projected periodic payments corresponding to the [paymentStreams](#paymentstream) defined within the [Plan](#plan).  |
+| `accounts` | [Projection[]](#projection) | The projected periodic account balances corresponding to the [accounts](#account) defined within the [Plan](#plan). Also contains FPE-calculated streams (see [PaymentStream projections](output_streams.md#account-projections)). |
+| `paymentStreams` | [Projection[]](#projection) | The projected periodic payments corresponding to the [paymentStreams](#paymentstream) defined within the [Plan](#plan).  Also contains FPE-calculated streams (see [PaymentStream projections](output_streams.md#paymentstream-projections)). |
 | `annualReports` | [AnnualReports](#annualreports) | Contains various reports that are unconditionally annual in nature (e.g. income tax due). |
 | `fire` | [FIRE](#fire) | Contains details as to the earliest retirement dates across the earned income streams that still yields a non-negative estate value.  |
 | `postRetireIncomeExpenseRatio` | float | This value loosely serves as a "retirement readiness" score.  It is unbounded (e.g. if person has high income and very low expenses in retirement, this score will be well over `1.0`).  |
@@ -135,12 +135,12 @@ Contains various reports that are unconditionally annual in nature (e.g. income 
 
 `FIRE` is the result of the optional [calcFIRE](README.md#forecastparams) calculation, which solves for the earliest `endDate` that can be used across all [PaymentStreams](#paymentstream) whose `earnedIncome` flag is true, such that the forecast's `estateValue` is as close to $0 without being negative.
 
-Note that, while the FIRE algorithm can potentially push the `endDate` for a given job to a later date (i.e. suggesting you need to postpone retirement), it will never move a future `startDate` back to an earlier date.
+Note that, while the FIRE algorithm can potentially push the `endDate` for a given job to a later date (i.e. suggesting you need to postpone retirement), it will never shift a job's `startDate` back to an earlier date.
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `origRetireDate` | string | The plan's inferred retirement date, which is based on the latest date across all `earnedIncome` [PaymentStreams](#paymentstream). |
-| `earliestRetireDates` | map | A map of [PaymentStream](#paymentstream) names to [Date](#date) entries, where each entry indicates the earliest `endDate` for the named stream that will satisfy the goal described in the [FIRE](#FIRE) summary above. |
+| `earliestRetireDates` | map | A map of [PaymentStream](#paymentstream) names to [Date](#date) entries, where each entry indicates the earliest `endDate` for the named stream that satisfies the goal described in the [FIRE](#FIRE) summary above. |
 
 Sample JSON requests can be found in [examples/forecast/calc_fire/](examples/forecast/calc_fire/).
 
@@ -299,7 +299,7 @@ A `plan` is the top-level financial object; it represents the user's complete pr
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `checkingAccount` | string | The name of the account into which all income that needs to be tracked (in terms of surplus/gap) will be deposited. |
-| `savingsAccount` | string | the name of the account to which excess savings will be saved. "Excess savings" refers to total income received minus expenses within a given month. |
+| `savingsAccount` | string | the name of the account to which excess income will be saved. |
 | `savingRate` | float | The percentage of excess income for the month that will be saved into `savingsAccount`.  Valid range is `[0.0, 1.0]`. |
 
 #### Market
