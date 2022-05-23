@@ -135,12 +135,12 @@ Contains various reports that are unconditionally annual in nature (e.g. income 
 
 `FIRE` is the result of the optional [calcFIRE](README.md#forecastparams) calculation, which solves for the earliest `endDate` that can be used across all [PaymentStreams](#paymentstream) whose `earnedIncome` flag is true, such that the forecast's `estateValue` is as close to $0 without being negative.
 
-Note that, while the FIRE algorithm can potentially push the `endDate` for a given job to a later date (i.e. suggesting you need to postpone retirement), it will never move a future `startDate` back to an earlier date.
+Note that, while the FIRE algorithm can potentially push the `endDate` for a given job to a later date (i.e. suggesting you need to postpone retirement), it will never shift a job's `startDate` back to an earlier date.
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `origRetireDate` | string | The plan's inferred retirement date, which is based on the latest date across all `earnedIncome` [PaymentStreams](#paymentstream). |
-| `earliestRetireDates` | map | A map of [PaymentStream](#paymentstream) names to [Date](#date) entries, where each entry indicates the earliest `endDate` for the named stream that will satisfy the goal described in the [FIRE](#FIRE) summary above. |
+| `earliestRetireDates` | map | A map of [PaymentStream](#paymentstream) names to [Date](#date) entries, where each entry indicates the earliest `endDate` for the named stream that satisfies the goal described in the [FIRE](#FIRE) summary above. |
 
 Sample JSON requests can be found in [examples/forecast/calc_fire/](examples/forecast/calc_fire/).
 
