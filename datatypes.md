@@ -7,7 +7,7 @@ An `account` is a financial ledger of the transactions within a real-world accou
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `name` | string | The unique name of the account (e.g. `"wells_fargo_savings"`). Valid characters are: `[a-zA-Z0-9]`, `-`, `_`, `/`, and white space.|
-| `type` | [AccountType](#accounttype) | Determines the type of account. Common account types are `aftertax`, `ira`, `401k`, `asset`, `loan`. |
+| `type` | [AccountType](#accounttype) | Determines the type of account. Common account types are `aftertax`, `401k`, `asset`, and `loan`. |
 | `balance` | int | The account balance at the start of the simulation. |
 | `balanceLimit` | int |  Sets a balance limit on this account.  This attribute is only valid for accounts of type `loan` or `revolvingCredit`.|
 | `owner` | enum | Determines the account owner (valid values are [`primary`, `spouse`]). If this attribute is empty AND the primary account holder has no spouse, then the value defaults to `primary`. |
@@ -26,7 +26,7 @@ The `AccountType` enum represents the different types of accounts that can be mo
 | Value | Description |
 | ------------ | ----------- |
 | `aftertax` | Any account funded with after-tax dollars (e.g. checking account). |
-| `asset` | An [asset](https://www.investopedia.com/terms/a/asset.asp) is a resource with economic value that an individual owns or controls with the expectation that it will provide a future benefit. Common examples are real estate, fine art, and jewelry. |
+| `asset` | An [asset](https://www.investopedia.com/terms/a/asset.asp) is a resource with economic value that an individual owns or controls with the expectation that it will provide a future benefit. For example: real estate, vehicles, fine art, and jewelry. |
 | `ira` | See [Traditional IRA](https://www.investopedia.com/terms/t/traditionalira.asp) |
 | `401k` | See [Traditional 401(k)](https://www.investopedia.com/terms/1/401kplan.asp) |
 | `529` | A [529 plan](https://www.investopedia.com/terms/1/529plan.asp) is a tax-advantaged savings plan designed to help pay for education. |
@@ -34,6 +34,7 @@ The `AccountType` enum represents the different types of accounts that can be mo
 | `roth` | See [Roth IRA](https://www.investopedia.com/terms/r/rothira.asp) |
 | `roth401k` | [Roth 401(k)](https://www.investopedia.com/terms/1/401kplan.asp) |
 | `loan` |  A type of credit vehicle in which a sum of money is lent to another party in exchange for future repayment of the value or principal amount. In FPE, a loan refers specifically to the borrowing of a specific one-time amount (e.g. car loan, mortgage) vs. revolving credit loans (e.g. cred cards). |
+| `mortgage` | A [mortgage](https://www.investopedia.com/terms/m/mortgage.asp) is a loan used to purchase or maintain a home, land, or other types of real estate. |
 | `revolvingCredit` | [Revolving credit](https://www.investopedia.com/terms/r/revolvingcredit.asp) is an agreement that permits an account holder to borrow money repeatedly up to a set dollar limit while repaying a portion of the current balance due in regular payments. Two common examples are [credit cards and LOC (line of credit)](https://www.bankrate.com/finance/credit-cards/line-of-credit-vs-credit-card/). |
 | `reverseMortgage` | See [What is a Reverse Mortgage?](https://www.investopedia.com/mortgage/reverse-mortgage/) |
 
