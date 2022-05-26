@@ -2,7 +2,7 @@
 
 ## Overview
 
-Income-linked contributions are essentially one or more contributions taken directly from an [income stream](./terms.md#income-stream) payment, and deposited into one or more target [accounts](./datatypes.md#account).  The remainder of the income payment (i.e. the amount left after processing the contributions) is then deposited into the stream's designated `target` account.
+Income-linked contributions are essentially one or more contributions taken directly from an [income stream](terms.md#income-stream) payment, and deposited into one or more target [accounts](datatypes.md#account).  The remainder of the income payment (i.e. the amount left after processing the contributions) is then deposited into the stream's designated `target` account.
 
 ### Employer Match Logic
 
@@ -54,7 +54,7 @@ where:
 
 <b>Step 3: Constrain employer match to satisfy an annual cap</b>
 
-If an employer match annual cap has been specified (see [employerMatchAnnualCap](./datatypes.md#contributionfromincome)), the employer match dollar amount may need to be reduced in order to stay within this annual limit:
+If an employer match annual cap has been specified (see [employerMatchAnnualCap](datatypes.md#contributionfromincome)), the employer match dollar amount may need to be reduced in order to stay within this annual limit:
 
 ![emp-match-cap](https://latex.codecogs.com/svg.image?m'%20=%20%5Cbegin%7Bcases%7DannualCap%20-%20ytdMatch%20&%20%5Ctext%7B%20if%20%7D%20(ytdMatch%20&plus;%20m)%20%3E%20annualCap%20%5C%5Cm%20&%20%5Ctext%7B%20if%20%7D%20(ytdMatch%20&plus;%20m)%20%3C=%20annualCap%20%5C%5C%20%5Cend%7Bcases%7D)
 
@@ -74,7 +74,7 @@ _m'_ is the dollar amount that the employer will contribute to the employee's re
 
 In order to model the above example, there are 3 crucial entities that must be specified in the [plan](./datatypes.md#plan):
 
-1. The [account](./datatypes.md#account) into which the employee (and possibly employer) contributions will be deposited:
+1. The [account](datatypes.md#account) into which the employee (and possibly employer) contributions will be deposited:
 
 ```json
   {
@@ -83,7 +83,7 @@ In order to model the above example, there are 3 crucial entities that must be s
   }
 ```
 
-2. An `aftertax` [account](./datatypes.md#account) into which the remaining portion of the earned income will be deposited:
+2. An `aftertax` [account](datatypes.md#account) into which the remaining portion of the earned income will be deposited:
 
 ```json
   {
