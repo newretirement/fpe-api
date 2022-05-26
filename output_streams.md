@@ -6,8 +6,8 @@ When a [plan](datatypes.md#plan) is submitted to the [POST /forecast](README.md#
 
 | Stream name | Type | Description |
 | ----------- | ---- | ----------- |
-| `@total_savings` | report | The sum of account balances for all [liquid asset](#terminology) accounts. |
-| `@projected_savings` | report | The sum of account balances for all [liquid asset](#terminology) accounts PLUS any accounts whose type is [revolvingCredit](datatypes.md#accounttype). |
+| `@total_savings` | report | The sum of account balances for all [liquid asset](terms.md#liquidasset) accounts. |
+| `@projected_savings` | report | The sum of account balances for all [liquid asset](terms.md#liquidasset) accounts PLUS any accounts whose type is [revolvingCredit](datatypes.md#accounttype). |
 | `@total_debt` | report | The sum of all accounts with a negative balance. |
 | `@interest:<account>` | report | The interest accrued on the account whose name is `<account>`. |
 
@@ -27,8 +27,8 @@ When a [plan](datatypes.md#plan) is submitted to the [POST /forecast](README.md#
 | `@irmaa` | report | The [IRMAA](https://www.medicareresources.org/medicare-eligibility-and-enrollment/what-is-the-income-related-monthly-adjusted-amount-irmaa/) portion of the total `@medicare_oopc` expense. |
 | `@irmaa_spouse` | report | Same as the `@irmaa` payment stream, but applies exclusively to the spouse (if one is defined for this plan). |
 | `@medicare_oopc` | expense | The Medicare Out-Of-Pocket-Cost within a given period. |
-| `@repay:lifetimeDebt` | report | Reports [lifetime debt](#terminology) repayment within a given period. |
-| `@saved_surplus` | report | The portion of [excess income](#terminology) that is saved each month.  The saved portion is determined by [plan.cashFlow.savingRate](datatypes.md#cashflow). For example, if in a given month the plan has $1,000 of excess income, and savingRate = 0.75, then $250 will be transferred plan's [checkingAccount](datatypes.md#cashflow) into the plan's [savingsAccount](datatypes.md#cashflow). |
+| `@repay:lifetimeDebt` | report | Reports [lifetime debt](terms.md#lifetimedebt) repayment within a given period. |
+| `@saved_surplus` | report | The portion of [excess income](terms.md#excessincome) that is saved each month.  The saved portion is determined by [plan.cashFlow.savingRate](datatypes.md#cashflow). For example, if in a given month the plan has $1,000 of excess income, and savingRate = 0.75, then $250 will be transferred plan's [checkingAccount](datatypes.md#cashflow) into the plan's [savingsAccount](datatypes.md#cashflow). |
 | `@ss_income` | income | Social security income stream for the primary member of the plan. |
 | `@ss_income_spouse` | income | Social security income stream for the spouse (if one is defined for the plan). |
 | `@state_income_tax` | report | The calculated state income tax due for the given tax year. |
@@ -36,13 +36,5 @@ When a [plan](datatypes.md#plan) is submitted to the [POST /forecast](README.md#
 | `@tax_liability` | report | The total tax liability for the given tax year.  Includes federal+state income tax, FICA, capital gains tax, and possibly other state-specific taxes. |
 | `@total_expenses` | report | The sum of all PaymentStream projections of type `expense`. |
 | `@total_income` | report | The sum of all PaymentStream projections of type `income`. |
-| `@unsaved_surplus` | expense | The portion of [excess income](#terminology) that is "spent" each month.  The unsaved portion is determined by [plan.cashFlow.savingRate](datatypes.md#cashflow). For example, if in a given month the plan has $1,000 of excess income, and savingRate = 0.75, then $750 will be withdrawn from the plan's [checkingAccount](datatypes.md#cashflow). |
+| `@unsaved_surplus` | expense | The portion of [excess income](terms.md#excessincome) that is "spent" each month.  The unsaved portion is determined by [plan.cashFlow.savingRate](datatypes.md#cashflow). For example, if in a given month the plan has $1,000 of excess income, and savingRate = 0.75, then $750 will be withdrawn from the plan's [checkingAccount](datatypes.md#cashflow). |
 | `@unfunded_gap` | report | The difference between the lifetime debt in the current period and the previous period.  More specifically, given the lifetime debt stream named `lifetimeDebt`, `@unfunded_gap[k] = min(0, lifetimeDebt[k] - lifetimeDebt[k-1])`. |
-
-## Terminology
-
-| Term | Definition |
-| -----| ---------- |
-| excess&nbsp;income | After processing all expenses, transfers, tax payments, and contributions to retirement plans within a given month, _excess income_ is the remainder of the gross income received that month. |
-| lifetime&nbsp;debt | Whenever the plan has insufficient funds to cover a withdrawal, the amount is paid for out of the "lifetime debt" account (i.e. an account whose type is [revolvingCredit](datatypes.md#accounttype)). |
-| liquid&nbsp;asset | A [liquid asset](https://www.investopedia.com/terms/l/liquidasset.asp) is an asset that can easily be converted into cash in a short amount of time.  Within FPE, an [account](datatypes.md#account) is classified as a liquid asset based on its [type](datatypes.md#accounttype) combined with the following rules:<br/>  - NOT a liquid asset if account type is `asset`, `loan`, `revolvingCredit`, `mortgage`, or `reverseMortage` <br/>  - IS a liquid asset for any other account type |

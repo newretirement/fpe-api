@@ -2,7 +2,7 @@
 
 ## Overview
 
-Income-linked contributions are essentially one or more contributions taken directly from an [income stream](./payment_streams.md#income-streams) payment, and deposited into one or more target [accounts](./datatypes.md#account).  The remainder of the income payment (i.e. the amount left after processing the contributions) is then deposited into the stream's designated `target` account.
+Income-linked contributions are essentially one or more contributions taken directly from an [income stream](./terms.md#income-stream) payment, and deposited into one or more target [accounts](./datatypes.md#account).  The remainder of the income payment (i.e. the amount left after processing the contributions) is then deposited into the stream's designated `target` account.
 
 ### Employer Match Logic
 
@@ -234,7 +234,7 @@ The complete JSON request for this example can be found [here](examples/forecast
 
 ### Output Streams
 
-Each [income stream](./payment_streams.md#income-streams) having income-linked contributions will produce a set of system-generated output streams, which detail the payments for each contribution:
+Each [income stream](./terms.md#income-stream) having income-linked contributions will produce a set of system-generated output streams, which detail the payments for each contribution:
 
 - `@employeeContrib:{paymentStream.name}:{k}`: This report stream will contain the employee contributions for the _{k}th_ contribution declaration in the `contributions[]` array.
 - `@employerContrib:{paymentStream.name}:{k}`: This report stream will contain the employer contributions for the _{k}th_ contribution declaration in the `contributions[]` array.

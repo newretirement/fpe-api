@@ -32,7 +32,7 @@ The `AccountType` enum represents the different types of accounts that can be mo
 | `529` | A [529 plan](https://www.investopedia.com/terms/1/529plan.asp) is a tax-advantaged savings plan designed to help pay for education. |
 | `hsa` | A [Health Savings Account](https://www.investopedia.com/terms/h/hsa.asp) (HSA) is a tax-advantaged savings account that is created for people who get their insurance coverage through [high-deductible health plans](https://www.investopedia.com/terms/h/hdhp.asp). |
 | `roth` | See [Roth IRA](https://www.investopedia.com/terms/r/rothira.asp) |
-| `roth401k` | [Roth 401(k)](https://www.investopedia.com/terms/1/401kplan.asp) |
+| `roth401k` | See [Roth 401(k)](https://www.investopedia.com/terms/1/401kplan.asp) |
 | `loan` |  A type of credit vehicle in which a sum of money is lent to another party in exchange for future repayment of the value or principal amount. In FPE, a loan refers specifically to the borrowing of a specific one-time amount (e.g. car loan, mortgage) vs. revolving credit loans (e.g. cred cards). |
 | `mortgage` | A [mortgage](https://www.investopedia.com/terms/m/mortgage.asp) is a loan used to purchase or maintain a home, land, or other types of real estate. |
 | `revolvingCredit` | [Revolving credit](https://www.investopedia.com/terms/r/revolvingcredit.asp) is an agreement that permits an account holder to borrow money repeatedly up to a set dollar limit while repaying a portion of the current balance due in regular payments. Two common examples are [credit cards and LOC (line of credit)](https://www.bankrate.com/finance/credit-cards/line-of-credit-vs-credit-card/). |
@@ -197,9 +197,9 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 | `paymentsPerYear` | int | Determines the payment frequency within a given year. Valid values are: [`1`, `2`, `4`, `12`].  Regardless of frequency, the first payment occurs on `startDate` (or `date`). |
 | `paymentAmount` | int | The dollar amount of the payment.
 | `earnedIncome` | boolean | Set to `true` if this paymentStream represents income that the IRS deems allowable for a tax-advantaged contribution to a retirement account.  Also referred to as "taxable compensation".|
-| `taxable` | boolean | [Income streams](./payment_streams.md#income-streams) flagged as taxable are considered when calculating AGI for tax purposes.  For example, an annuity income stream may or may not be taxed depending on the individual's chosen configuration. Defaults to `true`. |
+| `taxable` | boolean | [Income streams](./terms.md#income-stream) flagged as taxable are considered when calculating AGI for tax purposes.  For example, an annuity income stream may or may not be taxed depending on the individual's chosen configuration. Defaults to `true`. |
 | `survivorBenefit` | float | A rate in the range `[0..1]` that determines the ratio of each payment amount that is retained when the paymentStream's owner dies. This attribute is typically needed for modeling annuities and pensions. |
-| `taxDeductionRate` | float | A value in the range [0..1] that indicates what percentage of this expense is tax-deductible.  If unset, the default value is `0.0`. __NOTE:__ This attribute only applies to PaymentStream objects that represent [expenses](./payment_streams.md#expense-streams). |
+| `taxDeductionRate` | float | A value in the range [0..1] that indicates what percentage of this expense is tax-deductible.  If unset, the default value is `0.0`. __NOTE:__ This attribute only applies to [expense streams](./terms.md#expense-streams). |
 | `aboveTheLine` | boolean | If true, the tax-deductible portion of the expense will be subtracted from gross income prior calculating AGI.  Otherwise, its is treated as an itemized deduction (below-the-line). __NOTE:__ This attribute is relevant only when `taxDeductionRate > 0.0`. |
 | `contributions` | [ContributionFromIncome[]](#contributionfromincome) | (Optional) Specifies 1 or more "income-linked" contributions taken directly from the income payment. Use this for modeling things like 401(k) employee contributions with employer matching rules. |
 
