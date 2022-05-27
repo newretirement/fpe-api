@@ -112,7 +112,7 @@ A sample JSON request for relocation is [here](examples/forecast/housing/relocat
 | `duration` | [Duration](#duration) | The timespan of the financial projection. |
 | `period` | string | Determines how the values in this forecast's TimeSeries data points should be interpreted: `yearly` => values are annualized, `monthly` => monthly values |
 | `currentNetWorth` | int | The net worth of user's [Plan](#plan) at the beginning of the financial projection. |
-| `estateValue` | int | The net worth of user's [Plan](#plan) at the end of the financial projection. |
+| `estateValue` | int | The net worth of user's [Plan](#plan) at the end of the financial projection. See [estate value](terms.md#estate-value). |
 | `lifetimeTaxes` | int | The net sum of all federal and state taxes paid throughout the financial projection. Includes all income taxes (plus FICA, self-employment, and other state-specific taxes) and all capital gains taxes paid minus any tax refunds received. |
 | `lifetimeSSBenefit` | int | The sum of all social security payments received throughout the financial projection. |
 | `outOfSavingsDate` | [Date](#date) | The date that the user's [Plan](#plan) runs out of savings and starts accumulating debt. A value of `null` means the plan never ran out of savings. |
@@ -120,8 +120,8 @@ A sample JSON request for relocation is [here](examples/forecast/housing/relocat
 | `accounts` | [Projection[]](#projection) | The projected periodic account balances corresponding to the [accounts](#account) defined within the [Plan](#plan). Also contains FPE-calculated streams (see [PaymentStream projections](output_streams.md#account-projections)). |
 | `paymentStreams` | [Projection[]](#projection) | The projected periodic payments corresponding to the [paymentStreams](#paymentstream) defined within the [Plan](#plan).  Also contains FPE-calculated streams (see [PaymentStream projections](output_streams.md#paymentstream-projections)). |
 | `annualReports` | [AnnualReports](#annualreports) | Contains various reports that are unconditionally annual in nature (e.g. income tax due). |
-| `fire` | [FIRE](#fire) | Contains details as to the earliest retirement dates across the earned income streams that still yields a non-negative estate value.  |
-| `postRetireIncomeExpenseRatio` | float | This value loosely serves as a "retirement readiness" score.  It is unbounded (e.g. if person has high income and very low expenses in retirement, this score will be well over `1.0`).  |
+| `fire` | [FIRE](#fire) | Contains details as to the earliest retirement dates across the earned income streams that still yields a non-negative [liquid estate value](terms.md#liquid-estate-value).  |
+| `postRetireIncomeExpenseRatio` | float | This value loosely serves as a "retirement readiness" score.  It is unbounded (e.g. if person has high income and very low expenses in retirement, this score will be well over `1.0`). |
 
 #### AnnualReports
 
@@ -132,17 +132,29 @@ Contains various reports that are unconditionally annual in nature (e.g. income 
 | `fedTaxableIncomeByBracket` | [IncomeTaxDataRange[]](#incometaxdatarange) | Reports federal taxable income by tax bracket over time. |
 | `stateTaxableIncomeByBracket` | [IncomeTaxDataRange[]](#incometaxdatarange) | Reports state taxable income by tax bracket over time. |
 
-#### FIRE
+#### FIRE (a.k.a Earliest Retire Date)
 
-`FIRE` is the result of the optional [calcFIRE](README.md#forecastparams) calculation, which solves for the earliest `endDate` that can be used across all [PaymentStreams](#paymentstream) whose `earnedIncome` flag is true, such that the forecast's `estateValue` is as close to $0 without being negative.
+`FIRE` is the result of the optional [calcFIRE](README.md#forecastparams) calculation, which solves for the earliest `endDate` that can be used across all jobs (i.e. [PaymentStreams](#paymentstream) whose `earnedIncome` flag is true), such that the forecast's [liquid estate value](terms.md#liquid-estate-value) is within the range `[-$1,000, $1,000]`.
 
-Note that, while the FIRE algorithm can potentially push the `endDate` for a given job to a later date (i.e. suggesting you need to postpone retirement), it will never shift a job's `startDate` back to an earlier date.
+When searching for an optimal solution, the algorithm is constrained by the following rules:
+
+- A job's `startDate` can never be modified
+- Multiple job scenario:
+    - The algorithm can move the endDate back in time (i.e. allow the person to quit their job sooner) for any/all jobs.  However, only the most current job(s) are considered when moving the endDate further into the future.
+    - Formally defined:
+        - Let J = the set of all jobs in the [plan](datatypes.md#plan)
+        - Let j<sub>k</sub> = the k<sup>th</sup> job in set J
+        - Let d<sub>k</sub> = the original endDate for j<sub>k</sub> prior to any modifications by this algorithm
+        - Let d'<sub>k</sub> = the algorithm's suggested endDate for j<sub>k</sub>
+        - The endDate of job j<sub>k</sub> may be modified _iff_ any of the following statements are true:
+            - d'<sub>k</sub> < d<sub>k</sub>
+            - d'<sub>k</sub> = the latest endDate across all jobs in set J
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `origRetireDate` | string | The plan's inferred retirement date, which is based on the latest date across all `earnedIncome` [PaymentStreams](#paymentstream). |
-| `liquidEstatevalue` |  |
-| `earliestRetireDates` | map | A map of [PaymentStream](#paymentstream) names to [Date](#date) entries, where each entry indicates the earliest `endDate` for the named stream that satisfies the goal described in the [FIRE](#FIRE) summary above. |
+| `liquidEstateValue` | int | See [liquid estate value](terms.md#liquid-estate-value) definition. |
+| `earliestRetireDates` | map | A map of [PaymentStream](#paymentstream) names to [Date](#date) entries, where each entry indicates the earliest `endDate` for the named stream that satisfies the [liquid estate value](terms.md#liquid-estate-value) goal described in the summary above. |
 
 Sample JSON requests can be found in [examples/forecast/calc_fire/](examples/forecast/calc_fire/).
 
