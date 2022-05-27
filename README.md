@@ -172,7 +172,7 @@ Below are all possible warning codes and their descriptions.
 
 # API Endpoints
 
-Across all FPE endpoints, request and responses are represented as JSON objects.  These data objects are cataloged and described on [this page](./datatypes.md).
+Across all FPE endpoints, request and responses are represented as JSON objects.  These data objects are cataloged and described on [this page](datatypes.md).
 
 Below are the descriptions of each endpoint.
 
@@ -213,7 +213,7 @@ This is the top-level request object that is posted to this endpoint.
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `currentDate` | [Date](./datatypes.md#date) | Today's date. |
+| `currentDate` | [Date](datatypes.md#date) | Today's date. |
 | `annuitant` | [Person](#person) | The [annuitant](https://www.investopedia.com/terms/a/annuitant.asp) is the recepient of the annuity payments. |
 | `survivingSpouse` | [Person](#person) | (optional) If the annuitant has a spouse |
 | `scenarios` | [AnnuityScenario[]](#annuityscenario) | List of 0 or more annuity calculation scenarios. |
@@ -224,7 +224,7 @@ Represents either the annuitant or their surviving spouse.
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `birthDate` | [Date](./datatypes.md#date) | The person's date of birth. |
+| `birthDate` | [Date](datatypes.md#date) | The person's date of birth. |
 | `gender` | [Gender](datatypes.md#gender) | The person's gender (required for mortality calculations). |
 
 #### AnnuityScenario
@@ -232,8 +232,8 @@ Represents either the annuitant or their surviving spouse.
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `premium` | int | The lump sum cost of the annuity. |
-| `purchaseDate` | [Date](./datatypes.md#date)  | The date on which the annuity was purchased. |
-| `startDate` | [Date](./datatypes.md#date)  | The date on which annuity payments shall commence. |
+| `purchaseDate` | [Date](datatypes.md#date)  | The date on which the annuity was purchased. |
+| `startDate` | [Date](datatypes.md#date)  | The date on which annuity payments shall commence. |
 | `survivorBenefit` | float | Survivor benefit ratio.  This is only relevant when the annuitant has declared a `survivingSpouse`.  Valid range is `[0.0..1.0]`.  Default value is `0.0` if omitted. |
 | `cola` | float | Cost of Living Adjustment.  Valid range is `[0.0..1.0]`.  Default value is `0.0` if omitted. |
 | `yearsCertain` | int | A [Years Certain annuity](https://www.investopedia.com/terms/y/years-certain-annuity.asp) pays the holder a continuous monthly income for the specified number of years, regardless of how long the annuitant lives.  Default value is `0` if omitted. |
@@ -254,7 +254,7 @@ Example request and response JSONs can be found in [examples/annuitize/](example
 
 ## `POST /v5/forecast`
 
-Given a financial [plan](./datatypes.md#plan), this endpoint runs a simulation that generates a forecast of that plan, consisting of some summary information about the future projection, and a set of time series representing the future periodic values of each account and payment stream involved in the simulation.
+Given a financial [plan](datatypes.md#plan), this endpoint runs a simulation that generates a forecast of that plan, consisting of some summary information about the future projection, and a set of time series representing the future periodic values of each account and payment stream involved in the simulation.
 
 ### ForecastRequest
 

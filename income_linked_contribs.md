@@ -72,7 +72,7 @@ _m'_ is the dollar amount that the employer will contribute to the employee's re
 
 > Scenario: John works at the ACME company, where he is paid $10K/month (annual salary of $120K).  He wishes to contribute 8% of his pay to the company's 401(k) plan.  ACME matches 100% of employee contributions up to the first 4% of their salary.  Beyond that, the employer matches 50% of employee contributions up to 6% of salary.
 
-In order to model the above example, there are 3 crucial entities that must be specified in the [plan](./datatypes.md#plan):
+In order to model the above example, there are 3 crucial entities that must be specified in the [plan](datatypes.md#plan):
 
 1. The [account](datatypes.md#account) into which the employee (and possibly employer) contributions will be deposited:
 
@@ -92,7 +92,7 @@ In order to model the above example, there are 3 crucial entities that must be s
   },
 ```
 
-3. A [paymentStream](./datatypes.md#PaymentStream) object representing the person's earned income. Pay particular attention to the [contributions](./datatypes.md#ContributionFromIncome) array:
+3. A [paymentStream](datatypes.md#PaymentStream) object representing the person's earned income. Pay particular attention to the [contributions](datatypes.md#ContributionFromIncome) array:
 
 ```json
   {
@@ -234,7 +234,7 @@ The complete JSON request for this example can be found [here](examples/forecast
 
 ### Output Streams
 
-Each [income stream](./terms.md#income-stream) having income-linked contributions will produce a set of system-generated output streams, which detail the payments for each contribution:
+Each [income stream](terms.md#income-stream) having income-linked contributions will produce a set of system-generated output streams, which detail the payments for each contribution:
 
 - `@employeeContrib:{paymentStream.name}:{k}`: This report stream will contain the employee contributions for the _{k}th_ contribution declaration in the `contributions[]` array.
 - `@employerContrib:{paymentStream.name}:{k}`: This report stream will contain the employer contributions for the _{k}th_ contribution declaration in the `contributions[]` array.

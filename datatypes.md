@@ -141,6 +141,7 @@ Note that, while the FIRE algorithm can potentially push the `endDate` for a giv
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `origRetireDate` | string | The plan's inferred retirement date, which is based on the latest date across all `earnedIncome` [PaymentStreams](#paymentstream). |
+| `liquidEstatevalue` |  |
 | `earliestRetireDates` | map | A map of [PaymentStream](#paymentstream) names to [Date](#date) entries, where each entry indicates the earliest `endDate` for the named stream that satisfies the goal described in the [FIRE](#FIRE) summary above. |
 
 Sample JSON requests can be found in [examples/forecast/calc_fire/](examples/forecast/calc_fire/).
