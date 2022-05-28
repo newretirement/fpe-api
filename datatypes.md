@@ -134,7 +134,7 @@ Contains various reports that are unconditionally annual in nature (e.g. income 
 
 #### FIRE
 
-`FIRE` (a.k.a. "earliest retire date") is the result of the optional [calcFIRE](README.md#forecastparams) calculation, which solves for the earliest `endDate` that can be used across all jobs (i.e. [PaymentStreams](#paymentstream) whose `earnedIncome` flag is true), such that the forecast's [liquid estate value](terms.md#liquid-estate-value) `V` is in the range `-1000 <= V <= 1000`.
+`FIRE` (a.k.a. "earliest retire date") is the result of the optional [calcFIRE](README.md#forecastparams) calculation, which solves for the earliest `endDate` that can be used across all jobs (i.e. [PaymentStreams](#paymentstream) whose `earnedIncome` flag is true), such that the forecast's [liquid estate value](terms.md#liquid-estate-value) `V` is in the range `-1000　≤　V　≤　1000`.
 
 When searching for an optimal solution, the algorithm is constrained by the following rules:
 
