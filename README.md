@@ -271,7 +271,7 @@ This is the top-level request object that is posted to this endpoint.
 | ---------- | ---- | ----------- |
 | `calcFIRE` | boolean | If `true`, the 'FIRE' solver is executed, and the result appears in the [Forecast.FIRE](datatypes.md#forecast) response. |
 | `calcPostRetireIncomeExpenseRatio` | boolean | If `true`, the _Income/Expense Ratio_ calculation is executed, and the result appears in [Forecast.postRetireIncomeExpenseRatio](datatypes.md#forecast) within the response. |
-| `calcSpendingPower` | boolean | If `true`, the 'Spending Power' calculation executes, and the result appears as the `spendingPower` attribute within the [Forecast](datatypes.md#Forecast) response object. Note that [plan.primary.retireDate](datatypes.md#Person) must be set when running this calculation. See [Forecast.spendingPower](datatypes.md#Forecast) for more details on this calculation. |
+| `calcSpendingPower` | boolean | If `true`, the 'Spending Power' calculation executes, and the result appears as the `spendingPower` attribute within the [Forecast](datatypes.md#forecast) response object. Note that [plan.primary.retireDate](datatypes.md#person) must be set when running this calculation. See [Forecast.spendingPower](datatypes.md#forecast) for more details on this calculation. |
 | `filterForecast` | [ForecastFilter](#forecastfilter) | Applies filtering to the output streams within the [Forecast](datatypes.md#forecast) object. |
 | `projectionPeriod` | enum | Determines if the forecasted projection vectors represent monthly or aggregated annual amounts. Valid values are [`monthly`, `yearly`]. If this attribute is empty, `yearly` is the default. |
 

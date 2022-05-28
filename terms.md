@@ -32,6 +32,12 @@ Whenever the plan has insufficient funds to cover a withdrawal, the amount is pa
 
 <hr/><br/>
 
+## longevity age
+
+Longevity age refers to a person's life expectancy.  In FPE, this value is set via the [Plan.Person.goalAge](datatypes.md#person) attribute.
+
+<hr/><br/>
+
 ## liquid asset
 
 A [liquid asset](https://www.investopedia.com/terms/l/liquidasset.asp) is an asset that can easily be converted into cash in a short amount of time.  Within FPE, an [account](datatypes.md#account) is classified as a liquid asset based on its [type](datatypes.md#accounttype) combined with the following rules:
