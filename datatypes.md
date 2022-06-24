@@ -6,18 +6,19 @@ An `account` is a financial ledger of the transactions within a real-world accou
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `name` | string | The unique name of the account (e.g. `"wells_fargo_savings"`). Valid characters are: `[a-zA-Z0-9]`, `-`, `_`, `/`, and white space.|
-| `type` | [AccountType](#accounttype) | Determines the type of account. Common account types are `aftertax`, `401k`, `asset`, and `loan`. |
 | `balance` | int | The account balance at the start of the simulation. |
 | `balanceLimit` | int |  Sets a balance limit on this account.  This attribute is only valid for accounts of type `loan` or `revolvingCredit`.|
-| `owner` | enum | Determines the account owner (valid values are [`primary`, `spouse`]). If this attribute is empty AND the primary account holder has no spouse, then the value defaults to `primary`. |
-| `rate` | [Rate](#rate) | Determines the account's growth, which is calculated and updated on a monthly basis.
 | `costBasis` | int | [Cost basis](https://www.investopedia.com/articles/investing/060313/what-determines-your-cost-basis.asp) is the original value or purchase price of an asset or investment for tax purposes.  This attribute is only relevant for accounts on which capital gains taxes are calculated.  Default value is `balance * 0.75`. |
-| `realizedGainRate` | float | Determines the percentage of projected monthly investment returns that are realized immediately, and therefore taxed as capital gains.  A value of `1.0` means 100% of investment returns will be taxed immediately. A value of `0.0` means none of the returns are realized immediately, and so capital gains will only be processed upon a distribution event. This attribute is only relevant for accounts on which capital gains taxes are calculated.  Default value is `1.0`. |
 | `disableOptimalWithdraw` | boolean | If true, this account is excluded from the candidate accounts selected for the _Optimal Withdrawal Strategy_ (refer to [PaymentStream\.source](#paymentstream) description). Defaults to `false`. |
 | `disableRMD` | boolean | If true, RMDs are guaranteed not to be taken from this account, regardless of context (e.g. the person's age or the account's type). Defaults to `false`. |
 | `disableRothConversion` | boolean | If true, the _Roth Conversion Optimizer_ algorithm will ignore this account when finding candidate tax-advantaged accounts to be converted.  Defaults to `false`. |
 | `inherited` | boolean | Required for modeling [inherited IRAs](https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-beneficiary).  If this account has a designated beneficiary, set this attribute to `true`.  Inherited retirement accounts are:<br/>&nbsp;&nbsp;1. not subject to RMDs<br/>&nbsp;&nbsp;2. not eligible for Roth conversion|
+| `name` | string | The unique name of the account (e.g. `"wells_fargo_savings"`). Valid characters are: `[a-zA-Z0-9]`, `-`, `_`, `/`, and white space.|
+| `owner` | enum | Determines the account owner (valid values are [`primary`, `spouse`]). If this attribute is empty AND the primary account holder has no spouse, then the value defaults to `primary`. |
+| `rate` | [Rate](#rate) | Determines the account's growth, which is calculated and updated on a monthly basis.
+| `realizedGainRate` | float | Determines the percentage of projected monthly investment returns that are realized immediately, and therefore taxed as capital gains.  A value of `1.0` means 100% of investment returns will be taxed immediately. A value of `0.0` means none of the returns are realized immediately, and so capital gains will only be processed upon a distribution event. This attribute is only relevant for accounts on which capital gains taxes are calculated.  Default value is `1.0`. |
+| `taxTreatment` | enum |  Determines how growth on an Account is taxed. Valid values are `capitalGains` or `ordinaryIncome`. Default is `capitalGains`. |
+| `type` | [AccountType](#accounttype) | Determines the type of account. Common account types are `aftertax`, `401k`, `asset`, and `loan`. |
 
 #### AccountType
 
@@ -295,7 +296,7 @@ A `plan` is the top-level financial object; it represents the user's complete pr
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `currentDate` | [Date](#date) | The starting point of the financial simulation. |
+| `currentDate` | [Date](#date) | Today's date. |
 | `cashFlow` | [CashFlow](#cashflow) | Determines how excess income is spent/saved. |
 | `market` | [Market](#market) | Market data (inflation rate, etc.). |
 | `primary` | [Person](#person) | The primary account holder within the simulation. |
