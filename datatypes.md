@@ -173,7 +173,7 @@ Within a given tax jurisdiction (federal or state), `IncomeTaxDataRange` represe
 
 #### Projection
 
-`Projection` is a named time series representing a financial projection of either `yearly` or `monthly` granularity.  The values (depending on context) represent future account balances, payments, or projection reports.
+A named time series representing a financial projection of either `yearly` or `monthly` granularity.  The values (depending on context) represent future account balances, payments, or projection reports.
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
@@ -183,12 +183,12 @@ Within a given tax jurisdiction (federal or state), `IncomeTaxDataRange` represe
 
 #### TaxBracket
 
-Within a given tax jurisdiction (federal or state), `IncomeTaxDataRange` represents taxable income by tax bracket over a range of consecutive years.
+Represents annual income subject to income tax at the specified `rate`.
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `rate` | float | The income tax rate for this tax bracket. |
-| `income` | int[] | The annual taxable income over a range of years within this tax bracket.  Note that the income limits within the bracket might be inflation-adjusted over time. |
+| `income` | int[] | The annual taxable income over a range of years within this tax bracket.  Note that the income limits within the bracket could be [inflation-adjusted](#market) over time |
 
 <br/><hr/>
 
