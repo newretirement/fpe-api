@@ -225,7 +225,7 @@ This is the multifaceted configuration object that influences how the financial 
 | ---------- | ---- | ----------- |
 | `name` | string[] | The list of output stream names to include in the forecast. |
 
-#### RCOParams
+### RCOParams
 
 These config parameters are used exclusively by the [Roth Conversion Optimizer](README.md#fpe-api#post-v5optimizeroth).
 

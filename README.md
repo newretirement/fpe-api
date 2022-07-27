@@ -282,7 +282,7 @@ The JSON request for this scenario is [here](examples/forecast/basic/single-01.j
 
 <br/>
 
-## `POST /fpe/v5/optimize/roth`
+## `POST /v5/optimize/roth`
 
 Given a financial [Plan](datatypes.md#plan), the Roth Conversion Optimizer (RCO) attempts to find an optimal set of Roth conversions that satisfy the given set of goals and constraints (some of which are optional):
 
