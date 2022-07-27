@@ -192,6 +192,56 @@ Represents annual income subject to income tax at the specified `rate`.
 
 <br/><hr/>
 
+## ForecastParams
+
+This is the multifaceted configuration object that influences how the financial forecast is projected; it is part of the request object of multiple endpoints (most notably, `POST /forecast`).
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `calcFIRE` | boolean | If `true`, the 'FIRE' solver is executed, and the result appears in the [Forecast.FIRE](#forecast) response. |
+| `calcPostRetireIncomeExpenseRatio` | boolean | If `true`, the _Income/Expense Ratio_ calculation is executed, and the result appears in [Forecast.postRetireIncomeExpenseRatio](#forecast) within the response. |
+| `calcSpendingPower` | boolean | If `true`, the 'Spending Power' calculation executes, and the result appears as the `spendingPower` attribute within the [Forecast](#forecast) response object. Note that [plan.primary.retireDate](#person) must be set when running this calculation. See [Forecast.spendingPower](#forecast) for more details on this calculation. |
+| `filterForecast` | [ForecastFilter](#forecastfilter) | Applies filtering to the output streams within the [Forecast](#forecast) object. |
+| `projectionPeriod` | enum | Determines if the forecasted projection vectors represent monthly or aggregated annual amounts. Valid values are [`monthly`, `yearly`]. If this attribute is empty, `yearly` is the default. |
+| `rothConversionOptimizer` | [RCOParams](#rcoparams) | Configuration object for the Roth Conversion Optmizer algorithm. |
+
+### AnnualReportsFilter
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `excludeAll` | boolean | Excludes the [annualReports](forecast) content from the forecast. |
+
+### ForecastFilter
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `accounts` | [StreamFilter](#streamfilter) | Applies filtering rules to the account output streams. |
+| `paymentStreams` | [StreamFilter](#streamfilter) | Applies filtering rules to the payment output streams.  |
+| `annualReports` | [AnnualReportsFilter](#annualreportsfilter) | Applies filtering rules to the annual report output streams.  |
+
+### IncludeFilter
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `name` | string[] | The list of output stream names to include in the forecast. |
+
+#### RCOParams
+
+These config parameters are used exclusively by the [Roth Conversion Optimizer](README.md#fpe-api#post-v5optimizeroth).
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `payTaxOnlyFromAfterTaxFunds` | boolean | If `true`, the RCO algorithm will limit the Roth conversion amount based on aftertax funds available to pay for the estimated tax due for the conversion (a 20% tax rate is assumed).  Defaults to `false`. |
+
+### StreamFilter
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `excludeAll` | boolean | Excludes all output streams.|
+| `include` | [IncludeFilter](#includefilter) | Includes only the output streams implied by this filter.|
+
+
+<br/><hr/>
 
 ## PaymentStream
 

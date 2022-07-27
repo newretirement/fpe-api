@@ -262,32 +262,8 @@ This is the top-level request object that is posted to this endpoint.
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `params` | [ForecastParams](#forecastparams) | (optional) Configuration for things like optional calculations, time series density, etc. |
+| `params` | [ForecastParams](datatypes.md#forecastparams) | (optional) Configuration for things like optional calculations, time series density, etc. |
 | `plan` | [Plan](datatypes.md#plan) | The financial plan to forecast. |
-
-#### ForecastParams
-
-| Attribute  | Type | Description |
-| ---------- | ---- | ----------- |
-| `calcFIRE` | boolean | If `true`, the 'FIRE' solver is executed, and the result appears in the [Forecast.FIRE](datatypes.md#forecast) response. |
-| `calcPostRetireIncomeExpenseRatio` | boolean | If `true`, the _Income/Expense Ratio_ calculation is executed, and the result appears in [Forecast.postRetireIncomeExpenseRatio](datatypes.md#forecast) within the response. |
-| `calcSpendingPower` | boolean | If `true`, the 'Spending Power' calculation executes, and the result appears as the `spendingPower` attribute within the [Forecast](datatypes.md#forecast) response object. Note that [plan.primary.retireDate](datatypes.md#person) must be set when running this calculation. See [Forecast.spendingPower](datatypes.md#forecast) for more details on this calculation. |
-| `filterForecast` | [ForecastFilter](#forecastfilter) | Applies filtering to the output streams within the [Forecast](datatypes.md#forecast) object. |
-| `projectionPeriod` | enum | Determines if the forecasted projection vectors represent monthly or aggregated annual amounts. Valid values are [`monthly`, `yearly`]. If this attribute is empty, `yearly` is the default. |
-
-### AnnualReportsFilter
-
-| Attribute  | Type | Description |
-| ---------- | ---- | ----------- |
-| `excludeAll` | boolean | Excludes the [annualReports](datatypes.md#forecast) content from the forecast. |
-
-### ForecastFilter
-
-| Attribute  | Type | Description |
-| ---------- | ---- | ----------- |
-| `accounts` | [StreamFilter](#streamfilter) | Applies filtering rules to the account output streams. |
-| `paymentStreams` | [StreamFilter](#streamfilter) | Applies filtering rules to the payment output streams.  |
-| `annualReports` | [AnnualReportsFilter](#annualreportsfilter) | Applies filtering rules to the annual report output streams.  |
 
 ### ForecastResponse
 
@@ -296,19 +272,6 @@ This is the top-level request object that is posted to this endpoint.
 | `forecast` | [Forecast](datatypes.md#forecast) | The projected forecast of the submitted plan. |
 | `warnings` | [Warning[]](#what-is-a-warning) | List of non-critical warnings. |
 
-### IncludeFilter
-
-| Attribute  | Type | Description |
-| ---------- | ---- | ----------- |
-| `name` | string[] | The list of output stream names to include in the forecast. |
-
-### StreamFilter
-
-| Attribute  | Type | Description |
-| ---------- | ---- | ----------- |
-| `excludeAll` | boolean | Excludes all output streams.|
-| `include` | [IncludeFilter](#includefilter) | Includes only the output streams implied by this filter.|
-
 ### Sample Scenario
 
 Consider this basic scenario, which is followed by the corresponding JSON request/response:
@@ -316,3 +279,47 @@ Consider this basic scenario, which is followed by the corresponding JSON reques
 > Scenario: The current date is January 2021.  John is a 60-year-old single male in excellent health.  He expects to live until the age of 90.  John will start claiming social security at age 67 (full retirement age), and knows his PIA will be $2,325. His retirement savings consists of a single IRA with a current balance of $500,000 and an expected AGR of 6% (and a future AGR of 4% starting in 2027).  John works for a company where he earns $7,500/month.  Furthermore, he is participating in an employer-sponsored retirement plan, where he contributes 10% of his salary, and the company matches 50% of his contribution up to 8% of salary.  He plans on retiring at age 67.  John expects to spend $7,000/month in retirement.
 
 The JSON request for this scenario is [here](examples/forecast/basic/single-01.json), and the corresponding JSON response is [here](examples/forecast/basic/single-01.response.json).
+
+<br/>
+
+## `POST /fpe/v5/optimize/roth`
+
+Given a financial [Plan](datatypes.md#plan), the Roth Conversion Optimizer (RCO) attempts to find an optimal set of Roth conversions that satisfy the given set of goals and constraints (some of which are optional):
+
+1. Maximize [estate value](terms.md#estate-value)
+1. Restrict annual conversion amount such that the estimated conversion tax can be funded strictly from [aftertax](datatypes.md#accounttype) accounts.
+
+If RCO is unable to improve the estate value or no retirement accounts are eligible for Roth conversion, the forecast will contain a a warning message with the code `algoImprovedNothing`.
+
+### RCORequest
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `plan` | [Plan](datatypes.md#plan) | The financial plan. |
+| `params` | [ForecastParams](datatypes.md#forecastparams) | The input parameters to the simulation. |
+
+### Response object
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `plan` | [Plan](https://github.com/newretirement/fpe-api/blob/master/datatypes.md#plan) | The optimized plan containing potentially different Roth optimization transactions |
+| `forecast` | [Forecast](https://github.com/newretirement/fpe-api/blob/master/datatypes.md#forecast) | The financial forecast that results from the optimized plan |
+| `oldRothConversions` | [RothConversion\[\]](#rothconversion) | The list of 0 or more Roth conversions from the original plan submitted in the request |
+| `newRothConversions` | [RothConversion\[\]](#rothconversion) | The list of 0 or more Roth conversions recommended by this optimizer |
+
+#### RothConversion
+
+The `RothConversion` object represents a one-time transfer from a tax-deferred account into a Roth IRA.
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `source` | string | The tax-deferred source account |
+| `target` | string | The Roth IRA target account  |
+| `date`   | [Date](#date) | The date on which the Roth conversion takes place |
+| `amount` | int | The monetary amount of the Roth conversion |
+
+_NOTE:_ Sample json requests can be found in [test/queries/optimize/roth/](test/queries/optimize/roth).
+
+<br/>
+
+
