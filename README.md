@@ -302,8 +302,8 @@ If RCO is unable to improve the estate value or no retirement accounts are eligi
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `plan` | [Plan](https://github.com/newretirement/fpe-api/blob/master/datatypes.md#plan) | The optimized plan containing potentially different Roth optimization transactions |
-| `forecast` | [Forecast](https://github.com/newretirement/fpe-api/blob/master/datatypes.md#forecast) | The financial forecast that results from the optimized plan |
+| `plan` | [Plan](datatypes.md#plan) | The optimized plan containing potentially different Roth optimization transactions |
+| `forecast` | [Forecast](datatypes.md#forecast) | The financial forecast that results from the optimized plan |
 | `oldRothConversions` | [RothConversion\[\]](#rothconversion) | The list of 0 or more Roth conversions from the original plan submitted in the request |
 | `newRothConversions` | [RothConversion\[\]](#rothconversion) | The list of 0 or more Roth conversions recommended by this optimizer |
 

@@ -227,7 +227,7 @@ This is the multifaceted configuration object that influences how the financial 
 
 ### RCOParams
 
-These config parameters are used exclusively by the [Roth Conversion Optimizer](README.md#fpe-api#post-v5optimizeroth).
+These config parameters are used exclusively by the [Roth Conversion Optimizer](README.md#post-v5optimizeroth).
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
