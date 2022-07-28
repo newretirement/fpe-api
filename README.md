@@ -28,7 +28,7 @@ Failure to provide a valid API key will trigger an [HTTP 403 Forbidden](#http-re
 FPE uses [semantic versioning](https://semver.org/) as its software versioning policy.  The version of a running FPE service can be obtained in 2 ways:
 
 1. __HTTP response header__: All endpoints add a `Fpe-Version` header attribute to their response.
-2. __[GET /info](#get-info)__: This endpoint returns the version, along with other build/deploy related info.
+2. __[GET /fpe/v5/info](#get-info)__: This endpoint returns the version, along with other build/deploy related info.
 
 <br/><hr/><br/>
 
@@ -43,7 +43,7 @@ An error occurs if the API client submits a request for which FPE cannot return 
   - An HTTP status code appropriate for the type of error (see [HTTP Response Status Codes](#http-response-status-codes) further down)
   - A `text/plain` detail message
 
-For example, if the client calls `POST /forecast` and provides an invalid birthDate of `1200-01`, FPE responses with:
+For example, if the client calls `POST /fpe/v5/forecast` and provides an invalid birthDate of `1200-01`, FPE responses with:
 
 ```
 HTTP/1.1 400 Bad Request
@@ -259,7 +259,7 @@ The JSON request for this scenario is [here](examples/forecast/basic/single-01.j
 
 <br/>
 
-## `GET /info`
+## `GET /v5/info`
 
 Returns information about the deployed web service.
 
@@ -283,7 +283,7 @@ Returns information about the deployed web service.
 
 <br/>
 
-## `POST /fpe/v5/montecarlo`
+## `POST /v5/montecarlo`
 
 Runs a Monte Carlo simulation for given a [plan](datatypes.md#plan), returning the probability of not running out of money before goal age.
 
