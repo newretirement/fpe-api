@@ -1,5 +1,8 @@
 {
 	"analysis": {
+		"pathCount": 1000,
+		"successProbability": 0.666,
+		"legacyGoalProbability": 0.666,
 		"estateValue": [
 			{
 				"percentile": 0,
@@ -30,8 +33,6 @@
 				"value": 7076606
 			}
 		],
-		"legacyGoalProbability": 0.666,
-		"pathCount": 1000,
 		"projectedSavings": [
 			{
 				"percentile": 0,
@@ -313,7 +314,6 @@
 					5973403
 				]
 			}
-		],
-		"successProbability": 0.666
+		]
 	}
 }
