@@ -322,7 +322,7 @@ Runs a Monte Carlo simulation for given a [plan](datatypes.md#plan), returning t
 | `estateValue` | object[] | TODO: document this |
 | `projectedSavings` | object[] | TODO: document this |
 
-Sample JSON requests can be found in [test/queries/montecarlo/](test/queries/montecarlo/).
+Sample JSON requests can be found in [examples/montecarlo/](examples/montecarlo/).
 
 <br/>
 
@@ -361,9 +361,4 @@ The `RothConversion` object represents a one-time transfer from a tax-deferred a
 | `target` | string | The Roth IRA target account  |
 | `date`   | [Date](./datatypes.md#date) | The date on which the Roth conversion takes place |
 | `amount` | int | The monetary amount of the Roth conversion |
-
-_NOTE:_ Sample json requests can be found in [test/queries/optimize/roth/](test/queries/optimize/roth).
-
-<br/>
-
 

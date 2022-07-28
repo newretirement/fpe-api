@@ -1,0 +1,119 @@
+{
+	"params": {
+		"calcPostRetireIncomeExpenseRatio": true,
+		"deterministic": "always",
+		"varyInvestmentReturns": true,
+		"varyGeneralInflation": true,
+		"varyMedicalInflation": true,
+		"varyWageGrowth": true,
+		"desiredEstateValue": 0,
+		"analysisPercentiles": [0, 10, 25, 50, 75, 90, 100]
+	},
+	"plan": {
+		"currentDate": "2021-01",
+		"isPlusUser": true,
+		"stateCode": "GA",
+		"market": {
+			"inflation": {
+				"optimistic": 0.02,
+				"pessimistic": 0.06
+			},
+			"medicalInflation": {
+				"optimistic": 0.03,
+				"pessimistic": 0.07
+			},
+			"socialSecurityInflation": {
+				"optimistic": 0.01,
+				"pessimistic": 0.03
+			}
+		},
+		"primary": {
+			"birthDate": "1971-01",
+			"goalAge": "85y",
+			"gender": "male",
+			"socialSecurity": {
+				"startAge": "62y",
+				"primaryInsuranceAmount": 2680
+			}
+		},
+		"cashFlow": {
+			"checkingAccount": "primary_checking",
+			"savingRate": 1,
+			"savingsAccount": "primary_savings"
+		},
+		"accounts": [
+      {
+				"name": "primary_checking",
+				"type": "aftertax"
+			},
+			{
+				"name": "revolving_credit",
+				"type": "revolvingCredit"
+			},
+			{
+				"name": "primary_savings",
+				"type": "aftertax",
+				"balance": 10000,
+				"rate": {
+					"optimistic": 0.02,
+					"pessimistic": 0.01
+				}
+			},
+			{
+				"name": "retirement_savings",
+				"balance": 500000,
+				"type": "ira",
+				"owner": "primary",
+				"rate": {
+					"optimistic": 0.07,
+					"pessimistic": 0.02
+				}
+			},
+			{
+				"name": "other_savings",
+				"type": "aftertax",
+				"balance": 800000,
+				"taxTreatment": "capitalGains",
+				"costBasis": 0,
+				"realizedGainRate": 0.2,
+				"rate": {
+					"optimistic": 0.06,
+					"pessimistic": 0.03
+				}
+			},
+			{
+				"name": "my_house",
+				"type": "asset",
+				"balance": 200000,
+				"rate": {
+					"optimistic": 0.08,
+					"pessimistic": 0.02
+				}
+			}
+		],
+		"paymentStreams": [
+      {
+				"name": "my_job",
+				"paymentAmount": 5000,
+				"endDate": "2032-01",
+				"target": "primary_checking",
+				"earnedIncome": true,
+				"paymentsPerYear": 12,
+				"rate": {
+					"optimistic": 0.04,
+					"pessimistic": 0.01
+				}
+			},
+			{
+				"name": "expenses",
+				"paymentAmount": 4900,
+				"source": "optimal",
+				"paymentsPerYear": 12,
+				"rate": {
+					"optimistic": 0.03,
+					"pessimistic": 0.03
+				}
+			}
+		]
+	}
+}
