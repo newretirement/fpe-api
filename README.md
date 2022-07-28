@@ -315,7 +315,7 @@ The `RothConversion` object represents a one-time transfer from a tax-deferred a
 | ---------- | ---- | ----------- |
 | `source` | string | The tax-deferred source account |
 | `target` | string | The Roth IRA target account  |
-| `date`   | [Date](#date) | The date on which the Roth conversion takes place |
+| `date`   | [Date](./datatypes.md#date) | The date on which the Roth conversion takes place |
 | `amount` | int | The monetary amount of the Roth conversion |
 
 _NOTE:_ Sample json requests can be found in [test/queries/optimize/roth/](test/queries/optimize/roth).
