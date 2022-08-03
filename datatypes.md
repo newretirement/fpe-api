@@ -231,7 +231,7 @@ These config parameters are used exclusively by the [Roth Conversion Optimizer](
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `payTaxOnlyFromAfterTaxFunds` | boolean | If `true`, the RCO algorithm will limit the Roth conversion amount based on aftertax funds available to pay for the estimated tax due for the conversion (a 20% tax rate is assumed).  Defaults to `false`. |
+| `payTaxOnlyFromAfterTaxFunds` | boolean | If `true`, the RCO algorithm will limit the Roth conversion amount based on aftertax funds available to pay for the estimated tax due for the conversion (a 20% tax rate is assumed).  Defaults to `false`. **NOTE**: This flag is currently experimental, and may change or be removed in a future release. |
 
 ### StreamFilter
 
