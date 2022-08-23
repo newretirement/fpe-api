@@ -130,8 +130,12 @@ Contains various reports that are unconditionally annual in nature (e.g. income 
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `fedTaxableIncomeByBracket` | [IncomeTaxDataRange[]](#incometaxdatarange) | Reports federal taxable income by tax bracket over time. |
-| `stateTaxableIncomeByBracket` | [IncomeTaxDataRange[]](#incometaxdatarange) | Reports state taxable income by tax bracket over time. |
+| `fedIncomeTaxDue` | int[] | The federal income tax due for each tax year in the simulation.  |
+| `fedMarginalIncomeTaxRates` | float[] | The federal marginal income tax rate for each tax year in the simulation. |
+| `incomeTaxRefunds` | int[] | Reports the total tax refund (if any) for each tax year in the simulation. |
+| `fedTaxableIncomeByBracket` | [IncomeTaxDataRange[]](#incometaxdatarange) | Reports federal taxable income by tax bracket for each tax year in the simulation. |
+| `stateMarginalIncomeTaxRates` | float[] | The state marginal income tax rate for each tax year in the simulation. |
+| `stateTaxableIncomeByBracket` | [IncomeTaxDataRange[]](#incometaxdatarange) | Reports state taxable income by tax bracket for each tax year in the simulation. |
 
 #### FIRE
 

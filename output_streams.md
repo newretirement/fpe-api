@@ -19,11 +19,12 @@ When a [plan](datatypes.md#plan) is submitted to the [POST /forecast](README.md#
 | `@capital_gains_tax` | report | The [tax due on all capital gains](https://www.investopedia.com/terms/c/capital_gains_tax.asp) for the given tax year. |
 | `@capital_gains_tax_payment` | expense | Represents a [capital gains tax](https://www.investopedia.com/terms/c/capital_gains_tax.asp) payment. |
 | `@combined_irmaa` | report | `@irmaa + @irmaa_spouse`. |
-| `@federal_income_tax` | report | The calculated federal income tax due for the given tax year. |
-| `@federal_taxable_income` | report | The portion of the plan's income that is subject to federal income tax for the given tax year. |
+| `@federal_income_tax` | report | The federal income tax due for the given tax year.  DEPRECATED: this stream is now in `annualReports.fedIncomeTaxDue`. |
+| `@federal_taxable_income` | report | The portion of the plan's income that is subject to federal income tax for the given tax year. DEPRECATED: this stream is now in `annualReports.fedTaxableIncome`. |
 | `@fica` | report | The [FICA](https://www.investopedia.com/terms/f/fica.asp) amount due for the given tax year. |
 | `@gap` | report | `@total_income - @total_expenses` |
 | `@income_tax` | expense | The actual income tax payments made to the IRS.  Income tax includes federal, state, FICA, and other taxes. |
+| `@income_tax_refunds` | report | The total tax refund (if any) for each tax year in the simulation.  DEPRECATED: this stream is now in `annualReports.incomeTaxRefunds`. |
 | `@irmaa` | report | The [IRMAA](https://www.medicareresources.org/medicare-eligibility-and-enrollment/what-is-the-income-related-monthly-adjusted-amount-irmaa/) portion of the total `@medicare_oopc` expense. |
 | `@irmaa_spouse` | report | Same as the `@irmaa` payment stream, but applies exclusively to the spouse (if one is defined for this plan). |
 | `@medicare_oopc` | expense | The Medicare Out-Of-Pocket-Cost within a given period. |
