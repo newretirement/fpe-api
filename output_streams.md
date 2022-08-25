@@ -24,7 +24,7 @@ When a [plan](datatypes.md#plan) is submitted to the [POST /forecast](README.md#
 | `@fica` | report | The [FICA](https://www.investopedia.com/terms/f/fica.asp) amount due for the given tax year. |
 | `@gap` | report | `@total_income - @total_expenses` |
 | `@income_tax` | expense | The actual income tax payments made to the IRS.  Income tax includes federal, state, FICA, and other taxes. |
-| `@income_tax_refunds` | report | The total tax refund (if any) for each tax year in the simulation.  DEPRECATED: this stream is now in `annualReports.incomeTaxRefunds`. |
+| `@income_tax_refund` | report | The total tax refund (if any) for each tax year in the simulation.  DEPRECATED: this stream is now in `annualReports.incomeTaxRefunds`. |
 | `@irmaa` | report | The [IRMAA](https://www.medicareresources.org/medicare-eligibility-and-enrollment/what-is-the-income-related-monthly-adjusted-amount-irmaa/) portion of the total `@medicare_oopc` expense. |
 | `@irmaa_spouse` | report | Same as the `@irmaa` payment stream, but applies exclusively to the spouse (if one is defined for this plan). |
 | `@medicare_oopc` | expense | The Medicare Out-Of-Pocket-Cost within a given period. |
@@ -33,7 +33,7 @@ When a [plan](datatypes.md#plan) is submitted to the [POST /forecast](README.md#
 | `@ss_income` | income | Social security income stream for the primary member of the plan. |
 | `@ss_income_spouse` | income | Social security income stream for the spouse (if one is defined for the plan). |
 | `@state_income_tax` | report | The calculated state income tax due for the given tax year. |
-| `@state_taxable_income` | report | The portion of the plan's income that is subject to state income tax for the given tax year. |
+| `@state_taxable_income` | report | The portion of the plan's income that is subject to state income tax for the given tax year. DEPRECATED: this stream is now in `annualReports.stateTaxableIncome`. |
 | `@tax_liability` | report | The total tax liability for the given tax year.  Includes federal+state income tax, FICA, capital gains tax, and possibly other state-specific taxes. |
 | `@total_expenses` | report | The sum of all PaymentStream projections of type `expense`. |
 | `@total_income` | report | The sum of all PaymentStream projections of type `income`. |
