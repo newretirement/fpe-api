@@ -134,6 +134,8 @@ Contains various reports that are unconditionally annual in nature (e.g. income 
 | `fedMarginalIncomeTaxRates` | float[] | The federal marginal income tax rate for each tax year in the simulation. |
 | `incomeTaxRefunds` | int[] | Reports the total tax refund (if any) for each tax year in the simulation. |
 | `fedTaxableIncomeByBracket` | [IncomeTaxDataRange[]](#incometaxdatarange) | Reports federal taxable income by tax bracket for each tax year in the simulation. |
+| `stateTaxableIncome` | int[] | The state income tax due for each tax year in the simulation.  |
+| `stateIncomeTaxDue` | int[] | The state income tax due for each tax year in the simulation.  |
 | `stateMarginalIncomeTaxRates` | float[] | The state marginal income tax rate for each tax year in the simulation. |
 | `stateTaxableIncomeByBracket` | [IncomeTaxDataRange[]](#incometaxdatarange) | Reports state taxable income by tax bracket for each tax year in the simulation. |
 
@@ -235,6 +237,7 @@ These config parameters are used exclusively by the [Roth Conversion Optimizer](
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
+| `maxEffectiveFedTaxRate` | float | The RCO algorithm will limit the Roth conversion amount for a given year such that the specified effective federal tax rate is not exceeded for that year.  The default value is 15%.
 | `payTaxOnlyFromAfterTaxFunds` | boolean | If `true`, the RCO algorithm will limit the Roth conversion amount based on aftertax funds available to pay for the estimated tax due for the conversion (a 20% tax rate is assumed).  Defaults to `false`. **NOTE**: This flag is currently experimental, and may change or be removed in a future release. |
 
 ### StreamFilter
