@@ -132,7 +132,7 @@ Contains various reports that are unconditionally annual in nature (e.g. income 
 | ---------- | ---- | ----------- |
 | `fedIncomeTaxDue` | int[] | The federal income tax due for each tax year in the simulation.  |
 | `fedMarginalIncomeTaxRates` | float[] | The federal marginal income tax rate for each tax year in the simulation. |
-| `incomeTaxRefunds` | int[] | Reports the total tax refund (if any) for each tax year in the simulation. |
+| `incomeTaxTrueUp` | int[] | Reports the annual true-up for each tax year in the simulation.  A positive true-up amount indicates a refund, whereas a negative amount indicates the actual tax owed. |
 | `fedTaxableIncomeByBracket` | [IncomeTaxDataRange[]](#incometaxdatarange) | Reports federal taxable income by tax bracket for each tax year in the simulation. |
 | `stateTaxableIncome` | int[] | The state income tax due for each tax year in the simulation.  |
 | `stateIncomeTaxDue` | int[] | The state income tax due for each tax year in the simulation.  |
