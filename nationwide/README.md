@@ -17,8 +17,6 @@ _WIP..._
 
 Much of the LIB algorithm and associated concepts map directly to existing FPE data structures and concepts (e.g. traditional and Roth IRA accounts, taxable and non-taxable annuity streams, variable account growth rates, ...).  That being said, certain aspects of the LIB algorithm are specific enough to Nationwide that they require their own dedicated calculation module and associated data objects (see [Data Objects](#data-objects) section).
 
-xxx
-
 _WIP..._
 
 
