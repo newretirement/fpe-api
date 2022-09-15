@@ -8,6 +8,19 @@ Lifetime Income Builder ("LIB" for short) is a [Nationwide](https://www.nationwi
 
 The LIB-related financial modeling is triggered by including a valid [NWLIB](#nwlib) data object within an existing FPE [Plan](../datatypes.md#plan) when calling the [POST&nbsp;/v5/forecast](../README.md#post-v5forecast) endpoint.  Example JSON requests containing the `nationwide.lifetimeIncomeBuilder{}` data object can be found in the [./examples](./examples/) subdirectory.
 
+_WIP..._
+
+
+<br/><br/>
+
+## Mapping LIB Attributes to the FPE Data Model
+
+Much of the LIB algorithm and associated concepts map directly to existing FPE data structures and concepts (e.g. traditional and Roth IRA accounts, taxable and non-taxable annuity streams, variable account growth rates, ...).  That being said, certain aspects of the LIB algorithm are specific enough to Nationwide that they require their own dedicated calculation module and associated data objects (see [Data Objects](#data-objects) section).
+
+xxx
+
+_WIP..._
+
 
 <br/><br/>
 
@@ -29,7 +42,7 @@ The NWLIB object defines all of the financial inputs needed for the LIB (Lifetim
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `incomeActivationDate` | [Date](../datatypes.md#date) |  |
+| `incomeActivationDate` | [Date](../datatypes.md#date) | The future date at which point the participant's LIB income payments commence. |
 | `highWaterMark` | int | The highest total balance across the LIB assets to date. |
 | `gtdWithdrawRate` | float | At income activation date, the annual guaranteed annuity payment is determined by the formula:<br/>`highWaterMark × gtdWithdrawRate`. |
 | `nonGtdWithdrawRate` | float | At income activation date, the annual non-guaranteed annuity payment is determined by the formula:<br/>`highWaterMark × nonGtdWithdrawRate`. |
