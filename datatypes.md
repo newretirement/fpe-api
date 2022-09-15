@@ -359,7 +359,7 @@ A `plan` is the top-level financial object; it represents the user's complete pr
 | `currentDate` | [Date](#date) | Today's date. |
 | `events` | [Events](#events) | Describes various non-periodic life events such as buying a new home or purchasing an annuity. |
 | `market` | [Market](#market) | Market data (inflation rate, etc.). |
-| `nationwide` | [Nationwide](nationwide/nwlib.md#nationwide) | Contains plan attributes that are specific to the [Nationwide](https://www.nationwide.com) insurance company. |
+| `nationwide` | [Nationwide](nationwide/README.md#nationwide) | Contains plan attributes that are specific to the [Nationwide](https://www.nationwide.com) insurance company. |
 | `paymentStreams` | [PaymentStream[]](#paymentstream) | Array of payment streams within the financial plan. |
 | `primary` | [Person](#person) | The primary account holder within the simulation. |
 | `spouse` | [Person](#person) | The primary's spouse (optional). |
