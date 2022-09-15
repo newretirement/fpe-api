@@ -6,7 +6,7 @@ Lifetime Income Builder ("LIB" for short) is a [Nationwide](https://www.nationwi
 
 <br/>
 
-The LIB-related financial modeling is triggered by including a valid [NWLIB](#nwlib) data object within an existing FPE [Plan](../datatypes.md#plan) when calling the [POST /v5/forecast](../README.md#post-v5forecast) endpoint.  Example JSON requests containing the `nationwide.lifetimeIncomeBuilder{}` data object can be found in the [./examples](./examples/) subdirectory.
+The LIB-related financial modeling is triggered by including a valid [NWLIB](#nwlib) data object within an existing FPE [Plan](../datatypes.md#plan) when calling the [POST&nbsp;/v5/forecast](../README.md#post-v5forecast) endpoint.  Example JSON requests containing the `nationwide.lifetimeIncomeBuilder{}` data object can be found in the [./examples](./examples/) subdirectory.
 
 
 <br/><br/>
