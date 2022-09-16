@@ -63,42 +63,45 @@
                 "balance": 45000,
                 "type": "ira",
                 "disableOptimalWithdraw": true,
-				"rate": {
-					"curve": [{
-							"date": "2023-01",
-							"rate": {
-								"mean": 0.046
-							}
-						},
-						{
-							"date": "2033-01",
-							"rate": {
-								"mean": 0.04
-							}
-						}
-					]
-				},
-                "comment": "This account combines the initial balances for IRA Equity and IRA FIA assets ($20K and $25K respectively)"            },
+                "rate": {
+                    "curve": [
+                        {
+                            "date": "2023-01",
+                            "rate": {
+                                "mean": 0.046
+                            }
+                        },
+                        {
+                            "date": "2033-01",
+                            "rate": {
+                                "mean": 0.04
+                            }
+                        }
+                    ]
+                },
+                "comment": "This account combines the initial balances for IRA Equity and IRA FIA assets ($20K and $25K respectively)"
+            },
             {
                 "name": "lib-equity-roth",
                 "balance": 55000,
                 "type": "roth",
                 "disableOptimalWithdraw": true,
-				"rate": {
-					"curve": [{
-							"date": "2023-01",
-							"rate": {
-								"mean": 0.046
-							}
-						},
-						{
-							"date": "2033-01",
-							"rate": {
-								"mean": 0.04
-							}
-						}
-					]
-				},
+                "rate": {
+                    "curve": [
+                        {
+                            "date": "2023-01",
+                            "rate": {
+                                "mean": 0.046
+                            }
+                        },
+                        {
+                            "date": "2033-01",
+                            "rate": {
+                                "mean": 0.04
+                            }
+                        }
+                    ]
+                },
                 "comment": "This account combines the initial balances for Roth Equity and Roth FIA assets ($30K and $25K respectively)"
             }
         ],
