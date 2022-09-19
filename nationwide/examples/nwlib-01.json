@@ -12,6 +12,7 @@
         "nationwide": {
             "lifetimeIncomeBuilder": {
                 "incomeActivationDate": "2033-01",
+                "equityAllocation": 0.25,
                 "highWaterMark": 125000,
                 "gtdWithdrawRate": 0.045,
                 "nonGtdWithdrawRate": 0.015,
