@@ -237,8 +237,9 @@ These config parameters are used exclusively by the [Roth Conversion Optimizer](
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
+| `evalYearOrder` | enum | Determines the year-order in which Roth conversions are attempted. Valid values are: [`chronological`, `incFedTaxableIncome`]. `chronological` means that the candidate Roth conversion years are sorted in chronologica order; `incFedTaxableIncome` means that the years are sorted by increasing federal taxable income values. Defaults to `chronological`.  |
 | `maxDollarAmount` | int | Sets an upper bound on the amount of money that will be converted to Roth IRAs within a given year. |
-| `maxEffectiveFedTaxRate` | float | The RCO algorithm will limit the Roth conversion amount for a given year such that the specified effective federal tax rate is not exceeded for that year.  The default value is 15%.
+| `maxEffectiveFedTaxRate` | float | The RCO algorithm will limit the Roth conversion amount for a given year such that the specified effective federal tax rate is not exceeded for that year.  Defaults to `15%`.
 | `payTaxOnlyFromAfterTaxFunds` | boolean | If `true`, the RCO algorithm will limit the Roth conversion amount based on aftertax funds available to pay for the estimated tax due for the conversion (a 20% tax rate is assumed).  Defaults to `false`. **NOTE**: This flag is currently experimental, and may change or be removed in a future release. |
 
 ### StreamFilter
