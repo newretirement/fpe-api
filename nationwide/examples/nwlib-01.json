@@ -114,7 +114,6 @@
                 "paymentsPerYear": 12,
                 "endDate": "2033-01",
                 "target": "checking",
-                "maxLifetimeContribution": 45000,
                 "contributions": [
                     {
                         "employeeContribAmount": 200,
