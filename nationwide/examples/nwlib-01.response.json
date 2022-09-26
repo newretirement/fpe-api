@@ -4,7 +4,7 @@
         "endDate": "2038-01",
         "duration": "15y0m",
         "period": "yearly",
-        "estateValue": 198427,
+        "estateValue": -13645,
         "currentNetWorth": 230000,
         "lifetimeTaxes": 322386,
         "lifetimeSSBenefit": 0,
@@ -129,11 +129,11 @@
                     87551,
                     94028,
                     100804,
-                    103269,
-                    105834,
-                    108501,
-                    111275,
-                    114160
+                    24642,
+                    24062,
+                    23458,
+                    22830,
+                    22177
                 ]
             },
             {
@@ -150,11 +150,11 @@
                     113413,
                     122306,
                     131607,
-                    134825,
-                    138172,
-                    141652,
-                    145272,
-                    149037
+                    32171,
+                    31412,
+                    30622,
+                    29801,
+                    28946
                 ]
             },
             {
@@ -171,11 +171,11 @@
                     350103,
                     368617,
                     388043,
-                    349116,
-                    310649,
-                    271720,
-                    230427,
-                    198427
+                    167834,
+                    122116,
+                    75646,
+                    26511,
+                    -13645
                 ]
             },
             {
@@ -192,11 +192,11 @@
                     350103,
                     368617,
                     388043,
-                    349116,
-                    310649,
-                    271720,
-                    256548,
-                    263197
+                    167834,
+                    122116,
+                    75646,
+                    52631,
+                    51124
                 ]
             },
             {
@@ -341,11 +341,11 @@
                     3792,
                     4077,
                     4375,
-                    3976,
-                    4075,
-                    4178,
-                    4284,
-                    4395
+                    952,
+                    930,
+                    907,
+                    883,
+                    857
                 ]
             },
             {
@@ -362,11 +362,11 @@
                     4901,
                     5292,
                     5701,
-                    5192,
-                    5320,
-                    5454,
-                    5593,
-                    5738
+                    1243,
+                    1214,
+                    1184,
+                    1152,
+                    1119
                 ]
             },
             {
@@ -438,7 +438,7 @@
                 ]
             },
             {
-                "name": "lib-gtd-withdrawal-ira",
+                "name": "lib-gtd-income-ira",
                 "type": "income",
                 "taxable": true,
                 "taxableFederal": true,
@@ -462,7 +462,7 @@
                 ]
             },
             {
-                "name": "lib-gtd-withdrawal-roth",
+                "name": "lib-gtd-income-roth",
                 "type": "income",
                 "targetAccount": "checking",
                 "values": [
@@ -505,7 +505,7 @@
                 ]
             },
             {
-                "name": "lib-nongtd-withdrawal-ira",
+                "name": "lib-nongtd-income-ira",
                 "type": "transfer",
                 "taxable": true,
                 "taxableFederal": true,
@@ -530,7 +530,7 @@
                 ]
             },
             {
-                "name": "lib-nongtd-withdrawal-roth",
+                "name": "lib-nongtd-income-roth",
                 "type": "transfer",
                 "sourceAccount": "lib-equity-roth",
                 "targetAccount": "checking",

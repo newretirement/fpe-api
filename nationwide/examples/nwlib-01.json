@@ -18,10 +18,10 @@
                 "nonGtdWithdrawRate": 0.015,
                 "equityIRA": "lib-equity-ira",
                 "equityRoth": "lib-equity-roth",
-                "gtdAnnuityIRA": "lib-gtd-withdrawal-ira",
-                "gtdAnnuityRoth": "lib-gtd-withdrawal-roth",
-                "nonGtdAnnuityIRA": "lib-nongtd-withdrawal-ira",
-                "nonGtdAnnuityRoth": "lib-nongtd-withdrawal-roth"
+                "gtdIncomeIRA": "lib-gtd-income-ira",
+                "gtdIncomeRoth": "lib-gtd-income-roth",
+                "nonGtdIncomeIRA": "lib-nongtd-income-ira",
+                "nonGtdIncomeRoth": "lib-nongtd-income-roth"
             }
         },
         "primary": {
@@ -126,21 +126,21 @@
                 ]
             },
             {
-                "name": "lib-gtd-withdrawal-ira",
+                "name": "lib-gtd-income-ira",
                 "startDate": "2033-01",
                 "target": "checking",
                 "paymentsPerYear": 1,
                 "taxable": true
             },
             {
-                "name": "lib-gtd-withdrawal-roth",
+                "name": "lib-gtd-income-roth",
                 "startDate": "2033-01",
                 "target": "checking",
                 "paymentsPerYear": 1,
                 "taxable": false
             },
             {
-                "name": "lib-nongtd-withdrawal-ira",
+                "name": "lib-nongtd-income-ira",
                 "startDate": "2033-01",
                 "source": "lib-equity-ira",
                 "target": "checking",
@@ -148,7 +148,7 @@
                 "taxable": true
             },
             {
-                "name": "lib-nongtd-withdrawal-roth",
+                "name": "lib-nongtd-income-roth",
                 "startDate": "2033-01",
                 "source": "lib-equity-roth",
                 "target": "checking",
