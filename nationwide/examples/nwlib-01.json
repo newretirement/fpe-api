@@ -116,12 +116,12 @@
                 "target": "checking",
                 "contributions": [
                     {
-                        "endDate": "2027-01",
+                        "endDate": "2026-01",
                         "employeeContribAmount": 500,
                         "employeeContribTarget": "lib-equity-ira"
                     },
                     {
-                        "endDate": "2027-01",
+                        "endDate": "2026-01",
                         "employeeContribAmount": 500,
                         "employeeContribTarget": "lib-equity-roth"
                     }
