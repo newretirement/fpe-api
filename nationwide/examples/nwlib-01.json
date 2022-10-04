@@ -26,7 +26,7 @@
         },
         "primary": {
             "birthDate": "1968-01",
-            "goalAge": "70y",
+            "goalAge": "90y",
             "gender": "female"
         },
         "accounts": [
@@ -45,15 +45,15 @@
             },
             {
                 "name": "external-ira",
-                "balance": 10000,
+                "balance": 200000,
                 "type": "ira",
                 "rate": {
-                    "mean": 0.05
+                    "mean": 0.06
                 }
             },
             {
                 "name": "external-roth",
-                "balance": 20000,
+                "balance": 100000,
                 "type": "roth",
                 "rate": {
                     "mean": 0.07
@@ -75,7 +75,7 @@
                         {
                             "date": "2033-01",
                             "rate": {
-                                "mean": 0.04
+                                "mean": 0.01
                             }
                         }
                     ]
@@ -98,7 +98,7 @@
                         {
                             "date": "2033-01",
                             "rate": {
-                                "mean": 0.04
+                                "mean": 0.01
                             }
                         }
                     ]
@@ -116,11 +116,13 @@
                 "target": "checking",
                 "contributions": [
                     {
-                        "employeeContribAmount": 200,
+                        "endDate": "2027-01",
+                        "employeeContribAmount": 500,
                         "employeeContribTarget": "lib-equity-ira"
                     },
                     {
-                        "employeeContribAmount": 300,
+                        "endDate": "2027-01",
+                        "employeeContribAmount": 500,
                         "employeeContribTarget": "lib-equity-roth"
                     }
                 ]
