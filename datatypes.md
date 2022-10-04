@@ -283,6 +283,7 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
+| `endDate` | [Date](#date) | All income-linked contributions will cease as of this date. |
 | `employeeContribRate` | float | Determines how much the employee contributes to their retirement plan, expressed as a percentage of their annual income.  Valid range is `[0.0, 1.0]`. |
 | `employeeContribRateInc` | float | Automatically increments `employeeContribRate` on an annual basis by the specified rate. This annual contribution rate increase commences in the same month that the [PaymentStream's](#paymentstream) annual growth rate would normally start (i.e. 12 months past the simulation's start date). Valid range is `[0.0, 1.0]`. |
 | `employeeContribRateCap` | float | Imposes an upper bound on `employeeContribRate` (which can potentially increase annually based on `employeeContribRateInc`).  Valid range is `[0.0, 1.0]`. |
