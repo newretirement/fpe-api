@@ -141,7 +141,7 @@ Contains various reports that are unconditionally annual in nature (e.g. income 
 
 #### FIRE
 
-`FIRE` (a.k.a. "earliest retire date") is the result of the optional [calcFIRE](README.md#forecastparams) calculation, which solves for the earliest `endDate` that can be used across all jobs (i.e. [PaymentStreams](#paymentstream) whose `earnedIncome` flag is true), such that the forecast's [liquid estate value](terms.md#liquid-estate-value) `V` is in the range `-1000　≤　V　≤　1000`.
+`FIRE` (a.k.a. "earliest retire date") is the result of the optional [calcFIRE](datatypes.md#forecastparams) calculation, which solves for the earliest `endDate` that can be used across all jobs (i.e. [PaymentStreams](#paymentstream) whose `earnedIncome` flag is true), such that the forecast's [liquid estate value](terms.md#liquid-estate-value) `V` is in the range `-1000　≤　V　≤　1000`.
 
 When searching for an optimal solution, the algorithm is constrained by the following rules:
 
@@ -237,10 +237,12 @@ These config parameters are used exclusively by the [Roth Conversion Optimizer](
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `evalYearOrder` | enum | Determines the year-order in which Roth conversions are attempted. Valid values are: [`chronological`, `incFedTaxableIncome`]. `chronological` means that the candidate Roth conversion years are sorted in chronologica order; `incFedTaxableIncome` means that the years are sorted by increasing federal taxable income values. Defaults to `chronological`.  |
+| `evalYearsByFedTaxableIncome` | bool | Only applicable when `useRuleBasedAlgo=false`. Determines the year-order in which Roth conversions are attempted. If `true`, the candidate Roth conversion years are sorted in chronologica order; if `false`, the years are sorted by increasing federal taxable income values. Defaults to `false`.  <b>NOTE:</b> the rule-based algo unconditionally evaluates in order of increasing federal taxable income. |
 | `maxDollarAmount` | int | Sets an upper bound on the amount of money that will be converted to Roth IRAs within a given year. |
-| `maxEffectiveFedTaxRate` | float | The RCO algorithm will limit the Roth conversion amount for a given year such that the specified effective federal tax rate is not exceeded for that year.  Defaults to `15%`.
+| `maxTaxBracket` | int | Only applicable when `useRuleBasedAlgo=true`.  Determines the highest inflation-adjusted tax bracket beyond which the algorithm will stop recommending Roth conversions within a given year. |
+| `maxEffectiveFedTaxRate` | float | Only applicable when `useRuleBasedAlgo=false`.  The RCO algorithm will limit the Roth conversion amount for a given year such that the specified effective federal tax rate is not exceeded for that year.  Defaults to `15%`.
 | `payTaxOnlyFromAfterTaxFunds` | boolean | If `true`, the RCO algorithm will limit the Roth conversion amount based on aftertax funds available to pay for the estimated tax due for the conversion (a 20% tax rate is assumed).  Defaults to `false`. **NOTE**: This flag is currently experimental, and may change or be removed in a future release. |
+| `useRuleBasedAlgo` | bool | If `true`, a rule-based algorithm (one that attempts to mimic what a human financial advisor might recommend) is used; if `false`, a heuristic algorithm (i.e. one that attempts to "discover" the optimal set of Roth conversions) is used.  Defaults to `false`. |
 
 ### StreamFilter
 
