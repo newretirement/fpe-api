@@ -28,7 +28,7 @@ When a [plan](datatypes.md#plan) is submitted to the [POST /forecast](README.md#
 | `@irmaa` | report | The [IRMAA](https://www.medicareresources.org/medicare-eligibility-and-enrollment/what-is-the-income-related-monthly-adjusted-amount-irmaa/) portion of the total `@medicare_oopc` expense. |
 | `@irmaa_spouse` | report | Same as the `@irmaa` payment stream, but applies exclusively to the spouse (if one is defined for this plan). |
 | `@medicare_oopc` | expense | The Medicare Out-Of-Pocket-Cost within a given period. |
-| `@repay:lifetimeDebt` | report | Reports [lifetime debt](terms.md#lifetimedebt) repayment within a given period. |
+| `@repay:${x}` | report | Reports [lifetime debt](terms.md#lifetimedebt) repayment within a given period. `${x}` is the name of the first account in the plan whose type is [revolvingCredit](datatypes.md#accounttype). |
 | `@saved_surplus` | report | The portion of [excess income](terms.md#excessincome) that is saved each month.  The saved portion is determined by [plan.cashFlow.savingRate](datatypes.md#cashflow). For example, if in a given month the plan has $1,000 of excess income, and savingRate = 0.75, then $250 will be transferred plan's [checkingAccount](datatypes.md#cashflow) into the plan's [savingsAccount](datatypes.md#cashflow). |
 | `@ss_income` | income | Social security income stream for the primary member of the plan. |
 | `@ss_income_spouse` | income | Social security income stream for the spouse (if one is defined for the plan). |
