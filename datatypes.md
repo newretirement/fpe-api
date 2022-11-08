@@ -132,7 +132,7 @@ Contains various reports that are unconditionally annual in nature (e.g. income 
 | ---------- | ---- | ----------- |
 | `fedIncomeTaxDue` | int[] | The federal income tax due for each tax year in the simulation.  |
 | `fedMarginalIncomeTaxRates` | float[] | The federal marginal income tax rate for each tax year in the simulation. |
-| `incomeTaxTrueUp` | int[] | Reports the annual true-up for each tax year in the simulation.  A positive true-up amount indicates a refund, whereas a negative amount indicates the actual tax owed. |
+| `incomeTaxTrueUp` | int[] | Reports the annual true-up applied for each year in the simulation.  A positive true-up amount indicates a refund, whereas a negative amount indicates the actual tax owed. |
 | `fedTaxableIncomeByBracket` | [IncomeTaxDataRange[]](#incometaxdatarange) | Reports federal taxable income by tax bracket for each tax year in the simulation. |
 | `stateTaxableIncome` | int[] | The state income tax due for each tax year in the simulation.  |
 | `stateIncomeTaxDue` | int[] | The state income tax due for each tax year in the simulation.  |
@@ -241,7 +241,7 @@ These config parameters are used exclusively by the [Roth Conversion Optimizer](
 | `maxDollarAmount` | int | Sets an upper bound on the amount of money that will be converted to Roth IRAs within a given year. |
 | `maxTaxBracket` | int | Only applicable when `useRuleBasedAlgo=true`.  Determines the highest inflation-adjusted tax bracket beyond which the algorithm will stop recommending Roth conversions within a given year. |
 | `maxEffectiveFedTaxRate` | float | Only applicable when `useRuleBasedAlgo=false`.  The RCO algorithm will limit the Roth conversion amount for a given year such that the specified effective federal tax rate is not exceeded for that year.  Defaults to `15%`.
-| `payTaxOnlyFromAfterTaxFunds` | boolean | If `true`, the RCO algorithm will limit the Roth conversion amount based on aftertax funds available to pay for the estimated tax due for the conversion (a 20% tax rate is assumed).  Defaults to `false`. **NOTE**: This flag is currently experimental, and may change or be removed in a future release. |
+| `minAfterTaxFundsToKeep` | int | If set to a nonnegative value, the RCO algorithm will limit the Roth conversion amount based on aftertax funds available to pay for the estimated tax due for the conversion (a 20% tax rate is assumed).  For example, if set to `1000`, then the maximum annual conversion for a given year will be:<br/> `max(0, x-1000) / 0.20`<br/> where `x` is the total available aftertax funds for that year. **NOTE**: This attribute is currently experimental, and may change or be removed in a future release. |
 | `useRuleBasedAlgo` | bool | If `true`, a rule-based algorithm (one that attempts to mimic what a human financial advisor might recommend) is used; if `false`, a heuristic algorithm (i.e. one that attempts to "discover" the optimal set of Roth conversions) is used.  Defaults to `false`. |
 
 ### StreamFilter
