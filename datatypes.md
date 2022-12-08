@@ -111,13 +111,13 @@ A sample JSON request for relocation is [here](examples/forecast/housing/relocat
 | `accounts` | [Projection[]](#projection) | The projected periodic account balances corresponding to the [accounts](#account) defined within the [Plan](#plan). Also contains FPE-calculated streams (see [PaymentStream projections](output_streams.md#account-projections)). |
 | `annualReports` | [AnnualReports](#annualreports) | Contains various reports that are unconditionally annual in nature (e.g. income tax due). |
 | `currentNetWorth` | int | The net worth of user's [Plan](#plan) at the beginning of the financial projection. |
-| `duration` | [Duration](#duration) | The timespan of the financial projection. |
 | `dti` | float | The Debt-to-Income ratio of the user's [Plan](#plan), which was calculated as a result of adding [params.calcDTI: true](#forecastparams) to the request. |
+| `duration` | [Duration](#duration) | The timespan of the financial projection. |
 | `endDate` | [Date](#date) | The date of the final month in the financial projection. |
 | `estateValue` | int | The net worth of user's [Plan](#plan) at the end of the financial projection. See [estate value](terms.md#estate-value). |
 | `fire` | [FIRE](#fire) | Contains details as to the earliest retirement dates across the earned income streams that still yields a non-negative [liquid estate value](terms.md#liquid-estate-value).  |
-| `lifetimeTaxes` | int | The net sum of all federal and state taxes paid throughout the financial projection. Includes all income taxes (plus FICA, self-employment, and other state-specific taxes) and all capital gains taxes paid minus any tax refunds received. |
 | `lifetimeSSBenefit` | int | The sum of all social security payments received throughout the financial projection. |
+| `lifetimeTaxes` | int | The net sum of all federal and state taxes paid throughout the financial projection. Includes all income taxes (plus FICA, self-employment, and other state-specific taxes) and all capital gains taxes paid minus any tax refunds received. |
 | `monthlyRetirementIncome` | int | The estimated monthly income received in retirement. This attribute is only calculated if `params.calcMonthlyRetirementIncome` is set to true in the request. |
 | `outOfSavingsDate` | [Date](#date) | The date that the user's [Plan](#plan) runs out of savings and starts accumulating debt. A value of `null` means the plan never ran out of savings. |
 | `paymentStreams` | [Projection[]](#projection) | The projected periodic payments corresponding to the [paymentStreams](#paymentstream) defined within the [Plan](#plan).  Also contains FPE-calculated streams (see [PaymentStream projections](output_streams.md#paymentstream-projections)). |
