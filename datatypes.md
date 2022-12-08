@@ -108,21 +108,22 @@ A sample JSON request for relocation is [here](examples/forecast/housing/relocat
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `startDate` | [Date](#date) | The date of the initial month in the financial projection. |
-| `endDate` | [Date](#date) | The date of the final month in the financial projection. |
-| `duration` | [Duration](#duration) | The timespan of the financial projection. |
-| `period` | string | Determines how the values in this forecast's TimeSeries data points should be interpreted: `yearly` => values are annualized, `monthly` => monthly values |
-| `currentNetWorth` | int | The net worth of user's [Plan](#plan) at the beginning of the financial projection. |
-| `estateValue` | int | The net worth of user's [Plan](#plan) at the end of the financial projection. See [estate value](terms.md#estate-value). |
-| `lifetimeTaxes` | int | The net sum of all federal and state taxes paid throughout the financial projection. Includes all income taxes (plus FICA, self-employment, and other state-specific taxes) and all capital gains taxes paid minus any tax refunds received. |
-| `lifetimeSSBenefit` | int | The sum of all social security payments received throughout the financial projection. |
-| `outOfSavingsDate` | [Date](#date) | The date that the user's [Plan](#plan) runs out of savings and starts accumulating debt. A value of `null` means the plan never ran out of savings. |
-| `monthlyRetirementIncome` | int | The estimated monthly income received in retirement. This attribute is only calculated if `params.calcMonthlyRetirementIncome` is set to true in the request. |
 | `accounts` | [Projection[]](#projection) | The projected periodic account balances corresponding to the [accounts](#account) defined within the [Plan](#plan). Also contains FPE-calculated streams (see [PaymentStream projections](output_streams.md#account-projections)). |
-| `paymentStreams` | [Projection[]](#projection) | The projected periodic payments corresponding to the [paymentStreams](#paymentstream) defined within the [Plan](#plan).  Also contains FPE-calculated streams (see [PaymentStream projections](output_streams.md#paymentstream-projections)). |
 | `annualReports` | [AnnualReports](#annualreports) | Contains various reports that are unconditionally annual in nature (e.g. income tax due). |
+| `currentNetWorth` | int | The net worth of user's [Plan](#plan) at the beginning of the financial projection. |
+| `dti` | float | The Debt-to-Income ratio of the user's [Plan](#plan), which was calculated as a result of adding [params.calcDTI: true](#forecastparams) to the request. |
+| `duration` | [Duration](#duration) | The timespan of the financial projection. |
+| `endDate` | [Date](#date) | The date of the final month in the financial projection. |
+| `estateValue` | int | The net worth of user's [Plan](#plan) at the end of the financial projection. See [estate value](terms.md#estate-value). |
 | `fire` | [FIRE](#fire) | Contains details as to the earliest retirement dates across the earned income streams that still yields a non-negative [liquid estate value](terms.md#liquid-estate-value).  |
+| `lifetimeSSBenefit` | int | The sum of all social security payments received throughout the financial projection. |
+| `lifetimeTaxes` | int | The net sum of all federal and state taxes paid throughout the financial projection. Includes all income taxes (plus FICA, self-employment, and other state-specific taxes) and all capital gains taxes paid minus any tax refunds received. |
+| `monthlyRetirementIncome` | int | The estimated monthly income received in retirement. This attribute is only calculated if `params.calcMonthlyRetirementIncome` is set to true in the request. |
+| `outOfSavingsDate` | [Date](#date) | The date that the user's [Plan](#plan) runs out of savings and starts accumulating debt. A value of `null` means the plan never ran out of savings. |
+| `paymentStreams` | [Projection[]](#projection) | The projected periodic payments corresponding to the [paymentStreams](#paymentstream) defined within the [Plan](#plan).  Also contains FPE-calculated streams (see [PaymentStream projections](output_streams.md#paymentstream-projections)). |
+| `period` | string | Determines how the values in this forecast's TimeSeries data points should be interpreted: `yearly` => values are annualized, `monthly` => monthly values |
 | `postRetireIncomeExpenseRatio` | float | This value loosely serves as a "retirement readiness" score.  It is unbounded (e.g. if person has high income and very low expenses in retirement, this score will be well over `1.0`). |
+| `startDate` | [Date](#date) | The date of the initial month in the financial projection. |
 
 #### AnnualReports
 
@@ -132,7 +133,7 @@ Contains various reports that are unconditionally annual in nature (e.g. income 
 | ---------- | ---- | ----------- |
 | `fedIncomeTaxDue` | int[] | The federal income tax due for each tax year in the simulation.  |
 | `fedMarginalIncomeTaxRates` | float[] | The federal marginal income tax rate for each tax year in the simulation. |
-| `incomeTaxTrueUp` | int[] | Reports the annual true-up for each tax year in the simulation.  A positive true-up amount indicates a refund, whereas a negative amount indicates the actual tax owed. |
+| `incomeTaxTrueUp` | int[] | Reports the annual true-up applied for each year in the simulation.  A positive true-up amount indicates a refund, whereas a negative amount indicates the actual tax owed. |
 | `fedTaxableIncomeByBracket` | [IncomeTaxDataRange[]](#incometaxdatarange) | Reports federal taxable income by tax bracket for each tax year in the simulation. |
 | `stateTaxableIncome` | int[] | The state income tax due for each tax year in the simulation.  |
 | `stateIncomeTaxDue` | int[] | The state income tax due for each tax year in the simulation.  |
@@ -141,7 +142,7 @@ Contains various reports that are unconditionally annual in nature (e.g. income 
 
 #### FIRE
 
-`FIRE` (a.k.a. "earliest retire date") is the result of the optional [calcFIRE](README.md#forecastparams) calculation, which solves for the earliest `endDate` that can be used across all jobs (i.e. [PaymentStreams](#paymentstream) whose `earnedIncome` flag is true), such that the forecast's [liquid estate value](terms.md#liquid-estate-value) `V` is in the range `-1000　≤　V　≤　1000`.
+`FIRE` (a.k.a. "earliest retire date") is the result of the optional [calcFIRE](datatypes.md#forecastparams) calculation, which solves for the earliest `endDate` that can be used across all jobs (i.e. [PaymentStreams](#paymentstream) whose `earnedIncome` flag is true), such that the forecast's [liquid estate value](terms.md#liquid-estate-value) `V` is in the range `-1000　≤　V　≤　1000`.
 
 When searching for an optimal solution, the algorithm is constrained by the following rules:
 
@@ -204,7 +205,8 @@ This is the multifaceted configuration object that influences how the financial 
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `calcFIRE` | boolean | If `true`, the 'FIRE' solver is executed, and the result appears in the [Forecast.FIRE](#forecast) response. |
+| `calcDTI` | boolean | If `true`, the DTI (Debt-To-Income ratio) for the plan is calculated, and the result appears in the `dti` attribute of the [Forecast](#forecast) response. |
+| `calcFIRE` | boolean | If `true`, the 'FIRE' solver is executed, and the result appears in the [Forecast.FIRE](#fire) response. |
 | `calcPostRetireIncomeExpenseRatio` | boolean | If `true`, the _Income/Expense Ratio_ calculation is executed, and the result appears in [Forecast.postRetireIncomeExpenseRatio](#forecast) within the response. |
 | `calcSpendingPower` | boolean | If `true`, the 'Spending Power' calculation executes, and the result appears as the `spendingPower` attribute within the [Forecast](#forecast) response object. Note that [plan.primary.retireDate](#person) must be set when running this calculation. See [Forecast.spendingPower](#forecast) for more details on this calculation. |
 | `filterForecast` | [ForecastFilter](#forecastfilter) | Applies filtering to the output streams within the [Forecast](#forecast) object. |
@@ -237,10 +239,12 @@ These config parameters are used exclusively by the [Roth Conversion Optimizer](
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `evalYearOrder` | enum | Determines the year-order in which Roth conversions are attempted. Valid values are: [`chronological`, `incFedTaxableIncome`]. `chronological` means that the candidate Roth conversion years are sorted in chronologica order; `incFedTaxableIncome` means that the years are sorted by increasing federal taxable income values. Defaults to `chronological`.  |
+| `evalYearsByFedTaxableIncome` | bool | Only applicable when `useRuleBasedAlgo=false`. Determines the year-order in which Roth conversions are attempted. If `true`, the candidate Roth conversion years are sorted in chronologica order; if `false`, the years are sorted by increasing federal taxable income values. Defaults to `false`.  <b>NOTE:</b> the rule-based algo unconditionally evaluates in order of increasing federal taxable income. |
 | `maxDollarAmount` | int | Sets an upper bound on the amount of money that will be converted to Roth IRAs within a given year. |
-| `maxEffectiveFedTaxRate` | float | The RCO algorithm will limit the Roth conversion amount for a given year such that the specified effective federal tax rate is not exceeded for that year.  Defaults to `15%`.
-| `payTaxOnlyFromAfterTaxFunds` | boolean | If `true`, the RCO algorithm will limit the Roth conversion amount based on aftertax funds available to pay for the estimated tax due for the conversion (a 20% tax rate is assumed).  Defaults to `false`. **NOTE**: This flag is currently experimental, and may change or be removed in a future release. |
+| `maxTaxBracket` | int | Only applicable when `useRuleBasedAlgo=true`.  Determines the highest inflation-adjusted tax bracket beyond which the algorithm will stop recommending Roth conversions within a given year. |
+| `maxEffectiveFedTaxRate` | float | Only applicable when `useRuleBasedAlgo=false`.  The RCO algorithm will limit the Roth conversion amount for a given year such that the specified effective federal tax rate is not exceeded for that year.  Defaults to `15%`.
+| `minAfterTaxFundsToKeep` | int | If set to a nonnegative value, the RCO algorithm will limit the Roth conversion amount based on aftertax funds available to pay for the estimated tax due for the conversion (a 20% tax rate is assumed).  For example, if set to `1000`, then the maximum annual conversion for a given year will be:<br/> `max(0, x-1000) / 0.20`<br/> where `x` is the total available aftertax funds for that year. **NOTE**: This attribute is currently experimental, and may change or be removed in a future release. |
+| `useRuleBasedAlgo` | bool | If `true`, a rule-based algorithm (one that attempts to mimic what a human financial advisor might recommend) is used; if `false`, a heuristic algorithm (i.e. one that attempts to "discover" the optimal set of Roth conversions) is used.  Defaults to `false`. |
 
 ### StreamFilter
 
