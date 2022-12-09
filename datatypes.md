@@ -123,6 +123,7 @@ A sample JSON request for relocation is [here](examples/forecast/housing/relocat
 | `paymentStreams` | [Projection[]](#projection) | The projected periodic payments corresponding to the [paymentStreams](#paymentstream) defined within the [Plan](#plan).  Also contains FPE-calculated streams (see [PaymentStream projections](output_streams.md#paymentstream-projections)). |
 | `period` | string | Determines how the values in this forecast's TimeSeries data points should be interpreted: `yearly` => values are annualized, `monthly` => monthly values |
 | `postRetireIncomeExpenseRatio` | float | This value loosely serves as a "retirement readiness" score.  It is unbounded (e.g. if person has high income and very low expenses in retirement, this score will be well over `1.0`). |
+| `spendingPower` | int | The maximum amount of income a user could have in retirement if they spent the exact same amount every year. |
 | `startDate` | [Date](#date) | The date of the initial month in the financial projection. |
 
 #### AnnualReports
