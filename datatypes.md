@@ -240,12 +240,12 @@ These config parameters are used exclusively by the [Roth Conversion Optimizer](
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `evalYearsByFedTaxableIncome` | bool | Only applicable when `useRuleBasedAlgo=false`. Determines the year-order in which Roth conversions are attempted. If `true`, the candidate Roth conversion years are sorted in chronologica order; if `false`, the years are sorted by increasing federal taxable income values. Defaults to `false`.  <b>NOTE:</b> the rule-based algo unconditionally evaluates in order of increasing federal taxable income. |
+| `evalYearsByFedTaxableIncome` | boolean | Only applicable when `useRuleBasedAlgo=false`. Determines the year-order in which Roth conversions are attempted. If `true`, the candidate Roth conversion years are sorted in chronologica order; if `false`, the years are sorted by increasing federal taxable income values. Defaults to `false`.  <b>NOTE:</b> the rule-based algo unconditionally evaluates in order of increasing federal taxable income. |
 | `maxDollarAmount` | int | Sets an upper bound on the amount of money that will be converted to Roth IRAs within a given year. |
 | `maxTaxBracket` | int | Only applicable when `useRuleBasedAlgo=true`.  Determines the highest inflation-adjusted tax bracket beyond which the algorithm will stop recommending Roth conversions within a given year. |
 | `maxEffectiveFedTaxRate` | float | Only applicable when `useRuleBasedAlgo=false`.  The RCO algorithm will limit the Roth conversion amount for a given year such that the specified effective federal tax rate is not exceeded for that year.  Defaults to `15%`.
 | `minAfterTaxFundsToKeep` | int | If set to a nonnegative value, the RCO algorithm will limit the Roth conversion amount based on aftertax funds available to pay for the estimated tax due for the conversion (a 20% tax rate is assumed).  For example, if set to `1000`, then the maximum annual conversion for a given year will be:<br/> `max(0, x-1000) / 0.20`<br/> where `x` is the total available aftertax funds for that year. **NOTE**: This attribute is currently experimental, and may change or be removed in a future release. |
-| `useRuleBasedAlgo` | bool | If `true`, a rule-based algorithm (one that attempts to mimic what a human financial advisor might recommend) is used; if `false`, a heuristic algorithm (i.e. one that attempts to "discover" the optimal set of Roth conversions) is used.  Defaults to `false`. |
+| `useRuleBasedAlgo` | boolean | If `true`, a rule-based algorithm (one that attempts to mimic what a human financial advisor might recommend) is used; if `false`, a heuristic algorithm (i.e. one that attempts to "discover" the optimal set of Roth conversions) is used.  Defaults to `false`. |
 
 ### StreamFilter
 
@@ -263,23 +263,23 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `name` | string | The unique name of this paymentStream (e.g. `"auto_insurance"`). Valid characters are: `[a-zA-Z0-9]`, `-`, `_`, `/`, and white space. |
-| `source` | string | The name of the [account](#account) from which the payment will be withdrawn. <br/>**Special case**: If "optimal" is specified, the algorithm will implicitly withdraw the requested amount from 1 or more existing accounts, taking into consideration account type, projected growth rate, and possibly other attributes in an attempt to minimize negative impact on the plan's interest growth. This is known as the _Optimal Withdrawal Strategy_. |
-| `target` | string | The name of the [account](#account) into which the payment will be deposited. |
-| `rate` | [Rate](#rate) | Determines the annual growth rate of the payment over time.  The growth is applied annually starting 12 months into the simulation. |
-| `startGrowthOnFirstPayment` | boolean | If true, annual growth (determined by `rate`) is deferred until the first payment occurs (determined by `startDate`). By default, growth starts immediately. |
-| `owner` | enum | Determines who the payments are associated with. Valid values are [`primary`, `spouse`].  If an owner is assigned, payments will cease upon the owner's death.  Otherwise, payments will continue through the end of the simulation. |
-| `startDate` | [Date](#date) | The date that future payments commence.  |
-| `endDate` | [Date](#date) | The date that future payments have ceased.  |
-| `date` | [Date](#date) | Specify a single payment on a specific date. __Note:__ this is just a shorthand method of configuring a one-time payment; the same thing can be accomplished via `startDate` and `endDate`.  E.g. `{date: "2040-06"}` is the same as `{startDate: "2040-06", endDate: "2040-07"}`. |
-| `paymentsPerYear` | int | Determines the payment frequency within a given year. Valid values are: [`1`, `2`, `4`, `12`].  Regardless of frequency, the first payment occurs on `startDate` (or `date`). |
-| `paymentAmount` | int | The dollar amount of the payment.
-| `earnedIncome` | boolean | Set to `true` if this paymentStream represents income that the IRS deems allowable for a tax-advantaged contribution to a retirement account.  Also referred to as "taxable compensation".|
-| `taxable` | boolean | [Income streams](terms.md#income-stream) flagged as taxable are considered when calculating AGI for tax purposes.  For example, an annuity income stream may or may not be taxed depending on the individual's chosen configuration. Defaults to `true`. |
-| `survivorBenefit` | float | A rate in the range `[0..1]` that determines the ratio of each payment amount that is retained when the paymentStream's owner dies. This attribute is typically needed for modeling annuities and pensions. |
-| `taxDeductionRate` | float | A value in the range [0..1] that indicates what percentage of the expense is tax-deductible.  If unset, the default value is `0.0`. __NOTE:__ This attribute only applies to [expense streams](terms.md#expense-stream). |
 | `aboveTheLine` | boolean | If true, the tax-deductible portion of the expense will be subtracted from gross income prior calculating AGI.  Otherwise, its is treated as an itemized deduction (below-the-line). __NOTE:__ This attribute is relevant only when `taxDeductionRate > 0.0`. |
 | `contributions` | [ContributionFromIncome[]](#contributionfromincome) | (Optional) Specifies 1 or more "income-linked" contributions taken directly from the income payment. Use this for modeling things like 401(k) employee contributions with employer matching rules. |
+| `date` | [Date](#date) | Specify a single payment on a specific date. __Note:__ this is just a shorthand method of configuring a one-time payment; the same thing can be accomplished via `startDate` and `endDate`.  E.g. `{date: "2040-06"}` is the same as `{startDate: "2040-06", endDate: "2040-07"}`. |
+| `endDate` | [Date](#date) | The date that future payments have ceased. |
+| `name` | string | The unique name of this paymentStream (e.g. `"auto_insurance"`). Valid characters are: `[a-zA-Z0-9]`, `-`, `_`, `/`, and white space. |
+| `owner` | enum | Determines who the payments are associated with. Valid values are [`primary`, `spouse`].  If an owner is assigned, payments will cease upon the owner's death.  Otherwise, payments will continue through the end of the simulation. |
+| `paymentAmount` | int | The dollar amount of the payment.
+| `paymentsPerYear` | int | Determines the payment frequency within a given year. Valid values are: [`1`, `2`, `4`, `12`].  Regardless of frequency, the first payment occurs on `startDate` (or `date`). |
+| `qcd` | boolean| If true, this PaymentStream will be treated as a [QCD](https://www.investopedia.com/qualified-charitable-distribution-qcd-5409491), assuming it meets the necessary criteria of one. |
+| `rate` | [Rate](#rate) | Determines the annual growth rate of the payment over time.  The growth is applied annually starting 12 months into the simulation. |
+| `source` | string | The name of the [account](#account) from which the payment will be withdrawn. <br/>**Special case**: If "optimal" is specified, the algorithm will implicitly withdraw the requested amount from 1 or more existing accounts, taking into consideration account type, projected growth rate, and possibly other attributes in an attempt to minimize negative impact on the plan's interest growth. This is known as the _Optimal Withdrawal Strategy_. |
+| `startDate` | [Date](#date) | The date that future payments commence.  |
+| `startGrowthOnFirstPayment` | boolean | If true, annual growth (determined by `rate`) is deferred until the first payment occurs (determined by `startDate`). By default, growth starts immediately. |
+| `survivorBenefit` | float | A rate in the range `[0..1]` that determines the ratio of each payment amount that is retained when the paymentStream's owner dies. This attribute is typically needed for modeling annuities and pensions. |
+| `target` | string | The name of the [account](#account) into which the payment will be deposited. |
+| `taxable` | boolean | [Income streams](terms.md#income-stream) flagged as taxable are considered when calculating AGI for tax purposes.  For example, an annuity income stream may or may not be taxed depending on the individual's chosen configuration. Defaults to `true`. |
+| `taxDeductionRate` | float | A value in the range [0..1] that indicates what percentage of the expense is tax-deductible.  If unset, the default value is `0.0`. __NOTE:__ This attribute only applies to [expense streams](terms.md#expense-stream). |
 
 
 #### ContributionFromIncome
