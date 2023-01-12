@@ -52,6 +52,12 @@ Liquid estate value is very similar to [estate value](#estate-value), except tha
 
 <hr/><br/>
 
+## RMD liability
+
+The IRS-mandated amount of money that must be withdrawn annually from the [plan's](datatypes.md#plan) tax-deferred accounts in order to satisfy the [RMD rule](https://www.investopedia.com/terms/r/requiredminimumdistribution.asp).
+
+<hr/><br/>
+
 ## transfer
 
 A transfer is a transaction whereby money is withdrawn from one [account](datatypes.md#account) and deposited into another. In FPE, a tranfer is accomplished by setting both the `source` and `target` attributes of the [paymentStream](datatypes.md#paymentstream) object.
