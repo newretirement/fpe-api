@@ -366,15 +366,16 @@ A `plan` is the top-level financial object; it represents the user's complete pr
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `currentDate` | [Date](#date) | Today's date. |
+| `accounts` | [Account[]](#account) | Array of accounts within the financial plan. |
 | `cashFlow` | [CashFlow](#cashflow) | Determines how excess income is spent/saved. |
+| `currentDate` | [Date](#date) | Today's date. |
+| `events` | [Events](#events) | Describes various non-periodic life events such as buying a new home or purchasing an annuity. |
 | `market` | [Market](#market) | Market data (inflation rate, etc.). |
+| `nationwide` | [Nationwide](nationwide/README.md#nationwide) | Contains plan attributes that are specific to the [Nationwide](https://www.nationwide.com) insurance company. |
+| `paymentStreams` | [PaymentStream[]](#paymentstream) | Array of payment streams within the financial plan. |
 | `primary` | [Person](#person) | The primary account holder within the simulation. |
 | `spouse` | [Person](#person) | The primary's spouse (optional). |
 | `stateCode` | [USState](#usstate) | The primary's current state of residence. |
-| `accounts` | [Account[]](#account) | Array of accounts within the financial plan. |
-| `paymentStreams` | [PaymentStream[]](#paymentstream) | Array of payment streams within the financial plan. |
-| `events` | [Events](#events) | Describes various non-periodic life events such as buying a new home or purchasing an annuity. |
 | `tcjaSunset` | boolean | If true, FPE will model the [sunsetting](https://www.investopedia.com/terms/s/sunsetprovision.asp) of the [Tax Cuts and Jobs Act](https://www.investopedia.com/taxes/how-gop-tax-bill-affects-you/) due to end starting in 2026. Default is `false`. |
 
 #### CashFlow

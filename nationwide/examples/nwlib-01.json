@@ -1,0 +1,168 @@
+{
+    "params": {
+        "projectionPeriod": "yearly"
+    },
+    "plan": {
+        "currentDate": "2023-01",
+        "cashFlow": {
+            "checkingAccount": "checking",
+            "savingsAccount": "savings",
+            "savingRate": 0
+        },
+        "nationwide": {
+            "lifetimeIncomeBuilder": {
+                "incomeActivationDate": "2033-01",
+                "equityAllocation": 0.25,
+                "highWaterMark": 125000,
+                "gtdWithdrawRate": 0.045,
+                "nonGtdWithdrawRate": 0.015,
+                "equityIRA": "lib-equity-ira",
+                "equityRoth": "lib-equity-roth",
+                "gtdIncomeIRA": "lib-gtd-income-ira",
+                "gtdIncomeRoth": "lib-gtd-income-roth",
+                "nonGtdIncomeIRA": "lib-nongtd-income-ira",
+                "nonGtdIncomeRoth": "lib-nongtd-income-roth"
+            }
+        },
+        "primary": {
+            "birthDate": "1968-01",
+            "goalAge": "90y",
+            "gender": "female"
+        },
+        "accounts": [
+            {
+                "name": "checking",
+                "type": "aftertax"
+            },
+            {
+                "name": "savings",
+                "type": "aftertax",
+                "balance": 100000
+            },
+            {
+                "name": "lifetimeDebt",
+                "type": "revolvingCredit"
+            },
+            {
+                "name": "external-ira",
+                "balance": 200000,
+                "type": "ira",
+                "rate": {
+                    "mean": 0.06
+                }
+            },
+            {
+                "name": "external-roth",
+                "balance": 100000,
+                "type": "roth",
+                "rate": {
+                    "mean": 0.07
+                }
+            },
+            {
+                "name": "lib-equity-ira",
+                "balance": 45000,
+                "type": "ira",
+                "disableOptimalWithdraw": true,
+                "rate": {
+                    "curve": [
+                        {
+                            "date": "2023-01",
+                            "rate": {
+                                "mean": 0.046
+                            }
+                        },
+                        {
+                            "date": "2033-01",
+                            "rate": {
+                                "mean": 0.01
+                            }
+                        }
+                    ]
+                },
+                "comment": "This account combines the initial balances for IRA Equity and IRA FIA assets ($20K and $25K respectively)"
+            },
+            {
+                "name": "lib-equity-roth",
+                "balance": 55000,
+                "type": "roth",
+                "disableOptimalWithdraw": true,
+                "rate": {
+                    "curve": [
+                        {
+                            "date": "2023-01",
+                            "rate": {
+                                "mean": 0.046
+                            }
+                        },
+                        {
+                            "date": "2033-01",
+                            "rate": {
+                                "mean": 0.01
+                            }
+                        }
+                    ]
+                },
+                "comment": "This account combines the initial balances for Roth Equity and Roth FIA assets ($30K and $25K respectively)"
+            }
+        ],
+        "paymentStreams": [
+            {
+                "name": "work-income",
+                "earnedIncome": true,
+                "paymentAmount": 10000,
+                "paymentsPerYear": 12,
+                "endDate": "2033-01",
+                "target": "checking",
+                "contributions": [
+                    {
+                        "endDate": "2026-01",
+                        "employeeContribAmount": 500,
+                        "employeeContribTarget": "lib-equity-ira"
+                    },
+                    {
+                        "endDate": "2026-01",
+                        "employeeContribAmount": 500,
+                        "employeeContribTarget": "lib-equity-roth"
+                    }
+                ]
+            },
+            {
+                "name": "lib-gtd-income-ira",
+                "startDate": "2033-01",
+                "target": "checking",
+                "paymentsPerYear": 1,
+                "taxable": true
+            },
+            {
+                "name": "lib-gtd-income-roth",
+                "startDate": "2033-01",
+                "target": "checking",
+                "paymentsPerYear": 1,
+                "taxable": false
+            },
+            {
+                "name": "lib-nongtd-income-ira",
+                "startDate": "2033-01",
+                "source": "lib-equity-ira",
+                "target": "checking",
+                "paymentsPerYear": 1,
+                "taxable": true
+            },
+            {
+                "name": "lib-nongtd-income-roth",
+                "startDate": "2033-01",
+                "source": "lib-equity-roth",
+                "target": "checking",
+                "paymentsPerYear": 1,
+                "taxable": false
+            },
+            {
+                "name": "expenses",
+                "paymentAmount": 4000,
+                "paymentsPerYear": 12,
+                "source": "optimal"
+            }
+        ]
+    }
+}
