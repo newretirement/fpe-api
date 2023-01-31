@@ -181,12 +181,17 @@ Within a given tax jurisdiction (federal or state), `IncomeTaxDataRange` represe
 
 #### Projection
 
-A named time series representing a financial projection of either `yearly` or `monthly` granularity.  The values (depending on context) represent future account balances, payments, or projection reports.
+A named [time series](https://en.wikipedia.org/wiki/Time_series) that represents a financial projection whose monetary values represent account balances, payments, or reports depending on the projection's `type` attribute.  In addition, the projection's values can represent either yearly or monthly amounts based on the `annualized` Boolean attribute (see below).
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
+| `annualized` | boolean | If `true`, the values in this projection stream represent yearly values.  If `false`, the values are monthly. |
 | `name` | string | The name of this time series. |
 | `type` | string | The classification of this time series. If this series represents account balances, `type` is assigned the [AccountType](#accounttype) of the corresponding account. Otherwise, this time series represents payments or a report, in which case `type` is assigned one of [`income`, `expense`, `transfer`, `report`]. |
+| `sourceAccount` | string | If this projection represents a payment projection, then `sourceAccount` is the name of the [Account](#account) from which the payments originated.  This attribute is only present for expenses and transfers (but not for income). |
+| `targetAccount` | string | If this projection represents a payment projection, then `targetAccount` is the name of the [Account](#account) into which the payments were deposited.  This attribute is only present for income and transfers (but not for expenses). |
+| `taxable` | boolean | If `true`, this projection represents a payment stream that is subject to taxation.  If `taxableFederal` is `false` or omitted, then the scope of `taxable` applies at both the federal and state level. |
+| `taxableFederal` | boolean | If `true`, the values in this projection are specifically taxable at the federal level. |
 | `values` | int[] | The periodic values within this time series. The first value in this series corresponds to [Plan.currentDate](#plan). |
 
 #### TaxBracket
