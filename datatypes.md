@@ -181,12 +181,17 @@ Within a given tax jurisdiction (federal or state), `IncomeTaxDataRange` represe
 
 #### Projection
 
-A named time series representing a financial projection of either `yearly` or `monthly` granularity.  The values (depending on context) represent future account balances, payments, or projection reports.
+A named [time series](https://en.wikipedia.org/wiki/Time_series) that represents a financial projection whose monetary values represent account balances, payments, or reports depending on the projection's `type` attribute.  In addition, the projection's values can represent either yearly or monthly amounts based on the `annualized` Boolean attribute (see below).
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
+| `annualized` | boolean | If `true`, the values in this projection stream represent yearly values.  If `false`, the values are monthly. |
 | `name` | string | The name of this time series. |
 | `type` | string | The classification of this time series. If this series represents account balances, `type` is assigned the [AccountType](#accounttype) of the corresponding account. Otherwise, this time series represents payments or a report, in which case `type` is assigned one of [`income`, `expense`, `transfer`, `report`]. |
+| `sourceAccount` | string | If this projection represents a payment projection, then `sourceAccount` is the name of the [Account](#account) from which the payments originated.  This attribute is only present for expenses and transfers (but not for income). |
+| `targetAccount` | string | If this projection represents a payment projection, then `targetAccount` is the name of the [Account](#account) into which the payments were deposited.  This attribute is only present for income and transfers (but not for expenses). |
+| `taxable` | boolean | If `true`, this projection represents a payment stream that is subject to taxation.  If `taxableFederal` is `false` or omitted, then the scope of `taxable` applies at both the federal and state level. |
+| `taxableFederal` | boolean | If `true`, the values in this projection are specifically taxable at the federal level. |
 | `values` | int[] | The periodic values within this time series. The first value in this series corresponds to [Plan.currentDate](#plan). |
 
 #### TaxBracket
@@ -240,12 +245,12 @@ These config parameters are used exclusively by the [Roth Conversion Optimizer](
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `evalYearsByFedTaxableIncome` | boolean | Only applicable when `useRuleBasedAlgo=false`. Determines the year-order in which Roth conversions are attempted. If `true`, the candidate Roth conversion years are sorted in chronologica order; if `false`, the years are sorted by increasing federal taxable income values. Defaults to `false`.  <b>NOTE:</b> the rule-based algo unconditionally evaluates in order of increasing federal taxable income. |
+| `algoType` | enum | Determines the optimization algorithm to use.  Defaults to `heuristic`.  Valid values are: [`heuristic`, `rulebased`]. |
+| `evalYearsByFedTaxableIncome` | boolean | Only applicable when `algoType="heuristic"`. Determines the year-order in which Roth conversions are attempted. If `true`, the candidate Roth conversion years are sorted by increasing federal taxable income values; if `false`, they are sorted in chronological order. Defaults to `false`.  <b>NOTE:</b> the rule-based algo unconditionally evaluates in order of increasing federal taxable income. |
 | `maxDollarAmount` | int | Sets an upper bound on the amount of money that will be converted to Roth IRAs within a given year. |
-| `maxTaxBracket` | int | Only applicable when `useRuleBasedAlgo=true`.  Determines the highest inflation-adjusted tax bracket beyond which the algorithm will stop recommending Roth conversions within a given year. |
-| `maxEffectiveFedTaxRate` | float | Only applicable when `useRuleBasedAlgo=false`.  The RCO algorithm will limit the Roth conversion amount for a given year such that the specified effective federal tax rate is not exceeded for that year.  Defaults to `15%`.
-| `minAfterTaxFundsToKeep` | int | If set to a nonnegative value, the RCO algorithm will limit the Roth conversion amount based on aftertax funds available to pay for the estimated tax due for the conversion (a 20% tax rate is assumed).  For example, if set to `1000`, then the maximum annual conversion for a given year will be:<br/> `max(0, x-1000) / 0.20`<br/> where `x` is the total available aftertax funds for that year. **NOTE**: This attribute is currently experimental, and may change or be removed in a future release. |
-| `useRuleBasedAlgo` | boolean | If `true`, a rule-based algorithm (one that attempts to mimic what a human financial advisor might recommend) is used; if `false`, a heuristic algorithm (i.e. one that attempts to "discover" the optimal set of Roth conversions) is used.  Defaults to `false`. |
+| `maxEffectiveFedTaxRate` | float | Only applicable when `algoType="heuristic"`.  The RCO algorithm will limit the Roth conversion amount for a given year such that the specified effective federal tax rate is not exceeded for that year.  If not set, this value defaults to the mean of the plan's existing federal effective tax rates throughout the forecast. |
+| `maxTaxBracket` | int | Only applicable when `algoType="rulebased"`.  Determines the highest inflation-adjusted federal tax bracket beyond which the algorithm will stop recommending Roth conversions within a given year. <br/><br/> Note that the algorithm will stop increasing the conversion amount when doing so would trigger a current or future [insufficientFunds](README.md#warning-codes) warning. <br/><br/>Valid values:<ul><li>`0` = the special [zero tax bracket](https://www.realized1031.com/blog/what-does-it-mean-to-be-in-a-zero-tax-bracket) <li>`1` = the 1<sup>st</sup> lowest tax bracket (10% for single filers in 2023) <li>`2` = the 2<sup>nd</sup> lowest tax bracket (12%) <li>`k` = the k<sup>th</sup> lowest tax bracket.  If `k` is greater than the number of federal tax brackets, then this constraint is effectively disabled.<ul/> |
+| `minAfterTaxFundsToKeep` | int | If set to a nonnegative value, the RCO algorithm will limit the Roth conversion amount based on aftertax funds available to pay for the estimated tax due for the conversion (a 20% tax rate is assumed).  For example, if set to `1000`, then the maximum annual conversion for a given year will be:<br/> &nbsp;&nbsp;&nbsp;&nbsp;`max(0, x-1000) / 0.20`<br/> where `x` is the total available aftertax funds for that year. |
 
 ### StreamFilter
 
