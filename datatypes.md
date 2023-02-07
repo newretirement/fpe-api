@@ -31,7 +31,7 @@ The `AccountType` enum represents the different types of accounts that can be mo
 | `ira` | See [Traditional IRA](https://www.investopedia.com/terms/t/traditionalira.asp) |
 | `401k` | See [Traditional 401(k)](https://www.investopedia.com/terms/1/401kplan.asp) |
 | `529` | A [529 plan](https://www.investopedia.com/terms/1/529plan.asp) is a tax-advantaged savings plan designed to help pay for education. |
-| `hsa` | A [Health Savings Account](https://www.investopedia.com/terms/h/hsa.asp) (HSA) is a tax-advantaged savings account that is created for people who get their insurance coverage through [high-deductible health plans](https://www.investopedia.com/terms/h/hdhp.asp). |
+| `hsa` | A [Health Savings Account](https://www.investopedia.com/terms/h/hsa.asp) (HSA) is a tax-advantaged savings account that is created for people who get their insurance coverage through [high-deductible health plans](https://www.investopedia.com/terms/h/hdhp.asp).  Capital gains on HSA's <u>ARE</u> taxed in California (CA) and New Jersey (NJ), and are <u>NOT</u> taxed in all other U.S. states. |
 | `roth` | See [Roth IRA](https://www.investopedia.com/terms/r/rothira.asp) |
 | `roth401k` | See [Roth 401(k)](https://www.investopedia.com/terms/1/401kplan.asp) |
 | `loan` |  A type of credit vehicle in which a sum of money is lent to another party in exchange for future repayment of the value or principal amount. In FPE, a loan refers specifically to the borrowing of a specific one-time amount (e.g. car loan, mortgage) vs. revolving credit loans (e.g. cred cards). |
