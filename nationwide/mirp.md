@@ -75,6 +75,6 @@ In order to deal with these two situations, the following additional steps are t
         - RD = January of 2 years following CD
    - Otherwise:
         - RD = January of the year immediately following CD
-1. Modify `P′` within the **STEP 1**]** of the original [algorithm](#algorithm-description).
+1. Modify `P′` within the **STEP 1** of the original [algorithm](#algorithm-description).
 
 By performing this conditional logic, the retirement date is guaranteed to be in the future.
