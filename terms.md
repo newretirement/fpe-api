@@ -52,6 +52,12 @@ Liquid estate value is very similar to [estate value](#estate-value), except tha
 
 <hr/><br/>
 
+## periodic payment
+
+A payment that occurs at regular intervals (vs. a one-time payment).  The frequency of a periodic payment is determined by the value of [PaymentStream.paymentsPerYear](datatypes.md#paymentstream).
+
+<hr/><br/>
+
 ## RMD liability
 
 The IRS-mandated amount of money that must be withdrawn annually from the [plan's](datatypes.md#plan) tax-deferred accounts in order to satisfy the [RMD rule](https://www.investopedia.com/terms/r/requiredminimumdistribution.asp).
