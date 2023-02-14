@@ -57,8 +57,8 @@ Let D<sub>ret</sub> = the desired retirement date, indicated by the `startDate` 
         - D<sub>ret</sub> = January of 2 years following D<sub>curr</sub>
     - Otherwise:
         - D<sub>ret</sub> = January of the year immediately following D<sub>curr</sub>
-    - <i>NOTE: The above logic is for dealing with the cases where a person either retired: 1) in the past, or 2) within a year of D<sub>curr</sub>.
-1. Set [endDate](../datatypes.md#paymentstream) to D<sub>ret</sub> for all earned income streams in P′.</i>
+    - <i>NOTE: The above logic is for dealing with the cases where a person either retired: 1) in the past, or 2) within a year of D<sub>curr</sub>.</i>
+1. Set [endDate](../datatypes.md#paymentstream) to D<sub>ret</sub> for all earned income streams in P′.
 1. Set [plan.cashFlow.savingRate](../datatypes.md#cashflow) to 0% in P′.
 1. Run the [forecast](../README.md#post-v5forecast) for P′, and then obtain the [@unsaved_surplus](../output_streams.md#paymentstream-projections) amount in the month prior to D<sub>ret</sub>. <b>This amount respresents the combined take-home pay for primary and spouse.</b>
 
