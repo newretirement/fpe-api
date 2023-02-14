@@ -52,33 +52,24 @@ Let D<sub>ret</sub> = the desired retirement date, indicated by the `startDate` 
 1. Let P′ = a copy of plan P.
 1. Remove all user-defined [expenses](../terms.md#expense-stream) from P′.
 1. Remove all income from P′ that does not qualify as [earned income](https://www.investopedia.com/terms/e/earnedincome.asp) (social security, pensions, passive income, etc.).
+1. If D<sub>curr</sub> >= December of the year preceding D<sub>ret</sub>, then:
+    - If D<sub>curr</sub> falls on a December:
+        - D<sub>ret</sub> = January of 2 years following D<sub>curr</sub>
+    - Otherwise:
+        - D<sub>ret</sub> = January of the year immediately following D<sub>curr</sub>
+    - <i>NOTE: The above logic is for dealing with the cases where a person either retired: 1) in the past, or 2) within a year of D<sub>curr</sub>, in which case the FPE estimated tax calculations are not as stable</i>
+1. Set [endDate](../datatypes.md#paymentstream) to D<sub>ret</sub> for all earned income streams in P′.
 1. Set [plan.cashFlow.savingRate](../datatypes.md#cashflow) to 0% in P′.
-1. Run the [forecast](h../README.md#post-v5forecast) for P′, and then obtain the [@unsaved_surplus](../output_streams.md#paymentstream-projections) amount in the month prior to D<sub>ret</sub>.
+1. Run the [forecast](../README.md#post-v5forecast) for P′, and then obtain the [@unsaved_surplus](../output_streams.md#paymentstream-projections) amount in the month prior to D<sub>ret</sub>. <b>This amount respresents the combined take-home pay for primary and spouse.</b>
 
 
 ### **STEP 2**: Apply the Replacement Ratio
 
 1. Let `r` = the replacement ratio provided by [replacementRate](#mirp-request-object) within the request.
-1. Let `i` = the pre-retirement available monthly income determined at the end of **STEP 1** above.
+1. Let `i` = the combined take-home pay determined at the end of **STEP 1** above.
 1. The post-retirement estimated expenses are then calculated as `r × i`.
 
 ### **STEP 3**: Assert the post-retirement expense
 
 - Now that the post-retirement estimated expenses are known, assign this amount to the `paymentAmount` attribute of the [payentStream](../datatypes.md#paymentstream) referred to by `nationwide.mirp.postRetireExpenseStream` within the original plan P.
 - Re-run the [POST /v5/forecast](../README.md#post-v5forecast) using P as the request object; the resulting forecast will then take into account the plan's post-retirement expenses.
-
-### Corner Cases
-
-There are 2 situations that require a modification to D<sub>ret</sub> (the retirement date) when calculating take-home pay in STEP 1 above:
-
-1. D<sub>ret</sub> occurred in the past (i.e. D<sub>ret</sub> < D<sub>curr</sub>)
-2. D<sub>ret</sub> is in the future, but within (approximately) a year of D<sub>curr</sub>, which means the FPE estimated tax calculations are not as stable
-
-In order to deal with these two potential situations, the following supplemental algorithm steps to follow are:
-
-1. If D<sub>curr</sub> >= December of the year preceding D<sub>ret</sub>, then:
-    - If D<sub>curr</sub> falls on a December:
-        - D<sub>ret</sub> = January of 2 years following D<sub>curr</sub>
-   - Otherwise:
-        - D<sub>ret</sub> = January of the year immediately following D<sub>curr</sub>
-1. Modify P′ within the **STEP 1** of the original [algorithm](#algorithm-description) so that it incorporates the D<sub>ret</sub> value from the previous step.
