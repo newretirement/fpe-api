@@ -292,7 +292,7 @@ Runs a Monte Carlo simulation for given a [plan](datatypes.md#plan), returning t
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `plan` | [Plan](datatypes.md#plan) | The financial plan. |financial plan. |
-| `params` | [MonteCarloParams](#montecarloparams) | The input paramters to the simulation. |
+| `params` | [MonteCarloParams](#montecarloparams) | The input parameters to the simulation. |
 
 #### MonteCarloParams
 
