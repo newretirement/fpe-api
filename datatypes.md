@@ -408,9 +408,7 @@ The `Rate` object describes the growth rate and variability of various financial
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `mean` | float | The mean (average) annualized rate of growth. If either `optimistic` or `pessimistic` are set, this attribute is ignored and overridden with the computed mean (`(optimistic + pessimistic) / 2`). Valid range is `[-0.4, 0.4]`. |
-| `optimistic ` | float | The optimistic annual growth rate. This attribute should be used in conjunction with `pessimistic`. Valid range is `[-0.4, 0.4]`. |
-| `pessimistic ` | float | The pessimistic annual growth rate. This attribute should be used in conjunction with `optimistic`. Valid range is `[-0.4, 0.4]`. |
+| `mean` | float | The mean (average) annualized rate of growth. Valid range is `[-0.4, 0.4]`. |
 | `stdev` | float | The standard deviation of the random growth rate (only applicable when running a Monte Carlo simulation). |
 | `curve` | [RatePt[]](#ratept) | Defines 1 or more growth rates that will occur at specified future dates within the projection.  If this array is defined, all other attributes of this `Rate` object are ignored. The `RatePt` objects within this curve do not necessarily need to be in chronological order. __NOTE:__ Rate curves are only allowed on [Account](datatypes.md#account) objects. |
 
