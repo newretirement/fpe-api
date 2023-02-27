@@ -51,7 +51,7 @@ Let D<sub>ret</sub> = the desired retirement date, indicated by the `startDate` 
 
 1. Let P′ = a copy of plan P.
 1. Remove all user-defined [expenses](../terms.md#expense-stream) from P′.
-1. Remove all income from P′ that does not qualify as [earned income](https://www.investopedia.com/terms/e/earnedincome.asp) (social security, pensions, passive income, etc.).
+1. Remove all income from P′ that does not qualify as [earned income](https://www.investopedia.com/terms/e/earnedincome.asp) (social security, RMDs, pensions, passive income, etc.).
 1. If D<sub>curr</sub> >= December of the year preceding D<sub>ret</sub>, then:
     - If D<sub>curr</sub> falls on a December:
         - D<sub>ret</sub> = January of 2 years following D<sub>curr</sub>
