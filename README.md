@@ -397,3 +397,25 @@ The 1st data point corresponds to the first month of the simulation, and the las
     ]
 }
 ```
+
+<br/>
+
+## `POST /fpe/v5/optimize/socialsecurity`
+
+Given a financial plan, the social security optimizer solves for the optimal age to claim social security for the primary account holder (and their spouse if they have one).
+
+The response contains the following high-level objects:
+
+- A modified plan containing the optimized primary and spouse social security ages
+- The forecast of the modified plan
+- An optional list of warnings
+
+Response Format:
+
+```
+{
+	"plan": <plan>,
+	"forecast": <forecast>,
+	"warnings": [<warning>, ...]
+}
+```
