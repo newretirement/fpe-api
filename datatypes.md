@@ -134,9 +134,10 @@ Contains various reports that are unconditionally annual in nature (e.g. income 
 | ---------- | ---- | ----------- |
 | `fedIncomeTaxDue` | int[] | The federal income tax due for each tax year in the simulation.  |
 | `fedMarginalIncomeTaxRates` | float[] | The federal marginal income tax rate for each tax year in the simulation. |
+| `fedTaxableIncome` | int[] | The portion of gross income that the IRS deems subject to federal taxes.  FICA and capital gains are not included in this amount.  See [Investopedia: Taxable Income](https://www.investopedia.com/terms/t/taxableincome.asp). |
 | `incomeTaxTrueUp` | int[] | Reports the annual true-up applied for each year in the simulation.  A positive true-up amount indicates a refund, whereas a negative amount indicates the actual tax owed. |
 | `fedTaxableIncomeByBracket` | [IncomeTaxDataRange[]](#incometaxdatarange) | Reports federal taxable income by tax bracket for each tax year in the simulation. |
-| `stateTaxableIncome` | int[] | The state income tax due for each tax year in the simulation.  |
+| `stateTaxableIncome` | int[] | The portion of gross income that a given state's Department of Revenue deems subject to state taxes. |
 | `stateIncomeTaxDue` | int[] | The state income tax due for each tax year in the simulation.  |
 | `stateMarginalIncomeTaxRates` | float[] | The state marginal income tax rate for each tax year in the simulation. |
 | `stateTaxableIncomeByBracket` | [IncomeTaxDataRange[]](#incometaxdatarange) | Reports state taxable income by tax bracket for each tax year in the simulation. |
