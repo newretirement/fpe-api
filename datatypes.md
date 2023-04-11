@@ -178,7 +178,7 @@ Within a given tax jurisdiction (federal or state), `IncomeTaxDataRange` represe
 | `endYear` | int | The year in which the reported taxable income ceases within this range (year is exclusive). |
 | `filingStatus` | enum | The IRS filing status of the corresponding tax brackets.  Valid values are `single` and `married`. |
 | `stateCode` | [USState](#usstate) | The U.S. state corresponding to the tax bracket data. If the tax jurisdiction is federal, then this attribute is omitted.  |
-| `taxBrackets` | [TaxBracket[]](#taxbracket) | The year in which the reported taxable income ceases within this range (year is exclusive). |
+| `taxBrackets` | [TaxBracket[]](#taxbracket) | Chronological list of tax brackets for this IncomeTaxDataRange. |
 
 #### Projection
 
