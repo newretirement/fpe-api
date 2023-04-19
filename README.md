@@ -385,9 +385,9 @@ Sample JSON requests can be found in [examples/montecarlo/](examples/montecarlo/
 
 ## `POST /v5/optimize/roth`
 
-Given a financial [Plan](datatypes.md#plan), the Roth Conversion Optimizer (RCO) attempts to find an optimal set of Roth conversions that satisfy the given set of goals and/or constraints.  For a complete description of the available goals and constraints, see the [RCOParam](datatypes.md#rcoparams) object.
+Given a financial [Plan](datatypes.md#plan), attempt to find an optimal set of Roth conversions that satisfy a given set of goals and/or constraints.  For a complete description of the available goals and constraints, see the [RCOParam](datatypes.md#rcoparams) object.
 
-If RCO is unable to improve the estate value or no retirement accounts are eligible for Roth conversion, the forecast will contain a a warning message with the code `algoImprovedNothing`.
+If the algorithm is unable to improve the specified `goalMetric`, the forecast will contain a a warning message with the code [algoImprovedNothing](README.md#warning-codes).
 
 ### RCORequest
 
