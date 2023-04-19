@@ -283,6 +283,63 @@ Returns information about the deployed web service.
 
 <br/>
 
+## `GET /v5/medicare/irmaa`
+
+Returns information about the [Medicare IRMAA](https://www.nerdwallet.com/article/insurance/medicare/what-is-the-medicare-irmaa) surcharge amounts, and the income brackets to which they apply.
+
+### Response attributes
+
+| Attribute | Description |
+| ----------| ----------- |
+| year | the year to which the IRMAA data applies. |
+| incomeBrackets | List of income bracket objects (sorted by income limit) that determine the income threshold for a given set of PartB/PartD surcharges.  The income limit values are inclusive (vs. exclusive).  For example (refer to the sample response below), if a single person's income is $153,000, then their PartB/PartD surcharges would be $164/$31. |
+
+### Sample response
+
+```json
+{
+  "year": 2023,
+  "incomeBrackets": [
+    {
+      "incomeLimitSingle": 97000,
+      "incomeLimitMarried": 194000,
+      "additionalPartB": 0,
+      "additionalPartD": 0
+    },
+    {
+      "incomeLimitSingle": 123000,
+      "incomeLimitMarried": 246000,
+      "additionalPartB": 65,
+      "additionalPartD": 12
+    },
+    {
+      "incomeLimitSingle": 153000,
+      "incomeLimitMarried": 306000,
+      "additionalPartB": 164,
+      "additionalPartD": 31
+    },
+    {
+      "incomeLimitSingle": 183000,
+      "incomeLimitMarried": 366000,
+      "additionalPartB": 263,
+      "additionalPartD": 50
+    },
+    {
+      "incomeLimitSingle": 500000,
+      "incomeLimitMarried": 750000,
+      "additionalPartB": 362,
+      "additionalPartD": 70
+    },
+    {
+      "additionalPartB": 395,
+      "additionalPartD": 76
+    }
+  ]
+}
+```
+
+<br/>
+
 ## `POST /v5/montecarlo`
 
 Runs a Monte Carlo simulation for given a [plan](datatypes.md#plan), returning the probability of not running out of money before goal age.
