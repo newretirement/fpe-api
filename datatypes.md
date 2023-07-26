@@ -287,6 +287,7 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 | `target` | string | The name of the [account](#account) into which the payment will be deposited. |
 | `taxable` | boolean | [Income streams](terms.md#income-stream) flagged as taxable are considered when calculating AGI for tax purposes.  For example, an annuity income stream may or may not be taxed depending on the individual's chosen configuration. Defaults to `true`. |
 | `taxDeductionRate` | float | A value in the range [0..1] that indicates what percentage of the expense is tax-deductible.  If unset, the default value is `0.0`. __NOTE:__ This attribute only applies to [expense streams](terms.md#expense-stream). |
+| `itemizedDeductionCategory` | string | All itemized expenses for a given category will be aggregated into a single report stream whose name is `@{govLevel}_itemized_deduction_by_category:{category}`, where `{govLevel}` is either `state` or `federal`, and `category` is the value of this attribute. __NOTE:__ This attribute only applies to [expense streams](terms.md#expense-stream). |
 
 
 #### ContributionFromIncome
