@@ -373,6 +373,7 @@ A `plan` is the top-level financial object; it represents the user's complete pr
 | `cashFlow` | [CashFlow](#cashflow) | Determines how excess income is spent/saved. |
 | `currentDate` | [Date](#date) | Today's date. |
 | `events` | [Events](#events) | Describes various non-periodic life events such as buying a new home or purchasing an annuity. |
+| `limitRetireAccountContribs` | boolean | If `true`, income-linked contributions to `401k` and `ira` accounts will be capped based on IRS-defined rules; default value is `false`. |
 | `market` | [Market](#market) | Market data (inflation rate, etc.). |
 | `nationwide` | [Nationwide](nationwide/README.md#nationwide) | Contains plan attributes that are specific to the [Nationwide](https://www.nationwide.com) insurance company. |
 | `paymentStreams` | [PaymentStream[]](#paymentstream) | Array of payment streams within the financial plan. |
@@ -387,9 +388,10 @@ A `plan` is the top-level financial object; it represents the user's complete pr
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `checkingAccount` | string | The name of the account into which all income that needs to be tracked (in terms of surplus/gap) will be deposited. |
-| `savingsAccount` | string | the name of the account to which excess income will be saved. |
+| `checkingAccount` | string | The name of the "default checking" account into which all income that needs to be tracked (in terms of surplus/gap) will be deposited. |
+| `savingsAccount` | string | the name of the "default savings" account to which excess income will be saved. |
 | `savingRate` | float | The percentage of excess income for the month that will be saved into `savingsAccount`.  Valid range is `[0.0, 1.0]`. |
+| `depositTaxRefundToSavings` | boolean | If `true`, tax refunds are deposited into default savings; otherwise refunds go into default checking.  Default value is `false`. |
 
 #### Market
 
