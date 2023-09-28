@@ -162,7 +162,7 @@ Below are all possible warning codes and their descriptions.
 | __`algoConfigUpdated`__ | Due to algorithm-specific implementation constraints, certain aspects of the input model were modified in order for the algorithm to run.  <br/> An example of of this is a plan with `FIXED-DOLLAR` drawdown strategy sent into the Roth Conversion Optimizer.  The drawdown strategy will be changed to `SPENDING` prior to running the algorithm. |
 | __`algoImprovedNothing`__ | Given an input model to be solved/optimized, the algorithm was unable to produce a solution that was any better than the one implied by the original input model. |
 | __`algoGaveUp`__ | Even though a better solution might be possible given more computation time/resources, the algorithm is halting and returning its best solution. |
-| __`insufficientFunds`__ | A desired withdrawal could not be fully satisfied due to lack of funds in the account. |
+| __`insufficientFunds`__ | A desired withdrawal could not be fully satisfied due to lack of funds in the source account. |
 | __`valueOutOfRange`__ | An input value is outside of the acceptable range for a given FPE query. |
 | __`noFundsToConvert`__ | The plan provided to the Roth Conversion Optimizer did not contain any funds that were eligible for Roth conversion. |
 | __`ssConfig`__ | Within the `socialSecurity` input object, both `monthlyBenefit` and `primaryInsuranceAmount` (PIA) were provided, when only 1 is needed. In this case, PIA will take precedence. |
