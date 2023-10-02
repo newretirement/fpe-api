@@ -19,6 +19,7 @@ An `account` is a financial ledger of the transactions within a real-world accou
 | `realizedGainRate` | float | Determines the percentage of projected monthly investment returns that are realized immediately, and therefore taxed as capital gains.  A value of `1.0` means 100% of investment returns will be taxed immediately. A value of `0.0` means none of the returns are realized immediately, and so capital gains will only be processed upon a distribution event. This attribute is only relevant for accounts on which capital gains taxes are calculated.  Default value is `1.0`. |
 | `taxTreatment` | enum |  Determines how growth on an Account is taxed. Valid values are `capitalGains` or `ordinaryIncome`. Default is `capitalGains`. |
 | `type` | [AccountType](#accounttype) | Determines the type of account. Common account types are `aftertax`, `401k`, `asset`, and `loan`. |
+| `ytdContribution` | int | Specifies the total contributions made to this account year-to-date. Only applies to tax-deferred accounts.  This value is needed in order to accurately model current-year annual contribution limits. |
 
 #### AccountType
 
