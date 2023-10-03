@@ -4,6 +4,10 @@
         "market": {
             "inflation": {"mean": 0.028}
         },
+        "cashFlow": {
+            "checkingAccount": "primary_checking",
+            "savingsAccount": "primary_savings"
+        },
         "primary": {
             "birthDate": "1961-01",
             "goalAge": "90y",
@@ -15,10 +19,6 @@
                 "startAge": "67y0m",
                 "primaryInsuranceAmount": 2325
             }
-        },
-        "cashFlow": {
-            "checkingAccount": "primary_checking",
-            "savingsAccount": "primary_savings"
         },
         "accounts": [
             {

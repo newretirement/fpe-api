@@ -16,7 +16,7 @@ After processing all expenses, transfers, tax payments, and contributions to ret
 
 ## expense stream
 
-An expense stream represents a withdrawal from an [account](datatypes.md#account) within the [plan](datatypes.md#plan) that is applied to some external entity (e.g. a car payment to a financial institution).  In FPE, an expense stream is represented as a [paymentStream](datatypes.md#paymentstream) whose `target` attribute is empty, and whose `source` account is set to an existing account within the plan.
+An expense stream represents a withdrawal from 1 or more [accounts](datatypes.md#account) within the [plan](datatypes.md#plan).  In FPE, an expense stream is represented as a [paymentStream](datatypes.md#paymentstream) whose `target` is empty, and whose `source` is assigned the name of an existing account or `"optimal"`, which then funds the expense using the [Optimal Withdrawa Strategy](optimal_withdraw.md).
 
 <hr/><br/>
 
@@ -61,6 +61,12 @@ A payment that occurs at regular intervals (vs. a one-time payment).  The freque
 ## RMD liability
 
 The IRS-mandated amount of money that must be withdrawn annually from the [plan's](datatypes.md#plan) tax-deferred accounts in order to satisfy the [RMD rule](https://www.investopedia.com/terms/r/requiredminimumdistribution.asp).
+
+<hr/><br/>
+
+## shortfall withdrawal
+
+A shortfall withdrawal is an implicit withdrawal from an accounts that is automatically triggered when FPE is attempting to satisfy an expense amount that exceeds the balance of a given account. The order from which accounts are drawn is determined by the [optimal withdrawal strategy](optimal_withdrawal.md).
 
 <hr/><br/>
 
