@@ -34,12 +34,12 @@ This example demonstrates the _optimal withdrawal strategy_. The same $10,000 wi
 FPE evaluates all accounts in the plan, and then derives an optimal withdrawal order when satisfying the full expense amount.  The following 3-stage sort routine determines the account withdrawal order:
 
 - **STAGE 1:** Define 6 account categories (below) into which 1 or more accounts will be added based on the account's [type](datatypes.md#accounttype); then sort the accounts based on this category ordering:
-    1. afterTax
-    1. reverseMortgage
-    1. ira, 401k
-    1. roth, roth401k
-    1. hsa
-    1. revolvingCredit
+    - category 1: `afterTax`
+    - category 2: `reverseMortgage`
+    - category 3: `ira`, `401k`
+    - category 4: `roth`, `roth401k`
+    - category 5: `hsa`
+    - category 6: `revolvingCredit`
 - **STAGE 2:** Sort by [RoR](https://www.investopedia.com/terms/r/rateofreturn.asp)
     - Within each account category, sort by increasing RoR (specified by [account.rate](datatypes.md#account)).
 - **STAGE 3:** Sort by unique account name
