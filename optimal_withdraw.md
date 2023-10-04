@@ -43,7 +43,7 @@ FPE evaluates all accounts in the plan, and then derives an optimal withdrawal o
 - **STAGE 2:** Sort by [RoR](https://www.investopedia.com/terms/r/rateofreturn.asp)
     - Within each account category, sort by increasing RoR (specified by [account.rate](datatypes.md#account))
 
-Within each (category, RoR) subgroup, the original account order is intentionally preserved to allow the API client to control the withdrawal order.
+Within each _(category, RoR)_ equivalence class, the original account order is intentionally preserved to give the API client control over the withdrawal order.
 
 Once the account withdrawal order has been determined, FPE then attempts to withdraw the requested amount from each account until the full expense has been funded.  If the first account in the withdrawal sequence has insufficient funds, the remaining balance is withdrawn, and FPE moves on to the next account in the sequence, and so on.
 
