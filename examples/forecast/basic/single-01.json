@@ -1,8 +1,13 @@
 {
+    "params": {
+        "projectionPeriod": "yearly"
+    },
     "plan": {
-        "currentDate": "2021-01",
+        "currentDate": "2023-01",
         "market": {
-            "inflation": {"mean": 0.028}
+            "inflation": {
+                "mean": 0.03
+            }
         },
         "cashFlow": {
             "checkingAccount": "primary_checking",
@@ -32,7 +37,10 @@
             },
             {
                 "name": "debt",
-                "type": "revolvingCredit"
+                "type": "revolvingCredit",
+                "rate": {
+                    "mean": 0.08
+                }
             },
             {
                 "name": "retirement_savings",
@@ -40,8 +48,18 @@
                 "type": "ira",
                 "rate": {
                     "curve": [
-                        {"date": "2021-01", "rate": {"mean": 0.06}},
-                        {"date": "2027-07", "rate": {"mean": 0.04}}
+                        {
+                            "date": "2023-01",
+                            "rate": {
+                                "mean": 0.06
+                            }
+                        },
+                        {
+                            "date": "2028-07",
+                            "rate": {
+                                "mean": 0.04
+                            }
+                        }
                     ]
                 }
             }
@@ -49,9 +67,11 @@
         "paymentStreams": [
             {
                 "name": "work_income",
-                "paymentAmount": 7500,
+                "paymentAmount": 8000,
                 "paymentsPerYear": 12,
-                "rate": {"mean": 0.025},
+                "rate": {
+                    "mean": 0.025
+                },
                 "endDate": "2028-01",
                 "target": "primary_checking",
                 "earnedIncome": true,
@@ -59,7 +79,10 @@
                     {
                         "employeeContribRate": 0.1,
                         "employerMatches": [
-                            {"rate": 0.5, "upTo": 0.08}
+                            {
+                                "rate": 0.5,
+                                "upTo": 0.08
+                            }
                         ],
                         "employerMatchAnnualCap": 10000,
                         "employeeContribTarget": "retirement_savings"
@@ -68,8 +91,7 @@
             },
             {
                 "name": "expenses",
-                "paymentAmount": 7000,
-                "startDate": "2028-01",
+                "paymentAmount": 6000,
                 "source": "optimal",
                 "paymentsPerYear": 12
             }

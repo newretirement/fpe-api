@@ -1,15 +1,20 @@
 {
+    "params": {
+        "projectionPeriod": "yearly"
+    },
     "plan": {
-        "currentDate": "2021-01",
+        "currentDate": "2023-01",
         "market": {
-            "inflation": {"mean": 0.028}
+            "inflation": {
+                "mean": 0.03
+            }
         },
         "primary": {
             "birthDate": "1961-01",
             "goalAge": "90y",
             "gender": "female",
             "medical": {
-                "medicareStartAge": "65y",
+                "medicareStartAge": "64y",
                 "health": "good"
             },
             "socialSecurity": {
@@ -19,7 +24,7 @@
         },
         "spouse": {
             "birthDate": "1964-01",
-            "goalAge": "85y",
+            "goalAge": "83y",
             "gender": "male",
             "medical": {
                 "medicareStartAge": "65y",
@@ -27,7 +32,7 @@
             },
             "socialSecurity": {
                 "startAge": "63y6m",
-                "primaryInsuranceAmount": 2100
+                "primaryInsuranceAmount": 2500
             }
         },
         "cashFlow": {
@@ -52,14 +57,18 @@
                 "name": "primary_retirement_savings",
                 "balance": 300000,
                 "type": "401k",
-                "rate": {"mean": 0.04},
+                "rate": {
+                    "mean": 0.04
+                },
                 "owner": "primary"
             },
             {
                 "name": "spouse_retirement_savings",
                 "balance": 200000,
                 "type": "ira",
-                "rate": {"mean": 0.02},
+                "rate": {
+                    "mean": 0.02
+                },
                 "owner": "spouse"
             }
         ],
@@ -68,7 +77,9 @@
                 "name": "primary_work_income",
                 "paymentAmount": 8000,
                 "paymentsPerYear": 12,
-                "rate": {"mean": 0.02},
+                "rate": {
+                    "mean": 0.02
+                },
                 "endDate": "2028-01",
                 "target": "primary_checking",
                 "earnedIncome": true,
@@ -83,7 +94,9 @@
                 "name": "spouse_work_income",
                 "paymentAmount": 5000,
                 "paymentsPerYear": 12,
-                "rate": {"mean": 0.02},
+                "rate": {
+                    "mean": 0.02
+                },
                 "endDate": "2032-01",
                 "target": "primary_checking",
                 "earnedIncome": true,
