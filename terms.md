@@ -16,7 +16,7 @@ After processing all expenses, transfers, tax payments, and contributions to ret
 
 ## expense stream
 
-An expense stream represents a withdrawal from 1 or more [accounts](datatypes.md#account) within the [plan](datatypes.md#plan).  In FPE, an expense stream is represented as a [paymentStream](datatypes.md#paymentstream) whose `target` is empty, and whose `source` is assigned the name of an existing account or `"optimal"`, which then funds the expense using the [Optimal Withdrawa Strategy](optimal_withdraw.md).
+An expense stream represents a withdrawal from 1 or more [accounts](datatypes.md#account) within the [plan](datatypes.md#plan).  In FPE, an expense stream is represented as a [paymentStream](datatypes.md#paymentstream) whose `target` is empty, and whose `source` is assigned the name of an existing account or `"optimal"`, which then funds the expense using the [Optimal Withdrawal Strategy](optimal_withdraw.md).
 
 <hr/><br/>
 
