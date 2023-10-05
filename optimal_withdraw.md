@@ -20,7 +20,7 @@ If there are insufficient funds in the `"vacation"` account to cover the expense
 
 ### METHOD 2: Optimal Withdrawal Strategy
 
-This example demonstrates the _optimal withdrawal strategy_. As in the previous example, $10,000 will be withdrawn annually.  However, since the funding source is set to `"optimal"`, FPE can potentially withdraw the requested $10K from muliple accounts if the first chosen account can't cover the full amount.
+This example demonstrates the _optimal withdrawal strategy_. As in the previous example, $10,000 will be withdrawn annually.  However, since the funding source is set to `"optimal"`, FPE can potentially withdraw the requested $10K from muliple "shortfall" accounts if the first chosen account can't cover the full amount.
 
 ```json
 {
@@ -31,21 +31,28 @@ This example demonstrates the _optimal withdrawal strategy_. As in the previous 
 }
 ```
 
-FPE evaluates all accounts in the plan, and then derives an optimal withdrawal order when satisfying the full expense amount.  The following 2-stage sort routine determines the account withdrawal order:
+FPE evaluates all accounts in the plan, and then derives an optimal withdrawal order when satisfying the full expense amount.  The following 3-stage procedure determines the account withdrawal order:
 
-- **STAGE 1:** Define 6 account categories (below) into which 1 or more accounts will be added based on the account's [type](datatypes.md#accounttype); then sort the accounts based on this category ordering:
-    - category 1: `afterTax`
-    - category 2: `reverseMortgage`
-    - category 3: `ira`, `401k`
-    - category 4: `roth`, `roth401k`
-    - category 5: `hsa`
-    - category 6: `revolvingCredit`
-- **STAGE 2:** Sort by [RoR](https://www.investopedia.com/terms/r/rateofreturn.asp)
-    - Within each account category, sort by increasing RoR (specified by [account.rate](datatypes.md#account))
+- **STAGE 1**
+    - Withdraw from the user-specified default checking account (i.e. [plan.cashFlow.checkingAccount](datatypes.md#cashflow)).
+- **STAGE 2**
+    - Based on their [account type](datatypes.md#accounttype), assign the remaining accounts to the ordered categories below; then sort the accounts based on this category ordering:
+        - category 0: RMD-eligible accounts <b>having unsatisfied RMD withdrawals</b>
+        - category 1: `afterTax`
+        - category 2: `reverseMortgage`
+        - category 3: `ira`, `401k`
+        - category 4: `roth`, `roth401k`
+        - category 5: `hsa`
+        - category 6: `revolvingCredit`
+    - _Note:_ RMD-eligible accounts include `ira`, `401k`, and `roth401k`.
+- **STAGE 3**
+    - Within each account category, sort accounts by increasing [RoR](https://www.investopedia.com/terms/r/rateofreturn.asp) (specified by [account.rate](datatypes.md#account))
 
 Within each _(category, RoR)_ equivalence class, the original account order is intentionally preserved to give the API client control over the withdrawal order.
 
-Once the account withdrawal order has been determined, FPE then attempts to withdraw the requested amount from each account until the full expense has been funded.  If the first account in the withdrawal sequence has insufficient funds, the remaining balance is withdrawn, and FPE moves on to the next account in the sequence, and so on.
+Any account type that was not listed in the above categories is considered a _non-withdrawable account_ (e.g. a `loan`). In other words, these accounts will never be subject to implicit withdrawals.
+
+Once the account withdrawal order has been determined for a given month, FPE then attempts to withdraw the requested amount from each account until the full expense has been funded.  If the first account in the withdrawal sequence has insufficient funds, the remaining balance is withdrawn, and FPE moves on to the next account in the sequence, and so on.
 
 <br/>
 
