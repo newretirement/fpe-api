@@ -1,4 +1,5 @@
 {
+    "description": "ND-6737: Demonstrates how RMDs are withdrawn prior to aftertax accounts when an RMD liability exists. In this example, RMDs start in 2025.",
     "params": {
         "projectionPeriod": "yearly"
     },
@@ -9,9 +10,12 @@
             "savingsAccount": "savings-1"
         },
         "primary": {
-            "birthDate": "1973-01",
-            "goalAge": "60y",
-            "gender": "female"
+            "birthDate": "1952-01",
+            "goalAge": "85y",
+            "gender": "female",
+            "medical": {
+                "medicareStartAge": "999y"
+            }
         },
         "accounts": [
             {
@@ -21,23 +25,7 @@
             {
                 "name": "ira",
                 "type": "ira",
-                "balance": 10000,
-                "rate": {
-                    "mean": 0
-                }
-            },
-            {
-                "name": "401k",
-                "type": "401k",
-                "balance": 10000,
-                "rate": {
-                    "mean": 0
-                }
-            },
-            {
-                "name": "savings-3",
-                "type": "aftertax",
-                "balance": 10000,
+                "balance": 200000,
                 "rate": {
                     "mean": 0
                 }
@@ -45,7 +33,7 @@
             {
                 "name": "savings-2",
                 "type": "aftertax",
-                "balance": 10000,
+                "balance": 100000,
                 "rate": {
                     "mean": 0
                 }
@@ -53,7 +41,7 @@
             {
                 "name": "savings-1",
                 "type": "aftertax",
-                "balance": 10000,
+                "balance": 100000,
                 "rate": {
                     "mean": 0
                 }
@@ -66,7 +54,7 @@
         "paymentStreams": [
             {
                 "name": "expenses",
-                "paymentAmount": 7500,
+                "paymentAmount": 7000,
                 "source": "optimal",
                 "paymentsPerYear": 1
             }

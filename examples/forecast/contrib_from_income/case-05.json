@@ -1,5 +1,6 @@
 {
     "plan": {
+        "description": "Employee contributes 8% to acme_401k account; employer matches 5% up to 5% of salary to acme_roth account",
         "currentDate": "2021-01",
         "cashFlow": {
             "checkingAccount": "checking",

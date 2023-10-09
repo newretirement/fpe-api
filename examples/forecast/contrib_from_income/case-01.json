@@ -1,4 +1,5 @@
 {
+    "description": "employee contributes 8%, and employer matches; all proceeds to a single account",
     "plan": {
         "currentDate": "2021-01",
         "cashFlow": {

@@ -1,0 +1,114 @@
+{
+    "description": "Married couple; Primary has 2 jobs and contributes to a 401k for each job; spouse has 1 job and is contributing to 2 401k's within that single job.",
+    "params": {
+        "projectionPeriod": "yearly"
+    },
+    "plan": {
+        "currentDate": "2023-10",
+        "limitRetireAccountContribs": true,
+        "cashFlow": {
+            "checkingAccount": "checking",
+            "savingsAccount": "savings",
+            "savingRate": 1
+        },
+        "market": {
+            "inflation": {
+                "mean": 0
+            }
+        },
+        "primary": {
+            "birthDate": "1975-04",
+            "gender": "female",
+            "goalAge": "54y"
+        },
+        "spouse": {
+            "birthDate": "1976-04",
+            "gender": "female",
+            "goalAge": "53y"
+        },
+        "accounts": [
+            {
+                "name": "checking",
+                "type": "aftertax"
+            },
+            {
+                "name": "savings",
+                "type": "aftertax",
+                "balance": 50000
+            },
+            {
+                "name": "401k-1",
+                "type": "401k",
+                "owner": "primary",
+                "balance": 50000
+            },
+            {
+                "name": "401k-2",
+                "type": "401k",
+                "owner": "primary",
+                "balance": 50000
+            },
+            {
+                "name": "spouse-401k-1",
+                "type": "401k",
+                "owner": "spouse",
+                "balance": 50000
+            },
+            {
+                "name": "spouse-401k-2",
+                "type": "401k",
+                "owner": "spouse",
+                "balance": 50000
+            },
+            {
+                "name": "lifetime_debt",
+                "type": "revolvingCredit"
+            }
+        ],
+        "paymentStreams": [
+            {
+                "name": "job-1",
+                "paymentAmount": 10000,
+                "paymentsPerYear": 12,
+                "target": "checking",
+                "earnedIncome": true,
+                "contributions": [
+                    {
+                        "employeeContribRate": 0.2,
+                        "employeeContribTarget": "401k-1"
+                    }
+                ]
+            },
+            {
+                "name": "job-2",
+                "paymentAmount": 5000,
+                "paymentsPerYear": 12,
+                "target": "checking",
+                "earnedIncome": true,
+                "contributions": [
+                    {
+                        "employeeContribAmount": 1000,
+                        "employeeContribTarget": "401k-2"
+                    }
+                ]
+            },
+            {
+                "name": "spouse-job-1",
+                "paymentAmount": 10000,
+                "paymentsPerYear": 12,
+                "target": "checking",
+                "earnedIncome": true,
+                "contributions": [
+                    {
+                        "employeeContribAmount": 2000,
+                        "employeeContribTarget": "spouse-401k-1"
+                    },
+                    {
+                        "employeeContribAmount": 750,
+                        "employeeContribTarget": "spouse-401k-2"
+                    }
+                ]
+            }
+        ]
+    }
+}

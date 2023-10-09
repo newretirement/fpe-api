@@ -1,0 +1,72 @@
+{
+    "description": "Single person with a 401k and IRA; contributing to both 401k and IRA within the same income stream.",
+    "params": {
+        "projectionPeriod": "monthly"
+    },
+    "plan": {
+        "currentDate": "2023-10",
+        "limitRetireAccountContribs": true,
+        "cashFlow": {
+            "checkingAccount": "checking",
+            "savingsAccount": "savings",
+            "savingRate": 1
+        },
+        "market": {
+            "inflation": {
+                "mean": 0.0
+            }
+        },
+        "primary": {
+            "birthDate": "1975-04",
+            "gender": "female",
+            "goalAge": "52y"
+        },
+        "accounts": [
+            {
+                "name": "checking",
+                "type": "aftertax"
+            },
+            {
+                "name": "savings",
+                "type": "aftertax",
+                "balance": 100000
+            },
+            {
+                "name": "401k-primary",
+                "type": "401k",
+                "owner": "primary",
+                "balance": 100000
+            },
+            {
+                "name": "ira-primary",
+                "type": "ira",
+                "owner": "primary",
+                "balance": 50000
+            },
+            {
+                "name": "lifetime_debt",
+                "type": "revolvingCredit",
+                "rate": {}
+            }
+        ],
+        "paymentStreams": [
+            {
+                "name": "acme_income",
+                "paymentAmount": 10000,
+                "paymentsPerYear": 12,
+                "target": "checking",
+                "earnedIncome": true,
+                "contributions": [
+                    {
+                        "employeeContribRate": 0.3,
+                        "employeeContribTarget": "401k-primary"
+                    },
+                    {
+                        "employeeContribRate": 0.1,
+                        "employeeContribTarget": "ira-primary"
+                    }
+                ]
+            }
+        ]
+    }
+}

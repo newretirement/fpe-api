@@ -1,4 +1,5 @@
 {
+    "description": "Employee and employer contributions from same income stream go to 2 separate accounts",
     "plan": {
         "currentDate": "2021-01",
         "cashFlow": {

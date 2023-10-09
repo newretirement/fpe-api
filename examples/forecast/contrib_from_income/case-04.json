@@ -1,4 +1,5 @@
 {
+    "description": "Employee contribution by dollar amount (vs. % of gross income)",
     "plan": {
         "currentDate": "2021-01",
         "cashFlow": {

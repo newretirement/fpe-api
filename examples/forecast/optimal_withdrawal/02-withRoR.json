@@ -1,0 +1,77 @@
+{
+    "description": "ND-6737: Same as 01-noRoR, but now some accounts have RoR, which affects withdraw order (accounts with lower RoR should be hit first).",
+    "params": {
+        "projectionPeriod": "yearly"
+    },
+    "plan": {
+        "currentDate": "2023-01",
+        "cashFlow": {
+            "checkingAccount": "checking",
+            "savingsAccount": "savings-1"
+        },
+        "primary": {
+            "birthDate": "1973-01",
+            "goalAge": "60y",
+            "gender": "female"
+        },
+        "accounts": [
+            {
+                "name": "checking",
+                "type": "aftertax",
+                "balance": 10000
+            },
+            {
+                "name": "ira",
+                "type": "ira",
+                "balance": 10000,
+                "rate": {
+                    "mean": 0.006
+                }
+            },
+            {
+                "name": "401k",
+                "type": "401k",
+                "balance": 10000,
+                "rate": {
+                    "mean": 0.004
+                }
+            },
+            {
+                "name": "savings-3",
+                "type": "aftertax",
+                "balance": 10000,
+                "rate": {
+                    "mean": 0.002
+                }
+            },
+            {
+                "name": "savings-2",
+                "type": "aftertax",
+                "balance": 10000,
+                "rate": {
+                    "mean": 0.002
+                }
+            },
+            {
+                "name": "savings-1",
+                "type": "aftertax",
+                "balance": 10000,
+                "rate": {
+                    "mean": 0.001
+                }
+            },
+            {
+                "name": "debt",
+                "type": "revolvingCredit"
+            }
+        ],
+        "paymentStreams": [
+            {
+                "name": "expenses",
+                "paymentAmount": 7000,
+                "source": "optimal",
+                "paymentsPerYear": 1
+            }
+        ]
+    }
+}

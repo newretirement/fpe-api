@@ -1,7 +1,10 @@
 {
-    "description": "Employer match annual cap of $9k",
+    "description": "ND-3386, ND-3387: Allow multiple employer contribution strategies (rate, fixed dollar amount, match) within same `ContributionFromIncome` object",
+    "params": {
+        "projectionPeriod": "monthly"
+    },
     "plan": {
-        "currentDate": "2021-01",
+        "currentDate": "2023-09",
         "cashFlow": {
             "checkingAccount": "checking",
             "savingsAccount": "savings",
@@ -9,7 +12,7 @@
         },
         "primary": {
             "birthDate": "1973-01",
-            "goalAge": "90y",
+            "goalAge": "58y",
             "gender": "male"
         },
         "accounts": [
@@ -34,22 +37,24 @@
         "paymentStreams": [
             {
                 "name": "acme_income",
-                "paymentAmount": 15000,
+                "paymentAmount": 10000,
                 "paymentsPerYear": 12,
-                "endDate": "2038-01",
-                "rate": {"mean": 0.06},
-                "contributions": [
-                  {
-                      "employeeContribRate": 0.1,
-                      "employerMatches": [
-                          {"rate": 1.0, "upTo": 0.05}
-                      ],
-                      "employerMatchAnnualCap": 9000,
-                      "employeeContribTarget": "acme_401k"
-                  }
-                ],
                 "target": "checking",
-                "earnedIncome": true
+                "earnedIncome": true,
+                "contributions": [
+                    {
+                        "employeeContribAmount": 1000,
+                        "employerContribRate": 0.01,
+                        "employerContribAmount": 50,
+                        "employerMatches": [
+                            {
+                                "rate": 0.5,
+                                "upTo": 0.1
+                            }
+                        ],
+                        "employeeContribTarget": "acme_401k"
+                    }
+                ]
             }
         ]
     }
