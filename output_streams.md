@@ -19,6 +19,8 @@ When a [plan](datatypes.md#plan) is submitted to the [POST /forecast](README.md#
 | `@capital_gains_tax` | report | The [tax due on all capital gains](https://www.investopedia.com/terms/c/capital_gains_tax.asp) for the given tax year. |
 | `@capital_gains_tax_payment` | expense | Represents a [capital gains tax](https://www.investopedia.com/terms/c/capital_gains_tax.asp) payment. |
 | `@combined_irmaa` | report | `@irmaa + @irmaa_spouse`. |
+| `@employeeContrib:${work_stream}:${index}` | report | The employee contribution amount for a given earned income stream. |
+| `@employerContrib:${work_stream}:${index}` | report | The employer contribution amount for a given earned income stream. This amount combines both non-elective and employer-match contributions. |
 | `@federal_agi` | report | The [AGI](https://www.investopedia.com/terms/a/agi.asp) used for calculating federal income taxes. |
 | `@federal_income_tax` | report | The federal income tax due for the given tax year.  DEPRECATED: this stream is now in `annualReports.fedIncomeTaxDue`. |
 | `@federal_taxable_income` | report | DEPRECATED. This stream is now in [annualReports.fedTaxableIncome](datatypes.md#annualreports). |

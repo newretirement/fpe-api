@@ -217,29 +217,8 @@ This is the multifaceted configuration object that influences how the financial 
 | `calcFIRE` | boolean | If `true`, the 'FIRE' solver is executed, and the result appears in the [Forecast.FIRE](#fire) response. |
 | `calcPostRetireIncomeExpenseRatio` | boolean | If `true`, the _Income/Expense Ratio_ calculation is executed, and the result appears in [Forecast.postRetireIncomeExpenseRatio](#forecast) within the response. |
 | `calcSpendingPower` | boolean | If `true`, the 'Spending Power' calculation executes, and the result appears as the `spendingPower` attribute within the [Forecast](#forecast) response object. Note that [plan.primary.retireDate](#person) must be set when running this calculation. See [Forecast.spendingPower](#forecast) for more details on this calculation. |
-| `filterForecast` | [ForecastFilter](#forecastfilter) | Applies filtering to the output streams within the [Forecast](#forecast) object. |
 | `projectionPeriod` | enum | Determines if the forecasted projection vectors represent monthly or aggregated annual amounts. Valid values are [`monthly`, `yearly`]. If this attribute is empty, `yearly` is the default. |
 | `rothConversionOptimizer` | [RCOParams](#rcoparams) | Configuration object for the Roth Conversion Optmizer algorithm. |
-
-### AnnualReportsFilter
-
-| Attribute  | Type | Description |
-| ---------- | ---- | ----------- |
-| `excludeAll` | boolean | Excludes the [annualReports](forecast) content from the forecast. |
-
-### ForecastFilter
-
-| Attribute  | Type | Description |
-| ---------- | ---- | ----------- |
-| `accounts` | [StreamFilter](#streamfilter) | Applies filtering rules to the account output streams. |
-| `paymentStreams` | [StreamFilter](#streamfilter) | Applies filtering rules to the payment output streams.  |
-| `annualReports` | [AnnualReportsFilter](#annualreportsfilter) | Applies filtering rules to the annual report output streams.  |
-
-### IncludeFilter
-
-| Attribute  | Type | Description |
-| ---------- | ---- | ----------- |
-| `name` | string[] | The list of output stream names to include in the forecast. |
 
 ### RCOParams
 
@@ -254,14 +233,6 @@ These config parameters are used exclusively by the [Roth Conversion Optimizer](
 | `maxIRMAABracket` | int | Only applicable when `algoType="rulebased"`.  Determines the inflation-adjusted [IRMAA income bracket](README.md#get-v5medicareirmaa) limit used as the target for suggesting the Roth conversion amount within a given year.  The algorithm will attempt to find a conversion amount that results in a [MAGI](https://www.investopedia.com/terms/m/magi.asp) that is as close to the selected IRMAA income limit without exceeding it. <br/><br/>Valid values:<ul><li>`0` = the lowest income bracket ($97K for single filers and $194K for married filers in 2023) <li>`1` = the 2<sup>nd</sup> lowest income bracket <li>`2` = the 3<sup>rd</sup> lowest income bracket <li>`k` = the (k+1)<sup>th</sup> lowest income bracket.  If `k` is greater than the number of IRMAA income brackets, then this constraint is effectively disabled.</ul> Notes: <ol><li>This attribute is mutually exclusive of `maxTaxBracket`; if both attributes are set, an `HTTP 400` error will result.<li>The algorithm will stop increasing the conversion amount when doing so would trigger an [insufficientFunds](README.md#warning-codes) warning on a _user-defined_ expense/transfer. </ol> |
 | `maxTaxBracket` | int | Only applicable when `algoType="rulebased"`.  Determines the highest inflation-adjusted federal tax bracket beyond which the algorithm will stop recommending Roth conversions within a given year. <br/><br/>Valid values:<ul><li>`0` = the special [zero tax bracket](https://www.realized1031.com/blog/what-does-it-mean-to-be-in-a-zero-tax-bracket) <li>`1` = the 1<sup>st</sup> lowest tax bracket (10% for single filers in 2023) <li>`2` = the 2<sup>nd</sup> lowest tax bracket (12%) <li>`k` = the k<sup>th</sup> lowest tax bracket.  If `k` is greater than the number of federal tax brackets, then this constraint is effectively disabled.</ul>  Notes: <ol><li>This attribute is mutually exclusive of `maxIRMAABracket`; if both attributes are set, an `HTTP 400` error will result.<li>The algorithm will stop increasing the conversion amount when doing so would trigger an [insufficientFunds](README.md#warning-codes) warning. </ol> |
 | `minAfterTaxFundsToKeep` | int | If set to a nonnegative value, the RCO algorithm will limit the Roth conversion amount based on aftertax funds available to pay for the estimated tax due for the conversion (a 20% tax rate is assumed).  For example, if set to `1000`, then the maximum annual conversion for a given year will be:<br/> &nbsp;&nbsp;&nbsp;&nbsp;`max(0, x-1000) / 0.20`<br/> where `x` is the total available aftertax funds for that year. <br/><br/>If unset or `null`, the algorithm is allowed to pay for taxes on Roth conversions via any available funds (e.g. tax-deferred dollars from an IRA). |
-
-### StreamFilter
-
-| Attribute  | Type | Description |
-| ---------- | ---- | ----------- |
-| `excludeAll` | boolean | Excludes all output streams.|
-| `include` | [IncludeFilter](#includefilter) | Includes only the output streams implied by this filter.|
-
 
 <br/><hr/>
 
@@ -294,7 +265,7 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 
 #### ContributionFromIncome
 
-`ContributionFromIncome` determines how contributions from a given income payment are calculated, and to what account(s) the contributions will be deposited.
+`ContributionFromIncome` determines how contributions (employee and employer) from earned income are calculated, and to what account(s) the contributions will be deposited.
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
@@ -306,11 +277,21 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 | `employeeContribRateCap` | float | Imposes an upper bound on `employeeContribRate` (which can potentially increase annually based on `employeeContribRateInc`).  Valid range is `[0.0, 1.0]`. |
 | `employeeContribTarget` | string | The name of the account into which employee contributions are deposited. |
 | `employerContribAmount` | int | Specifies a fixed dollar amount (per income payment period) that the employer contributes to the `employerContribTarget` account. |
-| `employerContribRate` | float | Determines how much the employer contributes to the employee's retirement plan, expressed as a percentage of their annual income.  Valid range is `[0.0, 10000.0]`. |
+| `employerContribRate` | float | Determines how much the employer contributes to the employee's retirement plan, expressed as a percentage of their annual income.  E.g. a value of `0.05` means the employer will contribute 5%.  Valid range is `[0.0, 10000.0]`. |
+| `employerContribRateCurve` | [EmployerContribRatePt[]](#employercontribratept) | Represents an employer contribution rate that changes over time.  Each object in the array represents a contribution rate and the date on which that rate becomes active. For sample usage, [see this](./examples/forecast/contrib_from_income/case-08.json). |
 | `employerContribTarget` | string | The name of the account into which employer contributions are deposited.  If no account is specified, employer contributions will by default be deposited into `employeeContribTarget`. |
-| `employerMatches` | [EmployerMatch[]](#employermatch) | Defines both single-tier and multi-tier employer matching rules. |
+| `employerMatches` | [EmployerMatch[]](#employermatch) | Defines single- and multi-tier employer matching rules. |
 | `employerMatchAnnualCap` | int | Imposes an annual limit on the amount of money the employer contributes to the plan as a match. |
 | `endDate` | [Date](#date) | All income-linked contributions will cease as of this date. |
+
+
+#### EmployerContribRatePt
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `rate` | float | The percentage of the employee's income that will be contributed by their employer. E.g. a value of `0.05` means the employer will contribute 5%. Valid range is `[0.0, 10000.0]`. |
+| `date` | float | The start date on which `rate` becomes the active employer contribution rate. |
+
 
 #### EmployerMatch
 

@@ -1,0 +1,72 @@
+{
+    "description": "ND-6790: Employer contribution rate curve (i.e. contributes different rates based on current date within the simulation)",
+    "params": {
+        "projectionPeriod": "yearly"
+    },
+    "plan": {
+        "currentDate": "2023-01",
+        "cashFlow": {
+            "checkingAccount": "checking",
+            "savingsAccount": "savings",
+            "savingRate": 1
+        },
+        "primary": {
+            "birthDate": "1983-01",
+            "goalAge": "50y",
+            "gender": "male"
+        },
+        "accounts": [
+            {
+                "name": "checking",
+                "type": "aftertax"
+            },
+            {
+                "name": "savings",
+                "type": "aftertax",
+                "balance": 100000
+            },
+            {
+                "name": "lifetime_debt",
+                "type": "revolvingCredit"
+            },
+            {
+                "name": "acme_401k",
+                "type": "401k"
+            },
+            {
+                "name": "acme_roth",
+                "type": "roth"
+            }
+        ],
+        "paymentStreams": [
+            {
+                "name": "acme_income",
+                "paymentAmount": 10000,
+                "paymentsPerYear": 12,
+                "target": "checking",
+                "earnedIncome": true,
+                "contributions": [
+                    {
+                        "employeeContribTarget": "acme_401k",
+                        "employeeContribRate": 0.1,
+                        "employerContribTarget": "acme_roth",
+                        "employerContribRateCurve": [
+                            {
+                                "date": "2023-01",
+                                "rate": 0.01
+                            },
+                            {
+                                "date": "2025-01",
+                                "rate": 0.02
+                            },
+                            {
+                                "date": "2027-01",
+                                "rate": 0.03
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
