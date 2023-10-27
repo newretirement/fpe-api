@@ -21,6 +21,8 @@ When a [plan](datatypes.md#plan) is submitted to the [POST /forecast](README.md#
 | `@combined_irmaa` | report | `@irmaa + @irmaa_spouse`. |
 | `@employeeContrib:${work_stream}:${index}` | report | The employee contribution amount for a given earned income stream. |
 | `@employerContrib:${work_stream}:${index}` | report | The employer contribution amount for a given earned income stream. This amount combines both non-elective and employer-match contributions. |
+| `@employerMatch:${work_stream}:${index}` | report | Reports the employer match amount. |
+| `@employerNEC:${work_stream}:${index}` | report | Reports the non-elective employer contributions (NEC's). |
 | `@federal_agi` | report | The [AGI](https://www.investopedia.com/terms/a/agi.asp) used for calculating federal income taxes. |
 | `@federal_income_tax` | report | The federal income tax due for the given tax year.  DEPRECATED: this stream is now in `annualReports.fedIncomeTaxDue`. |
 | `@federal_taxable_income` | report | DEPRECATED. This stream is now in [annualReports.fedTaxableIncome](datatypes.md#annualreports). |
