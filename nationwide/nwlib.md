@@ -14,7 +14,7 @@ The `NWLIB` request object defines all of the financial inputs needed for the LI
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `equityAllocation` | float | At `incomeActivationDate`, the percentage of equity funds to be retained within the `equityRoth` and `equityIRA` accounts is dictated by this rate (where the non-retained portion is assumed to have been used to purchase the non-guarateed annuities). |
+| `equityAllocation` | float | At `incomeActivationDate`, the ratio of equity funds to be retained within the `equityRoth` and `equityIRA` accounts is dictated by this rate (where the non-retained portion is assumed to have been used to purchase the non-guaranteed annuities). |
 | `incomeActivationDate` | [Date](../datatypes.md#date) | The future date at which point the participant's LIB income payments commence. |
 | `highWaterMark` | int | The highest total balance across the LIB assets to date. |
 | `gtdWithdrawRate` | float | At income activation date, the annual guaranteed income payment is determined by the formula:<br/>`highWaterMark × gtdWithdrawRate`. |

@@ -145,15 +145,15 @@ Contains various reports that are unconditionally annual in nature (e.g. income 
 
 #### FIRE
 
-`FIRE` (a.k.a. "earliest retire date") is the result of the optional [calcFIRE](datatypes.md#forecastparams) calculation, which solves for the earliest `endDate` that can be used across all jobs (i.e. [PaymentStreams](#paymentstream) whose `earnedIncome` flag is true), such that the forecast's [liquid estate value](terms.md#liquid-estate-value) `V` is in the range `-1000　≤　V　≤　1000`.
+`FIRE` (a.k.a. "earliest retire date") is the result of the optional [calcFIRE](datatypes.md#forecastparams) calculation, which solves for the earliest `endDate` that can be used across all work income streams (i.e. [PaymentStreams](#paymentstream) whose `earnedIncome` flag is true), such that the forecast's [liquid estate value](terms.md#liquid-estate-value) `V` is in the range `-1000　≤　V　≤　1000`.
 
 When searching for an optimal solution, the algorithm is constrained by the following rules:
 
-- A job's `startDate` can never be modified
-- Multiple job scenario:
-    - The algorithm can move the endDate back in time (i.e. allow the person to quit their job sooner) for any/all jobs.  However, only the most current job(s) are considered when moving the endDate further into the future.
+- A work income stream's `startDate` can never be modified
+- Multiple work income stream scenario:
+    - The algorithm can move the endDate back in time (i.e. allow the person to quit their job sooner) for any/all work income streams.  However, only the most current job(s) are considered when moving the endDate further into the future.
     - Formally defined:
-        - Let J = the set of all jobs in the [plan](datatypes.md#plan)
+        - Let J = the set of all work income streams (jobs) in the [plan](datatypes.md#plan)
         - Let j<sub>k</sub> = the k<sup>th</sup> job in set J
         - Let d<sub>k</sub> = the original endDate for j<sub>k</sub> prior to any modifications by this algorithm
         - Let d'<sub>k</sub> = the algorithm's suggested endDate for j<sub>k</sub>
@@ -242,8 +242,8 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `aboveTheLine` | boolean | If true, the tax-deductible portion of the expense will be subtracted from gross income prior calculating AGI.  Otherwise, its is treated as an itemized deduction (below-the-line). __NOTE:__ This attribute is relevant only when `taxDeductionRate > 0.0`. |
-| `contributions` | [ContributionFromIncome[]](#contributionfromincome) | (Optional) Specifies 1 or more "income-linked" contributions taken directly from the income payment. Use this for modeling things like 401(k) employee contributions with employer matching rules. |
+| `aboveTheLine` | boolean | If true, the tax-deductible portion of the expense is subtracted from gross income prior calculating AGI.  Otherwise, it is treated as an itemized deduction (below-the-line). __NOTE:__ This attribute is relevant only when `taxDeductionRate > 0.0`. |
+| `contributions` | [ContributionFromIncome[]](#contributionfromincome) | (Optional) Specifies 1 or more [income-linked contributions](income_linked_contribs.md#income-linked-contributions) taken directly from an income payment. Use this for modeling things like 401(k) employee contributions with employer matching rules. |
 | `date` | [Date](#date) | Specify a single payment on a specific date. __Note:__ this is just a shorthand method of configuring a one-time payment; the same thing can be accomplished via `startDate` and `endDate`.  E.g. `{date: "2040-06"}` is the same as `{startDate: "2040-06", endDate: "2040-07"}`. |
 | `earnedIncome` | boolean | If true, indicates this is an income stream that satisfies the IRS's definition of [earned income](https://www.investopedia.com/terms/e/earnedincome.asp). |
 | `endDate` | [Date](#date) | The date that future payments have ceased. |
