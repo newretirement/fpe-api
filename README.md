@@ -420,13 +420,13 @@ The `RothConversion` object represents a one-time transfer from a tax-deferred a
 
 ## `POST /fpe/v5/savingsneed`
 
-Given a [Plan](datatypes.md#plan), solves for the total amount of money needed in order to "break even" at goal age at multiple future time points.
+Given a [Plan](datatypes.md#plan), solves for the total amount of money needed in order to "break even" at goal age (final month of simulation) at multiple future time points.
 
-To "break even", in this context, means that the household's [net worth](https://en.wikipedia.org/wiki/Net_worth) (`@total_savings - @total_debt`) is in the range [$0..$1000].
+"break even", in this context, means the household's [net worth](https://en.wikipedia.org/wiki/Net_worth) (i.e. [@total_savings - @total_debt](output_streams.md#account-projections)) is in the range [$0..$1000].
 
 The response contains a list of data points, where each one contains a `value` and `date`, indicating the _total_ amount of savings needed at a specific date in order to achieve break-even.
 
-The 1st data point corresponds to the first month of the simulation, and the last datapoint corresponds to the last month of the simulation.  The data points in between represent 5-year intervals starting from the first data point.
+The first data point corresponds to December of the simulation's first year, and the last datapoint corresponds to the last month of the simulation.  The data points in between represent 5-year intervals starting from the first data point.
 
 ### Sample response
 
@@ -434,20 +434,20 @@ The 1st data point corresponds to the first month of the simulation, and the las
 {
     "savingsNeed": [
         {
-            "date": "2019-01",
-            "value": "190700.00"
+            "date": "2024-12",
+            "value": "190700"
         },
         {
-            "date": "2024-01",
-            "value": "275200.00"
+            "date": "2029-12",
+            "value": "275200"
         },
         {
-            "date": "2029-01",
-            "value": "180400.00"
+            "date": "2034-12",
+            "value": "180400"
         },
         {
-            "date": "2034-01",
-            "value": "150900.00"
+            "date": "2035-03",
+            "value": "150900"
         }
     ]
 }
