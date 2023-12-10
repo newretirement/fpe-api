@@ -424,7 +424,7 @@ Given a [Plan](datatypes.md#plan), this endpoint solves for the [@total_savings]
 
 "break even", in this context, means the household's [net worth](https://en.wikipedia.org/wiki/Net_worth) (i.e. [@total_savings - @total_debt](output_streams.md#account-projections)) in the final month of the simulation is in the range [$0..$1000].
 
-The response object is a time series of data points, where each point contains a `value` and `date` indicating the [@total_savings](output_streams.md#account-projections) amount needed at a specific date in order to break even (see **Sample response** below).
+This endpoint returns a time series, where each data point contains a `value` and `date` indicating the [@total_savings](output_streams.md#account-projections) amount needed at a specific date in order to break even (see **Sample response** below).
 
 The first data point corresponds to December of the simulation's first year, and the last datapoint corresponds to the last month of the simulation.  The data points in between represent 5-year intervals starting from the first data point.
 
@@ -455,15 +455,27 @@ The first data point corresponds to December of the simulation's first year, and
 
 ### Implementation Note
 
-To find the correct `@total_savings` amount at date `d`, a temporary `paymentStream` having a one-time payment date `d` is injected into the original [Plan](datatypes.md#plan), and then a binary search is run in order to find the tax-free withdrawal or deposit amount needed.  In other words, the following `paymentStream` object is added to the plan, and then the simulation is repeatedly run with varying values of `x` until break-even is achieved:
+To find the correct `@total_savings` amount at date `d`, FPE  injects a temporary `paymentStream` having a one-time payment date `d` into the original [Plan](datatypes.md#plan), and then runs a binary search to find the non-taxable withdrawal or deposit amount needed.  More specifically, either a withdrawal or deposit `paymentStream` object is added to the plan, and then the simulation is repeatedly run with varying values of `x` until break-even is achieved:
 
+**Case 1:** Net worth at goal age is negative, so deposit more money
 ```
 {
-    "name": "temporaryStream",
+    "name": ""@solver-savingsNeedCalc"",
     "paymentAmount": x,
     "date": d,
-    "taxable": true,
+    "taxable": false,
     "target": "defaultSavings"
+}
+```
+
+**Case 2:** Net worth at goal age is above the $1,000 threshold, so withdraw more money
+```
+{
+    "name": ""@solver-savingsNeedCalc"",
+    "paymentAmount": x,
+    "date": d,
+    "taxable": false,
+    "source": "optimal"
 }
 ```
 
