@@ -420,11 +420,11 @@ The `RothConversion` object represents a one-time transfer from a tax-deferred a
 
 ## `POST /fpe/v5/savingsneed`
 
-Given a [Plan](datatypes.md#plan), solves for the total amount of money needed in order to "break even" at goal age (final month of simulation) at multiple future time points.
+Given a [Plan](datatypes.md#plan), this endpoint solves for the [@total_savings](output_streams.md#account-projections) needed in order to "break even" at goal age (final month of simulation) at multiple future time points.
 
-"break even", in this context, means the household's [net worth](https://en.wikipedia.org/wiki/Net_worth) (i.e. [@total_savings - @total_debt](output_streams.md#account-projections)) is in the range [$0..$1000].
+"break even", in this context, means the household's [net worth](https://en.wikipedia.org/wiki/Net_worth) (i.e. [@total_savings - @total_debt](output_streams.md#account-projections)) in the final month of the simulation is in the range [$0..$1000].
 
-The response contains a list of data points, where each one contains a `value` and `date`, indicating the _total_ amount of savings needed at a specific date in order to achieve break-even.
+The response object is a time series of data points, where each point contains a `value` and `date` indicating the [@total_savings](output_streams.md#account-projections) amount needed at a specific date in order to break even (see **Sample response** below).
 
 The first data point corresponds to December of the simulation's first year, and the last datapoint corresponds to the last month of the simulation.  The data points in between represent 5-year intervals starting from the first data point.
 
@@ -450,6 +450,20 @@ The first data point corresponds to December of the simulation's first year, and
             "value": "150900"
         }
     ]
+}
+```
+
+### Implementation Note
+
+To find the correct `@total_savings` amount at date `d`, a temporary `paymentStream` having a one-time payment date `d` is injected into the original [Plan](datatypes.md#plan), and then a binary search is run in order to find the tax-free withdrawal or deposit amount needed.  In other words, the following `paymentStream` object is added to the plan, and then the simulation is repeatedly run with varying values of `x` until break-even is achieved:
+
+```
+{
+    "name": "temporaryStream",
+    "paymentAmount": x,
+    "date": d,
+    "taxable": true,
+    "target": "defaultSavings"
 }
 ```
 
