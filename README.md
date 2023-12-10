@@ -457,10 +457,10 @@ The first data point corresponds to December of the simulation's first year, and
 
 To find the correct `@total_savings` amount at date `d`, FPE  injects a temporary `paymentStream` having a one-time payment date `d` into the original [Plan](datatypes.md#plan), and then runs a binary search to find the non-taxable withdrawal or deposit amount needed.  More specifically, either a withdrawal or deposit `paymentStream` object is added to the plan, and then the simulation is repeatedly run with varying values of `x` until break-even is achieved:
 
-**Case 1:** Net worth at goal age is negative, so deposit more money
+_**Case 1:** Net worth at goal age is negative, so deposit more money_
 ```
 {
-    "name": ""@solver-savingsNeedCalc"",
+    "name": "@solver-savingsNeedCalc",
     "paymentAmount": x,
     "date": d,
     "taxable": false,
@@ -468,10 +468,10 @@ To find the correct `@total_savings` amount at date `d`, FPE  injects a temporar
 }
 ```
 
-**Case 2:** Net worth at goal age is above the $1,000 threshold, so withdraw more money
+_**Case 2:** Net worth at goal age is above the $1,000 threshold, so withdraw more money_
 ```
 {
-    "name": ""@solver-savingsNeedCalc"",
+    "name": "@solver-savingsNeedCalc",
     "paymentAmount": x,
     "date": d,
     "taxable": false,
