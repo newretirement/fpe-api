@@ -359,7 +359,6 @@ A `plan` is the top-level financial object; it represents the user's complete pr
 | `events` | [Events](#events) | Describes various non-periodic life events such as buying a new home or purchasing an annuity. |
 | `limitRetireAccountContribs` | boolean | If `true`, income-linked contributions to `401k` and `ira` accounts will be capped based on IRS-defined rules; default value is `false`. |
 | `market` | [Market](#market) | Market data (inflation rate, etc.). |
-| `nationwide` | [Nationwide](nationwide/README.md#nationwide) | Contains plan attributes that are specific to the [Nationwide](https://www.nationwide.com) insurance company. |
 | `paymentStreams` | [PaymentStream[]](#paymentstream) | Array of payment streams within the financial plan. |
 | `primary` | [Person](#person) | The primary account holder within the simulation. |
 | `spouse` | [Person](#person) | The primary's spouse (optional). |
