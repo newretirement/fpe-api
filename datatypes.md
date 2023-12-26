@@ -290,7 +290,7 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `rate` | float | The percentage of the employee's income that will be contributed by their employer. E.g. a value of `0.05` means the employer will contribute 5%. Valid range is `[0.0, 10000.0]`. |
-| `date` | float | The start date on which `rate` becomes the active employer contribution rate. |
+| `age` | float | The start age of the account owner at which `rate` becomes the active employer contribution rate.  Note that the new rate is activated in January of the year that the account owner turns the specified age. |
 
 
 #### EmployerMatch
