@@ -1,6 +1,6 @@
 # Output Streams
 
-When a [plan](datatypes.md#plan) is submitted to the [POST /forecast](README.md#post-v5forecast) endpoint, a financial [Forecast](datatypes.md#forecast) object is returned.  This forecast contains (among other things) a set of account projections (see [Forecast.accounts](datatypes.md#forecast)), and a set of payment projections (see [Forecast.paymentStreams](datatypes.md#forecast)).  Each of these sets contain future projections of the [accounts](datatypes.md#account) and [payment streams](datatypes.md#paymentstream) defined in the [plan](datatypes.md#plan).  Also included are FPE-calculated projections, which can be identified by the `'@'` prefix character in their names (e.g. `@income_tax`, `@total_savings`).
+When a [plan](datatypes.md#plan) is submitted to the [POST /forecast](README.md#post-v6forecast) endpoint, a financial [Forecast](datatypes.md#forecast) object is returned.  This forecast contains (among other things) a set of account projections (see [Forecast.accounts](datatypes.md#forecast)), and a set of payment projections (see [Forecast.paymentStreams](datatypes.md#forecast)).  Each of these sets contain future projections of the [accounts](datatypes.md#account) and [payment streams](datatypes.md#paymentstream) defined in the [plan](datatypes.md#plan).  Also included are FPE-calculated projections, which can be identified by the `'@'` prefix character in their names (e.g. `@income_tax`, `@total_savings`).
 
 ## Account Projections
 

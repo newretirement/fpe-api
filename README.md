@@ -14,7 +14,7 @@ Starting at the present month, FPE projects future financial state by calculatin
 All FPE endpoints require a valid API key, which must be provided in the request header.  For example:
 
 ```
-POST /fpe/v5/forecast HTTP/1.1
+POST /fpe/v6/forecast HTTP/1.1
 X-Api-Key: abcdefg1234567
 ```
 
@@ -28,7 +28,7 @@ Failure to provide a valid API key will trigger an [HTTP 403 Forbidden](#http-re
 FPE uses [semantic versioning](https://semver.org/) as its software versioning policy.  The version of a running FPE service can be obtained in 2 ways:
 
 1. __HTTP response header__: All endpoints add a `Fpe-Version` header attribute to their response.
-2. __[GET /fpe/v5/info](#get-info)__: This endpoint returns the version, along with other build/deploy related info.
+2. __[GET /fpe/v6/info](#get-info)__: This endpoint returns the version, along with other build/deploy related info.
 
 <br/><hr/><br/>
 
@@ -43,7 +43,7 @@ An error occurs if the API client submits a request for which FPE cannot return 
   - An HTTP status code appropriate for the type of error (see [HTTP Response Status Codes](#http-response-status-codes) further down)
   - A `text/plain` detail message
 
-For example, if the client calls `POST /fpe/v5/forecast` and provides an invalid birthDate of `1200-01`, FPE responses with:
+For example, if the client calls `POST /fpe/v6/forecast` and provides an invalid birthDate of `1200-01`, FPE responses with:
 
 ```
 HTTP/1.1 400 Bad Request
@@ -118,13 +118,13 @@ The server understood the client request, but refuses to authorize it.  This typ
 
 __`404 Not Found`__
 
-The requested resource or method doesn't exist (e.g. `GET /fpe/v5/fake/path/123`).
+The requested resource or method doesn't exist (e.g. `GET /fpe/v6/fake/path/123`).
 
 <br/>
 
 __`405 Method Not Allowed`__
 
-The request method is valid (e.g. `GET`, `POST`), but is not supported by the requested resource.  For example, `GET /fpe/v5/forecast` will return `HTTP 405`, since endpoint only supports the `POST` HTTP method.
+The request method is valid (e.g. `GET`, `POST`), but is not supported by the requested resource.  For example, `GET /fpe/v6/forecast` will return `HTTP 405`, since endpoint only supports the `POST` HTTP method.
 
 <br/>
 
@@ -178,7 +178,7 @@ Below are the descriptions of each endpoint.
 
 <br/>
 
-## `POST /v5/annuitize`
+## `POST /v6/annuitize`
 
 Estimates the monthly [annuity](https://www.investopedia.com/terms/a/annuity.asp) income stream based on a given annuity premium, as well as other information that potentially affects the future income payments.
 
@@ -229,7 +229,7 @@ Example request and response JSONs can be found in [examples/annuitize/](example
 
 <br/>
 
-## `POST /v5/forecast`
+## `POST /v6/forecast`
 
 Given a financial [plan](datatypes.md#plan), this endpoint runs a simulation that generates a forecast of that plan, consisting of some summary information about the future projection, and a set of time series representing the future periodic values of each account and payment stream involved in the simulation.
 
@@ -259,7 +259,7 @@ The JSON request for this scenario is [here](examples/forecast/basic/single-01.j
 
 <br/>
 
-## `GET /v5/info`
+## `GET /v6/info`
 
 Returns information about the deployed web service.
 
@@ -283,7 +283,7 @@ Returns information about the deployed web service.
 
 <br/>
 
-## `GET /v5/medicare/irmaa`
+## `GET /v6/medicare/irmaa`
 
 Returns information about the [Medicare IRMAA](https://www.nerdwallet.com/article/insurance/medicare/what-is-the-medicare-irmaa) surcharge amounts, and the income brackets to which they apply.
 
@@ -340,7 +340,7 @@ Returns information about the [Medicare IRMAA](https://www.nerdwallet.com/articl
 
 <br/>
 
-## `POST /v5/montecarlo`
+## `POST /v6/montecarlo`
 
 Runs a Monte Carlo simulation for given a [plan](datatypes.md#plan), returning the probability of not running out of money before goal age.
 
@@ -383,7 +383,7 @@ Sample JSON requests can be found in [examples/montecarlo/](examples/montecarlo/
 
 <br/>
 
-## `POST /v5/optimize/roth`
+## `POST /v6/optimize/roth`
 
 Given a financial [Plan](datatypes.md#plan), attempt to find an optimal set of Roth conversions that satisfy a given set of goals and/or constraints.  For a complete description of the available goals and constraints, see the [RCOParam](datatypes.md#rcoparams) object.
 
@@ -418,7 +418,7 @@ The `RothConversion` object represents a one-time transfer from a tax-deferred a
 
 <br/>
 
-## `POST /fpe/v5/savingsneed`
+## `POST /fpe/v6/savingsneed`
 
 Given a [Plan](datatypes.md#plan), this endpoint solves for the [@total_savings](output_streams.md#account-projections) needed in order to "break even" at goal age (final month of simulation) at multiple future time points.
 
@@ -481,7 +481,7 @@ _**Case 2:** Net worth at goal age is above the $1,000 threshold, so withdraw mo
 
 <br/>
 
-## `POST /fpe/v5/optimize/socialsecurity`
+## `POST /fpe/v6/optimize/socialsecurity`
 
 Given a financial plan, the social security optimizer solves for the optimal age to claim social security for the primary account holder (and their spouse if they have one).
 
