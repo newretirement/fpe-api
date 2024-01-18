@@ -283,7 +283,7 @@ Returns information about the deployed web service.
 
 <br/>
 
-## `GET /v6/medicare/irmaa`
+## `GET /v6/globaldata/medicare/irmaa`
 
 Returns information about the [Medicare IRMAA](https://www.nerdwallet.com/article/insurance/medicare/what-is-the-medicare-irmaa) surcharge amounts, and the income brackets to which they apply.
 
