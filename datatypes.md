@@ -17,6 +17,7 @@ An `account` is a financial ledger of the transactions within a real-world accou
 | `owner` | enum | Determines the account owner (valid values are [`primary`, `spouse`]). If this attribute is empty AND the primary account holder has no spouse, then the value defaults to `primary`. |
 | `rate` | [Rate](#rate) | Determines the account's growth, which is calculated and updated on a monthly basis.
 | `realizedGainRate` | float | Determines the percentage of projected monthly investment returns that are realized immediately, and therefore taxed as capital gains.  A value of `1.0` means 100% of investment returns will be taxed immediately. A value of `0.0` means none of the returns are realized immediately, and so capital gains will only be processed upon a distribution event. This attribute is only relevant for accounts on which capital gains taxes are calculated.  Default value is `1.0`. |
+| `taxDeductibleInterest` | boolean | Set to `true` if the interest accrued on this loan or mortgage is tax deductible. Default is `false`. |
 | `taxTreatment` | enum |  Determines how growth on an Account is taxed. Valid values are `capitalGains` or `ordinaryIncome`. Default is `capitalGains`. |
 | `type` | [AccountType](#accounttype) | Determines the type of account. Common account types are `aftertax`, `401k`, `asset`, and `loan`. |
 | `ytdContribution` | int | Specifies the total contributions made to this account year-to-date. Only applies to tax-deferred accounts.  This value is needed in order to accurately model current-year annual contribution limits. |
@@ -245,12 +246,14 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 | `aboveTheLine` | boolean | If true, the tax-deductible portion of the expense is subtracted from gross income prior calculating AGI.  Otherwise, it is treated as an itemized deduction (below-the-line). __NOTE:__ This attribute is relevant only when `taxDeductionRate > 0.0`. |
 | `contributions` | [ContributionFromIncome[]](#contributionfromincome) | (Optional) Specifies 1 or more [income-linked contributions](income_linked_contribs.md#income-linked-contributions) taken directly from an income payment. Use this for modeling things like 401(k) employee contributions with employer matching rules. |
 | `date` | [Date](#date) | Specify a single payment on a specific date. __Note:__ this is just a shorthand method of configuring a one-time payment; the same thing can be accomplished via `startDate` and `endDate`.  E.g. `{date: "2040-06"}` is the same as `{startDate: "2040-06", endDate: "2040-07"}`. |
+| `dti` | boolean| If true, this PaymentStream will be treated as debt when calculating debt-to-income. See [params.calcDTI](#forecastparams). |
 | `earnedIncome` | boolean | If true, indicates this is an income stream that satisfies the IRS's definition of [earned income](https://www.investopedia.com/terms/e/earnedincome.asp). |
 | `endDate` | [Date](#date) | The date that future payments have ceased. |
 | `name` | string | The unique name of this paymentStream (e.g. `"auto_insurance"`). Valid characters are: `[a-zA-Z0-9]`, `-`, `_`, `/`, and white space. |
 | `owner` | enum | Determines who the payments are associated with. Valid values are [`primary`, `spouse`].  If an owner is assigned, payments will cease upon the owner's death.  Otherwise, payments will continue through the end of the simulation. |
-| `paymentAmount` | int | The dollar amount of the payment.
+| `paymentAmount` | int | The dollar amount of the payment. |
 | `paymentsPerYear` | int | Determines the payment frequency within a given year. Valid values are: [`1`, `2`, `4`, `12`].  Regardless of frequency, the first payment occurs on `startDate` (or `date`). |
+| `propertyTax` | boolean | Set to `true` if this is a property tax payment on real estate. |
 | `qcd` | boolean| If true, this PaymentStream will be treated as a [QCD](https://www.investopedia.com/qualified-charitable-distribution-qcd-5409491), assuming it meets the necessary criteria of one. |
 | `rate` | [Rate](#rate) | Determines the annual growth rate of the payment over time.  The growth is applied annually starting 12 months into the simulation. |
 | `source` | string | The name of the [account](#account) from which the payment will be withdrawn. <br/>**Special case**: If "optimal" is specified, the algorithm will implicitly withdraw the requested amount from 1 or more existing accounts, taking into consideration account type, projected growth rate, and possibly other attributes in an attempt to minimize negative impact on the plan's interest growth. For details, see [optimal withdrawal strategy](optimal_withdraw.md). |
