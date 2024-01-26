@@ -20,7 +20,7 @@ If there are insufficient funds in the `"vacation"` account to cover the expense
 
 ### METHOD 2: Optimal Withdrawal Strategy
 
-This example demonstrates the _optimal withdrawal strategy_. As in the previous example, $10,000 will be withdrawn annually.  However, since the funding source is set to `"optimal"`, FPE can potentially withdraw the requested $10K from muliple "shortfall" accounts if the first chosen account can't cover the full amount.
+This example demonstrates the _optimal withdrawal strategy_. As in the previous example, $10,000 will be withdrawn annually.  However, since the funding source is set to `"optimal"`, FPE can potentially withdraw the requested $10K from multiple "shortfall" accounts if the first chosen account can't cover the full amount.
 
 ```json
 {
