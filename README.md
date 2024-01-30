@@ -28,7 +28,7 @@ Failure to provide a valid API key will trigger an [HTTP 403 Forbidden](#http-re
 FPE uses [semantic versioning](https://semver.org/) as its software versioning policy.  The version of a running FPE service can be obtained in 2 ways:
 
 1. __HTTP response header__: All endpoints add a `Fpe-Version` header attribute to their response.
-2. __[GET /fpe/v6/info](#get-info)__: This endpoint returns the version, along with other build/deploy related info.
+2. __[GET /v6/info](#get-v6info)__: This endpoint returns the version, along with other build/deploy related info.
 
 <br/><hr/><br/>
 
