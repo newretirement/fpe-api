@@ -269,15 +269,13 @@ Returns information about the deployed web service.
 | ----------| ----------- |
 | version | The software version of this running web service. |
 | buildDate | When this release tarball was built. |
-| uptime | How long this web service has been running. __NOTE__: Depending on the deploy environment, this attribute may not exist (e.g. the AWS Lambda environment is inherently stateless, and so there is no meaningful notion of "uptime"). |
 
 ### Sample response
 
 ```json
 {
     "version": "3.6.2",
-    "buildDate": "2021-01-04T22:35:47Z",
-    "uptime": "9h27m59s"
+    "buildDate": "2021-01-04T22:35:47Z"
 }
 ```
 
