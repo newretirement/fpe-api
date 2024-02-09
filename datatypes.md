@@ -20,7 +20,6 @@ An `account` is a financial ledger of the transactions within a real-world accou
 | `taxDeductibleInterest` | boolean | Set to `true` if the interest accrued on this loan or mortgage is tax deductible. Default is `false`. |
 | `taxTreatment` | enum |  Determines how growth on an Account is taxed. Valid values are `capitalGains` or `ordinaryIncome`. Default is `capitalGains`. |
 | `type` | [AccountType](#accounttype) | Determines the type of account. Common account types are `aftertax`, `401k`, `asset`, and `loan`. |
-| `ytdContribution` | int | Specifies the total contributions made to this account year-to-date. Only applies to tax-deferred accounts.  This value is needed in order to accurately model current-year annual contribution limits. |
 
 #### AccountType
 
