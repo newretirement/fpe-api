@@ -253,7 +253,6 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 | `paymentAmount` | int | The dollar amount of the payment. |
 | `paymentsPerYear` | int | Determines the payment frequency within a given year. Valid values are: [`1`, `2`, `4`, `12`].  Regardless of frequency, the first payment occurs on `startDate` (or `date`). |
 | `propertyTax` | boolean | Set to `true` if this is a property tax payment on real estate. |
-| `qcd` | boolean| If true, this PaymentStream will be treated as a [QCD](https://www.investopedia.com/qualified-charitable-distribution-qcd-5409491), assuming it meets the necessary criteria of one. |
 | `rate` | [Rate](#rate) | Determines the annual growth rate of the payment over time.  The growth is applied annually starting 12 months into the simulation. |
 | `source` | string | The name of the [account](#account) from which the payment will be withdrawn. <br/>**Special case**: If "optimal" is specified, the algorithm will implicitly withdraw the requested amount from 1 or more existing accounts, taking into consideration account type, projected growth rate, and possibly other attributes in an attempt to minimize negative impact on the plan's interest growth. For details, see [optimal withdrawal strategy](optimal_withdraw.md). |
 | `startDate` | [Date](#date) | The date that future payments commence.  |
