@@ -26,7 +26,7 @@ The Post-Retirement Expense calculation request attributes are defined in the fo
 | `replacementRate` | float | A rate in the range `[0.0, 1.0]` that represents the percentage of a household's annual work income that is replaced by retirement income when they retire. |
 | `estimatedExpenseStream` | string | The name of the `payentStream` to which FPE will assign the estimated post-retirement expense amount.  Minimally, this object must:<ul><li>be configured to represent an expense stream having periodic payments <li>include a `startDate` (which the algorithm uses as the person's retirement date)</ul> |
 
-Example JSON requests containing the `plan.postRetireExpense{}` data object can be found in the [./examples/postRetireExpense/](./examples/postRetireExpense/) subdirectory.
+See [./post_retire_expense.json](./post_retire_expense.json) for a sample FPE request.
 
 <br/>
 

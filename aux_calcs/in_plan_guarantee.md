@@ -38,4 +38,4 @@ These attributes are situated within the [POST /v6/forecast](https://github.com/
 }
 ```
 
-Example JSON requests containing the `plan.inPlanGuarantee{}` data object can be found in the [./examples/inPlanGuarantee/](./examples/inPlanGuarantee/) subdirectory.
+See [./in_plan_guarantee.json](./in_plan_guarantee.json) for a sample FPE request.
