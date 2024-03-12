@@ -27,7 +27,7 @@ When a [plan](datatypes.md#plan) is submitted to the [POST /forecast](README.md#
 | `@federal_income_tax` | report | The federal income tax due for the given tax year.  DEPRECATED: this stream is now in `annualReports.fedIncomeTaxDue`. |
 | `@federal_taxable_income` | report | DEPRECATED. This stream is now in [annualReports.fedTaxableIncome](datatypes.md#annualreports). |
 | `@fica` | report | The [FICA](https://www.investopedia.com/terms/f/fica.asp) amount due for the given tax year. |
-| `@gap` | report | `@total_income - @total_expenses` |
+| `@gap` | report | `@total_income - @total_expenses - {acctInterest} - {employeeILCs}`,<br/><br/>where `{acctInterest}` is the cumulative interest across all ordinaryIncome accounts, and `{employeeILCs}` is the cumulative employee income-linked contributions |
 | `@income_tax` | expense | The actual income tax payments made to the IRS.  Income tax includes federal, state, FICA, and other taxes. |
 | `@income_tax_true_up` | report | Reports the annual true-up for each tax year in the simulation.  A positive true-up amount indicates a refund, whereas a negative amount indicates the actual tax owed.  DEPRECATED: this stream is now in `annualReports.incomeTaxTrueUp`. |
 | `@irmaa` | report | The [IRMAA](https://www.medicareresources.org/medicare-eligibility-and-enrollment/what-is-the-income-related-monthly-adjusted-amount-irmaa/) portion of the total `@medicare_oopc` expense. |
