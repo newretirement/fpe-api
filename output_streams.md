@@ -20,7 +20,6 @@ When a [plan](datatypes.md#plan) is submitted to the [POST /forecast](README.md#
 | `@capital_gains_tax_payment` | expense | Represents a [capital gains tax](https://www.investopedia.com/terms/c/capital_gains_tax.asp) payment. |
 | `@combined_irmaa` | report | `@irmaa + @irmaa_spouse`. |
 | `@employeeContrib:${work_stream}:${index}` | report | The employee contribution amount for a given earned income stream. |
-| `@employerContrib:${work_stream}:${index}` | report | The employer contribution amount for a given earned income stream. This amount combines both non-elective and employer-match contributions. |
 | `@employerMatch:${work_stream}:${index}` | report | Reports the employer match amount. |
 | `@employerNEC:${work_stream}:${index}` | report | Reports the non-elective employer contributions (NEC's). |
 | `@federal_agi` | report | The [AGI](https://www.investopedia.com/terms/a/agi.asp) used for calculating federal income taxes. |
