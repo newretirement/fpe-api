@@ -28,13 +28,20 @@ The `AccountType` enum represents the different types of accounts that can be mo
 | Value | Description |
 | ------------ | ----------- |
 | `aftertax` | Any account funded with after-tax dollars (e.g. checking account). |
+| `aftertax401k` | [See this article](https://www.bankrate.com/retirement/after-tax-401k/#:~:text=right%20for%20you.-,How%20an%20after%2Dtax%20401(k)%20works,already%20been%20paid%20on%20them) |
+| `aftertax403b` | A 403(b) account that permits after-tax contributions. |
+| `aftertax457b` | A 457(b) account that permits after-tax contributions. |
 | `asset` | An [asset](https://www.investopedia.com/terms/a/asset.asp) is a resource with economic value that an individual owns or controls with the expectation that it will provide a future benefit. For example: real estate, vehicles, fine art, and jewelry. |
 | `ira` | See [Traditional IRA](https://www.investopedia.com/terms/t/traditionalira.asp) |
 | `401k` | See [Traditional 401(k)](https://www.investopedia.com/terms/1/401kplan.asp) |
+| `403b` | See [Investopedia: 403b](https://www.investopedia.com/terms/1/403bplan.asp) |
+| `457b` | See [Investopedia: 457 Plan](https://www.investopedia.com/terms/1/457plan.asp) |
 | `529` | A [529 plan](https://www.investopedia.com/terms/1/529plan.asp) is a tax-advantaged savings plan designed to help pay for education. |
 | `hsa` | A [Health Savings Account](https://www.investopedia.com/terms/h/hsa.asp) (HSA) is a tax-advantaged savings account that is created for people who get their insurance coverage through [high-deductible health plans](https://www.investopedia.com/terms/h/hdhp.asp).  Capital gains on HSA's <u>ARE</u> taxed in California (CA) and New Jersey (NJ), and are <u>NOT</u> taxed in all other U.S. states. |
 | `roth` | See [Roth IRA](https://www.investopedia.com/terms/r/rothira.asp) |
 | `roth401k` | See [Roth 401(k)](https://www.investopedia.com/terms/1/401kplan.asp) |
+| `roth403b` | See [SmartAsset Roth 403(b)](https://smartasset.com/retirement/roth-403-b) |
+| `roth457b` | See [IRS 457(b)](https://www.irs.gov/retirement-plans/irc-457b-deferred-compensation-plans) |
 | `loan` |  A type of credit vehicle in which a sum of money is lent to another party in exchange for future repayment of the value or principal amount. In FPE, a loan refers specifically to the borrowing of a specific one-time amount (e.g. car loan, mortgage) vs. revolving credit loans (e.g. cred cards). |
 | `mortgage` | A [mortgage](https://www.investopedia.com/terms/m/mortgage.asp) is a loan used to purchase or maintain a home, land, or other types of real estate. |
 | `revolvingCredit` | [Revolving credit](https://www.investopedia.com/terms/r/revolvingcredit.asp) is an agreement that permits an account holder to borrow money repeatedly up to a set dollar limit while repaying a portion of the current balance due in regular payments. Two common examples are [credit cards and LOC (line of credit)](https://www.bankrate.com/finance/credit-cards/line-of-credit-vs-credit-card/). |
