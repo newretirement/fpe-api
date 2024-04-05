@@ -30,7 +30,6 @@ The `AccountType` enum represents the different types of accounts that can be mo
 | `aftertax` | Any account funded with after-tax dollars (e.g. checking account). |
 | `aftertax401k` | [See this article](https://www.bankrate.com/retirement/after-tax-401k/#:~:text=right%20for%20you.-,How%20an%20after%2Dtax%20401(k)%20works,already%20been%20paid%20on%20them) |
 | `aftertax403b` | A 403(b) account that permits after-tax contributions. |
-| `aftertax457b` | A 457(b) account that permits after-tax contributions. |
 | `asset` | An [asset](https://www.investopedia.com/terms/a/asset.asp) is a resource with economic value that an individual owns or controls with the expectation that it will provide a future benefit. For example: real estate, vehicles, fine art, and jewelry. |
 | `ira` | See [Traditional IRA](https://www.investopedia.com/terms/t/traditionalira.asp) |
 | `401k` | See [Traditional 401(k)](https://www.investopedia.com/terms/1/401kplan.asp) |
