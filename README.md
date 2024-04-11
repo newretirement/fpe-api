@@ -416,15 +416,13 @@ The `RothConversion` object represents a one-time transfer from a tax-deferred a
 
 <br/>
 
-## `POST /fpe/v6/savingsneed`
+## `POST /v6/savingsneed`
 
-Given a [Plan](datatypes.md#plan), this endpoint solves for the [@total_savings](output_streams.md#account-projections) needed in order to "break even" at goal age (final month of simulation) at multiple future time points.
+Given a [Plan](datatypes.md#plan), this endpoint solves for the [@total_savings](output_streams.md#account-projections) needed in order to "break even" at goal age (final month of simulation) at 1 or more future time points.  The future time points are set via the `params.savingsneed.dates` attribute within the [ForecastParams](datatypes.md#forecastparams) object.
 
 "break even", in this context, means the household's [net worth](https://en.wikipedia.org/wiki/Net_worth) (i.e. [@total_savings - @total_debt](output_streams.md#account-projections)) in the final month of the simulation is in the range [$0..$1000].
 
 This endpoint returns a time series, where each data point contains a `value` and `date` indicating the [@total_savings](output_streams.md#account-projections) amount needed at a specific date in order to break even (see **Sample response** below).
-
-The first data point corresponds to December of the simulation's first year, and the last datapoint corresponds to the last month of the simulation.  The data points in between represent 5-year intervals starting from the first data point.
 
 ### Sample response
 
