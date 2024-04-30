@@ -40,10 +40,11 @@ FPE evaluates all accounts in the plan, and then derives an optimal withdrawal o
         - category 0: RMD-eligible accounts <b>having unsatisfied RMD withdrawals</b>
         - category 1: `afterTax`
         - category 2: `reverseMortgage`
-        - category 3: `ira`, `401k`
-        - category 4: `rothIRA`, `roth401k`
-        - category 5: `hsa`
-        - category 6: `revolvingCredit`
+        - category 3: `ira`, `401k`, `403b`, `457b`
+        - category 4: `aftertax401k`, `aftertax403b`
+        - category 5: `rothIRA`, `roth401k`, `roth403b`, `roth457b`
+        - category 6: `hsa`
+        - category 7: `revolvingCredit`
     - _Note:_ RMD-eligible accounts include `ira`, `401k`, `roth401k`, `403b`, and `457b`.
 - **STAGE 3**
     - Within each account category, sort accounts by increasing [RoR](https://www.investopedia.com/terms/r/rateofreturn.asp) (specified by [account.rate](datatypes.md#account))
