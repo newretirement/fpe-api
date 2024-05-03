@@ -45,13 +45,13 @@ FPE evaluates all accounts in the plan, and then derives an optimal withdrawal o
         - category 5: `rothIRA`, `roth401k`, `roth403b`, `roth457b`
         - category 6: `hsa`
         - category 7: `revolvingCredit`
-    - _Note:_ RMD-eligible accounts include `ira`, `401k`, `roth401k`, `403b`, and `457b`.
+    - _Note:_ RMD-eligible accounts include `ira`, `401k`, `403b`, and `457b`.
 - **STAGE 3**
     - Within each account category, sort accounts by increasing [RoR](https://www.investopedia.com/terms/r/rateofreturn.asp) (specified by [account.rate](datatypes.md#account))
 
 Within each _(category, RoR)_ equivalence class, the original account order is intentionally preserved to give the API client control over the withdrawal order.
 
-Any account type that was not listed in the above categories is considered a _non-withdrawable account_ (e.g. a `loan`). In other words, these accounts will never be subject to implicit withdrawals.
+Any account type not listed in the above categories is considered a _non-withdrawable account_ (e.g. a `loan`), and will not be subject to implicit withdrawals.
 
 Once the account withdrawal order has been determined for a given month, FPE then attempts to withdraw the requested amount from each account until the full expense has been funded.  If the first account in the withdrawal sequence has insufficient funds, the remaining balance is withdrawn, and FPE moves on to the next account in the sequence, and so on.
 
