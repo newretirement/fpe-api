@@ -170,9 +170,9 @@ When searching for an optimal solution, the algorithm is constrained by the foll
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `origRetireDate` | string | The plan's inferred retirement date, which is based on the latest date across all `earnedIncome` [PaymentStreams](#paymentstream). |
-| `liquidEstateValue` | int | See [liquid estate value](terms.md#liquid-estate-value) definition. |
-| `earliestRetireDates` | map | A map of [PaymentStream](#paymentstream) names to [Date](#date) entries, where each entry indicates the earliest `endDate` for the named stream that satisfies the [liquid estate value](terms.md#liquid-estate-value) goal described in the summary above. |
+| `origRetireDate` | string | The plan's inferred retirement date, which is based on the latest date across all `earnedIncome` [PaymentStreams](#paymentstream). If no earned income streams exist, this attribute is omitted. |
+| `liquidEstateValue` | int | The [liquid estate value](terms.md#liquid-estate-value) resulting from this algorithm's suggested retirement dates. If no earned income streams exist, this attribute is omitted. |
+| `earliestRetireDates` | map | A map of [PaymentStream](#paymentstream) names to [Date](#date) entries, where each entry indicates the earliest `endDate` for the named stream that satisfies the [liquid estate value](terms.md#liquid-estate-value) goal described in the summary above. If no earned income streams exist, this map will be empty (i.e. `{}`). |
 
 Sample JSON requests can be found in [examples/forecast/calc_fire/](examples/forecast/calc_fire/).
 
