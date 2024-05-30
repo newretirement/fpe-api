@@ -32,7 +32,7 @@
             },
             {
                 "name": "acme_roth",
-                "type": "roth"
+                "type": "rothIRA"
             }
         ],
         "paymentStreams": [

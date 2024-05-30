@@ -1,30 +1,24 @@
 {
+    "description": "",
     "params": {
-        "projectionPeriod": "yearly"
+        "projectionPeriod": "monthly"
     },
     "plan": {
         "currentDate": "2024-01",
+        "inPlanGuarantee": {
+            "product": "LIB",
+            "pretaxAccount": "ipg-ira",
+            "rothAccount": "ipg-roth",
+            "highWaterMark": 125000
+        },
         "cashFlow": {
             "checkingAccount": "checking",
             "savingsAccount": "savings",
-            "savingRate": 0.5
-        },
-        "inPlanGuarantee": {
-            "incomeActivationDate": "2034-01",
-            "equityAllocation": 0.25,
-            "highWaterMark": 125000,
-            "gtdWithdrawRate": 0.045,
-            "nonGtdWithdrawRate": 0.015,
-            "equityIRA": "ipg-equity-ira",
-            "equityRoth": "ipg-equity-roth",
-            "gtdIncomeIRA": "ipg-gtd-income-ira",
-            "gtdIncomeRoth": "ipg-gtd-income-roth",
-            "nonGtdIncomeIRA": "ipg-nongtd-income-ira",
-            "nonGtdIncomeRoth": "ipg-nongtd-income-roth"
+            "savingRate": 0
         },
         "primary": {
             "birthDate": "1969-01",
-            "goalAge": "90y",
+            "goalAge": "95y",
             "gender": "female"
         },
         "accounts": [
@@ -35,108 +29,55 @@
             {
                 "name": "savings",
                 "type": "aftertax",
-                "balance": 100000
+                "balance": 300000
             },
             {
                 "name": "lifetimeDebt",
                 "type": "revolvingCredit"
             },
             {
-                "name": "external-ira",
-                "balance": 200000,
-                "type": "ira",
-                "rate": {
-                    "mean": 0.06
-                }
-            },
-            {
-                "name": "external-roth",
-                "balance": 100000,
-                "type": "roth",
-                "rate": {
-                    "mean": 0.07
-                }
-            },
-            {
-                "name": "ipg-equity-ira",
+                "name": "ipg-ira",
                 "balance": 45000,
                 "type": "ira",
-                "disableOptimalWithdraw": true,
-                "rate": {
-                    "mean": 0.05
-                }
+                "disableOptimalWithdraw": true
             },
             {
-                "name": "ipg-equity-roth",
+                "name": "ipg-roth",
                 "balance": 55000,
-                "type": "roth",
-                "disableOptimalWithdraw": true,
+                "type": "rothIRA",
+                "disableOptimalWithdraw": true
+            },
+            {
+                "name": "external-ira",
+                "balance": 500000,
+                "type": "ira",
                 "rate": {
-                    "mean": 0.04
+                    "mean": 0.05
                 }
             }
         ],
         "paymentStreams": [
             {
-                "name": "postRetireExpenses",
-                "source": "optimal",
-                "rate": {
-                    "mean": 0.0225
-                },
-                "startGrowthOnFirstPayment": true,
-                "startDate": "2054-07",
-                "paymentsPerYear": 12,
-                "paymentAmount": 5223
-            },
-            {
-                "name": "work-income",
+                "name": "workIncome",
                 "earnedIncome": true,
                 "paymentAmount": 10000,
                 "paymentsPerYear": 12,
-                "endDate": "2034-01",
+                "endDate": "2033-01",
                 "target": "checking",
                 "contributions": [
                     {
-                        "endDate": "2027-01",
-                        "employeeContribAmount": 500,
-                        "employeeContribTarget": "ipg-equity-ira"
+                        "endDate": "2026-01",
+                        "employeeContribAmount": 100,
+                        "employeeContribTarget": "ipg-ira"
                     },
                     {
-                        "endDate": "2027-01",
-                        "employeeContribAmount": 500,
-                        "employeeContribTarget": "ipg-equity-roth"
+                        "endDate": "2026-01",
+                        "employeeContribAmount": 100,
+                        "employerContribAmount": 50,
+                        "employeeContribTarget": "ipg-roth",
+                        "employerContribTarget": "ipg-roth"
                     }
                 ]
-            },
-            {
-                "name": "ipg-gtd-income-ira",
-                "startDate": "2034-01",
-                "target": "checking",
-                "paymentsPerYear": 1,
-                "taxable": true
-            },
-            {
-                "name": "ipg-gtd-income-roth",
-                "startDate": "2034-01",
-                "target": "checking",
-                "paymentsPerYear": 1,
-                "taxable": false
-            },
-            {
-                "name": "ipg-nongtd-income-ira",
-                "startDate": "2034-01",
-                "source": "ipg-equity-ira",
-                "target": "checking",
-                "paymentsPerYear": 1,
-                "taxable": true
-            },
-            {
-                "name": "ipg-nongtd-income-roth",
-                "startDate": "2034-01",
-                "source": "ipg-equity-roth",
-                "target": "checking",
-                "paymentsPerYear": 1,
-                "taxable": false
             },
             {
                 "name": "expenses",
