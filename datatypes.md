@@ -38,7 +38,6 @@ The `AccountType` enum represents the different types of accounts that can be mo
 | `529` | A [529 plan](https://www.investopedia.com/terms/1/529plan.asp) is a tax-advantaged savings plan designed to help pay for education. |
 | `hsa` | A [Health Savings Account](https://www.investopedia.com/terms/h/hsa.asp) (HSA) is a tax-advantaged savings account that is created for people who get their insurance coverage through [high-deductible health plans](https://www.investopedia.com/terms/h/hdhp.asp).  Capital gains on HSA's <u>ARE</u> taxed in California (CA) and New Jersey (NJ), and are <u>NOT</u> taxed in all other U.S. states. |
 | `rothIRA` | See [Roth IRA](https://www.investopedia.com/terms/r/rothira.asp) |
-| `roth` | DEPRECATED.  Use `rothIRA` instead. |
 | `roth401k` | See [Roth 401(k)](https://www.investopedia.com/terms/1/401kplan.asp) |
 | `roth403b` | See [SmartAsset Roth 403(b)](https://smartasset.com/retirement/roth-403-b) |
 | `roth457b` | See [IRS 457(b)](https://www.irs.gov/retirement-plans/irc-457b-deferred-compensation-plans) |
