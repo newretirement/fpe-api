@@ -34,24 +34,30 @@ This example demonstrates the _optimal withdrawal strategy_. As in the previous 
 FPE evaluates all accounts in the plan, and then derives an optimal withdrawal order when satisfying the full expense amount.  The following 3-stage procedure determines the account withdrawal order:
 
 #### STAGE 1
-    - Withdraw from the user-specified default checking account (i.e. [plan.cashFlow.checkingAccount](datatypes.md#cashflow)).
+
+Withdraw from the user-specified default checking account (i.e. [plan.cashFlow.checkingAccount](datatypes.md#cashflow)).
+    
 #### STAGE 2
-    - Based on their [account type](datatypes.md#accounttype), assign the remaining accounts to the ordered categories below; then sort the accounts based on this category ordering:
-        - category 0: RMD-eligible accounts <b>having unsatisfied RMD withdrawals</b>
-        - category 1: `afterTax`
-        - category 2: `reverseMortgage`
-        - category 3: `ira`, `401k`, `403b`, `457b`
-        - category 4: `aftertax401k`, `aftertax403b`
-        - category 5: `rothIRA`, `roth401k`, `roth403b`, `roth457b`
-        - category 6: `hsa`
-        - category 7: `revolvingCredit`
-    - _Note:_ RMD-eligible accounts include `ira`, `401k`, `403b`, and `457b`.
+
+Based on their [account type](datatypes.md#accounttype), assign the remaining accounts to the ordered categories below; then sort the accounts based on this category ordering:
+
+- category 0: RMD-eligible accounts <b>having unsatisfied RMD withdrawals</b>
+- category 1: `afterTax`
+- category 2: `reverseMortgage`
+- category 3: `ira`, `401k`, `403b`, `457b`
+- category 4: `aftertax401k`, `aftertax403b`
+- category 5: `rothIRA`, `roth401k`, `roth403b`, `roth457b`
+- category 6: `hsa`
+- category 7: `revolvingCredit`
+- _Note:_ RMD-eligible accounts include `ira`, `401k`, `403b`, and `457b`
+    
 #### STAGE 3
-    - Within each account category, sort accounts by increasing [RoR](https://www.investopedia.com/terms/r/rateofreturn.asp) (specified by [account.rate](datatypes.md#account))
 
-Within each _(category, RoR)_ equivalence class, the original account order is intentionally preserved to give the API client control over the withdrawal order.
-
-Any account type not listed in the above categories is considered a _non-withdrawable account_ (e.g. a `loan`), and will not be subject to implicit withdrawals.
+1. Within each account category, sort accounts by increasing [RoR](https://www.investopedia.com/terms/r/rateofreturn.asp) (specified by [account.rate](datatypes.md#account))
+1. Within each _(category, RoR)_ equivalence class, the original account order is intentionally preserved to give the API client control over the withdrawal order.
+1. An account will **not** be withdrawn from if:
+    - Its [disableOptimalWithdraw](datatypes.md#account) flag is set to true
+    - Its [account type](datatypes.md#accounttype) is not listed in one of the above categories (e.g. a `loan`)
 
 Once the account withdrawal order has been determined for a given month, FPE then attempts to withdraw the requested amount from each account until the full expense has been funded.  If the first account in the withdrawal sequence has insufficient funds, the remaining balance is withdrawn, and FPE moves on to the next account in the sequence, and so on.
 
