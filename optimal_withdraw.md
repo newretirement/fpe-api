@@ -33,9 +33,9 @@ This example demonstrates the _optimal withdrawal strategy_. As in the previous 
 
 FPE evaluates all accounts in the plan, and then derives an optimal withdrawal order when satisfying the full expense amount.  The following 3-stage procedure determines the account withdrawal order:
 
-- **STAGE 1**
+#### STAGE 1
     - Withdraw from the user-specified default checking account (i.e. [plan.cashFlow.checkingAccount](datatypes.md#cashflow)).
-- **STAGE 2**
+#### STAGE 2
     - Based on their [account type](datatypes.md#accounttype), assign the remaining accounts to the ordered categories below; then sort the accounts based on this category ordering:
         - category 0: RMD-eligible accounts <b>having unsatisfied RMD withdrawals</b>
         - category 1: `afterTax`
@@ -46,7 +46,7 @@ FPE evaluates all accounts in the plan, and then derives an optimal withdrawal o
         - category 6: `hsa`
         - category 7: `revolvingCredit`
     - _Note:_ RMD-eligible accounts include `ira`, `401k`, `403b`, and `457b`.
-- **STAGE 3**
+#### STAGE 3
     - Within each account category, sort accounts by increasing [RoR](https://www.investopedia.com/terms/r/rateofreturn.asp) (specified by [account.rate](datatypes.md#account))
 
 Within each _(category, RoR)_ equivalence class, the original account order is intentionally preserved to give the API client control over the withdrawal order.
