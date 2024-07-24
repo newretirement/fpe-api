@@ -49,7 +49,10 @@ Based on their [account type](datatypes.md#accounttype), assign the remaining ac
 - category 5: `rothIRA`, `roth401k`, `roth403b`, `roth457b`
 - category 6: `hsa`
 - category 7: `revolvingCredit`
-- _Note:_ RMD-eligible accounts include `ira`, `401k`, `403b`, and `457b`
+
+Note that:
+- RMD-eligible accounts include `ira`, `401k`, `403b`, and `457b`
+- Any account type not explicitly defined within the above categories will NOT be withdrawn from.
     
 #### STAGE 3
 
