@@ -18,7 +18,7 @@ An `account` is a financial ledger of the transactions within a real-world accou
 | `rate` | [Rate](#rate) | Determines the account's growth, which is calculated and updated on a monthly basis.
 | `realizedGainRate` | float | Determines the percentage of projected monthly investment returns that are realized immediately, and therefore taxed as capital gains.  A value of `1.0` means 100% of investment returns will be taxed immediately. A value of `0.0` means none of the returns are realized immediately, and so capital gains will only be processed upon a distribution event. This attribute is only relevant for accounts on which capital gains taxes are calculated.  Default value is `0.0`. |
 | `taxDeductibleInterest` | boolean | Set to `true` if the interest accrued on this loan or mortgage is tax deductible. Default is `false`. |
-| `taxTreatment` | enum |  Determines how growth on an Account is taxed. Valid values are `capitalGains` or `ordinaryIncome`. Default is `capitalGains`. |
+| `taxTreatment` | enum |  Determines how growth on an Account is taxed. Valid values are `capitalGains` or `ordinaryIncome`. Default is `capitalGains`.  This attribute is only relevant for `aftertax` account types, and is ignored for all other account types. |
 | `type` | [AccountType](#accounttype) | Determines the type of account. Common account types are `aftertax`, `401k`, `asset`, and `loan`. |
 
 #### AccountType
