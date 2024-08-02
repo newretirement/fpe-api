@@ -41,14 +41,17 @@ FPE uses [semantic versioning](https://semver.org/) as its software versioning p
 
 An error occurs if the API client submits a request for which FPE cannot return a meaningful response (for any reason). In the event of an error, FPE returns:
   - An HTTP status code appropriate for the type of error (see [HTTP Response Status Codes](#http-response-status-codes) further down)
-  - A `text/plain` detail message
+  - A JSON object containing the `httpStatusCode` and detailed `message`.
 
 For example, if the client calls `POST /fpe/v6/forecast` and provides an invalid birthDate of `1200-01`, FPE responses with:
 
 ```
 HTTP/1.1 400 Bad Request
-Content-Length: 67
-Error parsing JSON request: Valid year range is [1900..2200]: 1200
+Content-Type: application/json
+{
+  "httpStatusCode": 400,
+  "message": "Error parsing JSON request: Valid year range is [1900..2200]: 1200"
+}
 ```
 
 ### What is a Warning
