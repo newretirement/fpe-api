@@ -380,6 +380,7 @@ A `plan` is the top-level financial object; it represents the user's complete pr
 | `spouse` | [Person](#person) | The primary's spouse (optional). |
 | `stateCode` | [USState](#usstate) | The primary's current state of residence. |
 | `tcjaSunset` | boolean | If true, FPE will model the [sunsetting](https://www.investopedia.com/terms/s/sunsetprovision.asp) of the [Tax Cuts and Jobs Act](https://www.investopedia.com/taxes/how-gop-tax-bill-affects-you/) due to end starting in 2026. Default is `false`. |
+| `withdrawal` | [Withdrawal](#withdrawal) | Configures the strategy for withdrawing funds across multiple accounts within the plan. |
 
 #### CashFlow
 
@@ -401,6 +402,14 @@ The `Market` object contains financial market data and other economic values tha
 | `inflation` | [Rate](#rate) | The estimated U.S. annual inflation rate. |
 | `medicalInflation` | [Rate](#rate) | The estimated annual medical cost inflation rate. |
 | `socialSecurityInflation` | [Rate](#rate) | The estimated social security inflation rate. |
+
+#### Withdrawal
+
+`Withdrawal` is a configuration object that determines which withdrawal stategy to use.
+
+| Attribute  | Type   | Description |
+| ---------- | ------ | ----------- |
+| `strategy` | string | Determines which [optimal withdrawal strategy](./optimal_withdraw.md) will be used in the simulation.  Valid values are: `traditional` (default) and `userDefinedOrder`. |
 
 <br/><hr/>
 
