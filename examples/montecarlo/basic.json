@@ -1,23 +1,24 @@
 {
     "params": {
-        "deterministic": "always",
-        "varyInvestmentReturns": true,
-        "varyGeneralInflation": true,
-        "varyMedicalInflation": false,
-        "varyWageGrowth": false,
-        "desiredEstateValue": 0,
-        "analysisPercentiles": [
-            10,
-            50,
-            75,
-            90
-        ],
-        "projectionPeriod": "yearly"
+        "projectionPeriod": "yearly",
+        "montecarlo": {
+            "deterministic": "always",
+            "varyInvestmentReturns": true,
+            "varyGeneralInflation": true,
+            "varyMedicalInflation": false,
+            "varyWageGrowth": false,
+            "desiredEstateValue": 0,
+            "analysisPercentiles": [
+                25,
+                50,
+                75
+            ]
+        }
     },
     "plan": {
         "currentDate": "2023-01",
         "isPlusUser": true,
-        "stateCode": "GA",
+        "stateCode": "NY",
         "market": {
             "inflation": {
                 "mean": 0.03
@@ -28,8 +29,8 @@
             "goalAge": "85y",
             "gender": "male",
             "socialSecurity": {
-                "startAge": "62y",
-                "primaryInsuranceAmount": 3000
+                "startAge": "65y",
+                "primaryInsuranceAmount": 2500
             }
         },
         "cashFlow": {
@@ -43,35 +44,38 @@
                 "type": "aftertax"
             },
             {
-                "name": "revolving_credit",
-                "type": "revolvingCredit"
-            },
-            {
                 "name": "primary_savings",
                 "type": "aftertax",
                 "balance": 10000,
                 "rate": {
-                    "mean": 0.02
+                    "mean": 0.03,
+                    "stdev": 0.05
                 }
             },
             {
+                "name": "revolving_credit",
+                "type": "revolvingCredit"
+            },
+            {
                 "name": "retirement_savings",
-                "balance": 500000,
+                "balance": 300000,
                 "type": "ira",
                 "owner": "primary",
                 "rate": {
-                    "mean": 0.04
+                    "mean": 0.07,
+                    "stdev": 0.09
                 }
             },
             {
                 "name": "other_savings",
                 "type": "aftertax",
-                "balance": 800000,
+                "balance": 500000,
                 "taxTreatment": "capitalGains",
                 "costBasis": 0,
                 "realizedGainRate": 0.2,
                 "rate": {
-                    "mean": 0.05
+                    "mean": 0.09,
+                    "stdev": 0.15
                 }
             },
             {
@@ -92,7 +96,8 @@
                 "earnedIncome": true,
                 "paymentsPerYear": 12,
                 "rate": {
-                    "mean": 0.02
+                    "mean": 0.04,
+                    "stdev": 0.03
                 }
             },
             {

@@ -224,8 +224,21 @@ This is the multifaceted configuration object that influences how the financial 
 | `calcPostRetireIncomeExpenseRatio` | boolean | If `true`, the _Income/Expense Ratio_ calculation is executed, and the result appears in [Forecast.postRetireIncomeExpenseRatio](#forecast) within the response. |
 | `calcSpendingPower` | boolean | If `true`, the 'Spending Power' calculation executes, and the result appears as the `spendingPower` attribute within the [Forecast](#forecast) response object. Note that [plan.primary.retireDate](#person) must be set when running this calculation. See [Forecast.spendingPower](#forecast) for more details on this calculation. |
 | `projectionPeriod` | enum | Determines if the forecasted projection vectors represent monthly or aggregated annual amounts. Valid values are [`monthly`, `yearly`]. If this attribute is empty, `yearly` is the default. |
-| `rothConversionOptimizer` | [RCOParams](#rcoparams) | Configuration object for the Roth Conversion Optmizer algorithm. |
+| `montecarlo` | [MonteCarloParams](#montecarloparams) | Configuration obnject for the [Monte Carlo simulation](README.md#post-v6montecarlo). |
+| `rothConversionOptimizer` | [RCOParams](#rcoparams) | Configuration object for the [Roth Conversion Optmizer](README.md#post-v6optimizeroth). |
 | `savingsNeed` | [SavingsNeedParams](#savingsneedparams) | Configuration object for the [Savings Need](README.md#post-v6savingsneed) algorithm. |
+
+### MonteCarloParams
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `deterministic` | enum | (optional) Determines how the random variable are generated within the simulation.  Valid values are: <br/>- `always`: The same random seed (and therefore, the same set of random inputs) is used for all requests <br/>- `monthly`: The random seed changes at 12am UTC at the beginning of each month.  This setting is intended for production environments, where the probability score is expected to be stable. <br/>- `<null>`: A different random seed is chosen on each request (effectively nondeterministic) |
+| `desiredEstateValue` | int | (optional) Determines if a given path (outcome) within the simulation is considered a success. E.g. if `desiredEstateValue` is `100000`, then the plan's forecasted estate value must be >= 100000.  Default value is 0. |
+| `varyInvestmentReturns` | boolean | (optional) Choose random growth rates from a normal distribution for any [account](datatypes.md#account) within the plan based on the `mean` and `stdev` of that account's [rate](datatypes.md#rate). |
+| `varyGeneralInflation` | boolean | (optional) Choose random growth rates from a normal distribution for market inflation based on the `mean` and `stdev` of the [Market.inflation](datatypes.md#market) object. |
+| `varyMedicalInflation` | boolean | (optional) Choose random growth rates from a normal distribution for medical inflation based on the `mean` and `stdev` of the [Market.medicalInflation](datatypes.md#market) object. |
+| `varyWageGrowth` | boolean | (optional) For [PaymentStreams](datatypes.md#paymentstream) that represent earned income (i.e. `earnedIncome` is true), choose random growth rates from a normal distribution based on the `mean` and `stdev` of the [PaymentStream.Rate](datatypes.md#paymentstream) object.|
+| `analysisPercentiles` | int[] | (optional) A list of percentiles that, if provided, triggers the calculation of `analysis.projectedSavings[]` and `analysis.estateValue[]` values for for specified percentiles (see response below). |
 
 ### RCOParams
 

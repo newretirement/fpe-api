@@ -350,19 +350,8 @@ Runs a Monte Carlo simulation for given a [plan](datatypes.md#plan), returning t
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `plan` | [Plan](datatypes.md#plan) | The financial plan. |financial plan. |
-| `params` | [MonteCarloParams](#montecarloparams) | The input parameters to the simulation. |
+| `params` | [ForecastParams](datatypes.md#forecastparams) | The input parameters to the Monte Carlo simulation. |
 
-#### MonteCarloParams
-
-| Attribute  | Type | Description |
-| ---------- | ---- | ----------- |
-| `deterministic` | enum | (optional) Determines how the random variable are generated within the simulation.  Valid values are: <br/>- `always`: The same random seed (and therefore, the same set of random inputs) is used for all requests <br/>- `monthly`: The random seed changes at 12am UTC at the beginning of each month.  This setting is intended for production environments, where the probability score is expected to be stable. <br/>- `<null>`: A different random seed is chosen on each request (effectively nondeterministic) |
-| `desiredEstateValue` | int | (optional) Determines if a given path (outcome) within the simulation is considered a success. E.g. if `desiredEstateValue` is `100000`, then the plan's forecasted estate value must be >= 100000.  Default value is 0. |
-| `varyInvestmentReturns` | boolean | (optional) Choose random growth rates from a normal distribution for any [account](datatypes.md#account) within the plan based on the `mean` and `stdev` of that account's [rate](datatypes.md#rate). |
-| `varyGeneralInflation` | boolean | (optional) Choose random growth rates from a normal distribution for market inflation based on the `mean` and `stdev` of the [Market.inflation](datatypes.md#market) object. |
-| `varyMedicalInflation` | boolean | (optional) Choose random growth rates from a normal distribution for medical inflation based on the `mean` and `stdev` of the [Market.medicalInflation](datatypes.md#market) object. |
-| `varyWageGrowth` | boolean | (optional) For [PaymentStreams](datatypes.md#paymentstream) that represent earned income (i.e. `earnedIncome` is true), choose random growth rates from a normal distribution based on the `mean` and `stdev` of the [PaymentStream.Rate](datatypes.md#paymentstream) object.|
-| `analysisPercentiles` | int[] | (optional) A list of percentiles that, if provided, triggers the calculation of `analysis.projectedSavings[]` and `analysis.estateValue[]` values for for specified percentiles (see response below). |
 
 ### MonteCarloResponse
 
