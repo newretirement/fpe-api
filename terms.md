@@ -2,7 +2,7 @@
 
 ## estate value
 
-An [estate](https://www.investopedia.com/terms/e/estate.asp) is everything comprising the net worth of the [plan](datatypes.md#plan), including all land and real estate, possessions, financial securities, cash, and other assets.
+An [estate](https://www.investopedia.com/terms/e/estate.asp) is everything comprising the net worth of the [plan](datatypes.md#plan) at death (i.e. the final month of the simulation), including all land and real estate, possessions, financial securities, cash, and other assets.
 
 In FPE, the estate value is simply the sum the ending balances of _**all**_ [accounts](datatypes.md#account) regardless of [account type](datatypes.md#accounttype).
 
