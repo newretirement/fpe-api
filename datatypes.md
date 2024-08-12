@@ -6,7 +6,7 @@ An `account` is a financial ledger of the transactions within a real-world accou
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `balance` | int | The account balance at the start of the simulation. |
+| `balance` | int | The account balance at the start of the financial projection. |
 | `balanceLimit` | int |  Sets a balance limit on this account.  This attribute is only valid for accounts of type `loan` or `revolvingCredit`.|
 | `costBasis` | int | [Cost basis](https://www.investopedia.com/articles/investing/060313/what-determines-your-cost-basis.asp) is the original value or purchase price of an asset or investment for tax purposes.  This attribute is only relevant for accounts on which capital gains taxes are calculated.  Default value is `0`. |
 | `disableOptimalWithdraw` | boolean | If true, this account is excluded from the candidate accounts selected for the _Optimal Withdrawal Strategy_ (refer to [PaymentStream\.source](#paymentstream) description). Defaults to `false`. |
@@ -139,15 +139,15 @@ Contains various reports that are unconditionally annual in nature (e.g. income 
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `fedIncomeTaxDue` | int[] | The federal income tax due for each tax year in the simulation.  |
-| `fedMarginalIncomeTaxRates` | float[] | The federal marginal income tax rate for each tax year in the simulation. |
+| `fedIncomeTaxDue` | int[] | The federal income tax due for each tax year in the financial projection.  |
+| `fedMarginalIncomeTaxRates` | float[] | The federal marginal income tax rate for each tax year in the financial projection. |
 | `fedTaxableIncome` | int[] | The portion of gross income that the IRS deems subject to federal taxes.  FICA and capital gains are not included in this amount.  See [Investopedia: Taxable Income](https://www.investopedia.com/terms/t/taxableincome.asp). |
-| `incomeTaxTrueUp` | int[] | Reports the annual true-up applied for each year in the simulation.  A positive true-up amount indicates a refund, whereas a negative amount indicates the actual tax owed. |
-| `fedTaxableIncomeByBracket` | [IncomeTaxDataRange[]](#incometaxdatarange) | Reports federal taxable income by tax bracket for each tax year in the simulation. |
+| `incomeTaxTrueUp` | int[] | Reports the annual true-up applied for each year in the financial projection.  A positive true-up amount indicates a refund, whereas a negative amount indicates the actual tax owed. |
+| `fedTaxableIncomeByBracket` | [IncomeTaxDataRange[]](#incometaxdatarange) | Reports federal taxable income by tax bracket for each tax year in the financial projection. |
 | `stateTaxableIncome` | int[] | The portion of gross income that a given state's Department of Revenue deems subject to state taxes. |
-| `stateIncomeTaxDue` | int[] | The state income tax due for each tax year in the simulation.  |
-| `stateMarginalIncomeTaxRates` | float[] | The state marginal income tax rate for each tax year in the simulation. |
-| `stateTaxableIncomeByBracket` | [IncomeTaxDataRange[]](#incometaxdatarange) | Reports state taxable income by tax bracket for each tax year in the simulation. |
+| `stateIncomeTaxDue` | int[] | The state income tax due for each tax year in the financial projection.  |
+| `stateMarginalIncomeTaxRates` | float[] | The state marginal income tax rate for each tax year in the financial projection. |
+| `stateTaxableIncomeByBracket` | [IncomeTaxDataRange[]](#incometaxdatarange) | Reports state taxable income by tax bracket for each tax year in the financial projection. |
 
 #### FIRE
 
@@ -277,11 +277,11 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 | `earnedIncome` | boolean | If true, indicates this is an income stream that satisfies the IRS's definition of [earned income](https://www.investopedia.com/terms/e/earnedincome.asp). |
 | `endDate` | [Date](#date) | The date that future payments have ceased. |
 | `name` | string | The unique name of this paymentStream (e.g. `"auto_insurance"`). Valid characters are: `[a-zA-Z0-9]`, `-`, `_`, `/`, and white space. |
-| `owner` | enum | Determines who the payments are associated with. Valid values are [`primary`, `spouse`].  If an owner is assigned, payments will cease upon the owner's death.  Otherwise, payments will continue through the end of the simulation. |
+| `owner` | enum | Determines who the payments are associated with. Valid values are [`primary`, `spouse`].  If an owner is assigned, payments will cease upon the owner's death.  Otherwise, payments will continue through the end of the financial projection. |
 | `paymentAmount` | int | The dollar amount of the payment. |
 | `paymentsPerYear` | int | Determines the payment frequency within a given year. Valid values are: [`1`, `2`, `4`, `12`].  Regardless of frequency, the first payment occurs on `startDate` (or `date`). |
 | `propertyTax` | boolean | Set to `true` if this is a property tax payment on real estate. |
-| `rate` | [Rate](#rate) | Determines the annual growth rate of the payment over time.  The growth is applied annually starting 12 months into the simulation. |
+| `rate` | [Rate](#rate) | Determines the annual growth rate of the payment over time.  The growth is applied annually starting 12 months into the financial projection. |
 | `source` | string | The name of the [account](#account) from which the payment will be withdrawn. <br/>**Special case**: If "optimal" is specified, the algorithm will implicitly withdraw the requested amount from 1 or more existing accounts, taking into consideration account type, projected growth rate, and possibly other attributes in an attempt to minimize negative impact on the plan's interest growth. For details, see [optimal withdrawal strategy](optimal_withdraw.md). |
 | `startDate` | [Date](#date) | The date that future payments commence.  |
 | `startGrowthOnFirstPayment` | boolean | If true, annual growth (determined by `rate`) is deferred until the first payment occurs (determined by `startDate`). By default, growth starts immediately. |
@@ -300,9 +300,9 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 | ---------- | ---- | ----------- |
 | `employeeContribAmount` | int | Specifies a fixed dollar amount (per income payment period) that the employee contributes to their retirement plan. This amount is bound by the employee's total income for the given period. |
 | `employeeContribAmountCap` | int | Imposes an upper bound on `employeeContribAmount` (which can potentially increase annually based on `employeeContribAmountInc`). |
-| `employeeContribAmountInc` | int | Automatically increments `employeeContribAmount` on an annual basis by the specified amount. This annual contribution amount increase commences in the same month that the [PaymentStream's](#paymentstream) annual growth rate would normally start (i.e. 12 months past the simulation's start date). |
+| `employeeContribAmountInc` | int | Automatically increments `employeeContribAmount` on an annual basis by the specified amount. This annual contribution amount increase commences in the same month that the [PaymentStream's](#paymentstream) annual growth rate would normally start (i.e. 12 months past the financial projection's start date). |
 | `employeeContribRate` | float | Determines how much the employee contributes to their retirement plan, expressed as a percentage of their annual income.  Valid range is `[0.0, 1.0]`. |
-| `employeeContribRateInc` | float | Automatically increments `employeeContribRate` on an annual basis by the specified rate. This annual contribution rate increase commences in the same month that the [PaymentStream's](#paymentstream) annual growth rate would normally start (i.e. 12 months past the simulation's start date). Valid range is `[0.0, 1.0]`. |
+| `employeeContribRateInc` | float | Automatically increments `employeeContribRate` on an annual basis by the specified rate. This annual contribution rate increase commences in the same month that the [PaymentStream's](#paymentstream) annual growth rate would normally start (i.e. 12 months past the financial projection's start date). Valid range is `[0.0, 1.0]`. |
 | `employeeContribRateCap` | float | Imposes an upper bound on `employeeContribRate` (which can potentially increase annually based on `employeeContribRateInc`).  Valid range is `[0.0, 1.0]`. |
 | `employeeContribTarget` | string | The name of the account into which employee contributions are deposited. |
 | `employerContribAmount` | int | Specifies a fixed dollar amount (per income payment period) that the employer contributes to the `employerContribTarget` account. |
@@ -389,8 +389,8 @@ A `plan` is the top-level financial object; it represents the user's complete pr
 | `limitRetireAccountContribs` | boolean | If `true`, income-linked contributions to `401k` and `ira` accounts will be capped based on IRS-defined rules; default value is `false`. |
 | `market` | [Market](#market) | Market data (inflation rate, etc.). |
 | `paymentStreams` | [PaymentStream[]](#paymentstream) | Array of payment streams within the financial plan. |
-| `primary` | [Person](#person) | The primary account holder within the simulation. |
-| `spouse` | [Person](#person) | The primary's spouse (optional). |
+| `primary` | [Person](#person) | The primary account holder. |
+| `spouse` | [Person](#person) | The primary account holder's spouse (optional). |
 | `stateCode` | [USState](#usstate) | The primary's current state of residence. |
 | `tcjaSunset` | boolean | If true, FPE will model the [sunsetting](https://www.investopedia.com/terms/s/sunsetprovision.asp) of the [Tax Cuts and Jobs Act](https://www.investopedia.com/taxes/how-gop-tax-bill-affects-you/) due to end starting in 2026. Default is `false`. |
 | `withdrawal` | [Withdrawal](#withdrawal) | Configures the strategy for withdrawing funds across multiple accounts within the plan. |
@@ -422,14 +422,14 @@ The `Market` object contains financial market data and other economic values tha
 
 | Attribute  | Type   | Description |
 | ---------- | ------ | ----------- |
-| `strategy` | string | Determines which [optimal withdrawal strategy](./optimal_withdraw.md) will be used in the simulation.  Valid values are: `traditional` (default) and `userDefinedOrder`. |
+| `strategy` | string | Determines which [optimal withdrawal strategy](./optimal_withdraw.md) will be used in the financial projection.  Valid values are: `traditional` (default) and `userDefinedOrder`. |
 
 <br/><hr/>
 
 
 ## Rate
 
-The `Rate` object describes the growth rate and variability of various financial objects, such as [Accounts](datatypes.md#account) and [PaymentStreams](datatypes.md#paymentstream).  This object is, in a sense, polymorphic, in that its behavior varies based on how it's configured, what parent object it's attached to, and the type of simulation in which it is participating.
+The `Rate` object describes the growth rate and variability of various financial objects, such as [Accounts](datatypes.md#account) and [PaymentStreams](datatypes.md#paymentstream).
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
