@@ -343,7 +343,7 @@ Returns information about the [Medicare IRMAA](https://www.nerdwallet.com/articl
 
 ## `POST /v6/montecarlo`
 
-Runs a Monte Carlo simulation for given a [plan](datatypes.md#plan), returning the probability of not running out of money at [goal age](terms.md#goal-age) (i.e. [@projected_savings](output_streams.md#account-projections) in final month of simulation > $0).
+Runs a Monte Carlo simulation for given a [plan](datatypes.md#plan), returning the probability of not running out of money at [goal age](terms.md#goal-age) (i.e. [@projected_savings](output_streams.md#account-projections) in final month of simulation is nonnegative).
 
 ### MonteCarloRequest
 
