@@ -20,6 +20,12 @@ An expense stream represents a withdrawal from 1 or more [accounts](datatypes.md
 
 <hr/><br/>
 
+## goal age
+
+Goal age refers to a person's life expectancy.  In FPE, this value is set via the [Plan.Person.goalAge](datatypes.md#person) attribute.
+
+<hr/><br/>
+
 ## income stream
 
 An income stream represents money from an external source that is deposited into an [account](datatypes.md#account) within the [plan](datatypes.md#plan).  In FPE, an income stream is represented as a [paymentStream](datatypes.md#paymentstream) whose `source` attribute is empty, and whose `target` account is set to an existing account within the plan.
@@ -29,12 +35,6 @@ An income stream represents money from an external source that is deposited into
 ## lifetime debt
 
 Whenever the plan has insufficient funds to cover a withdrawal, the amount is paid for out of the "lifetime debt" account (i.e. an account whose type is [revolvingCredit](datatypes.md#accounttype)).
-
-<hr/><br/>
-
-## longevity age
-
-Longevity age refers to a person's life expectancy.  In FPE, this value is set via the [Plan.Person.goalAge](datatypes.md#person) attribute.
 
 <hr/><br/>
 

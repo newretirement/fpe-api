@@ -343,14 +343,14 @@ Returns information about the [Medicare IRMAA](https://www.nerdwallet.com/articl
 
 ## `POST /v6/montecarlo`
 
-Runs a Monte Carlo simulation for given a [plan](datatypes.md#plan), returning the probability of not running out of money before goal age.
+Runs a Monte Carlo simulation for given a [plan](datatypes.md#plan), returning the probability of not running out of money at [goal age](terms.md#goal-age) (i.e. [@projected_savings](output_streams.md#account-projections) in final month of simulation > $0).
 
 ### MonteCarloRequest
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `plan` | [Plan](datatypes.md#plan) | The financial plan. |financial plan. |
-| `params` | [ForecastParams](datatypes.md#forecastparams) | The input parameters to the Monte Carlo simulation. |
+| `plan` | [Plan](datatypes.md#plan) | The financial plan |
+| `params` | [ForecastParams](datatypes.md#forecastparams) | The input parameters to the Monte Carlo simulation (in particular, the `montecarlo{}` section) |
 
 
 ### MonteCarloResponse
@@ -364,10 +364,10 @@ Runs a Monte Carlo simulation for given a [plan](datatypes.md#plan), returning t
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `successProbability` |float | The probability that the user's plan will not run out of money before Goal Age. |
-| `pathCount` |float | The number of random paths that were run within the Monte Carlo simulation. |
-| `estateValue` | object[] | TODO: document this |
-| `projectedSavings` | object[] | TODO: document this |
+| `successProbability` |float | The probability that the user's plan will not run out of money at [Goal Age](terms.md#goal-age). |
+| `pathCount` |float | The number of paths that were run within the Monte Carlo simulation. |
+| `estateValue` | object[] | A list of (percentile, estateValue) pairs, where each pair represents the [estate value](terms.md#estate-value) at the specified percentile. |
+| `projectedSavings` | object[] | A list of (percentile, savingsProjections[]) pairs, where each pair represents the simulated annual projected savings for all years for the Monte Carlo path at the specified percentile. |
 
 Sample JSON requests can be found in [examples/montecarlo/](examples/montecarlo/).
 

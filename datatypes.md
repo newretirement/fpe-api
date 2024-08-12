@@ -233,12 +233,12 @@ This is the multifaceted configuration object that influences how the financial 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `deterministic` | enum | (optional) Determines how the random variable are generated within the simulation.  Valid values are: <br/>- `always`: The same random seed (and therefore, the same set of random inputs) is used for all requests <br/>- `monthly`: The random seed changes at 12am UTC at the beginning of each month.  This setting is intended for production environments, where the probability score is expected to be stable. <br/>- `<null>`: A different random seed is chosen on each request (effectively nondeterministic) |
-| `desiredEstateValue` | int | (optional) Determines if a given path (outcome) within the simulation is considered a success. E.g. if `desiredEstateValue` is `100000`, then the plan's forecasted estate value must be >= 100000.  Default value is 0. |
+| `desiredEstateValue` | int | (optional) Determines if the outcome of a given path within the simulation is considered a success. E.g. if `desiredEstateValue` is `100000`, then the plan's forecasted estate value must be >= $100,000.  Default value is 0. |
 | `varyInvestmentReturns` | boolean | (optional) Choose random growth rates from a normal distribution for any [account](datatypes.md#account) within the plan based on the `mean` and `stdev` of that account's [rate](datatypes.md#rate). |
 | `varyGeneralInflation` | boolean | (optional) Choose random growth rates from a normal distribution for market inflation based on the `mean` and `stdev` of the [Market.inflation](datatypes.md#market) object. |
 | `varyMedicalInflation` | boolean | (optional) Choose random growth rates from a normal distribution for medical inflation based on the `mean` and `stdev` of the [Market.medicalInflation](datatypes.md#market) object. |
 | `varyWageGrowth` | boolean | (optional) For [PaymentStreams](datatypes.md#paymentstream) that represent earned income (i.e. `earnedIncome` is true), choose random growth rates from a normal distribution based on the `mean` and `stdev` of the [PaymentStream.Rate](datatypes.md#paymentstream) object.|
-| `analysisPercentiles` | int[] | (optional) A list of percentiles that, if provided, triggers the calculation of `analysis.projectedSavings[]` and `analysis.estateValue[]` values for for specified percentiles (see response below). |
+| `analysisPercentiles` | int[] | (optional) A list of percentiles that, if provided, triggers the calculation of `analysis.projectedSavings[]` and `analysis.estateValue[]` values for for specified percentiles. |
 
 ### RCOParams
 
@@ -339,7 +339,7 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 | `birthDate` | [Date](#date) | The person's date of birth. |
 | `retireDate` | [Date](#date) | The date on which this person plans to retire. |
 | `gender` | [Gender](#gender) | The person's gender. |
-| `goalAge` | [Duration](#duration) | How long the person expects to live.  See [longevity age](terms.md#longevity-age). |
+| `goalAge` | [Duration](#duration) | How long the person expects to live.  See [goal age](terms.md#goal-age). |
 | `socialSecurity` | [SocialSecurity](#socialsecurity) | Social security configuration. |
 | `medical` | [Medical](#medical) | Attributes relating to the person's heath and health-related services (e.g. Medicare). |
 
