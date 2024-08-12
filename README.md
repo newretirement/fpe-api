@@ -367,7 +367,7 @@ Runs a Monte Carlo simulation for given a [plan](datatypes.md#plan), returning t
 | `successProbability` |float | The probability that the user's plan will not run out of money at [Goal Age](terms.md#goal-age). |
 | `pathCount` |float | The number of paths that were run within the Monte Carlo simulation. |
 | `estateValue` | object[] | A list of (percentile, estateValue) pairs, where each pair represents the [estate value](terms.md#estate-value) at the specified percentile. |
-| `projectedSavings` | object[] | A list of (percentile, savingsProjections[]) pairs, where each pair represents the simulated annual projected savings for all years for the Monte Carlo path at the specified percentile. |
+| `projectedSavings` | object[] | A list of (percentile, savingsProjections[]) pairs, where each pair represents the simulated annual [projected savings](output_streams.md#account-projections) for all years for the Monte Carlo path at the specified percentile. |
 
 Sample JSON requests can be found in [examples/montecarlo/](examples/montecarlo/).
 
