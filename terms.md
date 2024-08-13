@@ -72,4 +72,4 @@ A shortfall withdrawal is an implicit withdrawal from an accounts that is automa
 
 ## transfer
 
-A transfer is a transaction whereby money is withdrawn from one [account](datatypes.md#account) and deposited into another. In FPE, a tranfer is accomplished by setting both the `source` and `target` attributes of the [paymentStream](datatypes.md#paymentstream) object.
+A transfer is a transaction whereby money is withdrawn from one [account](datatypes.md#account) and deposited into another. In FPE, a transfer is accomplished by setting both the `source` and `target` attributes of the [paymentStream](datatypes.md#paymentstream) object.
