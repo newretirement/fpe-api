@@ -276,6 +276,7 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 | `dti` | boolean| If true, this PaymentStream will be treated as debt when calculating debt-to-income. See [params.calcDTI](#forecastparams). |
 | `earnedIncome` | boolean | If true, indicates this is an income stream that satisfies the IRS's definition of [earned income](https://www.investopedia.com/terms/e/earnedincome.asp). |
 | `endDate` | [Date](#date) | The date that future payments have ceased. |
+| `guaranteedIncome` | boolean | Only applies to [transfers](terms.md#transfer). If true, the deposit into the target account is guaranteed to be satisfied, even if the source account has insufficient funds.  Defaults to `false`. |
 | `name` | string | The unique name of this paymentStream (e.g. `"auto_insurance"`). Valid characters are: `[a-zA-Z0-9]`, `-`, `_`, `/`, and white space. |
 | `owner` | enum | Determines who the payments are associated with. Valid values are [`primary`, `spouse`].  If an owner is assigned, payments will cease upon the owner's death.  Otherwise, payments will continue through the end of the financial projection. |
 | `paymentAmount` | int | The dollar amount of the payment. |
