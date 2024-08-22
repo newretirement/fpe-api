@@ -28,16 +28,19 @@ The `AccountType` enum represents the different types of accounts that can be mo
 | Value | Description |
 | ------------ | ----------- |
 | `aftertax` | Any account funded with after-tax dollars (e.g. checking account). |
+| `aftertax401a` | [See this article](https://www.investopedia.com/ask/answers/060215/what-are-irs-guidelines-401a.asp) |
 | `aftertax401k` | [See this article](https://www.bankrate.com/retirement/after-tax-401k/#:~:text=right%20for%20you.-,How%20an%20after%2Dtax%20401(k)%20works,already%20been%20paid%20on%20them) |
 | `aftertax403b` | A 403(b) account that permits after-tax contributions. |
 | `asset` | An [asset](https://www.investopedia.com/terms/a/asset.asp) is a resource with economic value that an individual owns or controls with the expectation that it will provide a future benefit. For example: real estate, vehicles, fine art, and jewelry. |
 | `ira` | See [Traditional IRA](https://www.investopedia.com/terms/t/traditionalira.asp) |
+| `401a` | See [401(a)](https://www.investopedia.com/terms/1/401a-plan.asp) |
 | `401k` | See [Traditional 401(k)](https://www.investopedia.com/terms/1/401kplan.asp) |
 | `403b` | See [Investopedia: 403b](https://www.investopedia.com/terms/1/403bplan.asp) |
 | `457b` | See [Investopedia: 457 Plan](https://www.investopedia.com/terms/1/457plan.asp) |
 | `529` | A [529 plan](https://www.investopedia.com/terms/1/529plan.asp) is a tax-advantaged savings plan designed to help pay for education. |
 | `hsa` | A [Health Savings Account](https://www.investopedia.com/terms/h/hsa.asp) (HSA) is a tax-advantaged savings account that is created for people who get their insurance coverage through [high-deductible health plans](https://www.investopedia.com/terms/h/hdhp.asp).  Capital gains on HSA's <u>ARE</u> taxed in California (CA) and New Jersey (NJ), and are <u>NOT</u> taxed in all other U.S. states. |
 | `rothIRA` | See [Roth IRA](https://www.investopedia.com/terms/r/rothira.asp) |
+| `roth401a` | See [Fidelity - How does a Roth 401(a) plan work?](https://nb.fidelity.com/public/nbpreloginnav/spa/fidelitywork/core/401a) |
 | `roth401k` | See [Roth 401(k)](https://www.investopedia.com/terms/1/401kplan.asp) |
 | `roth403b` | See [SmartAsset Roth 403(b)](https://smartasset.com/retirement/roth-403-b) |
 | `roth457b` | See [IRS 457(b)](https://www.irs.gov/retirement-plans/irc-457b-deferred-compensation-plans) |
