@@ -1,12 +1,14 @@
 {
-    "description": "",
     "params": {
-        "projectionPeriod": "monthly"
+        "projectionPeriod": "yearly"
     },
     "plan": {
         "currentDate": "2024-01",
         "inPlanGuarantee": {
-            "product": "LIB",
+            "vintage": {
+                "product": "LIB",
+                "year": 2030
+            },
             "pretaxAccount": "ipg-ira",
             "rothAccount": "ipg-roth",
             "highWaterMark": 125000
@@ -38,19 +40,17 @@
             {
                 "name": "ipg-ira",
                 "balance": 45000,
-                "type": "ira",
-                "disableOptimalWithdraw": true
+                "type": "ira"
             },
             {
                 "name": "ipg-roth",
                 "balance": 55000,
-                "type": "rothIRA",
-                "disableOptimalWithdraw": true
+                "type": "rothIRA"
             },
             {
-                "name": "external-ira",
+                "name": "non-ipg-401k",
                 "balance": 500000,
-                "type": "ira",
+                "type": "401k",
                 "rate": {
                     "mean": 0.05
                 }
