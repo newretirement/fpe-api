@@ -1,4 +1,4 @@
-# IPG - In-Plan Guarantee
+# In-Plan Guarantee
 
 In-Plan Guarantee (IPG) is a financial product offered by a company to its plan participants, which attempts to provide guaranteed lifetime income and principal protection.
 
@@ -22,7 +22,7 @@ Income Activation Date (IAD) determines the year/month that IPG income payments 
 
 ## Vintage
 
-Describes the characteristics of an IPG financial model for a given cohort.  When FPE [forecasts a plan](../../README.md#post-v6forecast) with [IPG modeling enabled](#api-request-object), the specific vintage to use is selected from the list of vintages in the `inPlanGuarantee.vintages[]` list within the `POST /fpe/v6/globaldata` response.
+Describes the characteristics of an IPG financial model for a given cohort.  When FPE [forecasts a plan](../../README.md#post-v6forecast) with [IPG modeling enabled](#request-object), the specific vintage to use is selected from the list of vintages in the `inPlanGuarantee.vintages[]` list within the `POST /fpe/v6/globaldata` response.
 
 Below is a sample vintage object with all attributes defined:
 
@@ -59,7 +59,7 @@ Below is a sample vintage object with all attributes defined:
 <br/>
 
 
-# API Request Object
+# Request Object
 
 The IPG modeling algorithm is triggered by the inclusion of the `inPlanGuarantee{}` object within an existing FPE [Plan](https://github.com/newretirement/fpe-api/blob/master/datatypes.md#plan) when calling the [GET /fpe/v6/forecast](https://github.com/newretirement/fpe-api/blob/master/README.md#post-v6forecast) endpoint:
 
@@ -77,6 +77,8 @@ The IPG modeling algorithm is triggered by the inclusion of the `inPlanGuarantee
 See [this FPE request](./ipg_plan.json) for a complete example of an FPE plan with IPG modeling enabled.
 
 ### InPlanGuarantee
+
+The presence of ths object in the request will trigger the IPG logic.
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
