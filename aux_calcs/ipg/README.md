@@ -24,29 +24,31 @@ Income Activation Date (IAD) determines the year/month that IPG income payments 
 
 Describes the characteristics of an IPG financial model for a given cohort.  When FPE [forecasts a plan](../../README.md#post-v6forecast) with [IPG modeling enabled](#api-request-object), the specific vintage to use is selected from the list of vintages in the `inPlanGuarantee.vintages[]` list within the `POST /fpe/v6/globaldata` response.
 
-Below is a vintage object with all attributes defined:
+Below is a sample vintage object with all attributes defined:
 
 ```json
 {
     "product": "LIB",
     "year": 2031,
-    "entryDateRange": {
-        "start": "2022-01",
-        "end": "2023-12"
-    },
-    "birthDateRange": {
-        "start": "1965-01",
-        "end": "1967-12"
-    },
+    "entryDateRange": {"start": "2022-01", "end": "2023-12"},
+    "birthDateRange": {"start": "1965-01", "end": "1967-12"},
     "hwmRatio": 1.25,
     "nonGtdWithdrawRate": 0.015,
     "gtdWithdrawRate": 0.045,
     "lifetimeContribLimit": 1500000,
     "volatility": {
-        "equityPreActivate": {"mean": 0.0643, "stdev": 0.18},
-        "fixedIncomePreActivate": {"mean": 0.0553, "stdev": 0.046},
-        "equityPostActivate": {"mean": 0.0543, "stdev": 0.115},
-        "fixedIncomePostActivate": {"mean": 0.0553, "stdev": 0.036}
+        "equityPreActivate": {
+            "mean": 0.0643, "stdev": 0.18
+        },
+        "fixedIncomePreActivate": {
+            "mean": 0.0553, "stdev": 0.046
+        },
+        "equityPostActivate": {
+            "mean": 0.0543, "stdev": 0.115
+        },
+        "fixedIncomePostActivate": {
+            "mean": 0.0553, "stdev": 0.036
+        }
     },
     "glidePath": {
         "annualEquityAllocs": [0.4566, 0.4378, 0.4191, 0.4003, 0.3816]
@@ -65,9 +67,9 @@ The IPG modeling algorithm is triggered by the inclusion of the `inPlanGuarantee
 {
     "plan": {
         "inPlanGuarantee": {
-            ...
+            <IPG specifics>
         },
-        ...
+        <the rest of the plan>
     }
 }
 ```
