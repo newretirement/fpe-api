@@ -6,10 +6,11 @@ When a [plan](datatypes.md#plan) is submitted to the [POST /forecast](README.md#
 
 | Stream name | Type | Description |
 | ----------- | ---- | ----------- |
-| `@total_savings` | report | The sum of account balances for all [liquid asset](terms.md#liquid-asset) accounts. |
+| `@dividend:<account>` | report | The dividend payout on the account whose name is `<account>`. |
+| `@interest:<account>` | report | The interest accrued on the account whose name is `<account>`. |
 | `@projected_savings` | report | The sum of account balances for all [liquid asset](terms.md#liquid-asset) accounts PLUS any accounts whose type is [revolvingCredit](datatypes.md#accounttype). |
 | `@total_debt` | report | The sum of all accounts with a negative balance. |
-| `@interest:<account>` | report | The interest accrued on the account whose name is `<account>`. |
+| `@total_savings` | report | The sum of account balances for all [liquid asset](terms.md#liquid-asset) accounts. |
 
 ## PaymentStream Projections
 
