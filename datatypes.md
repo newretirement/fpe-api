@@ -114,7 +114,7 @@ A sample JSON request for relocation is [here](examples/forecast/housing/relocat
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `onAge` | [Duration](#duration) | The age of the primary account holder when the reverse mortage transaction should occur. Since the [minimum age to qualify](https://www.investopedia.com/reverse-mortgage-requirements-5223764) for a reverse mortgage is `62y`, an `HTTP 400` is returned if a value less than this is returned. |
+| `onAge` | [Duration](#duration) | The age of the primary account holder when the reverse mortage will occur. Since the [minimum age to qualify](https://www.investopedia.com/reverse-mortgage-requirements-5223764) for a reverse mortgage is `62y`, an `HTTP 400` is returned for age values less than this. |
 | `currentMortgage` | string | The name of the [Account](#account) that represents the home mortgage.  Leave this field empty if the home is already paid off. |
 | `reverseMortgage` | string |The name of the [Account](#account) that defines the reverse mortgage loan. |
 | `balanceLimitAGR` | float | Determines the rate at which the reverse mortgage's [LOC](https://www.investopedia.com/terms/l/lineofcredit.asp) increases. |
