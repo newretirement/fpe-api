@@ -84,7 +84,7 @@ The `Events` object represents various non-periodic life events such as relocati
 | ---------- | ---- | ----------- |
 | `relocations` | [Relocation[]](#relocation) | Models relocating to a new [U.S. state](#usstate). |
 | `assetSales` | [AssetSale[]](#assetsale) | Models buying/selling of assets, especially real estate. |
-| `reverseMortgages` | `ReverseMortgage[]` | Models 1 or more [reverse mortgages](https://www.investopedia.com/mortgage/reverse-mortgage/). |
+| `reverseMortgages` | [ReverseMortgage](#reversemortgage)` | Models 1 or more [reverse mortgages](https://www.investopedia.com/mortgage/reverse-mortgage/). |
 | `annuityPurchases` | `AnnuityPurchase[]` | Models 1 or more future annuity purchases, which are then converted into periodic income starting at some point after the purchase date. |
 
 #### AssetSale
@@ -109,6 +109,15 @@ The `Events` object represents various non-periodic life events such as relocati
 | `stateCode` | [USState](#usstate) | The U.S. state corresponding to the primary's current state of residence. |
 
 A sample JSON request for relocation is [here](examples/forecast/housing/relocation-01.json).
+
+#### ReverseMortgage
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `onAge` | [Duration](#duration) | The age of the primary account holder when the reverse mortage transaction should occur. Since the [minimum age to qualify](https://www.investopedia.com/reverse-mortgage-requirements-5223764) for a reverse mortgage is `62y`, an `HTTP 400` is returned if a value less than this is returned. |
+| `currentMortgage` | string | The name of the [Account](#account) that represents the home mortgage.  Leave this field empty if the home is already paid off. |
+| `reverseMortgage` | string |The name of the [Account](#account) that defines the reverse mortgage loan. |
+| `balanceLimitAGR` | float | Determines the rate at which the reverse mortgage's [LOC](https://www.investopedia.com/terms/l/lineofcredit.asp) increases. |
 
 <br/><hr/>
 
