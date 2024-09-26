@@ -119,6 +119,8 @@ A sample JSON request for relocation is [here](examples/forecast/housing/relocat
 | `reverseMortgage` | string |The name of the [Account](#account) that defines the reverse mortgage loan. |
 | `balanceLimitAGR` | float | Determines the rate at which the reverse mortgage's [LOC](https://www.investopedia.com/terms/l/lineofcredit.asp) increases. |
 
+See [reverse_mortage.json](examples/forecast/housing/reverse_mortgage.json) for a complete JSON plan example.
+
 <br/><hr/>
 
 
