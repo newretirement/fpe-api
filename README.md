@@ -410,9 +410,9 @@ The `RothConversion` object represents a one-time transfer from a tax-deferred a
 
 ## `POST /v6/savingsneed`
 
-Given a [Plan](datatypes.md#plan), this endpoint solves for the [@total_savings](output_streams.md#account-projections) needed in order to "break even" at goal age (final month of simulation) at 1 or more future time points.  The future time points are set via the `params.savingsneed.dates` attribute within the [ForecastParams](datatypes.md#forecastparams) object.
+Given a [Plan](datatypes.md#plan), solves for the [@total_savings](output_streams.md#account-projections) needed in order to "break even" at [goal age](terms.md#goal-age) at 1 or more future time points.  The future time points are set via the `params.savingsneed.dates` attribute within the [ForecastParams](datatypes.md#forecastparams) object.
 
-"break even", in this context, means the household's [net worth](https://en.wikipedia.org/wiki/Net_worth) (i.e. [@total_savings - @total_debt](output_streams.md#account-projections)) in the final month of the simulation is in the range [$0..$1000].
+"break even" means the household's [net worth](https://en.wikipedia.org/wiki/Net_worth) (i.e. [@total_savings - @total_debt](output_streams.md#account-projections)) in the final month of the simulation is within the range [$0..$1000].
 
 This endpoint returns a time series, where each data point contains a `value` and `date` indicating the [@total_savings](output_streams.md#account-projections) amount needed at a specific date in order to break even (see **Sample response** below).
 
@@ -443,7 +443,7 @@ This endpoint returns a time series, where each data point contains a `value` an
 
 ### Implementation Note
 
-To find the correct `@total_savings` amount at date `d`, FPE  injects a temporary `paymentStream` having a one-time payment date `d` into the original [Plan](datatypes.md#plan), and then runs a binary search to find the non-taxable withdrawal or deposit amount needed.  More specifically, either a withdrawal or deposit `paymentStream` object is added to the plan, and then the simulation is repeatedly run with varying values of `x` until break-even is achieved:
+To find the correct `@total_savings` amount at date `d`, FPE injects an ephemeral `paymentStream` having a one-time payment date `d` into the original [Plan](datatypes.md#plan), and then runs a binary search to find the non-taxable withdrawal or deposit amount needed.  More specifically, either a withdrawal or deposit `paymentStream` object is added to the plan, and then the simulation is repeatedly run with varying values of `x` until break-even is achieved:
 
 _**Case 1:** Net worth at goal age is negative, so deposit more money_
 ```
