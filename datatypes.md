@@ -397,13 +397,13 @@ A `plan` is the top-level financial object; it represents the user's complete pr
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `accounts` | [Account[]](#account) | Array of accounts within the financial plan. |
+| `accounts` | [Account[]](#account) | Array of accounts within the financial plan. The maximum number of accounts is `150`. |
 | `cashFlow` | [CashFlow](#cashflow) | Determines how excess income is spent/saved. |
 | `currentDate` | [Date](#date) | Today's date. |
 | `events` | [Events](#events) | Describes various non-periodic life events such as buying a new home or purchasing an annuity. |
 | `limitRetireAccountContribs` | boolean | If `true`, income-linked contributions to `401k` and `ira` accounts will be capped based on IRS-defined rules; default value is `false`. |
 | `market` | [Market](#market) | Market data (inflation rate, etc.). |
-| `paymentStreams` | [PaymentStream[]](#paymentstream) | Array of payment streams within the financial plan. |
+| `paymentStreams` | [PaymentStream[]](#paymentstream) | Array of payment streams within the financial plan.  The maximum number of paymentStreams is `350`. |
 | `primary` | [Person](#person) | The primary account holder. |
 | `spouse` | [Person](#person) | The primary account holder's spouse (optional). |
 | `stateCode` | [USState](#usstate) | The primary's current state of residence. |
