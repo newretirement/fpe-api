@@ -1,4 +1,6 @@
-# Inherited IRAs (WIP...)
+# Inherited IRAs
+
+__NOTE: This page is currently a WIP__
 
 ## RMD Calculation
 
