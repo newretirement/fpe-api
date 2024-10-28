@@ -10,9 +10,9 @@ A required minimum distribution (RMD) is the amount of money that must be withdr
 
 The age at which RMDs start is based on the account owner's [birthDate](datatypes.md#person):
 
-| birthDate | RMD age |
-| ------------- | ------- |
-| `1960-01` to present | `75y`   |
-| `1951-01` to `1959-12`  | `73y`   |
-| `1949-07` to `1950-12`  | `72y`   |
-| all other dates | `70y6m` |
+| birthDate              | RMD age |
+| ---------------------- | ------- |
+| `1960-01` to present   | `75y`   |
+| `1951-01` to `1959-12` | `73y`   |
+| `1949-07` to `1950-12` | `72y`   |
+| all other dates        | `70y6m` |
