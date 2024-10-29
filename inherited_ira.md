@@ -46,7 +46,9 @@ The [SECURE Act](https://www.investopedia.com/secure-act-4688468) was a 2019/202
 
 The procedure for determining the RMD [Distribution Period](#terms) differs slightly between `ira` and `rothIRA` [account types](datatypes.md#accounttype):
 
-#### Traditional IRA (`account.type = ira`)
+#### Traditional IRA
+
+Use this procedure when `account.type = "ira"`:
 
 1. Pre-SECURE-Act
     1. `decedent.deathDate` < [RBD](#terms)
@@ -65,7 +67,9 @@ The procedure for determining the RMD [Distribution Period](#terms) differs slig
     1. `decedent.deathDate` ≥ [RBD](#terms)
         1. Calculate Distribution Period per requirements `1.2` and `1.3` above.
 
-#### Roth IRA (`account.type = rothIRA`)
+#### Roth IRA
+
+Use this procedure when `account.type = "rothIRA"`:
 
 1. Pre-SECURE-Act
     1. Let `age` = beneficiary’s age in December of the RMD start year
@@ -96,9 +100,9 @@ RMDs for inherited IRAs are calculated using a [distribution period](#terms) bas
 1. The one-time withdrawal from an inherited IRA resulting from the 10-Year Rule is reported in a discrete output stream named `@withdrawal:<accountName>:10yr_rule`.
 
 
-## RMD Distributions
+## Distributions
 
-Distributions resulting from both [RMDs](#rmd-calculation) and the [10-Year Rule](#10-year-rule) are deposited into the plan's designated [checkingAccount](datatypes.md#cashflow).
+Inherited IRA distributions resulting from either [RMDs](#rmd-calculation) or the [10-Year Rule](#10-year-rule) are deposited into the plan's designated [checkingAccount](datatypes.md#cashflow).
 
 
 ## Terms
