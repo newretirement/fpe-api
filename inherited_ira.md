@@ -51,9 +51,9 @@ The following procedure calculates the annual RMD that must be satisfied by Dece
     1. `decedent.deathDate` ≥ [RBD](#terms)
         1. Calculate Distribution Period per requirements `2.2` and `2.3` above.
 1. The RMD for account a in year y is then calculated as follows:
-    1. Let `bal` = the ending balance of account a in year `y-1`
+    1. Let `bal` = the ending balance of a given account in year `y-1`
         1. If `y-1` precedes January of `plan.currentYear`, then `bal` = account balance on current date
-    1. Let `p` = the Distribution Period determined in the previous steps
+    1. Let `p` = the Distribution Period determined in the preceding steps
     1. `rmd = bal / p`
 
 ### Life Expectancy Table
