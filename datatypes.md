@@ -50,6 +50,16 @@ The `AccountType` enum represents the different types of accounts that can be mo
 | `revolvingCredit` | [Revolving credit](https://www.investopedia.com/terms/r/revolvingcredit.asp) is an agreement that permits an account holder to borrow money repeatedly up to a set dollar limit while repaying a portion of the current balance due in regular payments. Two common examples are [credit cards and LOC (line of credit)](https://www.bankrate.com/finance/credit-cards/line-of-credit-vs-credit-card/). |
 | `reverseMortgage` | See [What is a Reverse Mortgage?](https://www.investopedia.com/mortgage/reverse-mortgage/) |
 
+#### Decedent
+
+Applies only to [inherited IRAs](inherited_ira.md). The original account owner who has died, and is leaving their account to a designated beneficiary.
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `birthDate` | [Date](#date) | The decedent's birth date. |
+| `deathDate` | [Date](#date) | The date that the decedent died. |
+
+
 <br/><hr/>
 
 
@@ -100,15 +110,6 @@ The `Events` object represents various non-periodic life events such as relocati
 | `transactionAccountName` | string | The name of the account to use for all transactions involved in this asset sale.  This includes deposits (e.g. proceeds from asset sales) and withrawals (e.g. down payment on a new house). If this attribute is omitted, then proceeds will deposit into the default savings account, and the _Optimal Withdrawal Strategy_ will be used for withdrawals. |
 | `newLoanName` | string | The name of the new loan associated with the new asset (omit if none). |
 | `newLoanBalance` | int | The starting balance on the new loan (omit if none). |
-
-#### Decedent
-
-Applies only to [inherited IRAs](inherited_ira.md). The original account owner who has died, and is leaving their account to a designated beneficiary.
-
-| Attribute  | Type | Description |
-| ---------- | ---- | ----------- |
-| `birthDate` | [Date](#date) | The decedent's birth date. |
-| `deathDate` | [Date](#date) | The date that the decedent died. |
 
 #### Relocation
 
