@@ -4,7 +4,7 @@ An inherited IRA is a retirement account that was opened when either the [Primar
 
 In FPE, an inherited IRA is represented as an account in which the [account.decedent](datatypes.md#decedent) object has been specified.  For example:
 
-```json
+```js
 {
   ”name”: “my inherited IRA”, 
   "type": "ira", 
@@ -12,6 +12,7 @@ In FPE, an inherited IRA is represented as an account in which the [account.dece
     ”birthDate”: “1951-06”,
     “deathDate”: “2019-11”
   }
+  ... 
 }
 ```
 
