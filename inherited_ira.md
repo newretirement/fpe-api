@@ -96,7 +96,7 @@ RMDs for inherited IRAs are calculated using a [distribution period](#terms) bas
 
 1. The 10-Year Rule requires the beneficiary to withdraw the entire balance of the inherited account by December of the year containing the 10th anniversary of the owner’s death.  For example, if the decedent died in 2023, the beneficiary must fully distribute the IRA by `2033-12`.
 1. The beneficiary has discretion over when to take the dollars out over this time window, and there is no penalty if completed BEFORE the end of the 10th year.
-1. The 10-Year Rule applies ONLY IF decedent’s death ≥ `2020-01` (i.e. they died post-SECURE-Act).
+1. The 10-Year Rule applies ONLY IF they died post-SECURE-Act (i.e. `decedent.deathDate ≥ 2020-01`).
 1. The one-time withdrawal from an inherited IRA resulting from the 10-Year Rule is reported in a discrete output stream named `@withdrawal:<accountName>:10yr_rule`.
 
 
