@@ -9,6 +9,7 @@ An `account` is a financial ledger of the transactions within a real-world accou
 | `balance` | int | The account balance at the start of the financial projection. |
 | `balanceLimit` | int |  Sets a balance limit on this account.  This attribute is only valid for accounts of type `loan` or `revolvingCredit`.|
 | `costBasis` | int | [Cost basis](https://www.investopedia.com/articles/investing/060313/what-determines-your-cost-basis.asp) is the original value or purchase price of an asset or investment for tax purposes.  This attribute is only relevant for accounts on which capital gains taxes are calculated.  Default value is `0`. |
+| `decedent` | [Decedent](#decedent) | The original owner of an [inherited IRA](inherited_ira.md) |
 | `disableOptimalWithdraw` | boolean | If true, this account is excluded from the candidate accounts selected for the _Optimal Withdrawal Strategy_ (refer to [PaymentStream\.source](#paymentstream) description). Defaults to `false`. |
 | `disableRMD` | boolean | If true, RMDs are guaranteed not to be taken from this account, regardless of context (e.g. the person's age or the account's type). Defaults to `false`. |
 | `disableRothConversion` | boolean | If true, the _Roth Conversion Optimizer_ algorithm will ignore this account when finding candidate tax-advantaged accounts to be converted.  Defaults to `false`. |
@@ -99,6 +100,15 @@ The `Events` object represents various non-periodic life events such as relocati
 | `transactionAccountName` | string | The name of the account to use for all transactions involved in this asset sale.  This includes deposits (e.g. proceeds from asset sales) and withrawals (e.g. down payment on a new house). If this attribute is omitted, then proceeds will deposit into the default savings account, and the _Optimal Withdrawal Strategy_ will be used for withdrawals. |
 | `newLoanName` | string | The name of the new loan associated with the new asset (omit if none). |
 | `newLoanBalance` | int | The starting balance on the new loan (omit if none). |
+
+#### Decedent
+
+Applies only to [inherited IRAs](inherited_ira.md). The original account owner who has died, and is leaving their account to a designated beneficiary.
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `birthDate` | [Date](#date) | The decedent's birth date. |
+| `deathDate` | [Date](#date) | The date that the decedent died. |
 
 #### Relocation
 
@@ -348,6 +358,8 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 
 
 ## Person
+
+`Person` represents either the `primary` account holder of the financial [plan](#plan) or their `spouse`.
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
