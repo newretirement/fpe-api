@@ -2,24 +2,28 @@
 
 An inherited IRA is a retirement account that was opened when either the [Primary or Spouse](datatypes.md#plan) inherited an [IRA](datatypes.md#accounttype) from someone after they died.
 
-In FPE, an inherited IRA is represented as an account in which the [account.decedent](datatypes.md#decedent) object has been specified.  For example:
+In FPE, an inherited IRA is represented as an account in which the optional [decedent](datatypes.md#decedent) object has been specified.  For example:
 
-```js
+```json
 {
-  ”name”: “my inherited IRA”, 
-  "type": "ira", 
-  “decedent”: {
-    ”birthDate”: “1951-06”,
-    “deathDate”: “2019-11”
-  }
-  ... 
+  "accounts": [
+    {
+      "name": "my inherited IRA", 
+      "type": "ira", 
+      "decedent": {
+        "birthDate": "1951-06",
+        "deathDate": "2019-11"
+      }
+    }
+  ],
+  "paymentStreams": []
 }
 ```
 
 Support for inherited IRAs is currently limited:
 
-1. Only supports traditional IRAs (i.e. `account.type = "ira"`)
-1. Future inherited IRAs not supported (i.e. `plan.account[*].decedent.deathDate` cannot be after `plan.currentDate`)
+1. Only supports traditional IRAs (i.e. `account.type = "ira"`); otherwise, FPE returns `HTTP 400`;
+1. Future inherited IRAs not supported (i.e. `plan.account[*].decedent.deathDate` cannot be after `plan.currentDate`); otherwise, FPE returns `HTTP 400`.
 1. Unlike standard (i.e. non-inherited) RMDs, FPE does not attempt to implicitly satisfy the annual RMD obligation via [optimal withdrawal](optimal_withdraw.md) expenses throughout the year.
 
 
