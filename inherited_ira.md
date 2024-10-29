@@ -1,6 +1,6 @@
 # Inherited IRAs
 
-An inherited IRA is an [IRA](datatypes.md#accounttype) opened by the [Primary or Spouse](datatypes.md#plan) when they are the beneficiary of a deceased person’s (a.k.a. _[decedent](https://www.investopedia.com/terms/d/decedent.asp)_) retirement plan.
+An inherited IRA is a retirement account (either `ira` or `rothIRA`) opened by the [Primary or Spouse](datatypes.md#plan) when they are the beneficiary of a deceased person’s (a.k.a. _[decedent](https://www.investopedia.com/terms/d/decedent.asp)_) retirement plan.
 
 In FPE, an inherited IRA is represented as an account that includes the optional [decedent](datatypes.md#decedent) object.  For example:
 
@@ -23,19 +23,28 @@ In FPE, an inherited IRA is represented as an account that includes the optional
 
 Support for inherited IRAs is currently limited:
 
-1. Only supports traditional IRAs (i.e. `account.type = "ira"`); otherwise, FPE returns `HTTP 400`;
 1. Future inherited IRAs not supported (i.e. `plan.account[*].decedent.deathDate` cannot be after `plan.currentDate`); otherwise, FPE returns `HTTP 400`.
 1. Unlike standard (i.e. non-inherited) RMDs, FPE does not attempt to implicitly satisfy the annual RMD obligation via [optimal withdrawal](optimal_withdraw.md) expenses throughout the year.
 
 
 ## RMD Calculation
 
-_NOTE: RMDs on inherited IRAs must be calculated **per account** (vs. across all RMD-eligible accounts for a given account owner)._
+### Preamble
 
-The following procedure calculates the annual RMD that must be satisfied by December for a given account in a given year.
-
+1. RMDs on inherited IRAs must be calculated **per account** (vs. across all RMD-eligible accounts for a given account owner).
 1. RMDs on an inherited IRA start in the year following the decedent’s death.  For example, if `decedent.deathDate = 2021-04`, then the first RMD would be due in `2022-12`.
-1. Pre-SECURE-Act (`decedent.deathDate < 2020-01`)
+1. RMDs for a given year must be withdrawn no later than December of that year.
+1. The [SECURE Act](https://www.investopedia.com/secure-act-4688468) was a 2019/2020 law designed to help more Americans save for retirement.  For the purpose of this calculation:
+    - 'Pre-SECURE-Act' means `decedent.deathDate < 2020-01`
+    - 'Post-SECURE-Act' means `decedent.deathDate ≥ 2020-01`
+
+### Distribution Period
+
+The procedure for determining the RMD [Distribution Period](#terms) differs slightly between `ira` and `rothIRA` [account types](datatypes.md#accounttype):
+
+#### Traditional IRA (`account.type = ira`)
+
+1. Pre-SECURE-Act
     1. `decedent.deathDate` < [RBD](#terms)
         1. Let `age` = beneficiary’s age in December of the RMD start year
         1. Let `lifeExp` = the [life expectancy](#life-expectancy-table) for `age`
@@ -46,16 +55,29 @@ The following procedure calculates the annual RMD that must be satisfied by Dece
         1. Let `decedentLifeExp` = {[life expectancy](#life-expectancy-table) for `decedentAge`} - 1.0
         1. Let `lifeExp` = `max(beneficiaryLifeExp, decedentLifeExp)`
     1. Distribution Period = `max(1.0, lifeExp - (currentYear - rmdStartYear))`
-1. Post-SECURE-Act (`decedent.deathDate ≥ 2020-01`)
+1. Post-SECURE-Act
     1. `decedent.deathDate` < [RBD](#terms)
         1. No RMDs necessary
     1. `decedent.deathDate` ≥ [RBD](#terms)
-        1. Calculate Distribution Period per requirements `2.2` and `2.3` above.
-1. The RMD for account a in year y is then calculated as follows:
-    1. Let `bal` = the ending balance of a given account in year `y-1`
-        1. If `y-1` precedes January of `plan.currentYear`, then `bal` = account balance on current date
-    1. Let `p` = the Distribution Period determined in the preceding steps
-    1. `rmd = bal / p`
+        1. Calculate Distribution Period per requirements `1.2` and `1.3` above.
+
+#### Roth IRA (`account.type = rothIRA`)
+
+1. Pre-SECURE-Act
+    1. Let `age` = beneficiary’s age in December of the RMD start year
+    1. Let `lifeExp` = the [life expectancy](#life-expectancy-table) for `age`
+    1. Distribution Period = `max(1.0, lifeExp - (currentYear - rmdStartYear))`
+1. Post-SECURE-Act
+    1. __No RMDs necessary__
+
+### Calculate RMD
+
+The RMD for an account in year `y` is then calculated as follows:
+
+1. Let `bal` = the ending balance of the account in year `y-1`.
+    - If `y-1` precedes January of `plan.currentYear`, then `bal` = account balance on current date
+1. Let `p` = the Distribution Period determined in the [previous step](#distribution-period)
+1. `rmd = bal / p`
 
 ### Life Expectancy Table
 
