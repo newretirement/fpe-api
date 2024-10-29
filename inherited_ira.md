@@ -18,9 +18,9 @@ In FPE, an inherited IRA is represented as an account in which the [account.dece
 
 Support for inherited IRAs is currently limited:
 
-- Only supports traditional IRAs (i.e. `account.type = "ira"`)
-- Future inherited IRAs not supported (i.e. `plan.account[*].decedent.deathDate` cannot be after `plan.currentDate`)
-- Unlike standard (i.e. non-inherited) RMDs, FPE does not attempt to satisfied [optimally-withdrawn](optimal_withdraw.md) expenses throughout the year. 
+1. Only supports traditional IRAs (i.e. `account.type = "ira"`)
+1. Future inherited IRAs not supported (i.e. `plan.account[*].decedent.deathDate` cannot be after `plan.currentDate`)
+1. Unlike standard (i.e. non-inherited) RMDs, FPE does not attempt to implicitly satisfy the annual RMD obligation via [optimal withdrawal](optimal_withdraw.md) expenses throughout the year.
 
 
 ## RMD Calculation
@@ -29,29 +29,33 @@ _NOTE: RMDs on inherited IRAs must be calculated **per account** (vs. across all
 
 The following procedure calculates the annual RMD that must be satisfied by December for a given account in a given year.
 
-
-1. RMDs on an inherited IRA start in the year following the decedent’s death.  For example, if the decedent died in `2021-04`, then the first RMD would be due in `2022-12`.
-1. Pre-SECURE-Act (decedent’s death < `2020-01`)
-    1. Decedent’s death < [RBD](#terms)
+1. RMDs on an inherited IRA start in the year following the decedent’s death.  For example, if `decedent.deathDate = 2021-04`, then the first RMD would be due in `2022-12`.
+1. Pre-SECURE-Act (`decedent.deathDate < 2020-01`)
+    1. `decedent.deathDate` < [RBD](#terms)
         1. Let `age` = beneficiary’s age in December of the RMD start year
-        1. Let `lifeExp` = life expectancy for age based on Single life expectancy table 1
-    1. Decedent’s death ≥ [RBD](#terms)
+        1. Let `lifeExp` = the [life expectancy](#life-expectancy-table) for `age`
+    1. `decedent.deathDate` ≥ [RBD](#terms)
         1. Let `beneficiaryAge` = beneficiary’s age in December of the RMD start year
-        1. Let `beneficiaryLifeExp` = life expectancy for beneficiaryAge based on Single_life_expectancy_tbl_1
+        1. Let `beneficiaryLifeExp` = the [life expectancy](#life-expectancy-table) for `beneficiaryAge`
         1. Let `decedentAge` = decedent’s age in December of the year they died
-        1. Let `decedentLifeExp` = {life expectancy for decedentAge based on Single_life_expectancy_tbl_1} - 1.0
+        1. Let `decedentLifeExp` = {[life expectancy](#life-expectancy-table) for `decedentAge`} - 1.0
         1. Let `lifeExp` = `max(beneficiaryLifeExp, decedentLifeExp)`
     1. Distribution Period = `max(1.0, lifeExp - (currentYear - rmdStartYear))`
-1. Post-SECURE-Act (decedent’s death ≥ `2020-01`)
-    1. Decedent’s death < [RBD](#terms)
+1. Post-SECURE-Act (`decedent.deathDate ≥ 2020-01`)
+    1. `decedent.deathDate` < [RBD](#terms)
         1. No RMDs necessary
-    1. Decedent’s death ≥ [RBD](#terms)
-        1. Calculate Distribution Period per requirements 2.b and 2.c above.
+    1. `decedent.deathDate` ≥ [RBD](#terms)
+        1. Calculate Distribution Period per requirements `2.2` and `2.3` above.
 1. The RMD for account a in year y is then calculated as follows:
-    1. Let ` bal` = the ending balance of account a in year `y-1`
+    1. Let `bal` = the ending balance of account a in year `y-1`
         1. If `y-1` precedes January of `plan.currentYear`, then `bal` = account balance on current date
     1. Let `p` = the Distribution Period determined in the previous steps
     1. `rmd = bal / p`
+
+### Life Expectancy Table
+
+RMDs for inherited IRAs are calculated using a [distribution period](#terms) based on the IRS [Life Expectancy Table 1](https://www.irs.gov/publications/p590b#en_US_2023_publink100089977).  For example, someone who is 35 year old is expected to live 50.5 more years according to this table.
+
 
 ## 10-Year Rule
 
@@ -67,6 +71,6 @@ The following procedure calculates the annual RMD that must be satisfied by Dece
 | ------------ | ---------- |
 | beneficiary | The person receiving the inherited IRA. Corresponds to the [account.owner](datatypes.md#account) attribute in the FPE request. |
 | decedent | The original account owner who has died, and is leaving their account to a designated beneficiary. Corresponds to [account.decedent](datatypes.md#decedent) in the request. |
-| distribution period | The divisor used for calculating RMDs (ie. `RMD = {previous year balance} / {distribution period}`).  For inherited IRAs, this divisor is based on [this IRS life expectancy table](https://www.irs.gov/publications/p590b#en_US_2023_publink100089977) in conjunction with the age of either the beneficiary or decedent (based on RMD calculation rules in previous sections). |
+| distribution period | The divisor used for calculating RMDs (ie. `RMD = {previous year balance} / {distribution period}`).  For inherited IRAs, this divisor is based on [this IRS life expectancy table](#life-expectancy-table) in conjunction with the age of either the beneficiary or decedent (based on RMD calculation rules in previous sections). |
 | RBD | Required Beginning Date, calculated as April of the year _after_ the year the decedent reached their [RMD age](rmd.md#rmd-age).  For example, if the decedent was born on `1953-11`, their RBD is `2027-04`. |
 |RMD | Required Minimum Distribution.  See [RMD page](rmd.md) |
