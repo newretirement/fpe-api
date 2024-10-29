@@ -31,12 +31,16 @@ Support for inherited IRAs is currently limited:
 
 ### Preamble
 
-1. RMDs on inherited IRAs must be calculated **per account** (vs. across all RMD-eligible accounts for a given account owner).
-1. RMDs on an inherited IRA start in the year following the decedent’s death.  For example, if `decedent.deathDate = 2021-04`, then the first RMD would be due in `2022-12`.
-1. RMDs for a given year must be withdrawn no later than December of that year.
-1. The [SECURE Act](https://www.investopedia.com/secure-act-4688468) was a 2019/2020 law designed to help more Americans save for retirement.  For the purpose of this calculation:
-    - 'Pre-SECURE-Act' means `decedent.deathDate < 2020-01`
-    - 'Post-SECURE-Act' means `decedent.deathDate ≥ 2020-01`
+RMDs on an inherited IRA:
+
+1. must be calculated **per account** (vs. across all RMD-eligible accounts for a given account owner).
+1. start in the year following the decedent’s death.  For example, if `decedent.deathDate = 2021-04`, then the first RMD would be due in `2022-12`.
+1. must be withdrawn no later than December of a given year.
+
+The [SECURE Act](https://www.investopedia.com/secure-act-4688468) was a 2019/2020 law designed to help more Americans save for retirement.  For the purpose of this calculation:
+
+- 'Pre-SECURE-Act' means `decedent.deathDate < 2020-01`
+- 'Post-SECURE-Act' means `decedent.deathDate ≥ 2020-01`
 
 ### Distribution Period
 
@@ -68,7 +72,7 @@ The procedure for determining the RMD [Distribution Period](#terms) differs slig
     1. Let `lifeExp` = the [life expectancy](#life-expectancy-table) for `age`
     1. Distribution Period = `max(1.0, lifeExp - (currentYear - rmdStartYear))`
 1. Post-SECURE-Act
-    1. __No RMDs necessary__
+    1. No RMDs necessary
 
 ### Calculate RMD
 
@@ -90,6 +94,11 @@ RMDs for inherited IRAs are calculated using a [distribution period](#terms) bas
 1. The beneficiary has discretion over when to take the dollars out over this time window, and there is no penalty if completed BEFORE the end of the 10th year.
 1. The 10-Year Rule applies ONLY IF decedent’s death ≥ `2020-01` (i.e. they died post-SECURE-Act).
 1. The one-time withdrawal from an inherited IRA resulting from the 10-Year Rule is reported in a discrete output stream named `@withdrawal:<accountName>:10yr_rule`.
+
+
+## RMD Distributions
+
+Distributions resulting from both [RMDs](#rmd-calculation) and the [10-Year Rule](#10-year-rule) are deposited into the plan's designated [checkingAccount](datatypes.md#cashflow).
 
 
 ## Terms
