@@ -80,7 +80,7 @@ The RMD for an account in year `y` is then calculated as follows:
 
 1. Let `bal` = the ending balance of the account in year `y-1`.
     - If `y-1` precedes January of `plan.currentYear`, then `bal` = account balance on current date
-1. Let `p` = the Distribution Period determined in the [previous step](#distribution-period)
+1. Let `p` = the Distribution Period determined in the [previous section](#distribution-period)
 1. `rmd = bal / p`
 
 ### Life Expectancy Table
