@@ -20,7 +20,7 @@ If there are insufficient funds in the `"vacation"` account to cover the expense
 
 ### METHOD 2: Optimal Withdrawal Strategy
 
-This example demonstrates the _optimal withdrawal strategy_. As in the previous example, $10,000 will be withdrawn annually.  However, since the funding source is set to `"optimal"`, FPE can potentially withdraw the requested $10K from multiple "shortfall" accounts if the first chosen account can't cover the full amount.
+This example demonstrates the _optimal withdrawal strategy_. As in the previous example, $10,000 will be withdrawn annually.  However, since the funding source is set to `"optimal"`, FPE can potentially, and implicitly, withdraw the requested $10K from multiple accounts if the first chosen account can't cover the full amount (this is known as a [shortfall withdrawal](terms.md#shortfall-withdrawal)).
 
 ```json
 {
@@ -56,18 +56,10 @@ Note that:
     
 #### STAGE 3
 
-1. Within each account category, sort accounts by increasing [RoR](https://www.investopedia.com/terms/r/rateofreturn.asp) (specified by [account.rate](datatypes.md#account))
-1. Within each _(category, RoR)_ equivalence class, the original account order is intentionally preserved to give the API client control over the withdrawal order.
+1. Within each account category, sort accounts by increasing [RoR](https://www.investopedia.com/terms/r/rateofreturn.asp) (calculated as `account.rate + account.dividendRate`)
+1. _Note:_ Within each _(category, RoR)_ equivalence class, the original account order is preserved to give the API client control over the withdrawal order.
 1. An account will **not** be withdrawn from if:
     - Its [disableOptimalWithdraw](datatypes.md#account) flag is set to true
     - Its [account type](datatypes.md#accounttype) is not listed in one of the above categories (e.g. a `loan`)
 
 Once the account withdrawal order has been determined for a given month, FPE then attempts to withdraw the requested amount from each account until the full expense has been funded.  If the first account in the withdrawal sequence has insufficient funds, the remaining balance is withdrawn, and FPE moves on to the next account in the sequence, and so on.
-
-<br/>
-
-## Relevant Terms
-
-- [account](datatypes.md#account)
-- [accountType](datatypes.md#accounttype)
-- [expense stream](terms.md#expense-stream)

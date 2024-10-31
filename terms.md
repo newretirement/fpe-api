@@ -66,7 +66,7 @@ The IRS-mandated amount of money that must be withdrawn annually from the [plan'
 
 ## shortfall withdrawal
 
-A shortfall withdrawal is an implicit withdrawal from an accounts that is automatically triggered when FPE is attempting to satisfy an expense amount that exceeds the balance of a given account. The order from which accounts are drawn is determined by the [optimal withdrawal strategy](optimal_withdrawal.md).
+A shortfall withdrawal is an implicit withdrawal from an accounts that is automatically triggered when FPE is attempting to satisfy an expense amount that exceeds the balance of a given account. The order from which accounts are drawn is determined by the [Optimal Withdrawal Strategy](optimal_withdrawal.md).
 
 <hr/><br/>
 
