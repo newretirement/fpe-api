@@ -33,12 +33,17 @@ In FPE, an "optimal withdrawal" expense is signified by setting the expense stre
 }
 ```
 
-## Types of withdrawal strategies
+Any [shortfall withdrawals](terms.md#shortfall-withdrawal) resulting from the expense are output in the forecast's [PaymentStream Projections](https://github.com/newretirement/fpe-api/blob/master/terms.md#shortfall-withdrawal) with the following stream name: `@withdrawal:{accountName}:shortfall`.
+
+
+## Withdrawal Strategy Types
 
 FPE supports 2 withdrawal strategies:
 
-- `traditional`: FPE uses a traditional rule-based approach to order the accounts (e.g. withdraw from lowest to highest growth rate).
-- `userDefinedOrder`: The account withdrawal order is determined by the user (i.e. the order of the accounts as specified in `plan.accounts[]`. _**Note:** RMD withdrawals will take priority over the user-specified order_.
+| type | description |
+| ---- | ----------- |
+| traditional |  FPE uses a traditional rule-based approach to order the accounts (e.g. withdraw from lowest to highest growth rate).|
+| userDefinedOrder | The account withdrawal order is determined the order of the accounts as specified in `plan.accounts[]`. _**Note:** RMD withdrawals will take priority over the user-specified order_. |
 
 The withdrawal strategy type is specified by the [plan.withdrawal.strategy](https://github.com/newretirement/fpe-api/blob/master/datatypes.md#withdrawal) attribute in the request.
 
