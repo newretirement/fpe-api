@@ -1,37 +1,50 @@
 # Optimal Withdrawal Strategy
 
-When modeling an [expense](terms.md#expense-stream) in FPE, there are 2 methods for specifying how that expense is sourced:
+## Overview
 
+'Optimal Withdrawal Strategy' refers to the account withdrawal order determined by FPE when attempting to satisfy an [expense](terms.md#expense-stream).  The withdawal order can have a dramatic effect on the plan's future health (e.g. net worth, tax liability).
 
-### METHOD 1: Withdraw exclusively from a specific account
+Example:
 
-In this example, $10,000 will be withdrawn annually, and <u>_only_</u>, from the source account named `"savings"`.
+    Given a plan with the following accounts:
+
+    - Account 'A' with $5000 balance
+    - Account 'B' with $200 balance
+    - Account 'C' with $1000 balance
+    
+    Suppose the optimal withdrawal order is calculated as: [B, C, A].
+    Then, to satisfy a $2000 expense, FPE would implicitly perform the
+    following withdrawals:
+
+    1. Withdraw $200 from 'B' (depleting the account)
+    2. Withdraw $1000 from 'C' (depleting the account)
+    3. Withdraw $800 from 'A' (leaving the account with $4200)
+
+The implicit withdrawals above are called [shortfall withdrawals](terms.md#shortfall-withdrawal).
+
+In FPE, an "optimal withdrawal" expense is signified by setting the expense stream's `source` to the special value `"optimal"`:
 
 ```json
 {
-    "name": "vacation",
-    "paymentAmount": 10000,
-    "source": "savings",
-    "paymentsPerYear": 1
-}
-```
-
-If there are insufficient funds in the `"vacation"` account to cover the expense, then the actual payment will end up being the account's remaining balance, and an [insufficientFunds warning](README.md#what-is-a-warning) will be emitted in the FPE response.
-
-### METHOD 2: Optimal Withdrawal Strategy
-
-This example demonstrates the _optimal withdrawal strategy_. As in the previous example, $10,000 will be withdrawn annually.  However, since the funding source is set to `"optimal"`, FPE can potentially, and implicitly, withdraw the requested $10K from multiple accounts if the first chosen account can't cover the full amount (this is known as a [shortfall withdrawal](terms.md#shortfall-withdrawal)).
-
-```json
-{
-    "name": "medical_expenses",
-    "paymentAmount": 10000,
+    "name": "my_expense",
     "source": "optimal",
-    "paymentsPerYear": 1
+    "paymentAmount": 2000,
+    "date": "2024-06"
 }
 ```
 
-FPE evaluates all accounts in the plan, and then derives an optimal withdrawal order when satisfying the full expense amount.  The following 3-stage procedure determines the account withdrawal order:
+## Types of withdrawal strategies
+
+FPE supports 2 withdrawal strategies:
+
+- `traditional`: FPE uses a traditional rule-based approach to order the accounts (e.g. withdraw from lowest to highest growth rate).
+- `userDefinedOrder`: The account withdrawal order is determined by the user (i.e. the order of the accounts as specified in `plan.accounts[]`. _**Note:** RMD withdrawals will take priority over the user-specified order_.
+
+The withdrawal strategy type is specified by the [plan.withdrawal.strategy](https://github.com/newretirement/fpe-api/blob/master/datatypes.md#withdrawal) attribute in the request.
+
+### `traditional` Withdrawal Strategy
+
+The following 3-stage procedure describes the 'traditional' account withdrawal order:
 
 #### STAGE 1
 
@@ -63,3 +76,8 @@ Note that:
     - Its [account type](datatypes.md#accounttype) is not listed in one of the above categories (e.g. a `loan`)
 
 Once the account withdrawal order has been determined for a given month, FPE then attempts to withdraw the requested amount from each account until the full expense has been funded.  If the first account in the withdrawal sequence has insufficient funds, the remaining balance is withdrawn, and FPE moves on to the next account in the sequence, and so on.
+
+
+### `userDefinedOrder` Withdrawal Strategy
+
+UNDER CONSTRUCTION...
