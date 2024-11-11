@@ -59,14 +59,15 @@ Withdraw from the user-specified default checking account (i.e. [plan.cashFlow.c
 
 Based on their [account type](datatypes.md#accounttype), assign the remaining accounts to the ordered categories below; then sort the accounts based on this category ordering:
 
-- category 0: RMD-eligible accounts <b>having unsatisfied RMD withdrawals</b>
-- category 1: `afterTax`
-- category 2: `reverseMortgage`
-- category 3: `ira`, `401k`, `403b`, `457b`
-- category 4: `aftertax401k`, `aftertax403b`
-- category 5: `rothIRA`, `roth401k`, `roth403b`, `roth457b`
-- category 6: `hsa`
-- category 7: `revolvingCredit`
+- category 0: RMD-eligible accounts having unsatisfied [RMD](terms.md#rmd-liability) withdrawals (excludes inherited IRAs)
+- category 1: [Inherited IRAs](inherited_ira.md) having unsatisfied RMD withdrawals
+- category 2: `afterTax`
+- category 3: `reverseMortgage`
+- category 4: `ira`, `401k`, `403b`, `457b`
+- category 5: `aftertax401k`, `aftertax403b`
+- category 6: `rothIRA`, `roth401k`, `roth403b`, `roth457b`
+- category 7: `hsa`
+- category 8: `revolvingCredit`
 
 Note that:
 - RMD-eligible accounts include `ira`, `401k`, `403b`, and `457b`

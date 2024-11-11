@@ -21,21 +21,17 @@ In FPE, an inherited IRA is represented as an account that includes the optional
 }
 ```
 
-Support for inherited IRAs is currently limited:
-
-1. Future inherited IRAs not supported (i.e. `plan.account[*].decedent.deathDate` cannot be after `plan.currentDate`); otherwise, FPE returns `HTTP 400`.
-1. Unlike standard (i.e. non-inherited) RMDs, FPE does not attempt to implicitly satisfy the annual RMD obligation via [optimal withdrawal](optimal_withdraw.md) expenses throughout the year.
-
 
 ## RMD Calculation
 
 ### Preamble
 
-RMDs on an inherited IRA:
+RMDs on an inherited IRA...
 
-1. start in the year following the decedent’s death.  For example, if `decedent.deathDate = 2021-03`, then the first RMD would be due in `2022-12`.
-1. must be withdrawn no later than December.
-1. are calculated <u>**per account**</u> (vs. across all RMD-eligible accounts for a given account owner).
+1. start in the year following the decedent’s death.
+    - For example, if `decedent.deathDate` is `2021-03`, then the first RMD would be due in `2022-12`.
+1. must be withdrawn no later than December each year.
+1. are calculated <u>**per account**</u> (vs. across all RMD-eligible accounts for a given account [owner](datatypes.md#account)).
 
 The [SECURE Act](https://www.investopedia.com/secure-act-4688468) was a 2019/2020 law designed to help more Americans save for retirement.  For the purpose of this RMD calculation:
 
@@ -44,7 +40,7 @@ The [SECURE Act](https://www.investopedia.com/secure-act-4688468) was a 2019/202
 
 ### Distribution Period
 
-The procedure for determining the RMD [Distribution Period](#terms) differs slightly between `ira` and `rothIRA` [account types](datatypes.md#accounttype):
+The RMD [Distribution Period](#terms) calculation differs slightly between `ira` and `rothIRA` [account types](datatypes.md#accounttype):
 
 #### Traditional IRA
 
@@ -111,6 +107,6 @@ Inherited IRA distributions resulting from either [RMDs](#rmd-calculation) or th
 | ------------ | ---------- |
 | [beneficiary](https://www.investopedia.com/terms/b/beneficiary.asp) | The person receiving the inherited IRA. Corresponds to the [account.owner](datatypes.md#account) attribute in the FPE request. |
 | [decedent](https://www.investopedia.com/terms/d/decedent.asp) | The original account owner who has died, and is leaving their account to a designated beneficiary. Corresponds to [account.decedent](datatypes.md#decedent) in the request. |
-| distribution period | The divisor used for calculating RMDs (i.e. `RMD = {previous year balance} / {distribution period}`).  For inherited IRAs, this divisor is based on [this IRS life expectancy table](#life-expectancy-table) in conjunction with the age of either the beneficiary or decedent (based on RMD calculation rules in previous sections). |
-| [RBD](https://www.investopedia.com/terms/r/requiredbeginningdate.asp) | Required Beginning Date, calculated as April of the year _after_ the year the decedent reached their [RMD age](rmd.md#rmd-age).  For example, if the decedent was born on `1953-11`, their RBD is `2027-04`. |
+| distribution period | The divisor used for calculating RMDs (i.e. `RMD = {previous year-end balance} / {distribution period}`).  For inherited IRAs, distribution period is based on [this IRS life expectancy table](#life-expectancy-table) in conjunction with the age of either the beneficiary or decedent (based on RMD calculation rules in previous sections). |
+| [RBD](https://www.investopedia.com/terms/r/requiredbeginningdate.asp) | Required Beginning Date, calculated as April of the year _after_ the year the decedent reached their [RMD age](rmd.md#rmd-age).  For example, if the decedent was born on `1953-11`, their RBD would be `2027-04`. |
 | [RMD](https://www.investopedia.com/terms/r/requiredminimumdistribution.asp) | Required Minimum Distribution.  See [FPE: RMD page](rmd.md) for more info regarding how FPE calculates RMDs. |
