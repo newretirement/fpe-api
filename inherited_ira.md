@@ -2,7 +2,7 @@
 
 An inherited IRA is a retirement account (either `ira` or `rothIRA`) opened by the [Primary or Spouse](datatypes.md#plan) when they are the beneficiary of a deceased person’s (a.k.a. _[decedent](https://www.investopedia.com/terms/d/decedent.asp)_) retirement plan.
 
-In FPE, an inherited IRA is represented as an account that includes the optional [decedent](datatypes.md#decedent) object.  For example:
+In FPE, an inherited IRA is represented as an [account](datatypes.md#account) that includes the optional [decedent](datatypes.md#decedent) object.  For example:
 
 ```json
 {
