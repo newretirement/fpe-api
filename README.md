@@ -388,25 +388,12 @@ If the algorithm is unable to improve the specified `goalMetric`, the forecast w
 | `plan` | [Plan](datatypes.md#plan) | The financial plan. |
 | `params` | [ForecastParams](datatypes.md#forecastparams) | The input parameters that influence this algorithm. |
 
-### Response object
+### RCOResponse
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `plan` | [Plan](datatypes.md#plan) | The optimized plan containing potentially different Roth optimization transactions |
 | `forecast` | [Forecast](datatypes.md#forecast) | The financial forecast that results from the optimized plan |
-| `oldRothConversions` | [RothConversion\[\]](#rothconversion) | The list of 0 or more Roth conversions from the original plan submitted in the request |
-| `newRothConversions` | [RothConversion\[\]](#rothconversion) | The list of 0 or more Roth conversions recommended by this optimizer |
-
-#### RothConversion
-
-The `RothConversion` object represents a one-time transfer from a tax-deferred account into a Roth IRA.
-
-| Attribute  | Type | Description |
-| ---------- | ---- | ----------- |
-| `source` | string | The tax-deferred source account |
-| `target` | string | The Roth IRA target account  |
-| `date`   | [Date](./datatypes.md#date) | The date on which the Roth conversion takes place |
-| `amount` | int | The monetary amount of the Roth conversion |
 
 <br/>
 
