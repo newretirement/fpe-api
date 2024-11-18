@@ -343,6 +343,34 @@ Returns information about the [Medicare IRMAA](https://www.nerdwallet.com/articl
 
 <br/>
 
+## `POST /v6/inheritedira`
+
+Provides [inheriteed IRA](inherited_ira.md) specifics given the the account's [type](datatypes.md#accounttype) and the [decedent's](datatypes.md#decedent) birth and death dates.
+
+### Sample Request
+
+```json
+{
+    "accountType": "ira",
+    "decedent": {
+        "birthDate": "1949-09",
+        "deathDate": "2023-05"
+    }
+}
+```
+
+### Sample Response
+
+```json
+{
+    "rmdStartYear": 2024,
+    "rbd": "2022-04",
+    "preSECUREAct": false,
+    "tenYearRuleDeadline": "2033-12"
+}
+```
+<br/>
+
 ## `POST /v6/montecarlo`
 
 Runs a Monte Carlo simulation for given a [plan](datatypes.md#plan), returning the probability of not running out of money at [goal age](terms.md#goal-age) (i.e. [@projected_savings](output_streams.md#account-projections) in final month of simulation is nonnegative).
