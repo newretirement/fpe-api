@@ -369,6 +369,13 @@ Provides [inheriteed IRA](inherited_ira.md) specifics given the the account's [t
     "tenYearRuleDeadline": "2033-12"
 }
 ```
+#### Notes
+
+- "rbd" = [Required Beginning Date](inherited_ira.md#terms)
+- If `rmdStartYear` is null or omitted, then RMDs are not required
+- If `tenYearRuleDeadline` is null or omitted, then [10-Year Rule](inherited_ira.md#10-year-rule) does not apply
+
+
 <br/>
 
 ## `POST /v6/montecarlo`
