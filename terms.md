@@ -26,6 +26,12 @@ Goal age refers to a person's life expectancy.  In FPE, this value is set via th
 
 <hr/><br/>
 
+## income-linked contribution (ILC)
+
+An ILC refers to a contribution to a tax-advantaged account, whereby the the money is taken directly from the person's earned income stream (e.g. a 401k contribution as a pre-tax deduction from their paycheck).  See [Income-Linked Contributions](income_linked_contribs.md) page for details.
+
+<hr/><br/>
+
 ## income stream
 
 An income stream represents money from an external source that is deposited into an [account](datatypes.md#account) within the [plan](datatypes.md#plan).  In FPE, an income stream is represented as a [paymentStream](datatypes.md#paymentstream) whose `source` attribute is empty, and whose `target` account is set to an existing account within the plan.

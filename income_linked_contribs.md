@@ -2,7 +2,7 @@
 
 ## Overview
 
-Income-linked contributions are essentially one or more contributions taken directly from an [income stream](terms.md#income-stream) payment, and deposited into one or more target [accounts](datatypes.md#account).  The remainder of the income payment (i.e. the amount left after processing the contributions) is then deposited into the stream's designated `target` account.
+Income-linked contributions (ILC's) are tax-advantaged contributions taken directly from an [income stream](terms.md#income-stream) payment, and deposited into one or more target [accounts](datatypes.md#account).  The remainder of the income payment (i.e. the amount left after processing the contributions) is then deposited into the stream's designated [target](datatypes.md#paymentstream) account.
 
 ### Employer Match Logic
 

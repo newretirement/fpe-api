@@ -155,6 +155,8 @@ See [reverse_mortage.json](examples/forecast/housing/reverse_mortgage.json) for 
 | `paymentStreams` | [Projection[]](#projection) | The projected periodic payments corresponding to the [paymentStreams](#paymentstream) defined within the [Plan](#plan).  Also contains FPE-calculated streams (see [PaymentStream projections](output_streams.md#paymentstream-projections)). |
 | `period` | string | Determines how the values in this forecast's TimeSeries data points should be interpreted: `yearly` => values are annualized, `monthly` => monthly values |
 | `postRetireIncomeExpenseRatio` | float | This value loosely serves as a "retirement readiness" score.  It is unbounded (e.g. if person has high income and very low expenses in retirement, this score will be well over `1.0`). |
+| `retirementSavingsPrimary` | [RetirementSavingsRpt](#retirementsavingsrpt) | Returns current-year retirement savings opportunity for the primary account holder. |
+| `retirementSavingsSpouse` | [RetirementSavingsRpt](#retirementsavingsrpt) | Returns current-year retirement savings opportunity for the spouse.|
 | `spendingPower` | int | The maximum amount of income a user could have in retirement if they spent the exact same amount every year. |
 | `startDate` | [Date](#date) | The date of the initial month in the financial projection. |
 
@@ -227,6 +229,13 @@ A named [time series](https://en.wikipedia.org/wiki/Time_series) that represents
 | `taxableFederal` | boolean | If `true`, the values in this projection are specifically taxable at the federal level. |
 | `values` | int[] | The periodic values within this time series. The first value in this series corresponds to [Plan.currentDate](#plan). |
 
+#### RetirementSavingsRpt
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `currYearEndEmployeeContrib` | int | The projected sum of contributions to tax-advantaged accounts (includes [ILC's](terms.md#income-linked-contribution-ilc) and direct [transfers](terms.md#transfer)). |
+| `currYearEmployeeContribLimit` | int | The IRS annual contribution limit. |
+
 #### TaxBracket
 
 Represents annual income subject to income tax at the specified `rate`.
@@ -235,6 +244,7 @@ Represents annual income subject to income tax at the specified `rate`.
 | ---------- | ---- | ----------- |
 | `rate` | float | The income tax rate for this tax bracket. |
 | `income` | int[] | The annual taxable income over a range of years within this tax bracket.  Note that the income limits within the bracket could be [inflation-adjusted](#market) over time |
+
 
 <br/><hr/>
 
@@ -411,10 +421,10 @@ A `plan` is the top-level financial object; it represents the user's complete pr
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `accounts` | [Account[]](#account) | Array of accounts within the financial plan. The maximum number of accounts is `150`. |
+| `calcRetirementSavingsReport` | boolean | If `true`, the projected contributions to tax-advantage retirement accounts, and the associated annual contribution limits, are output in the [Forecast](#forecast). |
 | `cashFlow` | [CashFlow](#cashflow) | Determines how excess income is spent/saved. |
 | `currentDate` | [Date](#date) | Today's date. |
 | `events` | [Events](#events) | Describes various non-periodic life events such as buying a new home or purchasing an annuity. |
-| `limitRetireAccountContribs` | boolean | If `true`, income-linked contributions to `401k` and `ira` accounts will be capped based on IRS-defined rules; default value is `false`. |
 | `market` | [Market](#market) | Market data (inflation rate, etc.). |
 | `paymentStreams` | [PaymentStream[]](#paymentstream) | Array of payment streams within the financial plan.  The maximum number of paymentStreams is `350`. |
 | `primary` | [Person](#person) | The primary account holder. |
