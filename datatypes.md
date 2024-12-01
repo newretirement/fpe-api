@@ -421,7 +421,7 @@ A `plan` is the top-level financial object; it represents the user's complete pr
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `accounts` | [Account[]](#account) | Array of accounts within the financial plan. The maximum number of accounts is `150`. |
-| `calcRetirementSavingsReport` | boolean | If `true`, the projected contributions to tax-advantage retirement accounts, and the associated annual contribution limits, are output in the [Forecast](#forecast). |
+| `calcRetirementSavingsReport` | boolean | If `true`, the projected contributions to tax-advantage retirement accounts, and the associated annual contribution limits, are output in the [Forecast](#forecast). The projected contributions and limits are reported separately for the Primary and Spouse. See [Forecast.RetirementSavingsRpt](datatypes.md#retirementsavingsrpt). |
 | `cashFlow` | [CashFlow](#cashflow) | Determines how excess income is spent/saved. |
 | `currentDate` | [Date](#date) | Today's date. |
 | `events` | [Events](#events) | Describes various non-periodic life events such as buying a new home or purchasing an annuity. |
