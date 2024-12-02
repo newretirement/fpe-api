@@ -231,6 +231,8 @@ A named [time series](https://en.wikipedia.org/wiki/Time_series) that represents
 
 #### RetirementSavingsRpt
 
+Reports the current year's projected contributions (and associatged annual limits) to tax-advantaged retirement savings.  Within the [Forecast](#forecast), this object is reported separately for the Primary and Spouse (see `retirementSavingsPrimary` and `retirementSavingsSpouse`).
+
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `currYearEndEmployeeContrib` | int | The projected sum of contributions to tax-advantaged accounts (includes [ILC's](terms.md#income-linked-contribution-ilc) and direct [transfers](terms.md#transfer)). |
@@ -421,7 +423,7 @@ A `plan` is the top-level financial object; it represents the user's complete pr
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `accounts` | [Account[]](#account) | Array of accounts within the financial plan. The maximum number of accounts is `150`. |
-| `calcRetirementSavingsReport` | boolean | If `true`, the projected contributions to tax-advantage retirement accounts, and the associated annual contribution limits, are output in the [Forecast](#forecast). The projected contributions and limits are reported separately for the Primary and Spouse. See [Forecast.RetirementSavingsRpt](datatypes.md#retirementsavingsrpt). |
+| `calcRetirementSavingsReport` | boolean | If `true`, the projected contributions to tax-advantage retirement accounts, and the associated annual contribution limits, are output in the [Forecast](#forecast). The projected contributions and limits are reported separately for the Primary and Spouse. **NOTE**: [401a](datatypes.md#accounttype) accounts are excluded from the report. See [Forecast.RetirementSavingsRpt](datatypes.md#retirementsavingsrpt). |
 | `cashFlow` | [CashFlow](#cashflow) | Determines how excess income is spent/saved. |
 | `currentDate` | [Date](#date) | Today's date. |
 | `events` | [Events](#events) | Describes various non-periodic life events such as buying a new home or purchasing an annuity. |
