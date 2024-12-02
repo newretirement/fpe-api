@@ -317,6 +317,7 @@ A `paymentStream` represents one-time or recurring payments into, out of, or bet
 | `name` | string | The unique name of this paymentStream (e.g. `"auto_insurance"`). Valid characters are: `[a-zA-Z0-9]`, `-`, `_`, `/`, and white space. |
 | `owner` | enum | Determines who the payments are associated with. Valid values are [`primary`, `spouse`].  If an owner is assigned, payments will cease upon the owner's death.  Otherwise, payments will continue through the end of the financial projection. |
 | `paymentAmount` | int | The dollar amount of the payment. |
+| `paymentRate` | float | Specifies the payment amount as a percentage of the `source` account's balance. Only valid for one-time [transfers](terms.md#transfer). |
 | `paymentsPerYear` | int | Determines the payment frequency within a given year. Valid values are: [`1`, `2`, `4`, `12`].  Regardless of frequency, the first payment occurs on `startDate` (or `date`). |
 | `propertyTax` | boolean | Set to `true` if this is a property tax payment on real estate. |
 | `rate` | [Rate](#rate) | Determines the annual growth rate of the payment over time.  The growth is applied annually starting 12 months into the financial projection. |
