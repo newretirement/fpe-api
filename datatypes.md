@@ -231,7 +231,7 @@ A named [time series](https://en.wikipedia.org/wiki/Time_series) that represents
 
 #### RetirementSavingsRpt
 
-Reports the current year's projected contributions (and associatged annual limits) to tax-advantaged retirement savings.  Within the [Forecast](#forecast), this object is reported separately for the Primary and Spouse (see `retirementSavingsPrimary` and `retirementSavingsSpouse`).
+Reports the current year's projected contributions (and associated annual limits) to tax-advantaged retirement savings.  Within the [Forecast](#forecast), this object is reported separately for the Primary and Spouse (see `retirementSavingsPrimary` and `retirementSavingsSpouse`).
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
