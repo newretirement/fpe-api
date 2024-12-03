@@ -33,6 +33,7 @@ The `AccountType` enum represents the different types of accounts that can be mo
 | `aftertax401k` | [See this article](https://www.bankrate.com/retirement/after-tax-401k/#:~:text=right%20for%20you.-,How%20an%20after%2Dtax%20401(k)%20works,already%20been%20paid%20on%20them) |
 | `aftertax403b` | A 403(b) account that permits after-tax contributions. |
 | `asset` | An [asset](https://www.investopedia.com/terms/a/asset.asp) is a resource with economic value that an individual owns or controls with the expectation that it will provide a future benefit. For example: real estate, vehicles, fine art, and jewelry. |
+| `cashBalancePension` | A tax-deferred account type used for modeling  [cash balance pension plans](https://www.investopedia.com/terms/c/cashbalancepensionplan.asp).  Accounts of this type are not subject to RMDs, contribution limits, or [shortfall withdrawals](terms.md#shortfall-withdrawal). |
 | `ira` | See [Traditional IRA](https://www.investopedia.com/terms/t/traditionalira.asp) |
 | `401a` | See [401(a)](https://www.investopedia.com/terms/1/401a-plan.asp) |
 | `401k` | See [Traditional 401(k)](https://www.investopedia.com/terms/1/401kplan.asp) |
