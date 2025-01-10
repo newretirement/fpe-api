@@ -46,9 +46,7 @@ Whenever the plan has insufficient funds to cover a withdrawal, the amount is pa
 
 ## liquid asset
 
-A [liquid asset](https://www.investopedia.com/terms/l/liquidasset.asp) is an asset that can easily be converted into cash in a short amount of time.  Within FPE, an [account](datatypes.md#account) is classified as a liquid asset based on its [type](datatypes.md#accounttype) combined with the following rules:
-- NOT a liquid asset if account type is `asset`, `mortgage`, `reverseMortage`, `loan`, or `revolvingCredit`
-- IS a liquid asset for any other [account type](datatypes.md#accounttype)
+A [liquid asset](https://www.investopedia.com/terms/l/liquidasset.asp) is an asset that can easily be converted into cash in a short amount of time.  An [account](datatypes.md#account) is considered a liquid asset if and only if its [account type](datatypes.md#accounttype) is anything other than: `asset`, `mortgage`, `reverseMortage`, `loan`, or `revolvingCredit`.
 
 <hr/><br/>
 
