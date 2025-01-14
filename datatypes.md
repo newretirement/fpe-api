@@ -446,7 +446,7 @@ A `plan` is the top-level financial object; it represents the user's complete pr
 | ---------- | ---- | ----------- |
 | `checkingAccount` | string | The name of the "default checking" account into which all income that needs to be tracked (in terms of surplus/gap) will be deposited. |
 | `savingsAccount` | string | the name of the "default savings" account to which excess income will be saved. |
-| `savingRate` | float | The percentage of excess income for the month that is transferred into `checkingAccount`.  Valid range is `[0.0, 1.0]`. Default value is `0.0` (i.e. spend any money leftover at the end of the month). |
+| `savingRate` | float | The percentage of excess income for the month that is transferred into `savingsAccount`.  Valid range is `[0.0, 1.0]`. Default value is `0.0` (i.e. spend any money leftover at the end of the month). |
 
 #### Market
 
