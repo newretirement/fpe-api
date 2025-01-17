@@ -465,7 +465,7 @@ Specifies the [savingRate](#cashflow) to use starting at a specific point in tim
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
-| `date` | [Rate](#rate) | The date on which the new saving rate will take effect. |
+| `date` | [Date](#date) | The date on which the new saving rate will take effect. |
 | `rate` | float | The saving rate to be applied on the specified `date`. |
 
 #### Withdrawal
