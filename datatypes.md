@@ -447,6 +447,7 @@ A `plan` is the top-level financial object; it represents the user's complete pr
 | `checkingAccount` | string | The name of the "default checking" account into which all income that needs to be tracked (in terms of surplus/gap) will be deposited. |
 | `savingsAccount` | string | the name of the "default savings" account to which excess income will be saved. |
 | `savingRate` | float | The percentage of excess income for the month that is transferred into `savingsAccount`.  Valid range is `[0.0, 1.0]`. Default value is `0.0` (i.e. spend any money leftover at the end of the month). |
+| `savingRateCurve` | [SavingRatePt\[\]](#savingratept) | Defines multiple `savingRate` values on specific future dates.  Maximum size is 5. |
 
 #### Market
 
@@ -457,6 +458,15 @@ The `Market` object contains financial market data and other economic values tha
 | `inflation` | [Rate](#rate) | The estimated U.S. annual inflation rate. |
 | `medicalInflation` | [Rate](#rate) | The estimated annual medical cost inflation rate. |
 | `socialSecurityInflation` | [Rate](#rate) | The estimated social security inflation rate. |
+
+#### SavingRatePt
+
+Specifies the [savingRate](#cashflow) to use starting at a specific point in time.  See [savingRateCurve](#cashflow).
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `date` | [Rate](#rate) | The date on which the new saving rate will take effect. |
+| `rate` | float | The saving rate to be applied on the specified `date`. |
 
 #### Withdrawal
 
