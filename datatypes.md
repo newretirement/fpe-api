@@ -447,7 +447,7 @@ A `plan` is the top-level financial object; it represents the user's complete pr
 | `checkingAccount` | string | The name of the "default checking" account into which all income that needs to be tracked (in terms of surplus/gap) will be deposited. |
 | `savingsAccount` | string | the name of the "default savings" account to which excess income will be saved. |
 | `savingRate` | float | The percentage of excess income for the month that is transferred into `savingsAccount`.  Valid range is `[0.0, 1.0]`. Default value is `0.0` (i.e. spend any money leftover at the end of the month). |
-| `savingRateCurve` | [SavingRatePt\[\]](#savingratept) | Defines multiple `savingRate` values on specific future dates.  Maximum size is 5. |
+| `savingRateCurve` | [SavingRatePt\[\]](#savingratept) | Defines 1 or more `savingRate` values that will occur at specified future dates within the projection.   If the earliest [SavingRatePt](#savingratept) in this curve occurs in the future, then the curve's sibling `savingRate` is applied starting at the current date. If the earliest [SavingRatePt](#savingratept) in this curve occurs before or on `plan.currentDate`, then its rate takes precedence over this curve's sibling `savingRate` value. |
 
 #### Market
 
@@ -487,7 +487,7 @@ The `Rate` object describes the growth rate and variability of various financial
 | ---------- | ---- | ----------- |
 | `mean` | float | The mean (average) annualized rate of growth. Valid range is `[-0.4, 0.4]`. |
 | `stdev` | float | The standard deviation of the random growth rate (only applicable when running a Monte Carlo simulation). |
-| `curve` | [RatePt[]](#ratept) | Defines 1 or more growth rates that will occur at specified future dates within the projection.  If this array is defined, all other attributes of this `Rate` object are ignored. The `RatePt` objects within this curve do not necessarily need to be in chronological order. __NOTE:__ Rate curves are only allowed on [Account](datatypes.md#account) objects. |
+| `curve` | [RatePt[]](#ratept) | Defines 1 or more rates that will occur at specified future dates.  If the earliest [RatePt](#ratept) in this curve occurs in the future, then the curve's sibling `mean` and `stdev` attributes are applied starting at the current date.  If the earliest [RatePt](#ratept) in this curve occurs before or on `plan.currentDate`, then its `mean` and `stdev` take precedence over this curve's sibling `mean` and `stdev` attibutes.  The `RatePt` objects within this curve do not necessarily need to be in chronological order. __NOTE:__ Rate curves are only allowed on [Account](datatypes.md#account) objects. |
 
 #### RatePt
 
