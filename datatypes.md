@@ -262,9 +262,9 @@ This is the multifaceted configuration object that influences how the financial 
 | `calcPostRetireIncomeExpenseRatio` | boolean | If `true`, the _Income/Expense Ratio_ calculation is executed, and the result appears in [Forecast.postRetireIncomeExpenseRatio](#forecast) within the response. |
 | `calcSpendingPower` | boolean | If `true`, the 'Spending Power' calculation executes, and the result appears as the `spendingPower` attribute within the [Forecast](#forecast) response object. Note that [plan.primary.retireDate](#person) must be set when running this calculation. See [Forecast.spendingPower](#forecast) for more details on this calculation. |
 | `projectionPeriod` | enum | Determines if the forecasted projection vectors represent monthly or aggregated annual amounts. Valid values are [`monthly`, `yearly`]. If this attribute is empty, `yearly` is the default. |
-| `montecarlo` | [MonteCarloParams](#montecarloparams) | Configuration obnject for the [Monte Carlo simulation](README.md#post-v6montecarlo). |
-| `rothConversionOptimizer` | [RCOParams](#rcoparams) | Configuration object for the [Roth Conversion Optmizer](README.md#post-v6optimizeroth). |
-| `savingsNeed` | [SavingsNeedParams](#savingsneedparams) | Configuration object for the [Savings Need](README.md#post-v6savingsneed) algorithm. |
+| `montecarlo` | [MonteCarloParams](#montecarloparams) | Configuration obnject for the [Monte Carlo simulation](README.md#post-montecarlo). |
+| `rothConversionOptimizer` | [RCOParams](#rcoparams) | Configuration object for the [Roth Conversion Optmizer](README.md#post-optimizeroth). |
+| `savingsNeed` | [SavingsNeedParams](#savingsneedparams) | Configuration object for the [Savings Need](README.md#post-savingsneed) algorithm. |
 
 ### MonteCarloParams
 
@@ -280,7 +280,7 @@ This is the multifaceted configuration object that influences how the financial 
 
 ### RCOParams
 
-These config parameters are used exclusively by the [Roth Conversion Optimizer](README.md#post-v6optimizeroth).
+These config parameters are used exclusively by the [Roth Conversion Optimizer](README.md#post-optimizeroth).
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
@@ -288,13 +288,13 @@ These config parameters are used exclusively by the [Roth Conversion Optimizer](
 | `goalMetric` | enum | Specifies the intended goal of the optimization. Valid values are: [`estateValue`, `lifetimeTaxes`]. When `algoType="heuristic"`, this goal drives the [gradient descent](https://en.wikipedia.org/wiki/Gradient_descent) optimization logic. For all `algoType` variants, `goalMetric` determines whether or not the [algoImprovedNothing](README.md#warning-codes) is returned. |
 | `maxDollarAmount` | int | Sets an upper bound on the amount of money that will be converted to Roth IRAs within a given year. |
 | `maxEffectiveFedTaxRate` | float | Only applicable when `algoType="heuristic"`.  The RCO algorithm will limit the Roth conversion amount for a given year such that the specified effective federal tax rate is not exceeded for that year.  If not set, this value defaults to the max rate of the plan's existing federal effective tax rates throughout the forecast. |
-| `maxIRMAABracket` | int | Only applicable when `algoType="rulebased"`.  Determines the inflation-adjusted [IRMAA income bracket](README.md#get-v6medicareirmaa) limit used as the target for suggesting the Roth conversion amount within a given year.  The algorithm will attempt to find a conversion amount that results in a [MAGI](https://www.investopedia.com/terms/m/magi.asp) that is as close to the selected IRMAA income limit without exceeding it. <br/><br/>Valid values:<ul><li>`0` = the lowest income bracket ($97K for single filers and $194K for married filers in 2023)</li> <li>`1` = the 2<sup>nd</sup> lowest income bracket</li> <li>`2` = the 3<sup>rd</sup> lowest income bracket</li> <li>`k` = the (k+1)<sup>th</sup> lowest income bracket.  If `k` is greater than the number of IRMAA income brackets, then this constraint is effectively disabled.</li></ul> Notes: <ol><li>This attribute is mutually exclusive of `maxTaxBracket`; if both attributes are set, an `HTTP 400` error will result.</li> <li>The algorithm will stop increasing the conversion amount when doing so would trigger an [insufficientFunds](README.md#warning-codes) warning on a _user-defined_ expense/transfer.</li> </ol> |
+| `maxIRMAABracket` | int | Only applicable when `algoType="rulebased"`.  Determines the inflation-adjusted [IRMAA income bracket](README.md#get-medicareirmaa) limit used as the target for suggesting the Roth conversion amount within a given year.  The algorithm will attempt to find a conversion amount that results in a [MAGI](https://www.investopedia.com/terms/m/magi.asp) that is as close to the selected IRMAA income limit without exceeding it. <br/><br/>Valid values:<ul><li>`0` = the lowest income bracket ($97K for single filers and $194K for married filers in 2023)</li> <li>`1` = the 2<sup>nd</sup> lowest income bracket</li> <li>`2` = the 3<sup>rd</sup> lowest income bracket</li> <li>`k` = the (k+1)<sup>th</sup> lowest income bracket.  If `k` is greater than the number of IRMAA income brackets, then this constraint is effectively disabled.</li></ul> Notes: <ol><li>This attribute is mutually exclusive of `maxTaxBracket`; if both attributes are set, an `HTTP 400` error will result.</li> <li>The algorithm will stop increasing the conversion amount when doing so would trigger an [insufficientFunds](README.md#warning-codes) warning on a _user-defined_ expense/transfer.</li> </ol> |
 | `maxTaxBracket` | int | Only applicable when `algoType="rulebased"`.  Determines the highest inflation-adjusted federal tax bracket beyond which the algorithm will stop recommending Roth conversions within a given year. <br/><br/>Valid values:<ul><li>`0` = the special [zero tax bracket](https://www.realized1031.com/blog/what-does-it-mean-to-be-in-a-zero-tax-bracket)</li> <li>`1` = the 1<sup>st</sup> lowest tax bracket (10% for single filers in 2023)</li> <li>`2` = the 2<sup>nd</sup> lowest tax bracket (12%)</li> <li>`k` = the k<sup>th</sup> lowest tax bracket.  If `k` is greater than the number of federal tax brackets, then this constraint is effectively disabled.</li></ul>  Notes: <ol><li>This attribute is mutually exclusive of `maxIRMAABracket`; if both attributes are set, an `HTTP 400` error will result.</li> <li>The algorithm will stop increasing the conversion amount when doing so would trigger an [insufficientFunds](README.md#warning-codes) warning.</li> </ol> |
 | `minAfterTaxFundsToKeep` | int | If set to a nonnegative value, the RCO algorithm will limit the Roth conversion amount based on aftertax funds available to pay for the estimated tax due for the conversion (a 20% tax rate is assumed).  For example, if set to `1000`, then the maximum annual conversion for a given year will be:<br/> &nbsp;&nbsp;&nbsp;&nbsp;`max(0, x-1000) / 0.20`<br/> where `x` is the total available aftertax funds for that year. <br/><br/>If unset or `null`, the algorithm is allowed to pay for taxes on Roth conversions via any available funds (e.g. tax-deferred dollars from an IRA). |
 
 ### SavingsNeedParams
 
-These config parameters are used exclusively by the [Savings Need](README.md#post-v6savingsneed) endpoint.
+These config parameters are used exclusively by the [Savings Need](README.md#post-savingsneed) endpoint.
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
