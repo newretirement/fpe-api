@@ -154,7 +154,7 @@ See [reverse_mortage.json](examples/forecast/housing/reverse_mortgage.json) for 
 | `monthlyRetirementIncome` | int | The estimated monthly income received in retirement. This attribute is only calculated if `params.calcMonthlyRetirementIncome` is set to true in the request. |
 | `outOfSavingsDate` | [Date](#date) | The date that the user's [Plan](#plan) runs out of savings and starts accumulating debt. A value of `null` means the plan never ran out of savings. |
 | `paymentStreams` | [Projection[]](#projection) | The projected periodic payments corresponding to the [paymentStreams](#paymentstream) defined within the [Plan](#plan).  Also contains FPE-calculated streams (see [PaymentStream projections](output_streams.md#paymentstream-projections)). |
-| `period` | string | Determines how the values in this forecast's TimeSeries data points should be interpreted: `yearly` => values are annualized, `monthly` => monthly values |
+| `period` | string | Determines how the projected `accounts` and `paymentStreams` values should be interpreted: `yearly` => values are annualized, `monthly` => monthly values. _See [ForecastParams.projectionPeriod](#forecastparams)._ |
 | `postRetireIncomeExpenseRatio` | float | This value loosely serves as a "retirement readiness" score.  It is unbounded (e.g. if person has high income and very low expenses in retirement, this score will be well over `1.0`). |
 | `retirementSavingsPrimary` | [RetirementSavingsRpt](#retirementsavingsrpt) | Returns current-year retirement savings opportunity for the primary account holder. |
 | `retirementSavingsSpouse` | [RetirementSavingsRpt](#retirementsavingsrpt) | Returns current-year retirement savings opportunity for the spouse.|
