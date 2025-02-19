@@ -246,7 +246,7 @@ Represents annual income subject to income tax at the specified `rate`.
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `rate` | float | The income tax rate for this tax bracket. |
-| `income` | int[] | The annual taxable income over a range of years within this tax bracket.  Note that the income limits within the bracket could be [inflation-adjusted](#market) over time |
+| `income` | int[] | The annual taxable income over a range of years within this tax bracket.  Note that the income limits within the bracket could be [inflation-adjusted](#market) over time. |
 
 
 <br/><hr/>
@@ -255,16 +255,16 @@ Represents annual income subject to income tax at the specified `rate`.
 
 This is the multifaceted configuration object that influences how the financial forecast is projected; it is part of the request object of multiple endpoints (most notably, `POST /forecast`).
 
-| Attribute  | Type | Description |
-| ---------- | ---- | ----------- |
-| `calcDTI` | boolean | If `true`, the DTI (Debt-To-Income ratio) for the plan is calculated, and the result appears in the `dti` attribute of the [Forecast](#forecast) response. |
-| `calcFIRE` | boolean | If `true`, the 'FIRE' solver is executed, and the result appears in the [Forecast.FIRE](#fire) response. |
-| `calcPostRetireIncomeExpenseRatio` | boolean | If `true`, the _Income/Expense Ratio_ calculation is executed, and the result appears in [Forecast.postRetireIncomeExpenseRatio](#forecast) within the response. |
-| `calcSpendingPower` | boolean | If `true`, the 'Spending Power' calculation executes, and the result appears as the `spendingPower` attribute within the [Forecast](#forecast) response object. Note that [plan.primary.retireDate](#person) must be set when running this calculation. See [Forecast.spendingPower](#forecast) for more details on this calculation. |
-| `projectionPeriod` | enum | Determines if the forecasted projection vectors represent monthly or aggregated annual amounts. Valid values are [`monthly`, `yearly`]. If this attribute is empty, `yearly` is the default. |
-| `montecarlo` | [MonteCarloParams](#montecarloparams) | Configuration obnject for the [Monte Carlo simulation](README.md#post-montecarlo). |
-| `rothConversionOptimizer` | [RCOParams](#rcoparams) | Configuration object for the [Roth Conversion Optmizer](README.md#post-optimizeroth). |
-| `savingsNeed` | [SavingsNeedParams](#savingsneedparams) | Configuration object for the [Savings Need](README.md#post-savingsneed) algorithm. |
+| Attribute  | Type | Default | Description |
+| ---------- | ---- | ------- | ----------- |
+| `calcDTI` | boolean | false | Calculate the DTI (Debt-To-Income ratio) for the plan, placing the result in the `dti` in [Forecast.dti](#forecast). |
+| `calcFIRE` | boolean | false | Solve for [FIRE](https://www.investopedia.com/terms/f/financial-independence-retire-early-fire.asp), placing the result in [Forecast.FIRE](#fire). |
+| `calcPostRetireIncomeExpenseRatio` | boolean | false | Calculate the _Income/Expense Ratio_, and place the result in [Forecast.postRetireIncomeExpenseRatio](#forecast). |
+| `calcSpendingPower` | boolean | false | Calculate 'Spending Power' (a measure of how much money can be affordably spent post-retirement), placing the result in [Forecast.spendingPower](#forecast). _Note:_ [plan.primary.retireDate](#person) must be set when running this calculation. |
+| `projectionPeriod` | enum | `yearly` | If `yearly`, the projected `accounts` and `paymentStreams` vectors are aggregated to represent annual amounts; if `monthly`, they represent the "raw"monthly amounts used internally within the simulation. |
+| `montecarlo` | [MonteCarloParams](#montecarloparams) | | Configuration object for the [Monte Carlo simulation](README.md#post-montecarlo). |
+| `rothConversionOptimizer` | [RCOParams](#rcoparams) | | Configuration object for the [Roth Conversion Optmizer](README.md#post-optimizeroth). |
+| `savingsNeed` | [SavingsNeedParams](#savingsneedparams) | | Configuration object for the [Savings Need](README.md#post-savingsneed) algorithm. |
 
 ### MonteCarloParams
 
