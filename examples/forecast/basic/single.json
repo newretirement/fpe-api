@@ -1,0 +1,108 @@
+{
+	"plan": {
+		"currentDate": "2025-01",
+		"market": {
+			"inflation": {
+				"mean": 0.03
+			}
+		},
+		"cashFlow": {
+			"checkingAccount": "checking",
+			"savingsAccount": "savings",
+			"savingRate": 0.75
+		},
+		"primary": {
+			"birthDate": "1968-01",
+			"goalAge": "90y",
+			"gender": "male",
+			"medical": {
+				"health": "excellent"
+			},
+			"socialSecurity": {
+				"startAge": "67y",
+				"primaryInsuranceAmount": 2325
+			}
+		},
+		"accounts": [
+			{
+				"name": "checking",
+				"type": "aftertax"
+			},
+			{
+				"name": "savings",
+				"type": "aftertax",
+				"taxTreatment": "ordinaryIncome",
+				"balanace": 100000
+			},
+			{
+				"name": "debt",
+				"type": "revolvingCredit",
+				"rate": {
+					"mean": 0.08
+				}
+			},
+			{
+				"name": "retirement_savings",
+				"balance": 500000,
+				"type": "ira",
+				"rate": {
+					"curve": [
+						{
+							"date": "2025-01",
+							"rate": {
+								"mean": 0.08
+							}
+						},
+						{
+							"date": "2030-07",
+							"rate": {
+								"mean": 0.04
+							}
+						}
+					]
+				}
+			}
+		],
+		"paymentStreams": [
+			{
+				"name": "job",
+				"paymentAmount": 8000,
+				"paymentsPerYear": 12,
+				"rate": {
+					"mean": 0.025
+				},
+				"endDate": "2033-01",
+				"target": "checking",
+				"earnedIncome": true,
+				"contributions": [
+					{
+						"employeeContribRate": 0.1,
+						"employerMatches": [
+							{
+								"rate": 0.5,
+								"upTo": 0.08
+							}
+						],
+						"employerMatchAnnualCap": 10000,
+						"employeeContribTarget": "retirement_savings",
+						"employerContribTarget": "retirement_savings"
+					}
+				]
+			},
+			{
+				"name": "expenses-preRetire",
+				"paymentAmount": 6000,
+				"source": "optimal",
+				"paymentsPerYear": 12,
+				"endDate": "2028-01"
+			},
+			{
+				"name": "expenses-postRetire",
+				"paymentAmount": 7000,
+				"source": "optimal",
+				"paymentsPerYear": 12,
+				"startDate": "2028-01"
+			}
+		]
+	}
+}

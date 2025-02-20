@@ -119,7 +119,7 @@ The `Events` object represents various non-periodic life events such as relocati
 | `date` | [Date](#date) | The date of relocation. |
 | `stateCode` | [USState](#usstate) | The U.S. state corresponding to the primary's current state of residence. |
 
-A sample JSON request for relocation is [here](examples/forecast/housing/relocation-01.json).
+A sample JSON request for relocation is [here](examples/forecast/housing/relocation.json).
 
 #### ReverseMortgage
 

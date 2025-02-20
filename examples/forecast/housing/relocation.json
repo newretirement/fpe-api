@@ -1,0 +1,53 @@
+{
+	"description": "Person lives in CA, then moves to WA (no state income tax), and then moves again to OR (has state income tax)",
+	"plan": {
+		"currentDate": "2025-01",
+		"stateCode": "CA",
+		"cashFlow": {
+			"checkingAccount": "checking",
+			"savingsAccount": "savings",
+			"savingRate": 1
+		},
+		"primary": {
+			"birthDate": "1975-01",
+			"goalAge": "60y"
+		},
+		"accounts": [
+			{
+				"name": "checking",
+				"type": "aftertax"
+			},
+			{
+				"name": "savings",
+				"type": "aftertax",
+				"balance": 100000,
+				"taxTreatment": "ordinaryIncome"
+			},
+			{
+				"name": "lifetimeDebt",
+				"type": "revolvingCredit"
+			}
+		],
+		"paymentStreams": [
+			{
+				"name": "job",
+				"paymentAmount": 10000,
+				"paymentsPerYear": 12,
+				"target": "checking",
+				"earnedIncome": true
+			}
+		],
+		"events": {
+			"relocations": [
+				{
+					"date": "2027-01",
+					"stateCode": "WA"
+				},
+				{
+					"date": "2030-01",
+					"stateCode": "OR"
+				}
+			]
+		}
+	}
+}

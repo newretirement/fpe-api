@@ -1,85 +1,85 @@
 {
-    "params": {
-        "projectionPeriod": "monthly"
-    },
-    "plan": {
-        "currentDate": "2024-01",
-        "cashFlow": {
-            "checkingAccount": "checking",
-            "savingsAccount": "savings",
-            "savingRate": 0.25
-        },
-        "primary": {
-            "birthDate": "1962-01",
-            "gender": "female",
-            "goalAge": "63y0m"
-        },
-        "accounts": [
-            {
-                "name": "checking",
-                "type": "aftertax"
-            },
-            {
-                "name": "savings",
-                "type": "aftertax",
-                "balance": 31000
-            },
-            {
-                "name": "retirement",
-                "type": "ira",
-                "balance": 100000,
-                "owner": "primary"
-            },
-            {
-                "name": "home",
-                "type": "asset",
-                "balance": 350000,
-                "rate": {
-                    "mean": 0.03
-                }
-            },
-            {
-                "name": "home_mortgage",
-                "type": "mortgage",
-                "balance": -100000
-            },
-            {
-                "name": "reverse_mortgage",
-                "type": "reverseMortgage",
-                "rate": {
-                    "mean": 0.05
-                },
-                "balanceLimit": -165000
-            },
-            {
-                "name": "lifetime_debt",
-                "type": "revolvingCredit"
-            }
-        ],
-        "paymentStreams": [
-            {
-                "name": "home_mortgage_pymt",
-                "paymentAmount": 3000,
-                "paymentsPerYear": 12,
-                "source": "optimal",
-                "target": "home_mortgage"
-            },
-            {
-                "name": "other_expenses",
-                "paymentAmount": 1000,
-                "paymentsPerYear": 12,
-                "source": "optimal"
-            }
-        ],
-        "events": {
-            "reverseMortgages": [
-                {
-                    "onAge": "62y6m",
-                    "currentMortgage": "home_mortgage",
-                    "reverseMortgage": "reverse_mortgage",
-                    "balanceLimitAGR": 0.03
-                }
-            ]
-        }
-    }
+	"params": {
+		"projectionPeriod": "monthly"
+	},
+	"plan": {
+		"currentDate": "2025-01",
+		"cashFlow": {
+			"checkingAccount": "checking",
+			"savingsAccount": "savings",
+			"savingRate": 0.25
+		},
+		"primary": {
+			"birthDate": "1963-01",
+			"gender": "female",
+			"goalAge": "63y0m"
+		},
+		"accounts": [
+			{
+				"name": "checking",
+				"type": "aftertax"
+			},
+			{
+				"name": "savings",
+				"type": "aftertax",
+				"balance": 31000
+			},
+			{
+				"name": "retirement",
+				"type": "ira",
+				"balance": 100000,
+				"owner": "primary"
+			},
+			{
+				"name": "home",
+				"type": "asset",
+				"balance": 350000,
+				"rate": {
+					"mean": 0.03
+				}
+			},
+			{
+				"name": "home_mortgage",
+				"type": "mortgage",
+				"balance": -100000
+			},
+			{
+				"name": "reverse_mortgage",
+				"type": "reverseMortgage",
+				"rate": {
+					"mean": 0.05
+				},
+				"balanceLimit": -165000
+			},
+			{
+				"name": "lifetime_debt",
+				"type": "revolvingCredit"
+			}
+		],
+		"paymentStreams": [
+			{
+				"name": "home_mortgage_pymt",
+				"paymentAmount": 3000,
+				"paymentsPerYear": 12,
+				"source": "optimal",
+				"target": "home_mortgage"
+			},
+			{
+				"name": "other_expenses",
+				"paymentAmount": 1000,
+				"paymentsPerYear": 12,
+				"source": "optimal"
+			}
+		],
+		"events": {
+			"reverseMortgages": [
+				{
+					"onAge": "62y6m",
+					"currentMortgage": "home_mortgage",
+					"reverseMortgage": "reverse_mortgage",
+					"balanceLimitAGR": 0.03
+				}
+			]
+		}
+	}
 }
