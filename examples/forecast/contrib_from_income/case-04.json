@@ -47,6 +47,7 @@
                     {
                         "employeeContribAmount": 1000,
                         "employeeContribTarget": "acme_401k",
+                        "employerContribTarget": "acme_401k",
                         "employerMatches": [
                             {"rate": 0.5, "upTo": 0.05}
                         ]

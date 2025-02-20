@@ -1,11 +1,7 @@
 {
     "description": "ND-6185: Shows that future annual contribution limits increase with inflation.",
-    "params": {
-        "projectionPeriod": "yearly"
-    },
     "plan": {
         "currentDate": "2023-10",
-        "limitRetireAccountContribs": true,
         "cashFlow": {
             "checkingAccount": "checking",
             "savingsAccount": "savings",

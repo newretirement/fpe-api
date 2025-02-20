@@ -45,7 +45,8 @@
                           {"rate": 1.0, "upTo": 0.05}
                       ],
                       "employerMatchAnnualCap": 9000,
-                      "employeeContribTarget": "acme_401k"
+                      "employeeContribTarget": "acme_401k",
+                      "employerContribTarget": "acme_401k"
                   }
                 ],
                 "target": "checking",

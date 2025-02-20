@@ -52,7 +52,8 @@
                                 "upTo": 0.1
                             }
                         ],
-                        "employeeContribTarget": "acme_401k"
+                        "employeeContribTarget": "acme_401k",
+                        "employerContribTarget": "acme_401k"
                     }
                 ]
             }

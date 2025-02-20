@@ -47,12 +47,14 @@
                     {
                         "employeeContribRate": 0.1,
                         "employerContribAmount": 400,
-                        "employeeContribTarget": "acme_401k"
+                        "employeeContribTarget": "acme_401k",
+                        "employerContribTarget": "acme_401k"
                     },
                     {
                         "employeeContribRate": 0.05,
                         "employerContribAmount": 300,
-                        "employeeContribTarget": "acme_roth"
+                        "employeeContribTarget": "acme_roth",
+                        "employerContribTarget": "acme_roth"
                     }
                 ]
             }
