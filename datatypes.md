@@ -108,7 +108,7 @@ The `Events` object represents various non-periodic life events such as relocati
 | `newAssetName` | string | The name of the account representing the new asset being purchased (omit if none). |
 | `newAssetBalance` | int | The price of the new asset. |
 | `newAssetStateCode` | [USState](#usstate) | If this transaction involves a relocation to a new state (e.g. buying a house as a primary residence in a new state), assign a valid state code to this attribute.  Doing so allows the tax module to compute future taxes using the new state's tax data. |
-| `transactionAccountName` | string | The name of the account to use for all transactions involved in this asset sale.  This includes deposits (e.g. proceeds from asset sales) and withrawals (e.g. down payment on a new house). If this attribute is omitted, then proceeds will deposit into the default savings account, and the _Optimal Withdrawal Strategy_ will be used for withdrawals. |
+| `transactionAccountName` | string | The name of the account to use for all transactions involved in this asset sale.  This includes deposits (e.g. proceeds from asset sales) and withrawals (e.g. down payment on a new house). If omitted, the default savings account (i.e. [plan.cashFlow.savingsAccount](#cashflow)) will be used. If this account has insufficient funds, the [Optimal Withdrawal Strategy](optimal_withdraw.md) will obtain the remaining funds. |
 | `newLoanName` | string | The name of the new loan associated with the new asset (omit if none). |
 | `newLoanBalance` | int | The starting balance on the new loan (omit if none). |
 
