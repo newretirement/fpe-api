@@ -198,7 +198,6 @@ When searching for an optimal solution, the algorithm is constrained by the foll
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `origRetireDate` | string | The plan's inferred retirement date, which is based on the latest date across all `earnedIncome` [PaymentStreams](#paymentstream). If no earned income streams exist, this attribute is omitted. |
-| `liquidEstateValue` | int | The [liquid estate value](terms.md#liquid-estate-value) resulting from this algorithm's suggested retirement dates. If no earned income streams exist, this attribute is omitted. |
 | `earliestRetireDates` | map | A map of [PaymentStream](#paymentstream) names to [Date](#date) entries, where each entry indicates the earliest `endDate` for the named stream that satisfies the [liquid estate value](terms.md#liquid-estate-value) goal described in the summary above. If no earned income streams exist, this map will be empty (i.e. `{}`). |
 
 Sample JSON requests can be found in [examples/forecast/calc_fire/](examples/forecast/calc_fire/).
@@ -409,7 +408,8 @@ The `Medical` object contains the attributes relating to a person's health and h
 | `needsLTC` | boolean | True only if the person requires long-term care. |
 | `hasLTCI` | boolean | True only if the person has long-term care insurance (LTCI).  This flag is ignored if `needsLTC` is false. |
 | `health` | enum | Indicates a person's physical health.  It is needed for providing more accurate medical cost estimates.  Valid values are `excellent`, `good`, and `poor`.  Default is `excellent`. |
-| `medicareStartAge` | [Duration](#duration) | The age at which Medicare-related expenses will commence.  Default age is `65y`.  To exclude Medicare-related costs from the financial projection, set this age equal to or greater than the [person's goalAge](#person). |
+| `medicareOptOut` | boolean | True only if the person is opting out of Medicare (in which case the `@medicare_oopc` (Medicare out-of-pocket cost) stream will not be calculated, and it is assumed the person is itemizing their Medicare expenses). |
+| `medicareStartAge` | [Duration](#duration) | The age at which Medicare-related expenses should commence.  Default age is `65y`.  If omittied, Medicare expenses will start at age `65y` by default.  Ages younger than `65y` will result in an `HTTP 400: Bad Request` response. |
 | `medigapPremium` | [PremiumLevel](#premiumlevel) | The levels of cost for Medigap premiums. |
 | `drugPremium` | [PremiumLevel](#premiumlevel) | The levels of cost for prescription drug premiums. |
 | `medicareAdvantage` | [PremiumLevel](#premiumlevel) | The levels of cost for Medicare Advantage premiums. |
