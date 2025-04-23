@@ -56,13 +56,15 @@ Content-Type: application/json
 
 ### What is a Warning
 
-Suppose the API client submits a well-formed JSON request, but one or more attributes don't quite make sense (e.g. an account annual growth rate of 3000%).  If FPE is able to infer the intended value (or otherwise modify the value to make it acceptable), it will modify the request accordingly, execute it, and return a result.
+There are certain unexpected situations that can occur during the financial simulation, which cannot be foreseen by the API client.  Examples are:
 
-In addition, the response will include a `warnings[]` list at the top level of the JSON response, like this:
+- The source account did not have the funds to cover a future [transfer](terms.md#transfer)
+- An algorithm was running for too long, and therefore, gave up
 
-```
+For situations like this, FPE will complete the simulation and return an `HTTP 2xx` status, but will als return a list of warnings in the response. For example:
+
+```json
 {
-  ... the rest of the response ...
   "warnings": [
     {
       "code": "insufficientFunds",
@@ -71,25 +73,21 @@ In addition, the response will include a `warnings[]` list at the top level of t
       "account": "savings",
       "paymentStream": "buy_future_annuity",
       "details": {
-          "actual": 49310,
-          "date": "2022-01",
-          "desired": 50000
+        "actual": 49310,
+        "date": "2022-01",
+        "desired": 50000
       }
     },
     {
-      "code": "valueOutOfRange",
-      "context": "accounts.fidelity_ira.apy",
-      "message": "fidelity_ira account.rate.mean is out of range: 0.99. Valid range is [-0.4, 0.4]."
-      "details": {
-          "min": -0.4
-          "max": 0.4,
-          "desired": 0.99,
-          "actual": 0.4,
-      }
-    }
+      "code": "algoImprovedNothing",
+      "context": "rothOptimizer",
+      "message": "Optimizer could not produce a plan that resulted in a better estateValue metric."
+    },
   ]
 }
 ```
+
+The full list of warning codes is [here](#warning-codes).
 
 ## HTTP Response Status Codes
 
