@@ -39,9 +39,9 @@ FPE uses [semantic versioning](https://semver.org/) as its software versioning p
 
 ### What is an Error
 
-An error occurs if the API client submits a request for which FPE cannot return a meaningful response (for any reason). In the event of an error, FPE returns:
-  - An HTTP status code appropriate for the type of error (see [HTTP Response Status Codes](#http-response-status-codes) further down)
-  - A JSON object containing the `httpStatusCode` and detailed `message`.
+An error occurs if the API client submits a request for which FPE cannot return a meaningful response. In the event of an error, FPE returns an HTTP response with:
+  - A status code appropriate for the type of error (see [HTTP Response Status Codes](#http-response-status-codes) further down)
+  - A JSON payload containing the `httpStatusCode` number and a detailed `message`.
 
 For example, if the client calls `POST /forecast` and provides an invalid birthDate of `1200-01`, FPE responses with:
 
@@ -56,12 +56,12 @@ Content-Type: application/json
 
 ### What is a Warning
 
-There are certain unexpected situations that can occur during the financial simulation, which cannot be foreseen by the API client.  Examples are:
+There are certain unexpected situations that can occur during the financial simulation, which realistically cannot be foreseen or avoided by the API client.  Examples are:
 
-- The source account did not have the funds to cover a future [transfer](terms.md#transfer)
-- An algorithm was running for too long, and therefore, gave up
+- The source account did not have the funds to cover a [transfer](terms.md#transfer) at some point in the future
+- An optimization algorithm was running for too long, and therefore, gave up (but was nice, and returned the partially-optimized answer)
 
-For situations like this, FPE will complete the simulation and return an `HTTP 2xx` status, but will als return a list of warnings in the response. For example:
+For situations like this, FPE will complete the simulation and return an `HTTP 200` status, but will also return a list of 1 or more warnings in the response. For example:
 
 ```json
 {
@@ -73,15 +73,15 @@ For situations like this, FPE will complete the simulation and return an `HTTP 2
       "account": "savings",
       "paymentStream": "buy_future_annuity",
       "details": {
-        "actual": 49310,
         "date": "2022-01",
-        "desired": 50000
+        "desired": 50000,
+        "actual": 49310
       }
     },
     {
       "code": "algoImprovedNothing",
       "context": "rothOptimizer",
-      "message": "Optimizer could not produce a plan that resulted in a better estateValue metric."
+      "message": "Optimizer could not produce a plan that resulted in a better estateValue metric"
     },
   ]
 }
@@ -91,10 +91,18 @@ The full list of warning codes is [here](#warning-codes).
 
 ## HTTP Response Status Codes
 
-The FPE service uses standard [HTTP response status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) to indicate the success or failure of an API request.  In the event of an error, the HTTP response body will contain a short
-description of the problem (Content-Type: text/plain).
+The FPE service uses standard [HTTP response status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) to indicate the success or failure of an API request.  In the event of an error, the HTTP response body will contain a JSON object like this:
 
-Below is a list of possible status codes.  API Clients should be prepared to handle any of these.
+```
+Content-Type: application/json
+{
+  "httpStatusCode": <http code>,
+  "message": "a description of what went wrong..."
+}
+```
+
+
+Below is a list of possible HTTP status codes that can be returned from this service.
 
 __`2xx OK`__
 
@@ -104,10 +112,12 @@ Status codes in the `2xx` range indicate the request was understood and successf
 
 __`400 Bad Request`__
 
-Something was wrong with the client request such that FPE was unable understand it well enough to return any sort of useful result.  Typical causes for this error are:
+Something was wrong with the client request such that FPE was unable understand it well enough to return a useful result.  Typical causes for this type of error are:
 
-   1. Malformed JSON request
-   2. Critical information was missing from the request (e.g. `birthDate` omitted)
+  1. Malformed JSON request object (e.g. missing a curly brace somewhere)
+  1. Syntax errors (e.g. an improperly-formatted [date](datatypes.md#date), such as `1984-999`)
+  1. Critical information was missing from the request (e.g. missing `birthDate` attribute)
+  1. Business rule violations (e.g. setting a [reverse mortgage age](datatypes.md#reversemortgage) to youger than `62y`)
 
 <br/>
 
