@@ -160,7 +160,7 @@ Below are all possible warning codes and their descriptions.
 
 | Code | Description |
 | ----------| ----------- |
-| __`algoConfigUpdated`__ | Due to algorithm-specific implementation constraints, certain aspects of the input model were modified in order for the algorithm to run.  <br/> An example of of this is a plan with `FIXED-DOLLAR` drawdown strategy sent into the Roth Conversion Optimizer.  The drawdown strategy will be changed to `SPENDING` prior to running the algorithm. |
+| __`algoConfigUpdated`__ | Due to certain algorithm-specific constraints, aspects of the [plan](datatypes.md#plan) had to be modified in order for the algorithm to run.  <br/> One example of of this is a plan with `FIXED-DOLLAR` drawdown strategy sent to the [Roth Conversion Optimizer](#post-optimizeroth).  The drawdown strategy will be changed to `SPENDING` prior to running the algorithm. |
 | __`algoGaveUp`__ | Even though a better solution might be possible given more computation time/resources, the algorithm is halting and returning its best solution. |
 | __`algoImprovedNothing`__ | Given an input model to be solved/optimized, the algorithm was unable to produce a solution that was any better than the one implied by the original input model. |
 | __`ipgAnnualContribLimit`__ | A contribution was made to an account within an IPG plan that exceeded the annual limit. |
