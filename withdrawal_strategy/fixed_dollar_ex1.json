@@ -21,7 +21,7 @@
 		"drawdown": {
 			"strategy": "FIXED-DOLLAR",
 			"startAge": "70y",
-			"desiredEstateValue": 50000
+			"desiredEstateValue": 80000
 		},
 		"accounts": [
 			{
