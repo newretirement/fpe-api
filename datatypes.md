@@ -459,9 +459,9 @@ The `Drawdown` object configures the drawdown strategy to use (if any) when proj
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
 | `strategy` | enum | Valid values are: [`FIXED-DOLLAR`, `FIXED-PERCENT`] |
-| `startAge` | [Duration](#duration) | The age of the Primary account holder when the annual drawdown withdrawals should commence. Note that the actual withdrawal month will be pushed to the nearest December in the future. |
+| `startAge` | [Duration](#duration) | The age of the Primary account holder when the annual drawdown withdrawals should commence. Note that the actual withdrawal month will be pushed to the nearest December following the date they reach `startAge`. |
 | `desiredEstateValue` | int | Only applies to `FIXED-DOLLAR` strategy. The algorithm will attempt to retain this amount for the [liquid estate value](terms.md#liquid-estate-value) when solving for the fixed annual withdrawal amount. |
-| `drawdownRate` | float | Only applies to `FIXED-PERCENT` strategy. Determines the portion of their retirement savings that should be withdrawn each year, beginning at `startAge`.  For example, setting `drawdownRate` to `0.04` roughly models the well-known [4% Rule](https://www.investopedia.com/terms/f/four-percent-rule.asp). |
+| `drawdownRate` | float | Only applies to `FIXED-PERCENT` strategy. Determines the portion of retirement savings that should be withdrawn each year, beginning at `startAge`.  For example, setting `drawdownRate` to `0.04` roughly models the well-known [4% Rule](https://www.investopedia.com/terms/f/four-percent-rule.asp). |
 
 #### Market
 
