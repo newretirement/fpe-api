@@ -431,6 +431,7 @@ A `plan` is the top-level financial object; it represents the user's complete pr
 | `calcRetirementSavingsReport` | boolean | If `true`, the projected contributions to tax-advantaged retirement accounts, and the associated annual contribution limits, are output in the [Forecast](#forecast). The projected contributions and limits are reported separately for the Primary and Spouse. **NOTE**: [401a](datatypes.md#accounttype) accounts are excluded from the report. See [Forecast.RetirementSavingsRpt](datatypes.md#retirementsavingsrpt). |
 | `cashFlow` | [CashFlow](#cashflow) | Determines how excess income is spent/saved. |
 | `currentDate` | [Date](#date) | Today's date. |
+| `drawdown` | [Drawdown](#drawdown) | Configures the drawdown strategy (optional). |
 | `events` | [Events](#events) | Describes various non-periodic life events such as buying a new home or purchasing an annuity. |
 | `market` | [Market](#market) | Market data (inflation rate, etc.). |
 | `paymentStreams` | [PaymentStream[]](#paymentstream) | Array of payment streams within the financial plan.  The maximum number of paymentStreams is `350`. |
@@ -438,7 +439,7 @@ A `plan` is the top-level financial object; it represents the user's complete pr
 | `spouse` | [Person](#person) | The primary account holder's spouse (optional). |
 | `stateCode` | [USState](#usstate) | The primary's current state of residence. |
 | `tcjaSunset` | boolean | If true, FPE will model the [sunsetting](https://www.investopedia.com/terms/s/sunsetprovision.asp) of the [Tax Cuts and Jobs Act](https://www.investopedia.com/taxes/how-gop-tax-bill-affects-you/) due to end starting in 2026. Default is `false`. |
-| `withdrawal` | [Withdrawal](#withdrawal) | Configures the strategy for withdrawing funds across multiple accounts within the plan. |
+| `withdrawal` | [Withdrawal](#withdrawal) | Configures the strategy for withdrawing funds across multiple accounts within the plan (optional). |
 
 #### CashFlow
 
@@ -450,6 +451,17 @@ A `plan` is the top-level financial object; it represents the user's complete pr
 | `savingsAccount` | string | the name of the "default savings" account to which excess income will be saved. |
 | `savingRate` | float | The percentage of excess income for the month that is transferred into `savingsAccount`.  Valid range is `[0.0, 1.0]`. Default value is `0.0` (i.e. spend any money leftover at the end of the month). |
 | `savingRateCurve` | [SavingRatePt\[\]](#savingratept) | Defines 1 or more `savingRate` values that will occur at specified future dates within the projection.   If the earliest [SavingRatePt](#savingratept) in this curve occurs in the future, then the curve's sibling `savingRate` is applied starting at the current date. If the earliest [SavingRatePt](#savingratept) in this curve occurs before or on `plan.currentDate`, then its rate takes precedence over this curve's sibling `savingRate` value. |
+
+#### Drawdown
+
+The `Drawdown` object configures the drawdown strategy to use (if any) when projecting the [plan](#plan).
+
+| Attribute  | Type | Description |
+| ---------- | ---- | ----------- |
+| `strategy` | enum | Valid values are: [`FIXED-DOLLAR`, `FIXED-PERCENT`] |
+| `startAge` | [Duration](#duration) | The age of the Primary account holder when the annual drawdown withdrawals should commence. Note that the actual withdrawal month will be pushed to the nearest December in the future. |
+| `desiredEstateValue` | int | Only applies to `FIXED-DOLLAR` strategy. The algorithm will attempt to retain this amount for the [liquid estate value](terms.md#liquid-estate-value) when solving for the fixed annual withdrawal amount. |
+| `drawdownRate` | float | Only applies to `FIXED-PERCENT` strategy. Determines the portion of their retirement savings that should be withdrawn each year, beginning at `startAge`.  For example, setting `drawdownRate` to `0.04` roughly models the well-known [4% Rule](https://www.investopedia.com/terms/f/four-percent-rule.asp). |
 
 #### Market
 
