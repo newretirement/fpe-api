@@ -6,7 +6,7 @@ _NOTE 1: It will be helpful to keep in mind that the plan's [liquid estate value
 
 For example, suppose the forecast of a given [plan](../datatypes.md#plan) has the following characteristics:
 - The person (single) dies at age 90
-- Their [liquid estate value](../terms.md#liquid-estate-value) is **$500,000**
+- Their [liquid estate value](../terms.md#liquid-estate-value) is $500,000
 
 Now, suppose this person wishes to know how much _more_ they could withdraw annually starting at age 70, such that their liquid estate value would still have **$80,000** remaining.  This scenario can be modeled in FPE by including the following [drawdown](../datatypes.md#drawdown) configuration object within the [plan](../datatypes.md#plan):
 
