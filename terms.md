@@ -52,7 +52,7 @@ A [liquid asset](https://www.investopedia.com/terms/l/liquidasset.asp) is an ass
 
 ## liquid estate value
 
-Liquid estate value is very similar to [estate value](#estate-value), except that certain [account types](datatypes.md#accounttype) are excluded from the total value. The excluded account types are `asset`, `mortgage`, and `reverseMortage`.
+Liquid estate value is similar to [estate value](#estate-value), except that certain [account types](datatypes.md#accounttype) are excluded from the total value. The excluded account types are `asset`, `mortgage`, and `reverseMortage`.
 
 <hr/><br/>
 

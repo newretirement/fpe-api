@@ -1,0 +1,71 @@
+{
+	"params": {
+		"projectionPeriod": "yearly"
+	},
+	"plan": {
+		"currentDate": "2025-01",
+		"primary": {
+			"birthDate": "1965-01",
+			"gender": "female",
+			"goalAge": "90y"
+		},
+		"cashFlow": {
+			"checkingAccount": "primary_checking",
+			"savingsAccount": "primary_savings"
+		},
+		"market": {
+			"inflation": {
+				"mean": 0.04
+			}
+		},
+		"drawdown": {
+			"strategy": "FIXED-DOLLAR",
+			"startAge": "70y",
+			"desiredEstateValue": 50000
+		},
+		"accounts": [
+			{
+				"name": "primary_checking",
+				"type": "aftertax"
+			},
+			{
+				"name": "primary_savings",
+				"type": "aftertax",
+				"balance": 150721,
+				"rate": {
+					"mean": 0.05,
+					"stdev": 0.04
+				}
+			},
+			{
+				"name": "schwab_ira",
+				"type": "ira",
+				"balance": 400000,
+				"rate": {
+					"mean": 0.08,
+					"stdev": 0.1
+				}
+			},
+			{
+				"name": "lifetime_debt",
+				"type": "revolvingCredit"
+			}
+		],
+		"paymentStreams": [
+			{
+				"name": "job",
+				"paymentAmount": 8000,
+				"paymentsPerYear": 12,
+				"target": "primary_checking",
+				"earnedIncome": true,
+				"endDate": "2029-01"
+			},
+			{
+				"name": "expenses",
+				"paymentAmount": 4000,
+				"paymentsPerYear": 12,
+				"source": "optimal"
+			}
+		]
+	}
+}
