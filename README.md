@@ -43,7 +43,7 @@ An error occurs if the API client submits a request for which FPE cannot return 
   - A status code appropriate for the type of error (see [HTTP Response Status Codes](#http-response-status-codes) further down)
   - A JSON payload containing the `httpStatusCode` number and a detailed `message`.
 
-For example, if the client calls `POST /forecast` and provides an invalid birthDate of `1200-01`, FPE responses with:
+For example, if the client calls `POST /forecast` and provides an invalid birthDate of `1200-01`, FPE will respond with:
 
 ```
 HTTP/1.1 400 Bad Request
@@ -56,9 +56,9 @@ Content-Type: application/json
 
 ### What is a Warning
 
-There are certain unexpected situations that can occur during the financial simulation, which realistically cannot be foreseen or avoided by the API client.  Examples are:
+There are unexpected situations that can occur during the financial simulation, which realistically cannot be foreseen or avoided by the API client.  Examples are:
 
-- The source account did not have the funds to cover a [transfer](terms.md#transfer) at some point in the future
+- The [source account](terms.md#transfer) did not have sufficient funds to cover a [transfer](terms.md#transfer) at some point in the future
 - An optimization algorithm was running for too long, and therefore, gave up (but was nice, and returned the partially-optimized answer)
 
 For situations like this, FPE will complete the simulation and return an `HTTP 200` status, but will also return a list of 1 or more warnings in the response. For example:
@@ -91,18 +91,7 @@ The full list of warning codes is [here](#warning-codes).
 
 ## HTTP Response Status Codes
 
-The FPE service uses standard [HTTP response status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) to indicate the success or failure of an API request.  In the event of an error, the HTTP response body will contain a JSON object like this:
-
-```
-Content-Type: application/json
-{
-  "httpStatusCode": <http code>,
-  "message": "a description of what went wrong..."
-}
-```
-
-
-Below is a list of possible HTTP status codes that can be returned from this service.
+The FPE service uses standard [HTTP response status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) to indicate the success or failure of an API request.  Below is a list of possible HTTP status codes that can be returned by FPE.
 
 __`2xx OK`__
 
