@@ -137,7 +137,7 @@ See [reverse_mortage.json](examples/forecast/housing/reverse_mortgage.json) for 
 
 ## Forecast
 
-`Forecast` represents the calculated financial projection of the user's financial [Plan](#plan).
+`Forecast` represents the financial projection of the user's financial [Plan](#plan).
 
 | Attribute  | Type | Description |
 | ---------- | ---- | ----------- |
