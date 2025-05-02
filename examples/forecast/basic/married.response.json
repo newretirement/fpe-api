@@ -534,9 +534,7 @@
 				}
 			]
 		},
-		"drawdown": {
-			"strategy": "SPENDING"
-		},
+		"drawdown": {},
 		"accounts": [
 			{
 				"name": "checking",
