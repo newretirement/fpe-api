@@ -426,6 +426,9 @@ If the algorithm is unable to improve the specified `goalMetric`, the forecast w
 | ---------- | ---- | ----------- |
 | `plan` | [Plan](datatypes.md#plan) | The optimized plan containing potentially different Roth optimization transactions |
 | `forecast` | [Forecast](datatypes.md#forecast) | The financial forecast that results from the optimized plan |
+| `addedRothConversions` | string[] | The Roth conversions that were added by the RCO algorithm. Each item is a reference to a [PaymentStream](datatypes.md#paymentstream) within `plan.paymentStreams[]` within this response. |
+| `removedRothConversions` | string[] | The Roth conversions that were removed by the RCO algorithm. Each item is a reference to a [PaymentStream](datatypes.md#paymentstream) within `plan.paymentStreams[]` of the [RCORequest](#rcorequest) object. |
+
 
 <br/>
 
