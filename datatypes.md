@@ -152,6 +152,7 @@ See [reverse_mortage.json](examples/forecast/housing/reverse_mortgage.json) for 
 | `lifetimeSSBenefit` | int | The sum of all social security payments received throughout the financial projection. |
 | `lifetimeTaxes` | int | The net sum of all federal and state taxes paid throughout the financial projection. Includes all income taxes (plus FICA, self-employment, and other state-specific taxes) and all capital gains taxes paid minus any tax refunds received. |
 | `monthlyRetirementIncome` | int | The estimated monthly income received in retirement. This attribute is only calculated if `params.calcMonthlyRetirementIncome` is set to true in the request. |
+| `monthlyTakeHomePay` | int | The estimated monthly take-home pay at retirement. This attribute is only calculated if `params.calcMonthlyTakeHomePay` is set to true in the request. |
 | `outOfSavingsDate` | [Date](#date) | The date that the user's [Plan](#plan) runs out of savings and starts accumulating debt. A value of `null` means the plan never ran out of savings. |
 | `paymentStreams` | [Projection[]](#projection) | The projected periodic payments corresponding to the [paymentStreams](#paymentstream) defined within the [Plan](#plan).  Also contains FPE-calculated streams (see [PaymentStream projections](output_streams.md#paymentstream-projections)). |
 | `period` | string | Determines how the projected `accounts` and `paymentStreams` values should be interpreted: `yearly` => values are annualized, `monthly` => monthly values. _See [ForecastParams.projectionPeriod](#forecastparams)._ |
@@ -258,6 +259,7 @@ This is the multifaceted configuration object that influences how the financial 
 | ---------- | ---- | ------- | ----------- |
 | `calcDTI` | boolean | false | Calculate the DTI (Debt-To-Income ratio) for the plan, placing the result in the `dti` in [Forecast.dti](#forecast). |
 | `calcFIRE` | boolean | false | Solve for [FIRE](https://www.investopedia.com/terms/f/financial-independence-retire-early-fire.asp), placing the result in [Forecast.FIRE](#fire). |
+| `calcMonthlyTakeHomePay` | boolean | false | Estimates the monthly take-home pay (a.k.a. "net income") at retirement, placing the result in [Forecast.monthlyTakeHomePay](#forecast). |
 | `calcPostRetireIncomeExpenseRatio` | boolean | false | Calculate the _Income/Expense Ratio_, and place the result in [Forecast.postRetireIncomeExpenseRatio](#forecast). |
 | `calcSpendingPower` | boolean | false | Calculate 'Spending Power' (a measure of how much money can be affordably spent post-retirement), placing the result in [Forecast.spendingPower](#forecast). _Note:_ [plan.primary.retireDate](#person) must be set when running this calculation. |
 | `projectionPeriod` | enum | `yearly` | If `yearly`, the projected `accounts` and `paymentStreams` vectors are aggregated to represent annual amounts; if `monthly`, they represent the "raw"monthly amounts used internally within the simulation. |
