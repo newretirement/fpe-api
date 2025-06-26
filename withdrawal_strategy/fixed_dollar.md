@@ -1,6 +1,8 @@
 # Fixed-Dollar Withdrawal Strategy
 
-The Fixed-Dollar withdrawal strategy is a [solver](https://en.wikipedia.org/wiki/Solver) that finds a fixed annual withdrawal amount that, when applied at a given age, results in a given [liquid estate value](../terms.md#liquid-estate-value)<sup>1</sup>.  In other words, this solver attempts to answer the question: "Starting at some future age, how much more could I spend each year and still have _X_ dollars in my [liquid estate](../terms.md#liquid-estate-value) when I die?".
+The Fixed-Dollar withdrawal strategy is a [solver](https://en.wikipedia.org/wiki/Solver) that finds a fixed annual withdrawal amount that, when applied starting at a given age, results in a given [liquid estate value](../terms.md#liquid-estate-value)<sup>1</sup>.  In other words, this solver attempts to answer the question: "Starting at some future age, how much more could I spend each year and still have _X_ dollars in my [liquid estate](../terms.md#liquid-estate-value) when I die?".
+
+<b>IMPORTANT:</b> For this algorithm, 'liquid estate value' does NOT contain balances from accounts with the [disableOptimalWithdraw](../datatypes.md#account) flag set.
 
 For example, suppose the [forecast](../datatypes.md#forecast) of a given [plan](../datatypes.md#plan) has the following characteristics:
 - The person (single) dies at age 90
