@@ -259,7 +259,7 @@ This is the multifaceted configuration object that influences how the financial 
 | ---------- | ---- | ------- | ----------- |
 | `calcDTI` | boolean | false | Calculate the DTI (Debt-To-Income ratio) for the plan, placing the result in the `dti` in [Forecast.dti](#forecast). |
 | `calcFIRE` | boolean | false | Solve for [FIRE](https://www.investopedia.com/terms/f/financial-independence-retire-early-fire.asp), placing the result in [Forecast.FIRE](#fire). |
-| `calcMonthlyTakeHomePay` | boolean | false | Estimates the monthly take-home pay (a.k.a. "net income") at retirement, placing the result in [Forecast.monthlyTakeHomePay](#forecast). |
+| `calcMonthlyTakeHomePay` | boolean | false | Estimates the monthly take-home pay (a.k.a. "net income") at retirement (specified by `plan.retireDate`), placing the result in [Forecast.monthlyTakeHomePay](#forecast). |
 | `calcPostRetireIncomeExpenseRatio` | boolean | false | Calculate the _Income/Expense Ratio_, and place the result in [Forecast.postRetireIncomeExpenseRatio](#forecast). |
 | `calcSpendingPower` | boolean | false | Calculate 'Spending Power' (a measure of how much money can be affordably spent post-retirement), placing the result in [Forecast.spendingPower](#forecast). _Note:_ [plan.primary.retireDate](#person) must be set when running this calculation. |
 | `projectionPeriod` | enum | `yearly` | If `yearly`, the projected `accounts` and `paymentStreams` vectors are aggregated to represent annual amounts; if `monthly`, they represent the "raw"monthly amounts used internally within the simulation. |
